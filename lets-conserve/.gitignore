@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# local screens/preview artefacts
+*.png.bak
+shots/
+screenshots/
+.env
+.env.*

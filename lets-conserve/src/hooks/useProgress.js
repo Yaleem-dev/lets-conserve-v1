@@ -37,7 +37,7 @@ export function useProgress(quests) {
     try {
       window.localStorage.setItem(KEY, JSON.stringify(state))
     } catch {
-      /* storage unavailable — session-only progress */
+      /* storage unavailable · session-only progress */
     }
   }, [state])
 
@@ -108,7 +108,7 @@ export function currentWeek() {
     ((start - new Date(start.getFullYear(), 0, 1)) / 86400000 + 1) / 7,
   )
   return {
-    label: `${fmt(start)} – ${fmt(end)}`,
+    label: `${fmt(start)} · ${fmt(end)}`,
     index: Math.max(0, weekNumber - 1),
     key: `${start.getFullYear()}-W${weekNumber}`,
   }

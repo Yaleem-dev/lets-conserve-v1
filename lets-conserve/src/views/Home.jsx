@@ -1,297 +1,191 @@
-import { useState } from 'react'
-import { StickmanArt, Icon } from '../components/StickmanArt.jsx'
-import { Chip, Progress, ExternalLink } from '../components/ui.jsx'
-import { learnTopics, didYouKnow, organizations, resources, heroStats } from '../data/content.js'
-import { QUIZ_BONUS } from '../hooks/useProgress.js'
+import { useMemo, useState } from 'react'
+import { StickmanArt, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Btn, Chapter, Chip, Meter, Ext, Head } from '../components/ui.jsx'
+import { learnTopics, organizations, resources, quizQuestions } from '../data/content.js'
 
 export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
-  const [justDone, setJustDone] = useState(false)
+  const [flash, setFlash] = useState(false)
+  const done = isDone(quest.id)
 
-  const handleToggle = () => {
+  const handle = () => {
     toggleQuest(quest.id)
-    if (!isDone(quest.id)) {
-      setJustDone(true)
-      window.setTimeout(() => setJustDone(false), 2200)
+    if (!done) {
+      setFlash(true)
+      window.setTimeout(() => setFlash(false), 1800)
     }
   }
 
-  const done = isDone(quest.id)
-  const fact = didYouKnow[0]
+  const cards = useMemo(
+    () => [
+      { view: 'learn', art: 'learning', title: 'Learn', line: 'Short explanations. No jargon.', tone: 'bg-leaf' },
+      { view: 'discover', art: 'recycling', title: 'Discover', line: 'Ways to act, and who to join.', tone: 'bg-gold-tint' },
+      { view: 'explore', art: 'outdoors', title: 'Explore', line: 'Tools worth opening.', tone: 'bg-[#e3f0f8]' },
+    ],
+    [],
+  )
 
   return (
     <div className="fade-up">
-      {/* ------------------------------- HERO ------------------------------ */}
-      <section className="shell pt-10 pb-12 md:pt-16 md:pb-16">
-        <div className="grid items-center gap-10 md:grid-cols-[1.15fr_0.85fr] md:gap-14">
-          <div>
-            <p className="eyebrow">A platform for everyday eco-action</p>
-            <h1 className="mt-4 text-[2.5rem] leading-[1.05] sm:text-5xl md:text-[3.4rem]">
-              Learn something.
-              <br />
-              Discover something.
-              <br />
-              <span className="text-moss">Do something.</span>
-            </h1>
-            <p className="mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-ink-soft">
-              Caring for the planet should not feel intimidating. Let’s Conserve turns
-              environmental issues into short explainers, practical action guides, a
-              directory of real organizations, and one small weekly challenge.
-            </p>
+      {/* ---------------------------- HERO ---------------------------- */}
+      <section className="shell pt-6 md:pt-10">
+        <div className="card-chalk relative overflow-hidden px-6 py-8 md:px-10 md:py-12">
+          {/* chalk background doodles */}
+          <Doodle name="star" className="drift absolute right-6 top-6 h-7 w-7 text-gold/70" />
+          <Doodle name="star" className="absolute left-1/2 top-10 h-4 w-4 text-mint/40" />
+          <Doodle name="cloud" className="absolute right-10 top-20 h-8 w-12 text-paper/20" />
+          <Doodle name="bird" className="absolute left-8 top-16 h-5 w-8 text-paper/25" />
+          <Doodle name="arc" className="absolute -bottom-6 right-1/3 h-16 w-24 text-mint/15" />
 
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                onClick={() => go('quest')}
-                className="inline-flex items-center gap-2 rounded-full bg-moss px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-moss-deep"
-              >
-                This week’s quest
-                <Icon name="arrow" className="h-4 w-4" strokeWidth={2.2} />
-              </button>
-              <button
-                type="button"
-                onClick={() => go('learn')}
-                className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-5 py-3 text-sm font-bold text-ink transition-colors hover:border-[#c9c7bb]"
-              >
-                Start learning
-              </button>
-            </div>
-
-            <dl className="mt-9 flex flex-wrap gap-x-8 gap-y-3 border-t border-line pt-6">
-              {heroStats.map((s) => (
-                <div key={s.label}>
-                  <dt className="sr-only">{s.label}</dt>
-                  <dd className="text-xl font-bold tabular-nums">{s.value}</dd>
-                  <dd className="text-[0.8125rem] text-slate">{s.label}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          <div className="relative">
-            <div className="rounded-[18px] border border-line bg-surface p-7">
-              <StickmanArt name="outdoor" className="h-44 w-full text-moss md:h-52" />
-              <p className="mt-4 border-t border-line-soft pt-4 text-[0.8125rem] leading-relaxed text-slate">
-                No prior knowledge assumed. Nothing to sign up for. Your progress stays
-                on this device.
+          <div className="relative grid items-center gap-6 md:grid-cols-[1.05fr_0.95fr] md:gap-8">
+            <div>
+              <Chapter>Your personal guide for eco-action</Chapter>
+              <h1 className="display mt-3 text-[2.6rem] text-paper sm:text-[3.2rem] md:text-[3.6rem]">
+                Learn something.
+                <br />
+                <span className="text-gold">Discover</span> something.
+                <br />
+                Do something.
+              </h1>
+              <p className="mt-4 max-w-xs text-[0.9375rem] leading-relaxed text-paper/70">
+                Small steps. Real places. Nothing to sign up for.
               </p>
+
+              <div className="mt-6 flex flex-wrap gap-2.5">
+                <Btn variant="gold" onClick={() => go('quest')}>
+                  This week&rsquo;s quest
+                  <Icon name="arrow" className="h-4 w-4" />
+                </Btn>
+                <Btn variant="ghostLight" onClick={() => go('learn')}>
+                  Start learning
+                </Btn>
+              </div>
             </div>
-            <div className="absolute -bottom-4 -left-3 hidden rotate-[-3deg] rounded-xl border border-line bg-paper px-3 py-2 text-[0.6875rem] font-bold tracking-wide text-slate uppercase sm:block">
-              One small step at a time
+
+            <div className="relative">
+              <StickmanArt name="horizon" tone="dark" className="h-32 w-full md:h-40" />
+              <StickmanArt name="planting" tone="dark" className="mt-1 h-24 w-full opacity-95 md:h-28" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ------------------------- FEATURED QUEST -------------------------- */}
-      <section className="shell pb-14">
-        <div className="overflow-hidden rounded-[18px] border border-moss/25 bg-moss-tint/60">
-          <div className="grid md:grid-cols-[1fr_0.7fr]">
-            <div className="p-6 md:p-8">
+      {/* ------------------------- WEEKLY QUEST ---------------------- */}
+      <section className="shell mt-5">
+        <div className="card relative overflow-hidden p-5 md:p-6">
+          <div className="grid items-center gap-5 sm:grid-cols-[1fr_auto]">
+            <div>
               <div className="flex flex-wrap items-center gap-2">
-                <span className="eyebrow text-moss-deep">Featured weekly quest</span>
-                <span className="text-[0.6875rem] text-slate">· {week.label}</span>
+                <Chip tone="gold">This week</Chip>
+                <span className="text-[0.75rem] font-semibold text-slate">{week.label}</span>
               </div>
-              <h2 className="mt-3 text-2xl md:text-[1.75rem]">{quest.title}</h2>
-              <p className="mt-2.5 max-w-md text-[0.9375rem] leading-relaxed text-ink-soft">
-                {quest.text}
-              </p>
+              <h2 className="mt-2.5 text-[1.5rem] md:text-[1.75rem]">{quest.title}</h2>
+              <p className="mt-1 max-w-sm text-[0.9375rem] text-ink-soft">{quest.text}</p>
 
-              <div className="mt-5 flex flex-wrap items-center gap-2">
-                <Chip tone="moss">{quest.category}</Chip>
-                <Chip tone="gold">+{quest.points} points</Chip>
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <Btn variant={done ? 'chalk' : 'leaf'} onClick={handle} aria-pressed={done}>
+                  <Icon name={done ? 'check' : 'hand'} className="h-4 w-4" strokeWidth={2.6} />
+                  {done ? 'Done' : 'Mark complete'}
+                </Btn>
+                <span className="text-[0.8125rem] font-bold text-green-deep">
+                  {flash ? `+${quest.points} points` : `+${quest.points} points`}
+                </span>
               </div>
-
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <button
-                  type="button"
-                  onClick={handleToggle}
-                  aria-pressed={done}
-                  className={[
-                    'inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-bold transition-colors',
-                    done
-                      ? 'bg-moss-deep text-white'
-                      : 'border border-moss/40 bg-surface text-moss-deep hover:bg-white',
-                  ].join(' ')}
-                >
-                  <span
-                    className={[
-                      'flex h-4.5 w-4.5 items-center justify-center rounded-[4px] border',
-                      done ? 'border-white/60 bg-white/20' : 'border-moss/50',
-                    ].join(' ')}
-                  >
-                    {done && <Icon name="check" className="h-3 w-3" strokeWidth={3} />}
-                  </span>
-                  {done ? 'Completed — well done' : 'Mark as complete'}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => go('quest')}
-                  className="text-[0.8125rem] font-semibold text-moss-deep underline decoration-moss/30 underline-offset-4 hover:decoration-moss"
-                >
-                  See all quests
-                </button>
-              </div>
-
-              <p className="mt-4 min-h-[1.25rem] text-[0.8125rem] font-semibold text-moss-deep">
-                {justDone ? `+${quest.points} Eco-Points added.` : ''}
-              </p>
             </div>
 
-            <div className="relative flex items-center justify-center border-t border-moss/15 bg-surface/50 p-6 md:border-t-0 md:border-l">
-              <StickmanArt name={quest.art} className="h-36 w-full max-w-[220px] text-moss-deep md:h-44" />
+            <div className="flex justify-center">
+              <StickmanArt name={quest.art} tone="light" className="h-28 w-40 md:h-32 md:w-44" />
             </div>
           </div>
 
-          <div className="border-t border-moss/15 bg-surface/40 px-6 py-4 md:px-8">
-            <div className="flex flex-wrap items-center justify-between gap-3 text-[0.8125rem]">
-              <span className="text-ink-soft">
-                Your total: <strong className="tabular-nums">{points}</strong> Eco-Points
-              </span>
-              <div className="flex items-center gap-3">
-                <span className="text-slate">Next milestone</span>
-                <div className="w-32">
-                  <Progress value={points} max={120} />
-                </div>
-                <span className="font-semibold text-moss-deep">120</span>
-              </div>
-            </div>
+          <div className="mt-4 flex items-center gap-3 border-t border-line-soft pt-3.5">
+            <span className="text-[0.75rem] font-bold tabular-nums text-ink-soft">{points} pts</span>
+            <Meter value={points} max={120} />
+            <span className="text-[0.75rem] font-bold text-slate">120</span>
           </div>
         </div>
       </section>
 
-      {/* --------------------------- ENTRY CARDS --------------------------- */}
-      <section className="shell pb-14">
-        <div className="mb-6 flex items-baseline justify-between border-b border-line pb-4">
-          <h2 className="text-xl">Where would you like to start?</h2>
-          <span className="hidden text-[0.8125rem] text-slate sm:block">
-            Learn → Discover → Do
-          </span>
-        </div>
-
+      {/* -------------------------- ENTRY CARDS ---------------------- */}
+      <section className="shell mt-6 pb-8">
         <div className="grid gap-4 sm:grid-cols-3">
-          {[
-            { view: 'learn', art: 'learn', title: 'Learn', text: 'Bite-sized explainers on climate, biodiversity, pollution and circularity.', meta: `${learnTopics.length} explainers · quiz` },
-            { view: 'discover', art: 'recycle', title: 'Discover', text: 'Practical action guides for home, school and community, plus a real directory.', meta: `${organizations.length} organizations` },
-            { view: 'explore', art: 'walk', title: 'Explore', text: 'Curated external tools, carbon calculators and data portals worth your time.', meta: `${resources.length} resources` },
-          ].map((c) => (
+          {cards.map((c) => (
             <button
               key={c.view}
               type="button"
               onClick={() => go(c.view)}
-              className="group flex flex-col rounded-[14px] border border-line bg-surface p-5 text-left transition-colors hover:border-moss/40"
+              className={`group relative overflow-hidden rounded-[18px] border-[1.5px] border-line p-4 text-left transition-transform hover:-translate-y-0.5 ${c.tone}`}
             >
-              <StickmanArt name={c.art} className="h-24 w-full text-moss/80 transition-colors group-hover:text-moss" />
-              <h3 className="mt-3 text-base">{c.title}</h3>
-              <p className="mt-1.5 flex-1 text-[0.8125rem] leading-relaxed text-slate">{c.text}</p>
-              <div className="mt-3 flex items-center justify-between border-t border-line-soft pt-3">
-                <span className="text-[0.6875rem] font-semibold tracking-wide text-slate uppercase">{c.meta}</span>
-                <Icon name="arrow" className="h-4 w-4 text-moss transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
+              <StickmanArt name={c.art} tone="light" className="h-24 w-full" />
+              <div className="mt-2 flex items-center justify-between">
+                <h3 className="text-[1.0625rem]">{c.title}</h3>
+                <Icon name="arrow" className="h-4 w-4 text-green-deep transition-transform group-hover:translate-x-1" strokeWidth={2.4} />
               </div>
+              <p className="mt-0.5 text-[0.8125rem] text-ink-soft">{c.line}</p>
             </button>
           ))}
         </div>
       </section>
 
-      {/* -------------------------- DID YOU KNOW --------------------------- */}
-      <section className="shell pb-14">
-        <div className="grid gap-6 md:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-[14px] border border-line bg-ink p-6 text-paper md:p-7">
-            <p className="eyebrow text-paper/50">Did you know?</p>
-            <p className="mt-3 text-[1.0625rem] leading-relaxed">{fact.text}</p>
-            <p className="mt-4 text-[0.75rem] font-semibold tracking-wide text-paper/45 uppercase">
-              {fact.source}
-            </p>
-            <button
-              type="button"
-              onClick={() => go('learn')}
-              className="mt-5 inline-flex items-center gap-2 text-[0.8125rem] font-bold text-paper underline decoration-paper/30 underline-offset-4 hover:decoration-paper"
-            >
-              More facts in Learn
-              <Icon name="arrow" className="h-3.5 w-3.5" strokeWidth={2.2} />
+      {/* --------------------------- DIRECTORY TEASE ----------------- */}
+      <section className="shell pb-10">
+        <Head
+          chapter="Discover"
+          title="Organizations near you"
+          action={
+            <button type="button" onClick={() => go('discover')} className="text-[0.8125rem] font-bold text-green-deep underline decoration-gold decoration-2 underline-offset-4">
+              Full directory
             </button>
-          </div>
-
-          <div className="rounded-[14px] border border-line bg-surface p-6 md:p-7">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="eyebrow">Quick knowledge check</p>
-                <h3 className="mt-2 text-xl">Seven questions, {QUIZ_BONUS} Eco-Points</h3>
-              </div>
-              <StickmanArt name="quiz" className="hidden h-16 w-24 shrink-0 text-moss/70 sm:block" />
-            </div>
-            <p className="mt-2 max-w-md text-[0.9375rem] leading-relaxed text-slate">
-              Score 60% or more to earn the bonus. Answers are explained after each question,
-              so guessing teaches you nothing — reading does.
-            </p>
-            <button
-              type="button"
-              onClick={() => go('learn')}
-              className="mt-5 inline-flex items-center gap-2 rounded-full border border-line px-4 py-2.5 text-sm font-bold text-ink transition-colors hover:border-moss hover:text-moss-deep"
-            >
-              Take the quiz
-              <Icon name="arrow" className="h-4 w-4" strokeWidth={2.2} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ----------------------- DISCOVER PREVIEW -------------------------- */}
-      <section className="shell pb-14">
-        <div className="mb-4 flex items-end justify-between border-b border-line pb-4">
-          <div>
-            <p className="eyebrow mb-1.5">Discover</p>
-            <h2 className="text-xl">Organizations doing the work</h2>
-          </div>
-          <button
-            type="button"
-            onClick={() => go('discover')}
-            className="text-[0.8125rem] font-semibold text-moss-deep underline decoration-moss/30 underline-offset-4 hover:decoration-moss"
-          >
-            Full directory
-          </button>
-        </div>
-
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {organizations.slice(0, 3).map((o) => (
-            <div key={o.id} className="rounded-[14px] border border-line bg-surface p-5">
-              <Chip tone={o.region === 'Nigeria' ? 'moss' : 'quiet'}>{o.region}</Chip>
-              <h3 className="mt-3 text-[0.9375rem] leading-snug">{o.name}</h3>
-              <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-slate">{o.scope}</p>
-              <div className="mt-4">
-                <ExternalLink href={o.url}>Visit site</ExternalLink>
+          }
+        />
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { r: 'United States', n: 'Sierra Club' },
+            { r: 'United Kingdom', n: 'The Wildlife Trusts' },
+            { r: 'South Africa', n: 'WESSA' },
+            { r: 'Nigeria', n: 'NCF' },
+          ].map((x, i) => (
+            <div key={x.n} className="card flex items-center gap-3 p-3.5">
+              <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${['bg-leaf', 'bg-gold-tint', 'bg-[#e3f0f8]', 'bg-[#fbe7ec]'][i]}`}>
+                <Icon name="pin" className="h-4 w-4 text-green-deep" strokeWidth={2.2} />
+              </span>
+              <div className="min-w-0">
+                <p className="truncate text-[0.8125rem] font-bold">{x.n}</p>
+                <p className="text-[0.6875rem] text-slate">{x.r}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* -------------------------- RESOURCES ------------------------------ */}
-      <section className="shell pb-16">
-        <div className="rounded-[14px] border border-line bg-paper-2/60 p-6 md:p-8">
-          <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+      {/* ----------------------------- FACTS ------------------------- */}
+      <section className="shell pb-14">
+        <div className="card-chalk relative overflow-hidden p-6 md:p-8">
+          <Doodle name="sprout" className="absolute right-6 top-6 h-8 w-8 text-mint/40" />
+          <div className="grid items-center gap-6 md:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="eyebrow mb-1.5">Explore</p>
-              <h2 className="text-xl">Useful tools, not busywork</h2>
+              <Chapter>Did you know</Chapter>
+              <p className="mt-3 text-[1.25rem] leading-snug text-paper md:text-[1.4rem]">
+                Mangroves store more carbon per hectare than most land forests.
+              </p>
+              <button
+                type="button"
+                onClick={() => go('learn')}
+                className="mt-4 inline-flex items-center gap-2 text-[0.8125rem] font-bold text-gold"
+              >
+                More facts
+                <Icon name="arrow" className="h-3.5 w-3.5" strokeWidth={2.4} />
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={() => go('explore')}
-              className="text-[0.8125rem] font-semibold text-moss-deep underline decoration-moss/30 underline-offset-4 hover:decoration-moss"
-            >
-              All resources
-            </button>
-          </div>
-          <ul className="divide-y divide-line-soft">
-            {resources.slice(0, 3).map((r) => (
-              <li key={r.id} className="flex flex-wrap items-center justify-between gap-3 py-3.5">
-                <div className="min-w-0">
-                  <p className="text-[0.9375rem] font-semibold">{r.name}</p>
-                  <p className="mt-0.5 text-[0.8125rem] text-slate">{r.why}</p>
+            <div className="grid grid-cols-2 gap-3">
+              {resources.slice(0, 2).map((r) => (
+                <div key={r.id} className="rounded-xl border border-paper/15 p-3">
+                  <StickmanArt name={r.art} tone="dark" className="h-14 w-full" />
+                  <p className="mt-1.5 text-[0.8125rem] font-bold text-paper">{r.name}</p>
+                  <p className="text-[0.75rem] text-paper/55">{r.why}</p>
                 </div>
-                <ExternalLink href={r.url}>Open</ExternalLink>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </div>

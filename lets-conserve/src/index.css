@@ -1,28 +1,38 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------
+   Let's Conserve v2 design system
+   Palette re-derived from the Overview PDF: chalkboard green, gold,
+   mint, sky, rose, cream. Paper base with chalkboard panels.
+------------------------------------------------------------------ */
+
 @theme {
   --font-sans: Helvetica, "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
 
-  --color-paper: #fbfaf6;
-  --color-paper-2: #f4f3ec;
-  --color-surface: #ffffff;
-  --color-ink: #16211b;
-  --color-ink-soft: #3f4c45;
-  --color-slate: #5d6b63;
-  --color-line: #e3e1d7;
-  --color-line-soft: #efeee6;
+  --color-paper: #f7f5ea;
+  --color-paper-2: #efeada;
+  --color-card: #fffdf4;
+  --color-ink: #14271f;
+  --color-ink-soft: #2c4438;
+  --color-slate: #5b6f62;
+  --color-line: #dcd8c2;
+  --color-line-soft: #e9e6d3;
 
-  --color-moss: #2f6b4f;
-  --color-moss-deep: #234f3b;
-  --color-moss-tint: #eaf1ec;
-  --color-clay: #b96a3d;
-  --color-clay-tint: #f8efe8;
-  --color-sky: #3f6f92;
-  --color-sky-tint: #e9f0f5;
-  --color-gold: #a8853a;
-  --color-gold-tint: #f7f1e2;
+  --color-chalk: #14271f;
+  --color-chalk-2: #1b3129;
 
-  --radius-card: 14px;
+  --color-gold: #e5b842;
+  --color-gold-deep: #9c7715;
+  --color-gold-tint: #fbf1d3;
+  --color-mint: #5cb888;
+  --color-green: #2e7d5b;
+  --color-green-deep: #1f5a42;
+  --color-leaf: #d6edcd;
+  --color-leaf-2: #c0e2b4;
+  --color-sky: #4fa3d1;
+  --color-rose: #de708e;
+
+  --radius-card: 18px;
 }
 
 @layer base {
@@ -33,40 +43,40 @@
 
   body {
     background-color: var(--color-paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(20, 39, 31, 0.045) 1px, transparent 0),
+      radial-gradient(circle at 1px 1px, rgba(20, 39, 31, 0.03) 1px, transparent 0);
+    background-size: 22px 22px, 37px 37px;
+    background-position: 0 0, 11px 13px;
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-synthesis-weight: none;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4 {
     font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    letter-spacing: -0.025em;
+    line-height: 1.06;
     text-wrap: balance;
   }
 
-  p {
-    text-wrap: pretty;
-  }
-
   ::selection {
-    background: #cfe2d6;
-    color: #16211b;
+    background: var(--color-gold);
+    color: var(--color-chalk);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-moss);
-    outline-offset: 2px;
-    border-radius: 4px;
+    outline: 2.5px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 }
 
 @layer components {
   .shell {
     width: 100%;
-    max-width: 1140px;
+    max-width: 1120px;
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
@@ -75,42 +85,68 @@
     .shell { padding-inline: 2rem; }
   }
 
+  /* cream card with a chalky double edge */
   .card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-line);
+    background: var(--color-card);
+    border: 1.5px solid var(--color-line);
     border-radius: var(--radius-card);
   }
 
-  .hairline {
-    border-top: 1px solid var(--color-line-soft);
+  .card-chalk {
+    background: var(--color-chalk);
+    background-image:
+      radial-gradient(circle at 2px 2px, rgba(241, 241, 232, 0.05) 1px, transparent 0);
+    background-size: 18px 18px;
+    border: 1.5px solid rgba(241, 241, 232, 0.16);
+    border-radius: 22px;
+    color: #f1f1e8;
   }
 
-  .eyebrow {
+  /* the chapter marker used throughout the PDF */
+  .chapter {
     font-size: 0.6875rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-slate);
+  }
+
+  .display {
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
   }
 
   .link-quiet {
-    color: var(--color-moss-deep);
     text-decoration: underline;
-    text-decoration-color: #c3d6c9;
-    text-underline-offset: 3px;
-    transition: text-decoration-color 150ms ease;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
   }
-  .link-quiet:hover { text-decoration-color: var(--color-moss); }
 
   .fade-up {
     animation: fade-up 420ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
   }
+
+  .doodle-underline {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6c14-4 28 2 42 1s28-4 42-2 22 3 32 1' fill='none' stroke='%23E5B842' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0.34em;
+    padding-bottom: 0.22em;
+  }
 }
 
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* slow drift for the chalk background doodles */
+@keyframes drift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-7px) rotate(1.5deg); }
+}
+
+.drift { animation: drift 9s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
