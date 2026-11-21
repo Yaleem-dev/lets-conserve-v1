@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: Helvetica, "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
+
+  --color-paper: #fbfaf6;
+  --color-paper-2: #f4f3ec;
+  --color-surface: #ffffff;
+  --color-ink: #16211b;
+  --color-ink-soft: #3f4c45;
+  --color-slate: #5d6b63;
+  --color-line: #e3e1d7;
+  --color-line-soft: #efeee6;
+
+  --color-moss: #2f6b4f;
+  --color-moss-deep: #234f3b;
+  --color-moss-tint: #eaf1ec;
+  --color-clay: #b96a3d;
+  --color-clay-tint: #f8efe8;
+  --color-sky: #3f6f92;
+  --color-sky-tint: #e9f0f5;
+  --color-gold: #a8853a;
+  --color-gold-tint: #f7f1e2;
+
+  --radius-card: 14px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: #cfe2d6;
+    color: #16211b;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-moss);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 1140px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .shell { padding-inline: 2rem; }
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+
+  .hairline {
+    border-top: 1px solid var(--color-line-soft);
+  }
+
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-slate);
+  }
+
+  .link-quiet {
+    color: var(--color-moss-deep);
+    text-decoration: underline;
+    text-decoration-color: #c3d6c9;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 150ms ease;
+  }
+  .link-quiet:hover { text-decoration-color: var(--color-moss); }
+
+  .fade-up {
+    animation: fade-up 420ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
