@@ -9,33 +9,39 @@
 @theme {
   --font-sans: Helvetica, "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
 
-  /* page surfaces: bright lime / green tint, not beige */
-  --color-page: #e8f5c8;
-  --color-page-2: #ddf0b4;
-  --color-panel: #f6fce9;
-  --color-card: #fdfff6;
-  --color-line: #c3dda1;
-  --color-line-soft: #dcecc6;
+  /* page surfaces: bright lime tint, cards sit on pure white so they read
+     as separate objects instead of melting into the backdrop */
+  --color-page: #e3f1bd;
+  --color-page-2: #d6eaa6;
+  --color-panel: #f4fbe4;
+  --color-card: #ffffff;
+  --color-line: #8fb562;
+  --color-line-soft: #cbe3a9;
 
-  --color-ink: #12281c;
-  --color-ink-soft: #2a4636;
-  --color-slate: #4a6653;
+  /* light chalk paper: ink-on-chalk surfaces */
+  --color-paper: #f5f7ec;
 
-  --color-chalk: #12281c;
-  --color-chalk-2: #1a3527;
+  --color-ink: #0f2318;
+  --color-ink-soft: #23402f;
+  --color-slate: #3d5a49;
+
+  --color-chalk: #0f2418;
+  --color-chalk-2: #173427;
 
   --color-gold: #e5b842;
-  --color-gold-deep: #8a6a10;
-  --color-gold-tint: #fdf3cf;
+  --color-gold-deep: #7a5c0c;
+  --color-gold-tint: #fdf1c6;
 
   --color-mint: #5cb888;
-  --color-green: #2c7a54;
-  --color-green-deep: #1c5238;
+  --color-green: #23654a;
+  --color-green-deep: #10402a;
 
-  /* light green button family */
-  --color-leaf: #c9ee9c;
-  --color-leaf-2: #b2e57c;
-  --color-leaf-3: #e2f7c6;
+  /* light green button family. `leaf-edge` is the darker outline that keeps
+     the light fill from dissolving into the light page behind it. */
+  --color-leaf: #a8e56f;
+  --color-leaf-2: #8ed84f;
+  --color-leaf-3: #eef9dc;
+  --color-leaf-edge: #5f9c33;
 
   --color-sky: #2f7da6;
   --color-rose: #b8536f;
@@ -55,8 +61,9 @@
   body {
     background-color: var(--color-page);
     background-image:
-      radial-gradient(circle at 1px 1px, rgba(18, 40, 28, 0.07) 1px, transparent 0);
+      radial-gradient(circle at 1px 1px, rgba(15, 35, 24, 0.09) 1px, transparent 0);
     background-size: 24px 24px;
+    background-attachment: fixed;
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-synthesis-weight: none;
@@ -97,6 +104,7 @@
     background: var(--color-card);
     border: 1.5px solid var(--color-line);
     border-radius: var(--radius-card);
+    box-shadow: 0 1px 0 rgba(16, 64, 42, 0.05), 0 6px 16px -10px rgba(16, 64, 42, 0.4);
   }
 
   .card-chalk {

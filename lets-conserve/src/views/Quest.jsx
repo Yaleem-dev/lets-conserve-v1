@@ -64,7 +64,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
                 <span
                   key={b.id}
                   className={`inline-flex items-center gap-1.5 rounded-full border-[1.5px] px-2.5 py-1 text-[0.75rem] font-bold ${
-                    has ? 'border-leaf-2 bg-leaf text-green-deep' : 'border-line text-slate/60'
+                    has ? 'border-leaf-edge bg-leaf text-green-deep' : 'border-line text-slate'
                   }`}
                 >
                   <BadgeArt id={b.id} className="h-3.5 w-3.5" />
@@ -82,7 +82,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
           <div className="grid items-center gap-4 sm:grid-cols-[1fr_auto]">
             <div>
               <div className="flex items-center gap-2">
-                <span className="chapter rounded-full bg-leaf px-2.5 py-1 text-green-deep">This week</span>
+                <span className="chapter rounded-full border-[1.5px] border-leaf-edge bg-leaf px-2.5 py-1 text-green-deep">This week</span>
                 <span className="text-[0.75rem] text-paper/50">{week.label}</span>
               </div>
               <h2 className="mt-2 text-[1.4rem] text-paper">{featured.title}</h2>

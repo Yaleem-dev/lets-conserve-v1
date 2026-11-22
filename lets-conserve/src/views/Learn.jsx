@@ -98,8 +98,8 @@ function Quiz({ recordQuiz, best }) {
           const isAns = n === q.answer
           const isPick = n === picked
           const shown = picked !== null
-          let cls = 'border-line bg-card hover:border-leaf-2 hover:bg-leaf-3'
-          if (shown && isAns) cls = 'border-leaf-2 bg-leaf text-green-deep'
+          let cls = 'border-line bg-card hover:border-leaf-edge hover:bg-leaf-3'
+          if (shown && isAns) cls = 'border-leaf-edge bg-leaf text-green-deep'
           else if (shown && isPick) cls = 'border-rose/50 bg-[#fbe7ec]'
           return (
             <button

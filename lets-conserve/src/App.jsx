@@ -66,7 +66,7 @@ export default function App() {
         <div className="shell">
           <div className="flex h-16 items-center justify-between gap-3">
             <button type="button" onClick={() => go('home')} className="flex shrink-0 items-center gap-2.5" aria-label="Let’s Conserve home">
-              <span className="flex h-9 w-9 items-center justify-center rounded-[10px] border-[1.5px] border-leaf-2 bg-leaf">
+              <span className="flex h-9 w-9 items-center justify-center rounded-[10px] border-[1.5px] border-leaf-edge bg-leaf">
                 <Doodle name="sprig" className="h-5 w-5" />
               </span>
               <span className="text-left leading-none">
@@ -85,7 +85,7 @@ export default function App() {
                   onClick={() => go(t.id)}
                   aria-current={view === t.id ? 'page' : undefined}
                   className={`relative rounded-full px-3.5 py-2 text-[0.875rem] font-bold transition-colors ${
-                    view === t.id ? 'bg-leaf text-green-deep' : 'text-ink-soft hover:bg-leaf-3 hover:text-green-deep'
+                    view === t.id ? 'bg-leaf text-green-deep shadow-[inset_0_0_0_1.5px_var(--color-leaf-edge)]' : 'text-ink-soft hover:bg-leaf-3 hover:text-green-deep'
                   }`}
                 >
                   {t.label}
@@ -126,7 +126,7 @@ export default function App() {
                   type="button"
                   onClick={() => go(t.id)}
                   className={`flex w-full items-center gap-3 rounded-xl px-2.5 py-2.5 text-left text-[0.9375rem] font-bold ${
-                    view === t.id ? 'bg-leaf text-green-deep' : 'text-ink-soft'
+                    view === t.id ? 'bg-leaf text-green-deep shadow-[inset_0_0_0_1.5px_var(--color-leaf-edge)]' : 'text-ink-soft'
                   }`}
                 >
                   <Icon name={t.icon} className="h-4 w-4" />
@@ -156,16 +156,16 @@ export default function App() {
           <div className="grid gap-7 md:grid-cols-[1.5fr_1fr_1fr]">
             <div>
               <div className="flex items-center gap-2.5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-leaf">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg border-[1.5px] border-leaf-edge bg-leaf">
                   <Doodle name="sprig" className="h-4.5 w-4.5" />
                 </span>
                 <span className="text-[0.9375rem] font-bold">Let’s Conserve</span>
               </div>
-              <p className="mt-2 max-w-xs text-[0.8125rem] leading-relaxed text-paper/55">
+              <p className="mt-2 max-w-xs text-[0.8125rem] leading-relaxed text-paper/80">
                 {APP_DESCRIPTION}. Small steps, in real places.
               </p>
               <Strip
-                className="mt-3 h-10 w-full max-w-[280px] opacity-70"
+                className="mt-3 h-10 w-full max-w-[280px] opacity-90"
                 names={['tree', 'bulb', 'bin', 'droplet', 'bike']}
               />
             </div>
@@ -175,7 +175,7 @@ export default function App() {
               <ul className="space-y-1.5">
                 {TABS.filter((t) => t.id !== 'home').map((t) => (
                   <li key={t.id}>
-                    <button type="button" onClick={() => go(t.id)} className="text-[0.8125rem] text-paper/70 hover:text-leaf">
+                    <button type="button" onClick={() => go(t.id)} className="text-[0.8125rem] text-paper/85 hover:text-leaf">
                       {t.label}
                     </button>
                   </li>
@@ -185,7 +185,7 @@ export default function App() {
 
             <div>
               <p className="chapter mb-2.5 text-leaf">Start here</p>
-              <p className="text-[0.8125rem] leading-relaxed text-paper/55">
+              <p className="text-[0.8125rem] leading-relaxed text-paper/80">
                 Understand, act, repeat.
               </p>
               <Btn variant="leaf" className="mt-3 !px-4 !py-2 !text-[0.8125rem]" onClick={() => go('quest')}>
@@ -196,8 +196,8 @@ export default function App() {
           </div>
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-paper/12 pt-4">
-            <p className="text-[0.6875rem] text-paper/40">Version 1. Progress stays in this browser.</p>
-            <p className="text-[0.6875rem] text-paper/40">React, Vite, Tailwind CSS</p>
+            <p className="text-[0.6875rem] text-paper/70">Version 1. Progress stays in this browser.</p>
+            <p className="text-[0.6875rem] text-paper/70">React, Vite, Tailwind CSS</p>
           </div>
         </div>
       </footer>

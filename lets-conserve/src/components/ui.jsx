@@ -4,11 +4,11 @@ import { Icon, Doodle } from './StickmanArt.jsx'
    #1C5238 on #C9EE9C is about 7.4:1. */
 export function Btn({ children, onClick, variant = 'leaf', className = '', ...rest }) {
   const styles = {
-    leaf: 'bg-leaf text-green-deep border-leaf-2 hover:bg-leaf-2',
-    soft: 'bg-leaf-3 text-green-deep border-leaf hover:bg-leaf',
+    leaf: 'bg-leaf text-green-deep border-leaf-edge hover:bg-leaf-2',
+    soft: 'bg-leaf-3 text-green-deep border-leaf-edge hover:bg-leaf',
     chalk: 'bg-chalk text-paper border-chalk hover:bg-chalk-2',
-    gold: 'bg-gold-tint text-gold-deep border-gold hover:bg-gold hover:text-ink',
-    ghost: 'bg-card/70 text-ink-soft border-line hover:border-green hover:text-green-deep',
+    gold: 'bg-gold-tint text-gold-deep border-[#c99a20] hover:bg-gold hover:text-ink',
+    ghost: 'bg-card text-ink-soft border-line hover:border-green hover:text-green-deep',
     ghostLight: 'bg-paper/10 text-paper border-paper/40 hover:bg-leaf hover:text-green-deep hover:border-leaf',
   }
   return (
@@ -52,8 +52,8 @@ export function Pill({ active, children, onClick }) {
       className={[
         'inline-flex items-center gap-2 rounded-full border-[1.5px] px-3.5 py-1.5 text-[0.8125rem] font-bold transition-colors',
         active
-          ? 'border-leaf-2 bg-leaf text-green-deep shadow-[inset_0_0_0_1px_rgba(28,82,56,0.08)]'
-          : 'border-line bg-card/80 text-ink-soft hover:border-leaf-2 hover:bg-leaf-3',
+          ? 'border-leaf-edge bg-leaf text-green-deep shadow-[inset_0_0_0_1px_rgba(16,64,42,0.10)]'
+          : 'border-line bg-card text-ink-soft hover:border-leaf-edge hover:bg-leaf-3',
       ].join(' ')}
     >
       {children}
@@ -99,7 +99,7 @@ export function Points({ points, className = '', tone = 'light' }) {
   )
 }
 
-export function Meter({ value, max, tone = 'bg-green', track = 'bg-line-soft' }) {
+export function Meter({ value, max, tone = 'bg-green', track = 'bg-line' }) {
   const pct = max > 0 ? Math.min(100, Math.round((value / max) * 100)) : 0
   return (
     <div className={`h-2.5 w-full overflow-hidden rounded-full ${track}`} role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>

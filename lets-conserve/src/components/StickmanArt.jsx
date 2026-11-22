@@ -9,21 +9,12 @@
 const STROKE = 2.4
 const DOODLE_GREEN = '#2E5A36'
 
+/* No SVG filter primitives here on purpose. feTurbulence + feDisplacementMap
+   blur the strokes and, on mobile GPUs, can paint large corrupted bands
+   (the horizontal streak glitch). The hand-drawn feel lives in the path
+   data itself, so every line stays crisp. */
 export function LookDefs() {
-  return (
-    <svg width="0" height="0" aria-hidden="true" style={{ position: 'absolute' }}>
-      <defs>
-        <filter id="wobble" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.022 0.03" numOctaves="2" seed="7" result="n" />
-          <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-        <filter id="wobble-soft" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="3" result="n" />
-          <feDisplacementMap in="SourceGraphic" in2="n" scale="1" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-      </defs>
-    </svg>
-  )
+  return null
 }
 
 /* --------------------------- doodle glyphs -------------------------- */
@@ -293,7 +284,6 @@ export function Doodle({ name = 'leaf', className = 'h-6 w-6', filter = false, t
       strokeWidth={STROKE}
       strokeLinecap="round"
       strokeLinejoin="round"
-      filter={filter ? 'url(#wobble-soft)' : undefined}
       aria-hidden={title ? undefined : 'true'}
       role={title ? 'img' : undefined}
       focusable="false"
@@ -359,18 +349,25 @@ const SCENES = {
   explore: ['globe', 'kite', 'wind'],
   celebrate: ['person', 'sun', 'kite'],
   place: ['house', 'tree', 'bike'],
+
+  /* one distinct set per quest card: no two actions share a combo */
+  plant: ['sprig', 'hand', 'droplet'],
+  outdoors: ['tree', 'kite', 'wind'],
+  cleanup: ['hand', 'bin', 'droplets'],
+  walk: ['bike', 'person', 'wind'],
+  pollinator: ['flower', 'butterfly', 'sun'],
+  teach: ['duo', 'hand', 'bulb'],
 }
 
-export function Scene({ name = 'nature', className = 'h-24 w-full', size = 'h-14 w-14', filter = false }) {
-  const set = SCENES[name] || SCENES.nature
+export function Scene({ name = 'nature', className = 'h-24 w-full' }) {
+  const set = (SCENES[name] || SCENES.nature).slice(0, 3)
   return (
-    <div className={`flex items-center justify-center gap-3 sm:gap-4 ${className}`}>
+    <div className={`flex items-center justify-center gap-2 overflow-hidden ${className}`}>
       {set.map((g, i) => (
         <Doodle
           key={`${g}-${i}`}
           name={g}
-          filter={filter}
-          className={`${size} ${i === 1 ? 'scale-110' : i === 2 ? 'opacity-70' : ''}`}
+          className={`h-full w-auto min-w-0 shrink ${i === 1 ? 'opacity-100' : 'opacity-85'}`}
         />
       ))}
     </div>
@@ -380,9 +377,9 @@ export function Scene({ name = 'nature', className = 'h-24 w-full', size = 'h-14
 /* a wide doodle strip for hero and footer bands */
 export function Strip({ className = 'h-20 w-full', names = ['tree', 'bulb', 'bin', 'droplet', 'bike', 'leaf', 'sun', 'globe'], filter = true }) {
   return (
-    <div className={`flex items-center justify-between gap-2 ${className}`}>
+    <div className={`flex items-center justify-between gap-2 overflow-hidden ${className}`}>
       {names.map((n, i) => (
-        <Doodle key={`${n}-${i}`} name={n} filter={filter} className="h-full w-auto opacity-90" />
+        <Doodle key={`${n}-${i}`} name={n} className="h-full w-auto min-w-0 shrink opacity-90" />
       ))}
     </div>
   )

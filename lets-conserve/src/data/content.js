@@ -177,14 +177,14 @@ export const guideGroups = [
 export const questCategories = ['All', 'Nature', 'Community', 'Living', 'Wildlife']
 
 export const quests = [
-  { id: 'plant', title: 'Plant something', category: 'Nature', points: 20, art: 'garden', text: 'A tree or a tin of herbs.' },
-  { id: 'outdoors', title: 'Get outside', category: 'Nature', points: 15, art: 'explore', text: 'Twenty minutes in green space.' },
+  { id: 'plant', title: 'Plant something', category: 'Nature', points: 20, art: 'plant', text: 'A tree or a tin of herbs.' },
+  { id: 'outdoors', title: 'Get outside', category: 'Nature', points: 15, art: 'outdoors', text: 'Twenty minutes in green space.' },
   { id: 'waste', title: 'Sort your waste', category: 'Living', points: 20, art: 'waste', text: 'Three separate streams.' },
-  { id: 'cleanup', title: 'Clean a spot', category: 'Community', points: 25, art: 'community', text: 'One street, one hour.' },
-  { id: 'walk', title: 'Walk a short trip', category: 'Living', points: 15, art: 'transport', text: 'Leave the car once.' },
+  { id: 'cleanup', title: 'Clean a spot', category: 'Community', points: 25, art: 'cleanup', text: 'One street, one hour.' },
+  { id: 'walk', title: 'Walk a short trip', category: 'Living', points: 15, art: 'walk', text: 'Leave the car once.' },
   { id: 'learn', title: 'Learn one thing', category: 'Nature', points: 10, art: 'learn', text: 'Read one explainer.' },
-  { id: 'pollinator', title: 'Plant for bees', category: 'Wildlife', points: 20, art: 'garden', text: 'A pot of native flowers.' },
-  { id: 'share', title: 'Teach someone', category: 'Community', points: 15, art: 'community', text: 'Pass on one skill.' },
+  { id: 'pollinator', title: 'Plant for bees', category: 'Wildlife', points: 20, art: 'pollinator', text: 'A pot of native flowers.' },
+  { id: 'share', title: 'Teach someone', category: 'Community', points: 15, art: 'teach', text: 'Pass on one skill.' },
 ]
 
 export const badges = [
