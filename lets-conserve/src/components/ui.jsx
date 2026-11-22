@@ -1,13 +1,15 @@
-import { Icon } from './StickmanArt.jsx'
+import { Icon, Doodle } from './StickmanArt.jsx'
 
-/* light green button, the primary action style */
+/* Light green primary button, per the brief. Dark text for AA contrast:
+   #1C5238 on #C9EE9C is about 7.4:1. */
 export function Btn({ children, onClick, variant = 'leaf', className = '', ...rest }) {
   const styles = {
     leaf: 'bg-leaf text-green-deep border-leaf-2 hover:bg-leaf-2',
+    soft: 'bg-leaf-3 text-green-deep border-leaf hover:bg-leaf',
     chalk: 'bg-chalk text-paper border-chalk hover:bg-chalk-2',
-    gold: 'bg-gold text-chalk border-gold-deep',
-    ghost: 'bg-transparent text-ink-soft border-line hover:border-green hover:text-green-deep',
-    ghostLight: 'bg-transparent text-paper/90 border-paper/35 hover:border-gold hover:text-gold',
+    gold: 'bg-gold-tint text-gold-deep border-gold hover:bg-gold hover:text-ink',
+    ghost: 'bg-card/70 text-ink-soft border-line hover:border-green hover:text-green-deep',
+    ghostLight: 'bg-paper/10 text-paper border-paper/40 hover:bg-leaf hover:text-green-deep hover:border-leaf',
   }
   return (
     <button
@@ -21,19 +23,17 @@ export function Btn({ children, onClick, variant = 'leaf', className = '', ...re
   )
 }
 
-export function Chapter({ children, tone = 'dark', className = '' }) {
-  const color = tone === 'dark' ? 'text-mint' : 'text-green'
+export function Chapter({ children, tone = 'light', className = '' }) {
+  const color = tone === 'dark' ? 'text-leaf' : 'text-green'
   return <p className={`chapter ${color} ${className}`}>{children}</p>
 }
 
 export function Chip({ children, tone = 'leaf' }) {
   const tones = {
     leaf: 'bg-leaf text-green-deep',
+    soft: 'bg-leaf-3 text-green-deep',
     gold: 'bg-gold-tint text-gold-deep',
-    mint: 'bg-[#e2f4ea] text-green-deep',
-    sky: 'bg-[#e3f0f8] text-[#2F7DA6]',
-    rose: 'bg-[#fbe7ec] text-[#C05575]',
-    chalk: 'bg-[#14271f]/8 text-ink-soft',
+    chalk: 'bg-chalk/8 text-ink-soft',
   }
   return (
     <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-[0.6875rem] font-bold tracking-[0.04em] uppercase ${tones[tone]}`}>
@@ -42,7 +42,8 @@ export function Chip({ children, tone = 'leaf' }) {
   )
 }
 
-export function Pill({ active, children, onClick, dot }) {
+/* Active pill is light green, never dark green. */
+export function Pill({ active, children, onClick }) {
   return (
     <button
       type="button"
@@ -51,13 +52,33 @@ export function Pill({ active, children, onClick, dot }) {
       className={[
         'inline-flex items-center gap-2 rounded-full border-[1.5px] px-3.5 py-1.5 text-[0.8125rem] font-bold transition-colors',
         active
-          ? 'border-green bg-green text-paper'
-          : 'border-line bg-card text-ink-soft hover:border-green/50 hover:text-green-deep',
+          ? 'border-leaf-2 bg-leaf text-green-deep shadow-[inset_0_0_0_1px_rgba(28,82,56,0.08)]'
+          : 'border-line bg-card/80 text-ink-soft hover:border-leaf-2 hover:bg-leaf-3',
       ].join(' ')}
     >
-      {dot && <span className="h-2 w-2 rounded-full bg-gold" />}
       {children}
     </button>
+  )
+}
+
+/* Segmented toggle: active segment is light green. */
+export function Segmented({ options, value, onChange }) {
+  return (
+    <div className="flex gap-1.5 rounded-full border-[1.5px] border-line bg-card/80 p-1">
+      {options.map((o) => (
+        <button
+          key={o.id}
+          type="button"
+          onClick={() => onChange(o.id)}
+          aria-pressed={value === o.id}
+          className={`flex-1 rounded-full px-4 py-2.5 text-[0.875rem] font-bold transition-colors ${
+            value === o.id ? 'bg-leaf text-green-deep' : 'text-ink-soft hover:bg-leaf-3 hover:text-green-deep'
+          }`}
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
   )
 }
 
@@ -68,11 +89,11 @@ export function Points({ points, className = '', tone = 'light' }) {
       title="Eco-Points saved on this device"
       className={[
         'inline-flex items-center gap-1.5 rounded-full border-[1.5px] px-3 py-1.5 text-[0.8125rem] font-bold tabular-nums',
-        light ? 'border-line bg-card text-ink' : 'border-paper/30 text-paper',
+        light ? 'border-leaf-2 bg-leaf-3 text-green-deep' : 'border-paper/30 text-paper',
         className,
       ].join(' ')}
     >
-      <Icon name="leaf" className="h-3.5 w-3.5 text-green" strokeWidth={2.4} />
+      <Doodle name="leaf" className="h-3.5 w-3.5" filter={false} />
       {points}
     </span>
   )
@@ -87,8 +108,8 @@ export function Meter({ value, max, tone = 'bg-green', track = 'bg-line-soft' })
   )
 }
 
-export function Ext({ href, children = 'Visit', tone = 'light' }) {
-  const color = tone === 'light' ? 'text-green-deep hover:text-green' : 'text-gold hover:text-gold/80'
+export function Ext({ href, children = 'Learn more', tone = 'light' }) {
+  const color = tone === 'light' ? 'text-green-deep hover:text-green' : 'text-leaf hover:text-white'
   return (
     <a href={href} target="_blank" rel="noopener noreferrer"
       className={`inline-flex items-center gap-1.5 text-[0.8125rem] font-bold ${color}`}>
@@ -100,10 +121,10 @@ export function Ext({ href, children = 'Visit', tone = 'light' }) {
 
 export function Head({ chapter, title, action, tone = 'light' }) {
   return (
-    <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-line pb-3.5">
+    <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b-[1.5px] border-line pb-3.5">
       <div>
         {chapter && <Chapter tone={tone}>{chapter}</Chapter>}
-        <h2 className={`mt-1.5 text-xl md:text-[1.4rem] ${tone === 'dark' ? 'text-paper' : ''}`}>{title}</h2>
+        <h2 className={`mt-1.5 text-xl md:text-[1.4rem]`}>{title}</h2>
       </div>
       {action}
     </div>

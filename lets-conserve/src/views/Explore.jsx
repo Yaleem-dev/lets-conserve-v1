@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
-import { StickmanArt, Doodle, Icon } from '../components/StickmanArt.jsx'
-import { Btn, Chapter, Chip, Pill, Ext, Head } from '../components/ui.jsx'
+import { Scene, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Btn, Chapter, Chip, Pill, Ext } from '../components/ui.jsx'
 import { resources, exploreCategories } from '../data/content.js'
 
 export default function Explore({ go }) {
@@ -9,19 +9,22 @@ export default function Explore({ go }) {
 
   return (
     <div className="fade-up">
-      <section className="shell pt-8 md:pt-12">
+      <section className="shell pt-7 md:pt-10">
         <Chapter>Chapter 04</Chapter>
-        <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
-          <h1 className="display max-w-xl text-[2.2rem] md:text-[2.9rem]">
+        <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
+          <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
             Tools worth <span className="doodle-underline">opening</span>
           </h1>
-          <StickmanArt name="outdoors" tone="light" className="h-20 w-28" />
+          <Scene name="explore" className="h-16" size="h-10 w-10" />
         </div>
       </section>
 
-      <section className="shell mt-6 pb-8">
-        <Head chapter="Curated" title="Nine starting points" />
-        <div className="mb-4 flex flex-wrap gap-2">
+      <section className="shell mt-5 pb-7">
+        <div className="mb-3 border-b-[1.5px] border-line pb-3">
+          <Chapter>Curated</Chapter>
+          <h2 className="mt-1 text-xl">Nine starting points</h2>
+        </div>
+        <div className="mb-3.5 flex flex-wrap gap-2">
           {exploreCategories.map((c) => (
             <Pill key={c} active={cat === c} onClick={() => setCat(c)}>
               {c}
@@ -29,39 +32,36 @@ export default function Explore({ go }) {
           ))}
         </div>
 
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((r, n) => (
-            <article key={r.id} className={`rounded-[18px] border-[1.5px] border-line p-4 ${['bg-card', 'bg-leaf/50', 'bg-gold-tint/50'][n % 3]}`}>
-              <StickmanArt name={r.art} tone="light" className="h-16 w-full" />
+            <article key={r.id} className={`rounded-[18px] border-[1.5px] border-line p-4 ${['bg-card', 'bg-leaf-3', 'bg-gold-tint/60'][n % 3]}`}>
+              <Scene name={r.art} className="h-16" size="h-10 w-10" />
               <div className="mt-1.5 flex items-start justify-between gap-2">
-                <h3 className="text-[1rem] leading-tight">{r.name}</h3>
-                <Chip tone="chalk">{r.category}</Chip>
+                <h3 className="text-[0.9375rem] leading-tight">{r.name}</h3>
+                <Chip tone="soft">{r.category}</Chip>
               </div>
-              <p className="mt-1 text-[0.8125rem] text-slate">{r.why}</p>
-              <div className="mt-3 border-t border-line/70 pt-2.5">
-                <Ext href={r.url}>Open</Ext>
+              <p className="mt-0.5 text-[0.8125rem] text-slate">{r.why}</p>
+              <div className="mt-2.5 border-t border-line/70 pt-2">
+                <Ext href={r.url}>Learn more</Ext>
               </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="shell pb-12">
-        <div className="card-chalk relative overflow-hidden p-6 md:p-7">
-          <Doodle name="cloud" className="absolute right-6 top-5 h-7 w-10 text-paper/20" />
-          <div className="grid items-center gap-6 md:grid-cols-[1fr_auto]">
+      <section className="shell pb-10">
+        <div className="card-chalk relative overflow-hidden p-5">
+          <Doodle name="wind" className="absolute right-5 top-4 h-6 w-9 opacity-40" />
+          <div className="grid items-center gap-5 md:grid-cols-[1fr_auto]">
             <div>
-              <Chapter>Why so few</Chapter>
-              <h3 className="mt-2 text-xl text-paper">Ten good links beat a hundred</h3>
-              <p className="mt-2 max-w-md text-[0.9375rem] leading-relaxed text-paper/70">
-                A long list is a way of avoiding a decision.
-              </p>
-              <Btn variant="gold" className="mt-4" onClick={() => go('quest')}>
+              <Chapter tone="dark">Why so few</Chapter>
+              <h3 className="mt-1.5 text-xl text-paper">Nine good links beat a hundred</h3>
+              <Btn variant="leaf" className="mt-3" onClick={() => go('quest')}>
                 Turn one into a quest
                 <Icon name="arrow" className="h-4 w-4" />
               </Btn>
             </div>
-            <StickmanArt name="horizon" tone="dark" className="h-24 w-full md:w-56" />
+            <Scene name="climate" className="h-16" size="h-10 w-10" />
           </div>
         </div>
       </section>

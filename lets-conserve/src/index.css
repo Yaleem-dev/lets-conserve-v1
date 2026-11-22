@@ -1,36 +1,47 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Let's Conserve v2 design system
-   Palette re-derived from the Overview PDF: chalkboard green, gold,
-   mint, sky, rose, cream. Paper base with chalkboard panels.
+   Let's Conserve v3 design tokens
+   Page background: vibrant yellow-green tint (kept light enough for
+   AA contrast with ink text). Buttons: light green.
 ------------------------------------------------------------------ */
 
 @theme {
   --font-sans: Helvetica, "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
 
-  --color-paper: #f7f5ea;
-  --color-paper-2: #efeada;
-  --color-card: #fffdf4;
-  --color-ink: #14271f;
-  --color-ink-soft: #2c4438;
-  --color-slate: #5b6f62;
-  --color-line: #dcd8c2;
-  --color-line-soft: #e9e6d3;
+  /* page surfaces: bright lime / green tint, not beige */
+  --color-page: #e8f5c8;
+  --color-page-2: #ddf0b4;
+  --color-panel: #f6fce9;
+  --color-card: #fdfff6;
+  --color-line: #c3dda1;
+  --color-line-soft: #dcecc6;
 
-  --color-chalk: #14271f;
-  --color-chalk-2: #1b3129;
+  --color-ink: #12281c;
+  --color-ink-soft: #2a4636;
+  --color-slate: #4a6653;
+
+  --color-chalk: #12281c;
+  --color-chalk-2: #1a3527;
 
   --color-gold: #e5b842;
-  --color-gold-deep: #9c7715;
-  --color-gold-tint: #fbf1d3;
+  --color-gold-deep: #8a6a10;
+  --color-gold-tint: #fdf3cf;
+
   --color-mint: #5cb888;
-  --color-green: #2e7d5b;
-  --color-green-deep: #1f5a42;
-  --color-leaf: #d6edcd;
-  --color-leaf-2: #c0e2b4;
-  --color-sky: #4fa3d1;
-  --color-rose: #de708e;
+  --color-green: #2c7a54;
+  --color-green-deep: #1c5238;
+
+  /* light green button family */
+  --color-leaf: #c9ee9c;
+  --color-leaf-2: #b2e57c;
+  --color-leaf-3: #e2f7c6;
+
+  --color-sky: #2f7da6;
+  --color-rose: #b8536f;
+
+  /* the single line-art stroke, per the reference sheet */
+  --color-doodle: #2e5a36;
 
   --radius-card: 18px;
 }
@@ -42,12 +53,10 @@
   }
 
   body {
-    background-color: var(--color-paper);
+    background-color: var(--color-page);
     background-image:
-      radial-gradient(circle at 1px 1px, rgba(20, 39, 31, 0.045) 1px, transparent 0),
-      radial-gradient(circle at 1px 1px, rgba(20, 39, 31, 0.03) 1px, transparent 0);
-    background-size: 22px 22px, 37px 37px;
-    background-position: 0 0, 11px 13px;
+      radial-gradient(circle at 1px 1px, rgba(18, 40, 28, 0.07) 1px, transparent 0);
+    background-size: 24px 24px;
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-synthesis-weight: none;
@@ -62,12 +71,12 @@
   }
 
   ::selection {
-    background: var(--color-gold);
-    color: var(--color-chalk);
+    background: var(--color-leaf-2);
+    color: var(--color-ink);
   }
 
   :focus-visible {
-    outline: 2.5px solid var(--color-gold);
+    outline: 2.5px solid var(--color-green);
     outline-offset: 3px;
     border-radius: 6px;
   }
@@ -80,12 +89,10 @@
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
-
   @media (min-width: 768px) {
     .shell { padding-inline: 2rem; }
   }
 
-  /* cream card with a chalky double edge */
   .card {
     background: var(--color-card);
     border: 1.5px solid var(--color-line);
@@ -94,15 +101,13 @@
 
   .card-chalk {
     background: var(--color-chalk);
-    background-image:
-      radial-gradient(circle at 2px 2px, rgba(241, 241, 232, 0.05) 1px, transparent 0);
+    background-image: radial-gradient(circle at 2px 2px, rgba(241, 241, 232, 0.05) 1px, transparent 0);
     background-size: 18px 18px;
     border: 1.5px solid rgba(241, 241, 232, 0.16);
     border-radius: 22px;
     color: #f1f1e8;
   }
 
-  /* the chapter marker used throughout the PDF */
   .chapter {
     font-size: 0.6875rem;
     font-weight: 700;
@@ -116,22 +121,16 @@
     line-height: 0.98;
   }
 
-  .link-quiet {
-    text-decoration: underline;
-    text-decoration-thickness: 1.5px;
-    text-underline-offset: 4px;
-  }
-
   .fade-up {
     animation: fade-up 420ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
   }
 
   .doodle-underline {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6c14-4 28 2 42 1s28-4 42-2 22 3 32 1' fill='none' stroke='%23E5B842' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6c14-4 28 2 42 1s28-4 42-2 22 3 32 1' fill='none' stroke='%232E5A36' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: 0 100%;
-    background-size: 100% 0.34em;
-    padding-bottom: 0.22em;
+    background-size: 100% 0.32em;
+    padding-bottom: 0.2em;
   }
 }
 
@@ -140,12 +139,10 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* slow drift for the chalk background doodles */
 @keyframes drift {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-7px) rotate(1.5deg); }
 }
-
 .drift { animation: drift 9s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {

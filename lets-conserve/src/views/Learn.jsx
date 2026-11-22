@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
-import { StickmanArt, Doodle, Icon } from '../components/StickmanArt.jsx'
-import { Btn, Chapter, Chip, Pill, Meter, Head } from '../components/ui.jsx'
+import { Scene, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { learnTopics, learnCategories, facts, quizQuestions } from '../data/content.js'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
 
@@ -9,36 +9,34 @@ function Card({ topic }) {
   return (
     <article className="card overflow-hidden">
       <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="flex w-full items-center gap-3 p-4 text-left">
-        <div className="h-14 w-20 shrink-0">
-          <StickmanArt name={topic.art} tone="light" className="h-14 w-20" />
-        </div>
+        <Scene name={topic.art} className="h-14 w-24 shrink-0" size="h-9 w-9" />
         <div className="min-w-0 flex-1">
-          <Chip tone="mint">{topic.category}</Chip>
+          <Chip tone="soft">{topic.category}</Chip>
           <h3 className="mt-1 text-[1rem] leading-tight">{topic.title}</h3>
-          {!open && <p className="mt-0.5 truncate text-[0.8125rem] text-slate">{topic.lede}</p>}
+          {!open && <p className="truncate text-[0.8125rem] text-slate">{topic.lede}</p>}
         </div>
         <Icon name="chevron" className={`h-4 w-4 shrink-0 text-slate transition-transform ${open ? 'rotate-90' : ''}`} strokeWidth={2.4} />
       </button>
 
       {open && (
-        <div className="border-t border-line-soft px-4 pb-4 pt-3.5">
+        <div className="border-t border-line-soft px-4 pb-4 pt-3">
           <p className="text-[0.9375rem] font-semibold text-ink-soft">{topic.lede}</p>
-          <ul className="mt-2.5 space-y-1.5">
+          <ul className="mt-2 space-y-1.5">
             {topic.points.map((p) => (
-              <li key={p} className="flex gap-2 text-[0.875rem] leading-relaxed text-ink-soft">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+              <li key={p} className="flex gap-2 text-[0.875rem] text-ink-soft">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-green" />
                 {p}
               </li>
             ))}
           </ul>
-          <p className="mt-3 rounded-lg bg-gold-tint px-3 py-2 text-[0.8125rem] text-gold-deep">{topic.fact}</p>
+          <p className="mt-2.5 rounded-lg bg-leaf-3 px-3 py-2 text-[0.8125rem] text-green-deep">{topic.fact}</p>
         </div>
       )}
     </article>
   )
 }
 
-function Quiz({ recordQuiz, best, passed }) {
+function Quiz({ recordQuiz, best }) {
   const [i, setI] = useState(0)
   const [picked, setPicked] = useState(null)
   const [score, setScore] = useState(0)
@@ -64,27 +62,18 @@ function Quiz({ recordQuiz, best, passed }) {
   if (done) {
     const win = score / quizQuestions.length >= 0.6
     return (
-      <div className="card p-5 md:p-6">
+      <div className="card p-5">
         <div className="flex items-center gap-4">
-          <StickmanArt name={win ? 'celebrate' : 'learning'} tone="light" className="h-20 w-28 shrink-0" />
+          <Scene name={win ? 'celebrate' : 'learn'} className="h-16 w-24 shrink-0" size="h-12 w-12" />
           <div>
             <Chapter>Result</Chapter>
             <p className="mt-1 text-2xl font-bold tabular-nums">
               {score} / {quizQuestions.length}
             </p>
-            <p className="mt-1 text-[0.875rem] text-slate">
-              {win ? `Bonus earned. ${QUIZ_BONUS} points, once per device.` : 'Read the cards above, then try again.'}
+            <p className="mt-0.5 text-[0.875rem] text-slate">
+              {win ? `Bonus earned. ${QUIZ_BONUS} points.` : 'Read the cards, then retry.'}
             </p>
-            <Btn
-              variant="leaf"
-              className="mt-3"
-              onClick={() => {
-                setI(0)
-                setPicked(null)
-                setScore(0)
-                setDone(false)
-              }}
-            >
+            <Btn variant="leaf" className="mt-2.5 !py-2" onClick={() => { setI(0); setPicked(null); setScore(0); setDone(false) }}>
               Try again
             </Btn>
           </div>
@@ -102,25 +91,25 @@ function Quiz({ recordQuiz, best, passed }) {
       <div className="mt-2">
         <Meter value={i} max={quizQuestions.length} tone="bg-gold" />
       </div>
-      <h3 className="mt-3.5 text-[1rem] leading-snug">{q.q}</h3>
+      <h3 className="mt-3 text-[1rem] leading-snug">{q.q}</h3>
 
-      <div className="mt-3 space-y-2">
+      <div className="mt-2.5 space-y-2">
         {q.options.map((o, n) => {
           const isAns = n === q.answer
           const isPick = n === picked
           const shown = picked !== null
-          let cls = 'border-line bg-card hover:border-green'
-          if (shown && isAns) cls = 'border-green bg-leaf'
-          else if (shown && isPick) cls = 'border-rose/60 bg-[#fbe7ec]'
+          let cls = 'border-line bg-card hover:border-leaf-2 hover:bg-leaf-3'
+          if (shown && isAns) cls = 'border-leaf-2 bg-leaf text-green-deep'
+          else if (shown && isPick) cls = 'border-rose/50 bg-[#fbe7ec]'
           return (
             <button
               key={o}
               type="button"
               onClick={() => pick(n)}
               disabled={shown}
-              className={`flex w-full items-center gap-2.5 rounded-xl border-[1.5px] px-3 py-2.5 text-left text-[0.875rem] transition-colors ${cls}`}
+              className={`flex w-full items-center gap-2.5 rounded-xl border-[1.5px] px-3 py-2.5 text-left text-[0.875rem] font-medium transition-colors ${cls}`}
             >
-              <span className="flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full border border-current/30 text-[0.625rem] font-bold">
+              <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-current/30 text-[0.625rem] font-bold">
                 {shown && isAns ? <Icon name="check" className="h-2.5 w-2.5" strokeWidth={3.4} /> : String.fromCharCode(65 + n)}
               </span>
               {o}
@@ -129,10 +118,10 @@ function Quiz({ recordQuiz, best, passed }) {
         })}
       </div>
 
-      {picked !== null && <p className="mt-3 rounded-lg bg-paper-2 px-3 py-2 text-[0.8125rem] text-ink-soft">{q.why}</p>}
+      {picked !== null && <p className="mt-2.5 rounded-lg bg-leaf-3 px-3 py-2 text-[0.8125rem] text-green-deep">{q.why}</p>}
 
-      <div className="mt-3.5 flex justify-end">
-        <Btn variant="leaf" onClick={next} disabled={picked === null} className="disabled:opacity-40">
+      <div className="mt-3 flex justify-end">
+        <Btn variant="leaf" onClick={next} disabled={picked === null} className="!py-2 disabled:opacity-40">
           {i + 1 >= quizQuestions.length ? 'See result' : 'Next'}
           <Icon name="arrow" className="h-4 w-4" />
         </Btn>
@@ -147,19 +136,22 @@ export default function Learn({ quiz, recordQuiz }) {
 
   return (
     <div className="fade-up">
-      <section className="shell pt-8 md:pt-12">
+      <section className="shell pt-7 md:pt-10">
         <Chapter>Chapter 01</Chapter>
-        <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
-          <h1 className="display max-w-xl text-[2.2rem] md:text-[2.9rem]">
+        <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
+          <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
             Understand an <span className="doodle-underline">issue</span>
           </h1>
-          <StickmanArt name="learning" tone="light" className="h-20 w-28" />
+          <Scene name="learn" className="h-16" size="h-10 w-10" />
         </div>
       </section>
 
-      <section className="shell mt-7 pb-8">
-        <Head chapter="Explainers" title="Pick one" />
-        <div className="mb-4 flex flex-wrap gap-2">
+      <section className="shell mt-5 pb-7">
+        <div className="mb-3 border-b-[1.5px] border-line pb-3">
+          <Chapter>Explainers</Chapter>
+          <h2 className="mt-1 text-xl">Pick one</h2>
+        </div>
+        <div className="mb-3.5 flex flex-wrap gap-2">
           {learnCategories.map((c) => (
             <Pill key={c} active={cat === c} onClick={() => setCat(c)}>
               {c}
@@ -173,47 +165,47 @@ export default function Learn({ quiz, recordQuiz }) {
         </div>
       </section>
 
-      <section className="shell pb-8">
-        <Head chapter="Did you know" title="Four facts" />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="shell pb-7">
+        <div className="mb-3 border-b-[1.5px] border-line pb-3">
+          <Chapter>Did you know</Chapter>
+          <h2 className="mt-1 text-xl">Four facts</h2>
+        </div>
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {facts.map((f, n) => (
-            <div key={f.text} className={`rounded-[18px] border-[1.5px] border-line p-4 ${['bg-leaf', 'bg-[#e3f0f8]', 'bg-gold-tint', 'bg-[#fbe7ec]'][n]}`}>
-              <Doodle name="star" className="h-4 w-4 text-green-deep/60" />
-              <p className="mt-2 text-[0.875rem] leading-snug text-ink-soft">{f.text}</p>
-              <p className="mt-2 text-[0.625rem] font-bold uppercase tracking-wider text-slate">{f.source}</p>
+            <div key={f.text} className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-leaf-3', 'bg-[#e6f6d6]', 'bg-gold-tint', 'bg-card'][n]}`}>
+              <Scene name={f.art} className="h-12" size="h-7 w-7" />
+              <p className="mt-1.5 text-[0.8125rem] leading-snug text-ink-soft">{f.text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="shell pb-8">
-        <Head
-          chapter="Knowledge check"
-          title={`Five questions, ${QUIZ_BONUS} points`}
-          action={<span className="text-[0.75rem] text-slate">Best: {quiz.best}/{quizQuestions.length}</span>}
-        />
-        <div className="grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
-          <Quiz recordQuiz={recordQuiz} best={quiz.best} passed={quiz.passed} />
+      <section className="shell pb-7">
+        <div className="mb-3 flex items-end justify-between border-b-[1.5px] border-line pb-3">
+          <div>
+            <Chapter>Knowledge check</Chapter>
+            <h2 className="mt-1 text-xl">Five questions, {QUIZ_BONUS} points</h2>
+          </div>
+          <span className="text-[0.75rem] text-slate">Best {quiz.best}/{quizQuestions.length}</span>
+        </div>
+        <div className="grid gap-3 lg:grid-cols-[1.3fr_0.7fr]">
+          <Quiz recordQuiz={recordQuiz} best={quiz.best} />
           <aside className="card-chalk relative overflow-hidden p-5">
-            <Doodle name="star" className="absolute right-4 top-4 h-5 w-5 text-gold/60" />
-            <Chapter>Why bother</Chapter>
-            <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-paper/80">
-              Guessing teaches nothing. The explanations are the point.
-            </p>
-            <StickmanArt name="quiz" tone="dark" className="mt-3 h-20 w-full" />
+            <Doodle name="bulb" className="absolute right-4 top-4 h-6 w-6 opacity-70" />
+            <Chapter tone="dark">Why bother</Chapter>
+            <p className="mt-2 text-[0.9375rem] text-paper/80">Guessing teaches nothing.</p>
+            <Scene name="explore" className="mt-3 h-16" size="h-10 w-10" />
           </aside>
         </div>
       </section>
 
-      <section className="shell pb-12">
-        <div className="card relative overflow-hidden p-5">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <Chapter>Next</Chapter>
-              <h3 className="mt-1.5 text-lg">Now find a way to act</h3>
-            </div>
-            <StickmanArt name="walking" tone="light" className="h-20 w-28" />
+      <section className="shell pb-10">
+        <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
+          <div>
+            <Chapter>Next</Chapter>
+            <h3 className="mt-1 text-lg">Find a way to act</h3>
           </div>
+          <Scene name="community" className="h-14" size="h-9 w-9" />
         </div>
       </section>
     </div>

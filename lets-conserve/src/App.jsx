@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { ChalkDefs, Icon, StickmanArt, Doodle } from './components/StickmanArt.jsx'
+import { LookDefs, Icon, Scene, Strip, Doodle } from './components/StickmanArt.jsx'
 import { Points, Meter, Btn } from './components/ui.jsx'
 import { useProgress, currentWeek } from './hooks/useProgress.js'
 import { quests, badges, APP_DESCRIPTION } from './data/content.js'
@@ -55,19 +55,19 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <ChalkDefs />
+      <LookDefs />
 
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-chalk focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-paper">
         Skip to content
       </a>
 
       {/* --------------------------- HEADER --------------------------- */}
-      <header className="sticky top-0 z-40 border-b-[1.5px] border-line bg-paper/95 backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b-[1.5px] border-line bg-page/95 backdrop-blur-md">
         <div className="shell">
           <div className="flex h-16 items-center justify-between gap-3">
             <button type="button" onClick={() => go('home')} className="flex shrink-0 items-center gap-2.5" aria-label="Let’s Conserve home">
-              <span className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-chalk">
-                <Doodle name="sprout" className="h-5 w-5 text-mint" />
+              <span className="flex h-9 w-9 items-center justify-center rounded-[10px] border-[1.5px] border-leaf-2 bg-leaf">
+                <Doodle name="sprig" className="h-5 w-5" />
               </span>
               <span className="text-left leading-none">
                 <span className="block text-[1.0625rem] font-bold tracking-tight">Let’s Conserve</span>
@@ -85,7 +85,7 @@ export default function App() {
                   onClick={() => go(t.id)}
                   aria-current={view === t.id ? 'page' : undefined}
                   className={`relative rounded-full px-3.5 py-2 text-[0.875rem] font-bold transition-colors ${
-                    view === t.id ? 'bg-leaf text-green-deep' : 'text-ink-soft hover:text-green-deep'
+                    view === t.id ? 'bg-leaf text-green-deep' : 'text-ink-soft hover:bg-leaf-3 hover:text-green-deep'
                   }`}
                 >
                   {t.label}
@@ -100,7 +100,7 @@ export default function App() {
                 onClick={() => setMenu(!menu)}
                 aria-expanded={menu}
                 aria-label="Menu"
-                className="flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-line text-ink md:hidden"
+                className="flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-line bg-card/70 text-ink md:hidden"
               >
                 <Icon name={menu ? 'close' : 'menu'} className="h-4 w-4" strokeWidth={2.4} />
               </button>
@@ -151,30 +151,31 @@ export default function App() {
       </main>
 
       {/* --------------------------- FOOTER --------------------------- */}
-      <footer className="mt-4 border-t-[1.5px] border-line bg-chalk text-paper">
-        <div className="shell py-9">
-          <div className="grid gap-8 md:grid-cols-[1.5fr_1fr_1fr]">
+      <footer className="mt-3 border-t-[1.5px] border-line bg-chalk text-paper">
+        <div className="shell py-8">
+          <div className="grid gap-7 md:grid-cols-[1.5fr_1fr_1fr]">
             <div>
               <div className="flex items-center gap-2.5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-paper/10">
-                  <Doodle name="sprout" className="h-4.5 w-4.5 text-mint" />
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-leaf">
+                  <Doodle name="sprig" className="h-4.5 w-4.5" />
                 </span>
                 <span className="text-[0.9375rem] font-bold">Let’s Conserve</span>
               </div>
-              <p className="mt-2.5 max-w-xs text-[0.8125rem] leading-relaxed text-paper/55">
-                {APP_DESCRIPTION}. Learn something. Discover something. Do something.
+              <p className="mt-2 max-w-xs text-[0.8125rem] leading-relaxed text-paper/55">
+                {APP_DESCRIPTION}. Small steps, in real places.
               </p>
-              <div className="mt-3">
-                <StickmanArt name="horizon" tone="dark" className="h-16 w-56 opacity-80" />
-              </div>
+              <Strip
+                className="mt-3 h-10 w-full max-w-[280px] opacity-70"
+                names={['tree', 'bulb', 'bin', 'droplet', 'bike']}
+              />
             </div>
 
             <div>
-              <p className="chapter mb-2.5 text-mint">Sections</p>
+              <p className="chapter mb-2.5 text-leaf">Sections</p>
               <ul className="space-y-1.5">
                 {TABS.filter((t) => t.id !== 'home').map((t) => (
                   <li key={t.id}>
-                    <button type="button" onClick={() => go(t.id)} className="text-[0.8125rem] text-paper/70 hover:text-gold">
+                    <button type="button" onClick={() => go(t.id)} className="text-[0.8125rem] text-paper/70 hover:text-leaf">
                       {t.label}
                     </button>
                   </li>
@@ -183,17 +184,18 @@ export default function App() {
             </div>
 
             <div>
-              <p className="chapter mb-2.5 text-mint">Where to start</p>
+              <p className="chapter mb-2.5 text-leaf">Start here</p>
               <p className="text-[0.8125rem] leading-relaxed text-paper/55">
-                Understand an issue, find a way to act, practise a habit, then reach for a real tool.
+                Understand, act, repeat.
               </p>
-              <Btn variant="ghostLight" className="mt-3 !px-3.5 !py-1.5 !text-[0.75rem]" onClick={() => go('quest')}>
+              <Btn variant="leaf" className="mt-3 !px-4 !py-2 !text-[0.8125rem]" onClick={() => go('quest')}>
                 This week’s quest
+                <Icon name="arrow" className="h-3.5 w-3.5" />
               </Btn>
             </div>
           </div>
 
-          <div className="mt-7 flex flex-wrap items-center justify-between gap-2 border-t border-paper/12 pt-4">
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-paper/12 pt-4">
             <p className="text-[0.6875rem] text-paper/40">Version 1. Progress stays in this browser.</p>
             <p className="text-[0.6875rem] text-paper/40">React, Vite, Tailwind CSS</p>
           </div>
