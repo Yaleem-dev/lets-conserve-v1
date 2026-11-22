@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Scene, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Segmented, Ext } from '../components/ui.jsx'
 import { guideGroups, organizations, regions } from '../data/content.js'
 
@@ -27,7 +27,7 @@ export default function Discover({ go }) {
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
             Find your <span className="doodle-underline">path</span>
           </h1>
-          <Scene name="community" className="h-16" size="h-10 w-10" />
+          <Art name="community" variant="stick" className="h-20" />
         </div>
       </section>
 
@@ -80,7 +80,7 @@ export default function Discover({ go }) {
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {list.map((o) => (
                 <article key={o.id} className="card flex flex-col p-4">
-                  <Scene name={o.art} className="h-16" size="h-10 w-10" />
+                  <Art name={o.art} variant="doodle" className="h-12" />
                   <div className="mt-2 flex items-start justify-between gap-2">
                     <h3 className="text-[0.9375rem] leading-tight">{o.name}</h3>
                     <Chip tone={o.kind === 'vol' ? 'gold' : 'leaf'}>{o.region}</Chip>
@@ -110,7 +110,7 @@ export default function Discover({ go }) {
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {g.guides.map((x) => (
                     <div key={x.title} className="card p-4">
-                      <Scene name={x.art} className="h-16" size="h-10 w-10" />
+                      <Art name={x.art} variant="stick" className="h-20" />
                       <h4 className="mt-2 text-[0.9375rem] leading-snug">{x.title}</h4>
                       <div className="mt-2 flex items-center justify-between border-t border-line-soft pt-2">
                         <span className="text-[0.6875rem] font-bold uppercase tracking-wide text-slate">Guide</span>

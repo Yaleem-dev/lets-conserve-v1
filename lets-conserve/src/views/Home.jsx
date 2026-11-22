@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Scene, Strip, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Art, Strip, Doodle, Icon } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Meter } from '../components/ui.jsx'
 import { organizations, resources } from '../data/content.js'
 
@@ -93,7 +93,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
                 <span className="text-[0.8125rem] font-bold text-green-deep">+{quest.points} points</span>
               </div>
             </div>
-            <Scene name={quest.art} className="h-24" size="h-12 w-12" />
+            <Art name={quest.art} variant="stick" className="h-24" />
           </div>
 
           <div className="mt-4 flex items-center gap-3 border-t border-line-soft pt-3">
@@ -114,7 +114,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
               onClick={() => go(c.view)}
               className={`group relative overflow-hidden rounded-[18px] border-[1.5px] border-line p-4 text-left transition-transform hover:-translate-y-0.5 ${c.tone}`}
             >
-              <Scene name={c.scene} className="h-20" size="h-11 w-11" />
+              <Art name={c.scene} variant="stick" className="h-20" />
               <div className="mt-2 flex items-center justify-between">
                 <h3 className="text-[1.0625rem]">{c.title}</h3>
                 <Icon name="arrow" className="h-4 w-4 text-green-deep transition-transform group-hover:translate-x-1" strokeWidth={2.4} />
@@ -140,7 +140,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {featured.map((x, i) => (
             <div key={x.name} className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-leaf-3', 'bg-gold-tint', 'bg-[#e6f6d6]', 'bg-card'][i]}`}>
-              <Scene name={x.art} className="h-14" size="h-8 w-8" />
+              <Art name={x.art} variant="doodle" className="h-12" />
               <p className="mt-1.5 truncate text-[0.8125rem] font-bold">{x.name}</p>
               <p className="text-[0.6875rem] font-semibold text-slate">{x.region}</p>
             </div>
@@ -166,7 +166,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
             <div className="grid grid-cols-2 gap-2.5">
               {resources.slice(0, 2).map((r) => (
                 <div key={r.id} className="rounded-xl border border-paper/15 p-2.5">
-                  <Scene name={r.art} className="h-12" size="h-7 w-7" />
+                  <Art name={r.art} variant="doodle" className="h-11" />
                   <p className="mt-1 text-[0.75rem] font-bold text-paper">{r.name}</p>
                 </div>
               ))}

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { LookDefs, Icon, Scene, Strip, Doodle } from './components/StickmanArt.jsx'
+import { LookDefs, Icon, Scene, Strip, Doodle, StickScene } from './components/StickmanArt.jsx'
 import { Points, Meter, Btn } from './components/ui.jsx'
 import { useProgress, currentWeek } from './hooks/useProgress.js'
 import { quests, badges, APP_DESCRIPTION } from './data/content.js'
@@ -153,6 +153,7 @@ export default function App() {
       {/* --------------------------- FOOTER --------------------------- */}
       <footer className="mt-3 border-t-[1.5px] border-line bg-chalk text-paper">
         <div className="shell py-8">
+          <StickScene name="horizon" tone="dark" className="mb-7 h-20 w-full max-w-[520px]" />
           <div className="grid gap-7 md:grid-cols-[1.5fr_1fr_1fr]">
             <div>
               <div className="flex items-center gap-2.5">

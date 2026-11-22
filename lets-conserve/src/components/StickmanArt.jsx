@@ -6,8 +6,8 @@
    energy, transport, climate, people.
 ------------------------------------------------------------------ */
 
-const STROKE = 2.4
-const DOODLE_GREEN = '#2E5A36'
+const STROKE = 2.1
+const DOODLE_GREEN = '#2F5B3A'
 
 /* No SVG filter primitives here on purpose. feTurbulence + feDisplacementMap
    blur the strokes and, on mobile GPUs, can paint large corrupted bands
@@ -359,10 +359,10 @@ const SCENES = {
   teach: ['duo', 'hand', 'bulb'],
 }
 
-export function Scene({ name = 'nature', className = 'h-24 w-full' }) {
+export function Scene({ name = 'nature', className = 'h-full w-full' }) {
   const set = (SCENES[name] || SCENES.nature).slice(0, 3)
   return (
-    <div className={`flex items-center justify-center gap-2 overflow-hidden ${className}`}>
+    <div className={`flex h-full w-full items-center justify-center gap-2 overflow-hidden ${className}`}>
       {set.map((g, i) => (
         <Doodle
           key={`${g}-${i}`}
@@ -399,4 +399,446 @@ export function BadgeArt({ id, className = 'h-9 w-9' }) {
       {shapes[id] || shapes.seed}
     </svg>
   )
+}
+
+/* ==================================================================
+   Stickman scenes, restored from v2 and re-palettised.
+   Multi-colour single-stroke figures on a wavy ground line: people
+   planting, walking, sorting, learning, cleaning, celebrating.
+   These sit alongside the flat eco doodles so a page never shows the
+   same illustration language twice in a row.
+   No SVG filters: crisp strokes, no mobile GPU artefacts.
+================================================================== */
+
+/* gold, mint, sky, rose, cream. On cream cards the pale tones darken
+   so nothing disappears. */
+const DARK = { a: '#E5B842', b: '#5CB888', c: '#4FA3D1', d: '#DE708E', e: '#F1F1E8', f: '#8FD3A8' }
+const LIGHT = { a: '#96700C', b: '#276C50', c: '#276A8E', d: '#A54A67', e: '#1B3828', f: '#4E9669' }
+
+function pal(tone) {
+  return tone === 'dark' ? DARK : LIGHT
+}
+
+function ChalkScene({ children, tone = 'light', className = '', viewBox = '14 14 192 132' }) {
+  const p = pal(tone)
+  const common = {
+    fill: 'none',
+    strokeWidth: 2.4,
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+  }
+  return (
+    <svg
+      viewBox={viewBox}
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g {...common}>{typeof children === 'function' ? children(p) : children}</g>
+    </svg>
+  )
+}
+
+/* organic ground line, as on the PDF pages */
+const ground = (p, y = 132) => (
+  <path
+    d={`M6 ${y} q24 -7 48 0 t48 0 t48 0 t52 0`}
+    stroke={p.b}
+    opacity="0.55"
+    strokeWidth="2"
+  />
+)
+
+const head = (p, x, y, r = 10, color) => <circle cx={x} cy={y} r={r} stroke={color || p.a} />
+
+/* ------------------------------- scenes ------------------------------ */
+
+export function ArtPlanting({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          {ground(p)}
+          <circle cx="176" cy="42" r="13" stroke={p.a} />
+          <path d="M176 22v-6M176 68v-6M196 42h6M150 42h6M190 28l5-5M157 61l5-5" stroke={p.a} opacity="0.8" />
+          <path d="M28 40q7-7 14 0q7-7 14 0" stroke={p.e} opacity="0.7" strokeWidth="2" />
+
+          {/* planter */}
+          <head p={p} x="66" y="66" />
+          <path d="M66 76v30" stroke={p.e} />
+          <path d="M66 88l20 8" stroke={p.e} />
+          <path d="M66 88l-16 10" stroke={p.e} />
+          <path d="M66 106l-12 24M66 106l14 24" stroke={p.e} />
+
+          {/* sapling */}
+          <path d="M122 130v-30" stroke={p.b} />
+          <path d="M122 112c-15-2-22-13-20-25c15 2 22 13 20 25z" stroke={p.b} />
+          <path d="M122 122c16-2 23-13 21-25c-16 2-23 13-21 25z" stroke={p.b} />
+          <path d="M108 130q14-6 28 0" stroke={p.a} opacity="0.8" strokeWidth="2" />
+
+          {/* watering can */}
+          <path d="M96 92h20v16H96z" stroke={p.c} opacity="0.95" />
+          <path d="M116 96l12-6" stroke={p.c} />
+          <path d="M100 92c3-7 9-9 13-8" stroke={p.c} />
+          <path d="M130 98v6M134 104v8" stroke={p.c} opacity="0.7" strokeWidth="2" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtWalking({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          {ground(p)}
+          <circle cx="78" cy="60" r="10" stroke={p.a} />
+          <path d="M78 70v28" stroke={p.e} />
+          <path d="M76 80l18 8" stroke={p.e} />
+          <path d="M76 82l-16 10" stroke={p.e} />
+          <path d="M78 98l-14 26" stroke={p.e} />
+          <path d="M78 98l16 14l6 18" stroke={p.e} />
+
+          <path d="M28 116c0-10 8-16 16-16s16 6 16 16" stroke={p.b} />
+          <path d="M44 100v-8" stroke={p.b} />
+          <path d="M34 104l10-10l10 10" stroke={p.b} opacity="0.8" />
+
+          <circle cx="168" cy="44" r="14" stroke={p.a} />
+          <path d="M168 24v-6M168 68v6M188 44h6M148 44h6" stroke={p.a} opacity="0.75" />
+          <path d="M200 96q-8 -6 -16 0" stroke={p.c} opacity="0.6" strokeWidth="2" />
+          <path d="M118 34q6-6 12 0q6-6 12 0" stroke={p.e} opacity="0.55" strokeWidth="2" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtRecycling({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          {ground(p)}
+          <path d="M88 76h46l-5 46h-36z" stroke={p.e} />
+          <path d="M82 76h58" stroke={p.a} />
+          <path d="M100 76l3-9h16l3 9" stroke={p.a} />
+
+          {/* recycle arrows */}
+          <path d="M104 100a13 13 0 0 1 13-5" stroke={p.b} />
+          <path d="M130 100a13 13 0 0 1-11 14" stroke={p.b} />
+          <path d="M104 102a13 13 0 0 1 12 13" stroke={p.b} />
+          <path d="M117 95v5l5-1" stroke={p.b} />
+          <path d="M120 115l-6-2 4-5" stroke={p.b} />
+
+          <circle cx="46" cy="62" r="10" stroke={p.d} />
+          <path d="M46 72v28" stroke={p.d} />
+          <path d="M46 80l16-8" stroke={p.d} />
+          <path d="M46 82l-14 10" stroke={p.d} />
+          <path d="M46 100l-12 26M46 100l14 26" stroke={p.d} />
+          <path d="M60 62h12v18H60z" stroke={p.a} transform="rotate(-12 66 71)" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtLearning({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          {ground(p)}
+          <circle cx="108" cy="52" r="10" stroke={p.a} />
+          <path d="M108 62v26" stroke={p.e} />
+          <path d="M108 88c-12 0-18 8-24 14" stroke={p.e} />
+          <path d="M108 88c12 0 18 8 24 14" stroke={p.e} />
+          <path d="M88 90c9-5 15-4 20 0c5-4 11-5 20 0v16c-9-4-15-4-20 0c-5-4-11-4-20 0z" stroke={p.b} />
+          <path d="M108 90v16" stroke={p.b} />
+
+          {/* chalk doodles */}
+          <path d="M156 44q9-6 18 0q-9 6-18 0z" stroke={p.c} opacity="0.8" />
+          <path d="M36 50q9-6 18 0q-9 6-18 0z" stroke={p.d} opacity="0.7" />
+          <path d="M166 104v-10M161 99h10" stroke={p.a} opacity="0.9" strokeWidth="2" />
+          <path d="M44 96v-8M40 92h8" stroke={p.a} opacity="0.6" strokeWidth="2" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtOutdoors({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          {ground(p)}
+          <path d="M8 122l36-46l24 30l14-16l30 32" stroke={p.c} />
+          <path d="M110 122l34-42l42 42" stroke={p.b} />
+          <path d="M44 76l-6 8h12z" stroke={p.c} opacity="0.8" />
+          <circle cx="172" cy="34" r="12" stroke={p.a} />
+          <path d="M172 16v-5M172 57v5M190 34h5M149 34h5" stroke={p.a} opacity="0.7" strokeWidth="2" />
+          <path d="M22 40q6-6 12 0q6-6 12 0" stroke={p.e} opacity="0.6" strokeWidth="2" />
+
+          <circle cx="96" cy="66" r="8" stroke={p.d} />
+          <path d="M96 74v24" stroke={p.d} />
+          <path d="M96 82l14 8" stroke={p.d} />
+          <path d="M96 82l-12 8" stroke={p.d} />
+          <path d="M96 98l-8 24M96 98l10 24" stroke={p.d} />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtCleanup({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          {ground(p)}
+          <circle cx="66" cy="54" r="10" stroke={p.a} />
+          <path d="M66 64v32" stroke={p.a} />
+          <path d="M66 74l16 8" stroke={p.a} />
+          <path d="M66 76l-14 10" stroke={p.a} />
+          <path d="M66 96l-12 26M66 96l14 26" stroke={p.a} />
+          <path d="M82 82l26 30" stroke={p.e} />
+          <path d="M104 108l8 8" stroke={p.e} strokeWidth="3" />
+
+          <path d="M138 84h34v40h-34z" stroke={p.b} />
+          <path d="M145 84c0-9 5-14 10-14s10 5 10 14" stroke={p.b} />
+          <path d="M140 96h30" stroke={p.b} opacity="0.6" />
+          <path d="M150 116q6-10 15-12" stroke={p.d} opacity="0.8" />
+          <path d="M186 60v-9M182 55h9" stroke={p.c} strokeWidth="2" opacity="0.7" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtTree({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          {ground(p)}
+          <path d="M110 130V86" stroke={p.b} />
+          <path d="M110 104l-16-12M110 112l16-12" stroke={p.b} />
+          <path d="M110 86c-26 0-42-18-40-38c2-18 18-30 36-30c22 0 38 15 38 34c0 20-14 34-34 34z" stroke={p.b} />
+          <path d="M94 44q16-11 32 0" stroke={p.f} opacity="0.8" />
+          <path d="M62 60q-10-9-6-19" stroke={p.a} opacity="0.75" />
+          <circle cx="168" cy="34" r="9" stroke={p.a} opacity="0.9" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtLeaf({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          <path d="M108 128C70 118 50 88 56 44c42 4 68 32 52 84z" stroke={p.b} />
+          <path d="M108 128C72 106 64 78 56 44" stroke={p.b} opacity="0.6" />
+          <path d="M90 88l-16 2M98 104l-19 4M82 68l-14 0" stroke={p.a} opacity="0.75" />
+          <path d="M150 104q12-6 24-2" stroke={p.c} opacity="0.6" strokeWidth="2" />
+          <path d="M34 104v-10M29 99h10" stroke={p.d} opacity="0.7" strokeWidth="2" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtSun({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          <circle cx="110" cy="72" r="30" stroke={p.a} />
+          <path d="M110 28V14M110 130v-14M154 72h14M52 72h14M140 42l10-10M70 112l10-10M140 102l10 10M70 32l10 10" stroke={p.a} />
+          <circle cx="100" cy="68" r="1.6" fill={p.a} stroke="none" />
+          <circle cx="120" cy="68" r="1.6" fill={p.a} stroke="none" />
+          <path d="M102 80q8 7 16 0" stroke={p.a} />
+          <path d="M24 124q24-8 48 0" stroke={p.b} opacity="0.6" strokeWidth="2" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtCycle({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          <path d="M110 34a38 38 0 0 1 33 19" stroke={p.b} />
+          <path d="M148 40l-6 16-12-8" stroke={p.b} />
+          <path d="M148 76a38 38 0 0 1-33 40" stroke={p.c} />
+          <path d="M136 128l-16-12 16-8" stroke={p.c} />
+          <path d="M72 104a38 38 0 0 1 0-46" stroke={p.a} />
+          <path d="M60 68l4-16 12 8" stroke={p.a} />
+          <circle cx="110" cy="75" r="12" stroke={p.d} opacity="0.85" />
+          <path d="M104 75h12M110 69v12" stroke={p.d} strokeWidth="2" opacity="0.7" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtShare({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          {ground(p)}
+          <circle cx="70" cy="58" r="10" stroke={p.a} />
+          <path d="M70 68v30" stroke={p.a} />
+          <path d="M70 78l14 8" stroke={p.a} />
+          <path d="M70 78l-12 10" stroke={p.a} />
+          <path d="M70 98l-10 26M70 98l10 26" stroke={p.a} />
+
+          <circle cx="150" cy="58" r="10" stroke={p.d} />
+          <path d="M150 68v30" stroke={p.d} />
+          <path d="M150 78l-14 8" stroke={p.d} />
+          <path d="M150 98l-10 26M150 98l10 26" stroke={p.d} />
+          <path d="M94 46q16-10 32 0" stroke={p.c} opacity="0.85" />
+          <path d="M120 46l-4-5 6-2" stroke={p.c} opacity="0.85" />
+          <path d="M100 66q12 8 24 0" stroke={p.b} opacity="0.6" strokeWidth="2" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtCelebrate({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          {ground(p)}
+          <circle cx="110" cy="58" r="10" stroke={p.a} />
+          <path d="M110 68v30" stroke={p.a} />
+          <path d="M110 76l-18-20M110 76l18-20" stroke={p.a} />
+          <path d="M110 98l-13 26M110 98l13 26" stroke={p.a} />
+          <circle cx="78" cy="32" r="2.6" fill={p.c} stroke="none" />
+          <circle cx="142" cy="28" r="2.6" fill={p.d} stroke="none" />
+          <circle cx="62" cy="62" r="2" fill={p.b} stroke="none" />
+          <circle cx="160" cy="66" r="2" fill={p.a} stroke="none" />
+          <path d="M68 44l-7-7M152 44l7-7M96 20l-2-9M126 20l2-9" stroke={p.b} opacity="0.8" strokeWidth="2" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+export function ArtQuiz({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className}>
+      {(p) => (
+        <>
+          <path d="M64 28h72a7 7 0 0 1 7 7v68a7 7 0 0 1-7 7H64a7 7 0 0 1-7-7V35a7 7 0 0 1 7-7z" stroke={p.e} />
+          <path d="M74 52h38M74 68h46M74 84h24" stroke={p.b} opacity="0.75" />
+          <circle cx="150" cy="96" r="24" stroke={p.a} />
+          <path d="M142 88c0-6 5-9 9-9c5 0 9 3 9 9c0 5-5 6-8 9v3" stroke={p.a} />
+          <circle cx="152" cy="108" r="2" fill={p.a} stroke="none" />
+          <path d="M186 40v-9M181 35h9" stroke={p.c} strokeWidth="2" opacity="0.7" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+/* a wide landscape strip, used as a divider band */
+export function ArtHorizon({ tone, className }) {
+  return (
+    <ChalkScene tone={tone} className={className} viewBox="0 0 320 90">
+      {(p) => (
+        <>
+          <path d="M0 74q40 -10 80 0t80 0t80 0t80 0" stroke={p.b} opacity="0.5" strokeWidth="2" />
+          <circle cx="52" cy="26" r="12" stroke={p.a} />
+          <path d="M52 8v-4M52 48v4M70 26h4M30 26h4" stroke={p.a} opacity="0.7" strokeWidth="2" />
+          <path d="M222 74V42" stroke={p.b} />
+          <path d="M222 58c-12-2-18-11-16-21c12 2 18 11 16 21z" stroke={p.b} />
+          <path d="M222 66c13-2 19-11 17-21c-13 2-19 11-17 21z" stroke={p.b} />
+          <circle cx="150" cy="46" r="6" stroke={p.d} />
+          <path d="M150 52v16M150 58l10 6M150 58l-8 6M150 68l-7 8M150 68l8 8" stroke={p.d} />
+          <path d="M112 34q5-5 10 0q5-5 10 0" stroke={p.e} opacity="0.6" strokeWidth="2" />
+          <path d="M264 30q5-5 10 0q5-5 10 0" stroke={p.e} opacity="0.45" strokeWidth="2" />
+          <circle cx="288" cy="14" r="2" fill={p.a} stroke="none" />
+        </>
+      )}
+    </ChalkScene>
+  )
+}
+
+/* name -> {stick, doodles}: which stickman scene an art key can borrow */
+const ART_MIX = {
+  plant:      { stick: 'planting' },
+  outdoors:   { stick: 'outdoors' },
+  cleanup:    { stick: 'cleanup' },
+  walk:       { stick: 'walking' },
+  transport:  { stick: 'walking' },
+  pollinator: { stick: 'tree' },
+  teach:      { stick: 'share' },
+  community:  { stick: 'share' },
+  learn:      { stick: 'learning' },
+  waste:      { stick: 'recycling' },
+  celebrate:  { stick: 'celebrate' },
+  quiz:       { stick: 'quiz' },
+  climate:    { stick: 'cycle' },
+  garden:     { stick: 'tree' },
+  forest:     { stick: 'tree' },
+  harvest:    { stick: 'tree' },
+  nature:     { stick: 'tree' },
+  explore:    { stick: 'outdoors' },
+  place:      { stick: 'outdoors' },
+  energy:     { stick: null },
+  water:      { stick: null },
+  home:       { stick: null },
+}
+
+export function StickScene({ name = 'planting', tone = 'light', className = 'h-24 w-full' }) {
+  const S = STICK[name] || STICK.planting
+  return <S tone={tone} className={className} />
+}
+
+/* One entry point used by every view.
+   variant="stick"  -> multi-colour figure scene on a ground line
+   variant="doodle" -> flat single-stroke object trio
+   variant="auto"   -> figure if the topic has one and the box is tall
+   Both styles share the same frame, so mixing them reads as one set. */
+export function Art({ name = 'nature', variant = 'auto', tone = 'light', className = 'h-16 w-full' }) {
+  const m = ART_MIX[name] || {}
+  const tall = /h-(1[6-9]|2[0-9]|3[0-9]|[4-9][0-9])/.test(className)
+  const useStick = variant === 'stick' || (variant === 'auto' && m.stick && tall)
+  if (useStick && m.stick) {
+    return (
+      <div className={`art-frame ${className}`}>
+        <StickScene name={m.stick} tone={tone} className="h-full w-full" />
+      </div>
+    )
+  }
+  return (
+    <div className={`art-frame ${className}`}>
+      <Scene name={name} />
+    </div>
+  )
+}
+
+const STICK = {
+  planting: ArtPlanting,
+  walking: ArtWalking,
+  recycling: ArtRecycling,
+  learning: ArtLearning,
+  outdoors: ArtOutdoors,
+  cleanup: ArtCleanup,
+  tree: ArtTree,
+  leaf: ArtLeaf,
+  sun: ArtSun,
+  cycle: ArtCycle,
+  share: ArtShare,
+  celebrate: ArtCelebrate,
+  quiz: ArtQuiz,
+  horizon: ArtHorizon,
 }

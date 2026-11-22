@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Scene, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { learnTopics, learnCategories, facts, quizQuestions } from '../data/content.js'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
@@ -9,7 +9,7 @@ function Card({ topic }) {
   return (
     <article className="card overflow-hidden">
       <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="flex w-full items-center gap-3 p-4 text-left">
-        <Scene name={topic.art} className="h-14 w-24 shrink-0" size="h-9 w-9" />
+        <Art name={topic.art} variant="doodle" className="h-12 w-20 shrink-0" />
         <div className="min-w-0 flex-1">
           <Chip tone="soft">{topic.category}</Chip>
           <h3 className="mt-1 text-[1rem] leading-tight">{topic.title}</h3>
@@ -64,7 +64,7 @@ function Quiz({ recordQuiz, best }) {
     return (
       <div className="card p-5">
         <div className="flex items-center gap-4">
-          <Scene name={win ? 'celebrate' : 'learn'} className="h-16 w-24 shrink-0" size="h-12 w-12" />
+          <Art name={win ? 'celebrate' : 'learn'} variant="stick" className="h-20 w-28 shrink-0" />
           <div>
             <Chapter>Result</Chapter>
             <p className="mt-1 text-2xl font-bold tabular-nums">
@@ -142,7 +142,7 @@ export default function Learn({ quiz, recordQuiz }) {
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
             Understand an <span className="doodle-underline">issue</span>
           </h1>
-          <Scene name="learn" className="h-16" size="h-10 w-10" />
+          <Art name="learn" variant="stick" className="h-20" />
         </div>
       </section>
 
@@ -173,7 +173,7 @@ export default function Learn({ quiz, recordQuiz }) {
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {facts.map((f, n) => (
             <div key={f.text} className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-leaf-3', 'bg-[#e6f6d6]', 'bg-gold-tint', 'bg-card'][n]}`}>
-              <Scene name={f.art} className="h-12" size="h-7 w-7" />
+              <Art name={f.art} variant="doodle" className="h-11" />
               <p className="mt-1.5 text-[0.8125rem] leading-snug text-ink-soft">{f.text}</p>
             </div>
           ))}
@@ -194,7 +194,7 @@ export default function Learn({ quiz, recordQuiz }) {
             <Doodle name="bulb" className="absolute right-4 top-4 h-6 w-6 opacity-70" />
             <Chapter tone="dark">Why bother</Chapter>
             <p className="mt-2 text-[0.9375rem] text-paper/80">Guessing teaches nothing.</p>
-            <Scene name="explore" className="mt-3 h-16" size="h-10 w-10" />
+            <Art name="explore" variant="stick" className="mt-3 h-20" />
           </aside>
         </div>
       </section>
@@ -205,7 +205,7 @@ export default function Learn({ quiz, recordQuiz }) {
             <Chapter>Next</Chapter>
             <h3 className="mt-1 text-lg">Find a way to act</h3>
           </div>
-          <Scene name="community" className="h-14" size="h-9 w-9" />
+          <Art name="community" variant="doodle" className="h-12" />
         </div>
       </section>
     </div>

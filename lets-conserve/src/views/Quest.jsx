@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Scene, Doodle, Icon, BadgeArt } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon, BadgeArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { quests, questCategories, badges } from '../data/content.js'
 
@@ -30,7 +30,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
             Do one <span className="doodle-underline">small thing</span>
           </h1>
           <div className="flex items-end gap-3">
-            <Scene name="celebrate" className="hidden h-16 sm:flex" size="h-10 w-10" />
+            <Art name="celebrate" variant="stick" className="hidden h-20 sm:flex" />
             <div className="text-right">
               <p className="text-3xl font-bold tabular-nums">{points}</p>
               <p className="text-[0.6875rem] font-bold uppercase tracking-wider text-slate">points</p>
@@ -92,7 +92,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
                 {isDone(featured.id) ? 'Done' : 'Mark complete'}
               </Btn>
             </div>
-            <Scene name={featured.art} className="h-20" size="h-11 w-11" />
+            <Art name={featured.art} variant="stick" className="h-24" />
           </div>
         </div>
       </section>
@@ -130,7 +130,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
                   done ? 'border-leaf-2 bg-leaf-3' : `border-line ${['bg-card', 'bg-card', 'bg-gold-tint/70', 'bg-card'][n % 4]}`
                 }`}
               >
-                <Scene name={q.art} className="h-14" size="h-8 w-8" />
+                <Art name={q.art} variant={n % 2 ? 'doodle' : 'stick'} className="h-16" />
                 <h3 className="mt-1.5 text-[0.9375rem] leading-snug">{q.title}</h3>
                 <p className="text-[0.75rem] leading-snug text-slate">{q.text}</p>
 

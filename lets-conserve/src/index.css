@@ -116,6 +116,16 @@
     color: #f1f1e8;
   }
 
+  /* neutral frame: both illustration styles share the same box, so a
+     stickman scene and an icon trio read as one family. No tinted plate,
+     which looked like a chip on white cards and a grey slab on dark ones. */
+  .art-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
   .chapter {
     font-size: 0.6875rem;
     font-weight: 700;

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Scene, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Ext } from '../components/ui.jsx'
 import { resources, exploreCategories } from '../data/content.js'
 
@@ -15,7 +15,7 @@ export default function Explore({ go }) {
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
             Tools worth <span className="doodle-underline">opening</span>
           </h1>
-          <Scene name="explore" className="h-16" size="h-10 w-10" />
+          <Art name="explore" variant="stick" className="h-20" />
         </div>
       </section>
 
@@ -35,7 +35,7 @@ export default function Explore({ go }) {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((r, n) => (
             <article key={r.id} className={`rounded-[18px] border-[1.5px] border-line p-4 ${['bg-card', 'bg-leaf-3', 'bg-gold-tint/60'][n % 3]}`}>
-              <Scene name={r.art} className="h-16" size="h-10 w-10" />
+              <Art name={r.art} variant="doodle" className="h-12" />
               <div className="mt-1.5 flex items-start justify-between gap-2">
                 <h3 className="text-[0.9375rem] leading-tight">{r.name}</h3>
                 <Chip tone="soft">{r.category}</Chip>
@@ -61,7 +61,7 @@ export default function Explore({ go }) {
                 <Icon name="arrow" className="h-4 w-4" />
               </Btn>
             </div>
-            <Scene name="climate" className="h-16" size="h-10 w-10" />
+            <Art name="climate" variant="stick" className="h-20" />
           </div>
         </div>
       </section>
