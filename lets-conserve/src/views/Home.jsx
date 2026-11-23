@@ -36,14 +36,17 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
       {/* ---------------------------- HERO ---------------------------- */}
       <section className="shell pt-5 md:pt-8">
         <div className="card-chalk relative overflow-hidden px-6 py-8 md:px-10 md:py-11">
-          <Doodle name="sun" className="drift absolute right-6 top-5 h-9 w-9 opacity-80" />
+          <Doodle name="sun" tone="dark" className="drift absolute right-6 top-6 h-7 w-7 opacity-70" />
           <Doodle name="wind" className="absolute left-1/2 top-8 h-5 w-8 opacity-30" />
           <Doodle name="leaf" className="absolute bottom-6 left-6 h-6 w-6 opacity-25" />
 
           <div className="relative grid items-center gap-6 md:grid-cols-[1.05fr_0.95fr] md:gap-8">
             <div>
               <Chapter tone="dark">Your personal guide for eco-action</Chapter>
-              <h1 className="display mt-3 text-[2.5rem] text-paper sm:text-[3.1rem] md:text-[3.5rem]">
+              <h1
+                className="display mt-3 pr-2 text-paper"
+                style={{ fontSize: 'clamp(1.75rem, 7.1vw, 3.5rem)' }}
+              >
                 Learn something.
                 <br />
                 <span className="text-gold">Discover</span> something.
@@ -63,13 +66,17 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
               </div>
             </div>
 
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex w-full flex-col items-center gap-3">
               <Strip
                 tone="dark"
-                className="h-14 w-full"
+                className="h-12 w-full sm:h-14"
                 names={['tree', 'bulb', 'bin', 'droplet', 'bike', 'flower', 'sun']}
               />
-              <Strip tone="dark" className="h-12 w-full" names={['globe', 'apple', 'leaf', 'globeArrows']} />
+              <Strip
+                tone="dark"
+                className="h-10 w-full sm:h-12"
+                names={['globe', 'apple', 'leaf', 'globeArrows']}
+              />
             </div>
           </div>
         </div>

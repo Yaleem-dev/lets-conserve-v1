@@ -151,7 +151,7 @@ export default function App() {
       </main>
 
       {/* --------------------------- FOOTER --------------------------- */}
-      <footer className="mt-3 border-t-[1.5px] border-line bg-chalk text-paper">
+      <footer className="mt-3 overflow-hidden border-t-[1.5px] border-line bg-chalk text-paper">
         <div className="shell py-8">
           <StickScene name="horizon" tone="dark" className="mb-7 h-20 w-full max-w-[520px]" />
           <div className="grid gap-7 md:grid-cols-[1.5fr_1fr_1fr]">
@@ -165,11 +165,13 @@ export default function App() {
               <p className="mt-2 max-w-xs text-[0.8125rem] leading-relaxed text-paper/80">
                 {APP_DESCRIPTION}. Small steps, in real places.
               </p>
-              <Strip
-                tone="dark"
-                className="mt-3 h-10 w-full max-w-[280px]"
-                names={['tree', 'bulb', 'bin', 'droplet', 'bike']}
-              />
+              <div className="mt-3 w-full max-w-[260px] overflow-hidden">
+                <Strip
+                  tone="dark"
+                  className="h-9 w-full"
+                  names={['tree', 'bulb', 'bin', 'droplet', 'bike']}
+                />
+              </div>
             </div>
 
             <div>

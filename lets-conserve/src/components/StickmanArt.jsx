@@ -315,7 +315,7 @@ export function Doodle({ name = 'leaf', className = 'h-6 w-6', tone = 'light', t
     >
       {title && <title>{title}</title>}
       <g>{glyph}</g>
-      <g opacity="0.34" transform="translate(0.5 0.42) rotate(-2.5 12 12)" strokeDasharray="26 3 18 4">
+      <g opacity="0.26" transform="translate(0.45 0.38) rotate(-2.2 12 12)">
         {glyph}
       </g>
     </svg>
@@ -391,15 +391,19 @@ export function Scene({ name = 'nature', tone = 'light', className = 'h-full w-f
   const set = (SCENES[name] || SCENES.nature).slice(0, 3)
   const tilt = ['-7deg', '3deg', '-3deg']
   return (
-    <div className={`flex h-full w-full items-end justify-center gap-1.5 overflow-hidden ${className}`}>
+    <div
+      className={`grid w-full items-center gap-1.5 overflow-hidden ${className}`}
+      style={{ gridTemplateColumns: `repeat(${set.length}, minmax(0, 1fr))`, gridAutoRows: '100%' }}
+    >
       {set.map((g, i) => (
-        <Doodle
-          key={`${g}-${i}`}
-          name={g}
-          tone={tone}
-          className="h-full w-auto min-w-0 shrink"
-          style={{ transform: `rotate(${tilt[i % 3]})`, opacity: i === 1 ? 1 : 0.9 }}
-        />
+        <div key={`${g}-${i}`} className="flex min-w-0 items-center justify-center">
+          <Doodle
+            name={g}
+            tone={tone}
+            className="block h-full w-full"
+            style={{ transform: `rotate(${tilt[i % 3]})`, opacity: i === 1 ? 1 : 0.9 }}
+          />
+        </div>
       ))}
     </div>
   )
@@ -408,15 +412,19 @@ export function Scene({ name = 'nature', tone = 'light', className = 'h-full w-f
 /* a wide doodle strip for hero and footer bands */
 export function Strip({ className = 'h-20 w-full', names = ['tree', 'bulb', 'bin', 'droplet', 'bike', 'leaf', 'sun', 'globe'], tone = 'light' }) {
   return (
-    <div className={`flex items-end justify-between gap-2 overflow-hidden ${className}`}>
+    <div
+      className={`grid w-full items-center gap-1 overflow-hidden ${className}`}
+      style={{ gridTemplateColumns: `repeat(${names.length}, minmax(0, 1fr))`, gridAutoRows: '100%' }}
+    >
       {names.map((n, i) => (
-        <Doodle
-          key={`${n}-${i}`}
-          name={n}
-          tone={tone}
-          className="h-full w-auto min-w-0 shrink"
-          style={{ transform: `rotate(${i % 2 ? 4 : -4}deg)` }}
-        />
+        <div key={`${n}-${i}`} className="flex min-w-0 items-center justify-center">
+          <Doodle
+            name={n}
+            tone={tone}
+            className="block h-full w-full"
+            style={{ transform: `rotate(${i % 2 ? 4 : -4}deg)` }}
+          />
+        </div>
       ))}
     </div>
   )
