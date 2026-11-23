@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { LookDefs, Icon, Scene, Strip, Doodle, StickScene } from './components/StickmanArt.jsx'
+import { LookDefs, Icon, Scene, Strip, Doodle, StickScene, EarthMark } from './components/StickmanArt.jsx'
 import { Points, Meter, Btn } from './components/ui.jsx'
 import { useProgress, currentWeek } from './hooks/useProgress.js'
 import { quests, badges, APP_DESCRIPTION } from './data/content.js'
@@ -66,14 +66,11 @@ export default function App() {
         <div className="shell">
           <div className="flex h-16 items-center justify-between gap-3">
             <button type="button" onClick={() => go('home')} className="flex shrink-0 items-center gap-2.5" aria-label="Let’s Conserve home">
-              <span className="flex h-9 w-9 items-center justify-center rounded-[10px] border-[1.5px] border-leaf-edge bg-leaf">
-                <Doodle name="sprig" className="h-5 w-5" />
+              <span className="flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-sky-tint bg-white">
+                <EarthMark className="h-5.5 w-5.5" />
               </span>
               <span className="text-left leading-none">
-                <span className="block text-[1.0625rem] font-bold tracking-tight">Let’s Conserve</span>
-                <span className="mt-1 hidden text-[0.625rem] font-semibold tracking-[0.09em] text-slate uppercase sm:block">
-                  {APP_DESCRIPTION}
-                </span>
+                <span className="block text-[1.0625rem] font-bold tracking-tight text-brand-green">Let’s Conserve</span>
               </span>
             </button>
 
@@ -157,10 +154,10 @@ export default function App() {
           <div className="grid gap-7 md:grid-cols-[1.5fr_1fr_1fr]">
             <div>
               <div className="flex items-center gap-2.5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg border-[1.5px] border-leaf-edge bg-leaf">
-                  <Doodle name="sprig" color="#143f28" className="h-4.5 w-4.5" />
+                <span className="flex h-8 w-8 items-center justify-center rounded-full border-[1.5px] border-paper/30 bg-paper/10">
+                  <EarthMark color="#9fd0f5" className="h-4.5 w-4.5" />
                 </span>
-                <span className="text-[0.9375rem] font-bold">Let’s Conserve</span>
+                <span className="text-[0.9375rem] font-bold text-leaf">Let’s Conserve</span>
               </div>
               <p className="mt-2 max-w-xs text-[0.8125rem] leading-relaxed text-paper/80">
                 {APP_DESCRIPTION}. Small steps, in real places.

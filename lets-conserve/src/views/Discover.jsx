@@ -3,6 +3,51 @@ import { Art, Doodle, Icon } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Segmented, Ext } from '../components/ui.jsx'
 import { guideGroups, organizations, regions } from '../data/content.js'
 
+const BRAND = {
+  ocean: { bar: '#1d5fa8', tint: '#dbeafa', ink: '#17456f' },
+  surfrider: { bar: '#1d5fa8', tint: '#dbeafa', ink: '#17456f' },
+  volgov: { bar: '#1d5fa8', tint: '#dbeafa', ink: '#17456f' },
+  noaa: { bar: '#1d5fa8', tint: '#dbeafa', ink: '#17456f' },
+  mcs: { bar: '#1d5fa8', tint: '#dbeafa', ink: '#17456f' },
+  sierra: { bar: '#2f7d4f', tint: '#ddf3e4', ink: '#1a5c3f' },
+  tnc: { bar: '#2f7d4f', tint: '#ddf3e4', ink: '#1a5c3f' },
+  ewt: { bar: '#2f7d4f', tint: '#ddf3e4', ink: '#1a5c3f' },
+  nrdc: { bar: '#b8452f', tint: '#fbe2e2', ink: '#7a2b24' },
+  gpafrica: { bar: '#b8452f', tint: '#fbe2e2', ink: '#7a2b24' },
+  foeuk: { bar: '#b8452f', tint: '#fbe2e2', ink: '#7a2b24' },
+  idealist: { bar: '#5b3fa8', tint: '#eae4fb', ink: '#432c7a' },
+  wt: { bar: '#5b3fa8', tint: '#eae4fb', ink: '#432c7a' },
+}
+
+const BY_TOPIC = {
+  water: { bar: '#1d5fa8', tint: '#dbeafa', ink: '#17456f' },
+  nature: { bar: '#2f7d4f', tint: '#ddf3e4', ink: '#1a5c3f' },
+  forest: { bar: '#2f7d4f', tint: '#ddf3e4', ink: '#1a5c3f' },
+  plant: { bar: '#2f7d4f', tint: '#ddf3e4', ink: '#1a5c3f' },
+  garden: { bar: '#3f7d3a', tint: '#e4f4d9', ink: '#2c5426' },
+  climate: { bar: '#b8452f', tint: '#fbe2e2', ink: '#7a2b24' },
+  energy: { bar: '#b8862f', tint: '#fdf1c6', ink: '#6b4a12' },
+  transport: { bar: '#1f6f7a', tint: '#dcf1f2', ink: '#14505a' },
+  learn: { bar: '#5b3fa8', tint: '#eae4fb', ink: '#432c7a' },
+  community: { bar: '#5b3fa8', tint: '#eae4fb', ink: '#432c7a' },
+  place: { bar: '#1f6f7a', tint: '#dcf1f2', ink: '#14505a' },
+  waste: { bar: '#8a6a10', tint: '#f6ecd8', ink: '#5c4608' },
+  harvest: { bar: '#b8862f', tint: '#fdf1c6', ink: '#6b4a12' },
+  cleanup: { bar: '#8a6a10', tint: '#f6ecd8', ink: '#5c4608' },
+  explore: { bar: '#1f6f7a', tint: '#dcf1f2', ink: '#14505a' },
+}
+
+const accent = (o) => BRAND[o.id] || BY_TOPIC[o.art] || { bar: '#5f9c33', tint: '#eef9dc', ink: '#1a5c3f' }
+
+const initials = (name) =>
+  name
+    .replace(/[^A-Za-z ]/g, '')
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join('')
+
 export default function Discover({ go }) {
   const [tab, setTab] = useState('orgs')
   const [region, setRegion] = useState('All')
@@ -79,15 +124,24 @@ export default function Discover({ go }) {
           ) : (
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {list.map((o) => (
-                <article key={o.id} className="card flex flex-col p-4">
-                  <Art name={o.art} variant="doodle" className="h-12" />
-                  <div className="mt-2 flex items-start justify-between gap-2">
-                    <h3 className="text-[0.9375rem] leading-tight">{o.name}</h3>
-                    <Chip tone={o.kind === 'vol' ? 'gold' : 'leaf'}>{o.region}</Chip>
-                  </div>
-                  <p className="mt-1 flex-1 text-[0.8125rem] leading-snug text-slate">{o.note}</p>
-                  <div className="mt-2.5 border-t border-line-soft pt-2">
-                    <Ext href={o.url}>Learn more</Ext>
+                <article key={o.id} className="card flex flex-col overflow-hidden">
+                  <span aria-hidden="true" className="block h-1.5 w-full" style={{ background: accent(o).bar }} />
+                  <div className="flex flex-1 flex-col p-4">
+                    <div className="flex items-start gap-2.5">
+                      <span
+                        aria-hidden="true"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] text-[0.6875rem] font-bold tracking-[0.02em] uppercase"
+                        style={{ background: accent(o).tint, color: accent(o).ink }}
+                      >
+                        {initials(o.name)}
+                      </span>
+                      <h3 className="min-w-0 flex-1 text-[0.9375rem] leading-tight">{o.name}</h3>
+                    </div>
+                    <p className="mt-2 flex-1 text-[0.8125rem] leading-snug text-slate">{o.note}</p>
+                    <div className="mt-2.5 flex items-center justify-between gap-2 border-t border-line-soft pt-2">
+                      <Ext href={o.url}>Learn more</Ext>
+                      <span className="text-[0.625rem] font-bold uppercase tracking-[0.08em] text-slate">{o.region}</span>
+                    </div>
                   </div>
                 </article>
               ))}

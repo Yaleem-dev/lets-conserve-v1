@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
-import { Art, Strip, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon, HeroArt } from '../components/StickmanArt.jsx'
+import AnimalQuiz from '../components/AnimalQuiz.jsx'
 import { Btn, Chapter, Chip, Meter } from '../components/ui.jsx'
 import { organizations, resources } from '../data/content.js'
 
@@ -17,8 +18,8 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
 
   const cards = [
     { view: 'learn', scene: 'learn', title: 'Learn', line: 'Short explanations.', tone: 'bg-leaf-3' },
-    { view: 'discover', scene: 'community', title: 'Discover', line: 'Ways to act.', tone: 'bg-gold-tint' },
-    { view: 'explore', scene: 'explore', title: 'Explore', line: 'Tools worth opening.', tone: 'bg-[#e6f6d6]' },
+    { view: 'discover', scene: 'community', title: 'Discover', line: 'Ways to act.', tone: 'bg-sky-tint' },
+    { view: 'explore', scene: 'explore', title: 'Explore', line: 'Tools worth opening.', tone: 'bg-blush' },
   ]
 
   const featured = useMemo(
@@ -35,28 +36,24 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
     <div className="fade-up">
       {/* ---------------------------- HERO ---------------------------- */}
       <section className="shell pt-5 md:pt-8">
-        <div className="card-chalk relative overflow-hidden px-6 py-8 md:px-10 md:py-11">
-          <Doodle name="sun" tone="dark" className="drift absolute right-6 top-6 h-7 w-7 opacity-70" />
-          <Doodle name="wind" className="absolute left-1/2 top-8 h-5 w-8 opacity-30" />
-          <Doodle name="leaf" className="absolute bottom-6 left-6 h-6 w-6 opacity-25" />
-
+        <div className="card-hero relative overflow-hidden px-5 py-7 sm:px-6 sm:py-8 md:px-10 md:py-11">
           <div className="relative grid items-center gap-6 md:grid-cols-[1.05fr_0.95fr] md:gap-8">
-            <div>
-              <Chapter tone="dark">Your personal guide for eco-action</Chapter>
+            <div className="min-w-0">
+              <Chapter>Welcome</Chapter>
               <h1
-                className="display mt-3 pr-2 text-paper"
-                style={{ fontSize: 'clamp(1.75rem, 7.1vw, 3.5rem)' }}
+                className="display mt-3 text-ink"
+                style={{ fontSize: 'clamp(1.65rem, 6.6vw, 3.1rem)' }}
               >
-                Learn something.
+                Your personal guide
                 <br />
-                <span className="text-gold">Discover</span> something.
-                <br />
-                Do something.
+                for <span className="text-brand-green">eco-action</span>
               </h1>
-              <p className="mt-3 max-w-xs text-[0.9375rem] text-paper/70">Small steps. Real places.</p>
+              <p className="mt-3 max-w-sm text-[0.9375rem] font-semibold leading-snug text-ink-soft">
+                Learn something. Discover something. Do something.
+              </p>
 
               <div className="mt-5 flex flex-wrap gap-2.5">
-                <Btn variant="leaf" onClick={() => go('quest')}>
+                <Btn variant="warm" onClick={() => go('quest')}>
                   This week&rsquo;s quest
                   <Icon name="arrow" className="h-4 w-4" />
                 </Btn>
@@ -66,17 +63,8 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
               </div>
             </div>
 
-            <div className="flex w-full flex-col items-center gap-3">
-              <Strip
-                tone="dark"
-                className="h-12 w-full sm:h-14"
-                names={['tree', 'bulb', 'bin', 'droplet', 'bike', 'flower', 'sun']}
-              />
-              <Strip
-                tone="dark"
-                className="h-10 w-full sm:h-12"
-                names={['globe', 'apple', 'leaf', 'globeArrows']}
-              />
+            <div className="w-full min-w-0">
+              <HeroArt className="h-36 w-full sm:h-44" />
             </div>
           </div>
         </div>
@@ -110,6 +98,18 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
             <span className="text-[0.75rem] font-bold text-slate">120</span>
           </div>
         </div>
+      </section>
+
+      {/* ------------------------ ECO ANIMAL QUIZ -------------------- */}
+      <section className="shell mt-5">
+        <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b-[1.5px] border-line pb-3">
+          <div>
+            <Chapter>Quick quiz</Chapter>
+            <h2 className="mt-1 text-xl">Which eco animal are you</h2>
+          </div>
+          <span className="text-[0.75rem] text-slate">Five prompts</span>
+        </div>
+        <AnimalQuiz />
       </section>
 
       {/* -------------------------- ENTRY CARDS ---------------------- */}

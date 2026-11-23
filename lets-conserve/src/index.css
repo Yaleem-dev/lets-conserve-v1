@@ -12,6 +12,7 @@
   /* page surfaces: bright lime tint, cards sit on pure white so they read
      as separate objects instead of melting into the backdrop */
   --color-page: #e3f1bd;
+  --color-hero: #e7f6c2;
   --color-page-2: #d6eaa6;
   --color-panel: #f4fbe4;
   --color-card: #ffffff;
@@ -45,6 +46,30 @@
 
   --color-sky: #2f7da6;
   --color-rose: #b8536f;
+
+  /* pastel secondaries: soft, non green/yellow accents so the palette is
+     not just lime plus gold. Text on each tint clears WCAG AA. */
+  --color-blush: #fde7e2;
+  --color-blush-2: #f8cfc6;
+  --color-blush-ink: #7a2b24;
+  --color-mint-tint: #ddf3e4;
+  --color-mint-ink: #1a5c3f;
+  --color-sky-tint: #dbeafa;
+  --color-sky-ink: #17456f;
+  --color-lilac: #eae4fb;
+  --color-lilac-ink: #432c7a;
+  --color-tan: #f6ecd8;
+  --color-tan-ink: #6b4a12;
+
+  /* brand hues: earth mark and wordmark */
+  --color-brand-blue: #1d5fa8;
+  --color-brand-green: #17603c;
+
+  /* warm goldfish orange for the one button that must not read as green */
+  --color-warm: #f2a63c;
+  --color-warm-2: #e8932a;
+  --color-warm-edge: #bd7415;
+  --color-warm-ink: #3f2202;
 
   /* the single line-art stroke, per the reference sheet */
   --color-doodle: #2e5a36;
@@ -105,6 +130,16 @@
     border: 1.5px solid var(--color-line);
     border-radius: var(--radius-card);
     box-shadow: 0 1px 0 rgba(16, 64, 42, 0.05), 0 6px 16px -10px rgba(16, 64, 42, 0.4);
+  }
+
+  /* warm, open hero surface: light enough for ink text, greener than the
+     page so the card still reads as a card. */
+  .card-hero {
+    background: var(--color-hero);
+    background-image: radial-gradient(circle at 88% 12%, rgba(242, 166, 60, 0.16), transparent 55%);
+    border: 1.5px solid var(--color-line);
+    border-radius: 22px;
+    box-shadow: 0 1px 0 rgba(16, 64, 42, 0.05), 0 10px 26px -18px rgba(16, 64, 42, 0.55);
   }
 
   .card-chalk {

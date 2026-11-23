@@ -899,3 +899,172 @@ const STICK = {
   quiz: ArtQuiz,
   horizon: ArtHorizon,
 }
+
+/* ==================================================================
+   Additions for this pass: blue Earth mark, a coloured hero sketch
+   (rainbow + sun + trees) and small animal marks for the quiz.
+   All inline SVG, no raster assets.
+================================================================== */
+
+/* Blue Earth outline, used as the header logo mark */
+export function EarthMark({ className = 'h-5 w-5', color = '#1d5fa8' }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <circle cx="12" cy="12" r="9.2" />
+      <path d="M2.8 12h18.4" />
+      <path d="M12 2.8c2.7 2.7 4.1 5.8 4.1 9.2s-1.4 6.5-4.1 9.2c-2.7-2.7-4.1-5.8-4.1-9.2S9.3 5.5 12 2.8z" />
+      <path d="M5.1 7.2c2.2 1 4.4 1.5 6.9 1.5s4.7-.5 6.9-1.5M5.1 16.8c2.2-1 4.4-1.5 6.9-1.5s4.7.5 6.9 1.5" />
+    </svg>
+  )
+}
+
+/* Coloured sketch for the hero: rainbow, sun, three trees, grass.
+   Thin strokes, several hues, no fill. Everything sits well inside the
+   viewBox so nothing clips at the card edge. */
+export function HeroArt({ className = 'h-40 w-full' }) {
+  return (
+    <svg
+      viewBox="0 0 360 180"
+      className={className}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {/* rainbow */}
+      <g strokeWidth="2.6">
+        <path d="M30 108a62 62 0 0 1 124 0" stroke="#f7fbf0" opacity="0.55" />
+        <path d="M42 108a50 50 0 0 1 100 0" stroke="#f0bb35" />
+        <path d="M54 108a38 38 0 0 1 76 0" stroke="#ea8f8f" />
+        <path d="M66 108a26 26 0 0 1 52 0" stroke="#7fb9ea" />
+      </g>
+
+      {/* sun */}
+      <g stroke="#e5a52a" strokeWidth="2.1">
+        <circle cx="312" cy="40" r="13" />
+        <path d="M312 20v-4M312 64v4M292 40h-4M336 40h4M298 26l-3-3M326 26l3-3M298 54l-3 3M326 54l3 3" />
+      </g>
+
+      {/* cloud */}
+      <g stroke="#f7fbf0" strokeWidth="1.9" opacity="0.6">
+        <path d="M182 44c2-7 12-8 15-1 7-2 12 4 10 8h-27c-3-3-1-6 2-7z" />
+      </g>
+
+      {/* ground */}
+      <path d="M22 152c32-4 64 3 96-1s70 3 104-2 62 2 92 0" stroke="#f7fbf0" strokeWidth="1.8" opacity="0.5" />
+
+      {/* deciduous tree */}
+      <g strokeWidth="2.3">
+        <path d="M196 152v-22" stroke="#2f7d4f" />
+        <path d="M196 138l-9-9M196 132l9-8" stroke="#2f7d4f" opacity="0.85" />
+        <path d="M174 118c0-12 9.8-21 22-21s22 9 22 21-9.8 16-22 16-22-4-22-16z" stroke="#3f8f56" />
+        <path d="M196 101v-6" stroke="#3f8f56" opacity="0.7" />
+      </g>
+
+      {/* conifer */}
+      <g strokeWidth="2.3">
+        <path d="M250 152v-14" stroke="#2f7d4f" />
+        <path d="M250 96l-16 24h11l-13 20h36l-13-20h11z" stroke="#2f7d4f" />
+      </g>
+
+      {/* round gold tree */}
+      <g strokeWidth="2.3">
+        <path d="M302 152v-18" stroke="#c08a1c" />
+        <path d="M302 108c-11 0-18 7-18 14s7 12 18 12 18-5 18-12-7-14-18-14z" stroke="#d9a02c" />
+        <path d="M302 134v-24" stroke="#d9a02c" opacity="0.5" />
+      </g>
+
+      {/* grass tufts */}
+      <g strokeWidth="2">
+        <path d="M150 152c-1-6 1-10 3-12M156 152c0-6 2-10 4-12" stroke="#4f9459" opacity="0.9" />
+        <path d="M228 152c-1-5 1-9 3-11M234 152c0-5 2-9 4-11" stroke="#7a9e3e" opacity="0.85" />
+        <path d="M330 152c-1-5 1-9 3-11M336 152c0-5 2-9 4-11" stroke="#c08a1c" opacity="0.8" />
+      </g>
+    </svg>
+  )
+}
+
+/* Small animal marks for the quiz result. Same thin outline language,
+   one accent colour each. */
+const ANIMAL_PATHS = {
+  lion: (
+    <>
+      <circle cx="12" cy="12" r="8.4" />
+      <circle cx="12" cy="12" r="4.6" />
+      <path d="M10.5 11.4h.01M13.5 11.4h.01" />
+      <path d="M10.9 13.9c.7.6 1.5.6 2.2 0" />
+      <path d="M8.4 4.6l1.2 2.1M15.6 4.6l-1.2 2.1" />
+    </>
+  ),
+  elephant: (
+    <>
+      <path d="M6.6 8.6c0-2.5 2.4-4.3 5.4-4.3s5.4 1.8 5.4 4.3v4.2c0 2.6-1.1 4.4-2.5 5.5" />
+      <path d="M14.9 18.3c-.7 1.4.4 2.9 2.1 2.7" />
+      <path d="M7.5 7.3c-2.4.2-3.2 2.6-2.4 4.4.7 1.6 2.4 2 3.5 1.4" />
+      <path d="M10.3 12.1h.01M13.7 12.1h.01" />
+    </>
+  ),
+  turtle: (
+    <>
+      <path d="M4.4 14.4c0-4.1 3.4-7.4 7.6-7.4s7.6 3.3 7.6 7.4" />
+      <path d="M4.4 14.4h15.2" />
+      <path d="M12 7v7.4M8 8.7l1.6 5.7M16 8.7l-1.6 5.7" />
+      <path d="M4 16.6l-1.6 2M20 16.6l1.6 2" />
+      <path d="M12 4.4V6" />
+    </>
+  ),
+  leopard: (
+    <>
+      <path d="M6.5 8.6l2-2.8 3.5 1 3.5-1 2 2.8v3.2c0 3.1-2.1 5.7-5.5 5.7s-5.5-2.6-5.5-5.7z" />
+      <path d="M10 11.5h.01M14 11.5h.01" />
+      <path d="M11.2 14.2c.5.4 1.1.4 1.6 0" />
+      <path d="M8.7 12.7l.6.5M15.3 12.7l-.6.5" />
+    </>
+  ),
+  penguin: (
+    <>
+      <path d="M12 3.4c3.1 0 4.7 2.5 4.7 5.7v4.4c0 3.9-2.1 7.1-4.7 7.1s-4.7-3.2-4.7-7.1V9.1c0-3.2 1.6-5.7 4.7-5.7z" />
+      <path d="M10 9.6h.01M14 9.6h.01" />
+      <path d="M11.1 11.6l.9 1.6.9-1.6" />
+      <path d="M7.6 15.6c1 1.1 2.6 1.7 4.4 1.7s3.4-.6 4.4-1.7" />
+    </>
+  ),
+  gorilla: (
+    <>
+      <path d="M6.4 10.4c0-3.2 2.5-5.6 5.6-5.6s5.6 2.4 5.6 5.6c0 2-1 3.5-2.5 4.3" />
+      <path d="M6.4 10.4c0 2 1 3.5 2.5 4.3" />
+      <path d="M9.4 10.2h.01M14.6 10.2h.01" />
+      <path d="M10.4 12.7c.6.5 2.6.5 3.2 0" />
+      <path d="M4.6 19.6c1.5-1.7 4.1-2.7 7.4-2.7s5.9 1 7.4 2.7" />
+    </>
+  ),
+}
+
+export function AnimalArt({ name = 'lion', className = 'h-10 w-10', color = '#1d5fa8' }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {ANIMAL_PATHS[name] || ANIMAL_PATHS.lion}
+    </svg>
+  )
+}

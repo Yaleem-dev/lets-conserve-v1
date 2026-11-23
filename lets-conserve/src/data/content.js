@@ -9,7 +9,7 @@ export const APP_DESCRIPTION = 'Your personal guide for eco-action'
 
 /* -------------------------------- LEARN ---------------------------- */
 
-export const learnCategories = ['All', 'Climate', 'Nature', 'Waste', 'Forests']
+export const learnCategories = ['All', 'Climate', 'Nature', 'Ocean', 'Geography', 'Waste', 'Forests']
 
 export const learnTopics = [
   {
@@ -56,6 +56,32 @@ export const learnTopics = [
     lede: 'A forest holds four things at once.',
     points: ['Ten football pitches a minute, lost.', 'Fuelwood drives Nigerian loss.', 'Mangroves shield the coast.'],
     fact: 'NCF has protected Nigerian forest since 1980.',
+  },
+  {
+    id: 'ocean',
+    title: 'One shared ocean',
+    category: 'Ocean',
+    art: 'water',
+    lede: 'Every river ends up here.',
+    points: [
+      'The sea soaks up much of the heat we trap.',
+      'Warm water bleaches coral reefs.',
+      'Litter dropped inland still reaches the coast.',
+    ],
+    fact: 'Ocean water covers about 71 percent of the planet.',
+  },
+  {
+    id: 'geography',
+    title: 'Place shapes the choice',
+    category: 'Geography',
+    art: 'place',
+    lede: 'Where you live decides what helps.',
+    points: [
+      'Coasts take the first hit from storms.',
+      'Mountains store water for the cities below.',
+      'Dry regions feel a small shift first.',
+    ],
+    fact: 'Nigeria sits on the Gulf of Guinea, one of Africa\u2019s busiest coastlines.',
   },
 ]
 

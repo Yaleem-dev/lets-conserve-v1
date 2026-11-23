@@ -8,6 +8,8 @@ export function Btn({ children, onClick, variant = 'leaf', className = '', ...re
     soft: 'bg-leaf-3 text-green-deep border-leaf-edge hover:bg-leaf',
     chalk: 'bg-chalk text-paper border-chalk hover:bg-chalk-2',
     gold: 'bg-gold-tint text-gold-deep border-[#c99a20] hover:bg-gold hover:text-ink',
+    warm: 'bg-warm text-warm-ink border-warm-edge hover:bg-warm-2',
+    blush: 'bg-blush text-blush-ink border-blush-2 hover:bg-blush-2',
     ghost: 'bg-card text-ink-soft border-line hover:border-green hover:text-green-deep',
     ghostLight: 'bg-paper/10 text-paper border-paper/40 hover:bg-leaf hover:text-green-deep hover:border-leaf',
   }
