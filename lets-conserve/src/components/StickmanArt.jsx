@@ -1,3 +1,4 @@
+import { useId } from 'react'
 /* ------------------------------------------------------------------
    Eco line-art doodle library
    Single stroke #2E5A36, no fill, rounded terminals, uniform weight,
@@ -906,24 +907,243 @@ const STICK = {
    All inline SVG, no raster assets.
 ================================================================== */
 
-/* Blue Earth outline, used as the header logo mark */
-export function EarthMark({ className = 'h-5 w-5', color = '#1d5fa8' }) {
+/* Earth mark: a drawn world, not a gridded globe. Continents are
+   hand-traced silhouettes inside the ocean circle. Transparent
+   background so it sits on any surface. */
+export function EarthMark({ className = 'h-6 w-6', color = '#1d5fa8', weight = 0.95 }) {
   return (
     <svg
       viewBox="0 0 24 24"
       className={className}
       fill="none"
       stroke={color}
-      strokeWidth="1.5"
+      strokeWidth={weight}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
       focusable="false"
     >
-      <circle cx="12" cy="12" r="9.2" />
-      <path d="M2.8 12h18.4" />
-      <path d="M12 2.8c2.7 2.7 4.1 5.8 4.1 9.2s-1.4 6.5-4.1 9.2c-2.7-2.7-4.1-5.8-4.1-9.2S9.3 5.5 12 2.8z" />
-      <path d="M5.1 7.2c2.2 1 4.4 1.5 6.9 1.5s4.7-.5 6.9-1.5M5.1 16.8c2.2-1 4.4-1.5 6.9-1.5s4.7.5 6.9 1.5" />
+      <circle cx="12" cy="12" r="9.35" />
+      {/* North America */}
+      <path d="M4.3 6.6l1.4-1.5 2.3-.5 1.9.6.9 1.6-1.0 1.2 1.1 1.3-.8 1.6-1.5.5-1.0-1.2-1.3-1.0-.9-1.4z" />
+      {/* Greenland */}
+      <path d="M10.7 4.4l1.6.6-.6 1.5-1.3-.6z" />
+      {/* Central America and South America */}
+      <path d="M8.5 11.6l1.2.5.6 1.5 1.2.9-.3 1.7-1.1 2.1-1.2.9-.6-2.0.2-2.2-1.0-1.6z" />
+      {/* Africa */}
+      <path d="M12.8 10.4l2.1-.4 1.1 1.4-.5 2.0-.4 2.3-1.1 1.6-.8-2.0-.4-2.4-1.1-1.4z" />
+      {/* Europe */}
+      <path d="M12.7 7.1l1.7-.6 1.1 1.0-1.2 1.4-1.4-.2z" />
+      {/* Asia */}
+      <path d="M15.7 6.1l2.7-.7 1.9 1.2-.6 2.0-1.6.8-1.4-.7-.8-1.4z" />
+      {/* India */}
+      <path d="M16.9 9.7l1.0.2-.5 1.8z" />
+      {/* Southeast Asia */}
+      <path d="M18.6 10.6l1.2.4-.4 1.0-1.0-.3z" />
+      {/* Australia */}
+      <path d="M18.5 14.6l2.2-.4.4 1.7-1.3 1.2-1.5-.8z" />
+      {/* Antarctica hint */}
+      <path d="M6.2 19.4c3.8 1.0 8.0 1.0 11.7 0" strokeWidth="0.9" opacity="0.75" />
+    </svg>
+  )
+}
+
+/* ================== section banners ==================
+   Wide, low banners for the top of each view. Anime leaning: soft
+   gradient skies, layered depth, a warm sun disc, small sci-fi marks
+   (orbit arc, floating islets, spark line). Pure vector, no humans.
+=================================================================== */
+export function BannerArt({ variant = 'park', className = 'h-24 w-full' }) {
+  const uid = useId().replace(/[^a-zA-Z0-9]/g, '')
+  const skyId = 'sky' + uid
+  const glowId = 'glow' + uid
+  const waterId = 'water' + uid
+
+  const Sky = ({ from, to }) => (
+    <linearGradient id={skyId} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor={from} />
+      <stop offset="100%" stopColor={to} />
+    </linearGradient>
+  )
+
+  if (variant === 'ocean') {
+    return (
+      <svg viewBox="0 0 400 120" className={className} preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <defs>
+          <Sky from="#d7ecf7" to="#fdf3dd" />
+          <radialGradient id={glowId}>
+            <stop offset="0%" stopColor="#ffd98a" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="#ffd98a" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id={waterId} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#8fd0e8" />
+            <stop offset="100%" stopColor="#2f8fb8" />
+          </linearGradient>
+        </defs>
+        <rect width="400" height="120" fill={`url(#${skyId})`} />
+        <circle cx="300" cy="46" r="46" fill={`url(#${glowId})`} />
+        <circle cx="300" cy="46" r="15" fill="#ffcf6b" />
+        <g stroke="#2f7da6" strokeWidth="1.4" fill="none" opacity="0.55">
+          <path d="M236 30a64 26 0 0 1 128 0" strokeDasharray="3 6" />
+          <path d="M40 34c4-4 8-4 12 0M58 26c3-3 7-3 10 0" />
+        </g>
+        <path d="M0 78c30-10 52 6 80 2s52-12 82-4 60 8 90 0 62-10 88-2 42 8 60 4v42H0z" fill={`url(#${waterId})`} opacity="0.95" />
+        <g stroke="#f4fbff" strokeWidth="1.6" fill="none" opacity="0.8">
+          <path d="M28 92c10-4 18 4 28 0M96 100c10-4 18 4 28 0M180 90c10-4 18 4 28 0M262 102c10-4 18 4 28 0M326 92c10-4 18 4 28 0" />
+        </g>
+        <g fill="#1f6f57" opacity="0.9">
+          <path d="M62 78c-8-6-14-6-20-3 5 1 8 3 10 6-6-3-12-2-16 1 5 0 9 2 12 4z" />
+          <path d="M74 78c8-6 14-6 20-3-5 1-8 3-10 6 6-3 12-2 16 1-5 0-9 2-12 4z" />
+        </g>
+        <circle cx="352" cy="20" r="1.6" fill="#ffffff" />
+        <circle cx="120" cy="16" r="1.2" fill="#ffffff" opacity="0.8" />
+      </svg>
+    )
+  }
+
+  if (variant === 'landscape') {
+    return (
+      <svg viewBox="0 0 400 120" className={className} preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <defs>
+          <Sky from="#e2e6fa" to="#fbefdc" />
+          <radialGradient id={glowId}>
+            <stop offset="0%" stopColor="#ffe3a8" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#ffe3a8" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <rect width="400" height="120" fill={`url(#${skyId})`} />
+        <circle cx="96" cy="40" r="42" fill={`url(#${glowId})`} />
+        <circle cx="96" cy="40" r="13" fill="#ffd684" />
+        <path d="M198 78l38-44 34 44z" fill="#8fa9c9" />
+        <path d="M198 78l38-44 10 13-22 31z" fill="#b9cde2" />
+        <path d="M244 78l30-33 30 33z" fill="#7794b6" />
+        <path d="M324 78l26-27 30 27z" fill="#8fa9c9" />
+        <path d="M0 78l40-30 34 30z" fill="#a8bfd6" />
+        <rect y="76" width="400" height="44" fill="#dfeee4" />
+        <path d="M0 80c46-6 78 8 122 4s74-10 116-4 90 8 162 2v40H0z" fill="#a9dcb4" />
+        <path d="M0 96c52-8 92 6 142 4s84-8 130-4 76 6 128 2v26H0z" fill="#6fbf90" />
+        <g stroke="#3f8f6a" strokeWidth="1.5" fill="none">
+          <path d="M44 112v-14M44 100l-6-6M44 104l7-6" />
+          <path d="M58 112v-10M58 104l-5-5M58 107l6-5" />
+          <path d="M336 112v-16M336 100l-7-7M336 105l8-7" />
+          <path d="M352 112v-11M352 103l-5-5M352 107l6-5" />
+        </g>
+        <g stroke="#ffffff" strokeWidth="1.3" fill="none" opacity="0.65">
+          <path d="M160 58h44" strokeDasharray="2 5" />
+          <path d="M20 26c4-4 9-4 13 0" />
+        </g>
+        <circle cx="366" cy="30" r="1.4" fill="#ffffff" />
+      </svg>
+    )
+  }
+
+  /* park: the default, a bright garden with a sci-fi orbit line */
+  return (
+    <svg viewBox="0 0 400 120" className={className} preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <Sky from="#e6f7d4" to="#fdf6dd" />
+        <radialGradient id={glowId}>
+          <stop offset="0%" stopColor="#fff0b8" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#fff0b8" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <rect width="400" height="120" fill={`url(#${skyId})`} />
+      <circle cx="318" cy="38" r="44" fill={`url(#${glowId})`} />
+      <circle cx="318" cy="38" r="14" fill="#ffd97a" />
+      <path d="M214 38a104 40 0 0 1 208 0" fill="none" stroke="#6fa87e" strokeWidth="1.3" strokeDasharray="3 7" opacity="0.6" />
+      <circle cx="248" cy="26" r="2.2" fill="#e08a3c" />
+      <circle cx="392" cy="34" r="1.8" fill="#4d9ac2" />
+      <path d="M0 88c40-14 66 6 104 2s62-14 98-8 68 12 100 6 60-12 98-6v38H0z" fill="#c7e9a8" />
+      <path d="M0 100c44-10 74 4 116 2s72-10 112-4 76 8 108 2 46-6 64-4v24H0z" fill="#8fd176" />
+      <g stroke="#2f7d4f" strokeWidth="2" fill="none">
+        <path d="M56 100V82" /><path d="M56 88l-9-9M56 84l9-8" /><circle cx="56" cy="70" r="12" fill="#7ac48a" stroke="none" opacity="0.85" />
+        <path d="M200 102V86" /><path d="M200 78l-14 18h28z" fill="#5aa96f" stroke="none" opacity="0.9" />
+        <path d="M276 100v-10" /><path d="M276 84c-8 0-13 5-13 10s5 8 13 8 13-3 13-8-5-10-13-10z" fill="#cfe88f" stroke="none" />
+        <path d="M120 102l4-9M130 102l-4-9" opacity="0.8" />
+        <path d="M162 104l4-8M172 104l-4-8" opacity="0.8" />
+        <path d="M340 104l4-8M350 104l-4-8" opacity="0.8" />
+      </g>
+      <g fill="#ffffff" opacity="0.75">
+        <circle cx="86" cy="30" r="1.4" /><circle cx="140" cy="18" r="1" /><circle cx="268" cy="14" r="1.2" />
+      </g>
+    </svg>
+  )
+}
+
+/* ================== cartoon art ==================
+   Filled, chunky outline cartoon props. Used where the page needs
+   personality rather than another nature sketch. No people.
+=================================================== */
+export function CartoonTools({ className = 'h-32 w-full' }) {
+  return (
+    <svg viewBox="0 0 220 140" className={className} fill="none" aria-hidden="true" focusable="false">
+      {/* telescope */}
+      <g stroke="#123c2a" strokeWidth="2.6" strokeLinejoin="round" strokeLinecap="round">
+        <path d="M74 64l52-24 12 24-52 24z" fill="#f2a63c" />
+        <path d="M126 40l12-6 12 30-12 6z" fill="#ffd27a" />
+        <path d="M78 66l-6 6 8 6 6-6" fill="#e8932a" />
+        <path d="M92 76l-10 34M108 70l6 40" strokeWidth="2.4" />
+        <path d="M74 112h40" strokeWidth="2.4" />
+        <circle cx="152" cy="44" r="3.4" fill="#dff3ff" />
+      </g>
+      {/* compass */}
+      <g stroke="#123c2a" strokeWidth="2.6" strokeLinejoin="round">
+        <circle cx="46" cy="92" r="17" fill="#9fd0f5" />
+        <path d="M46 80l7 19-7-5-7 5z" fill="#1d5fa8" />
+      </g>
+      {/* leaf buddy */}
+      <g stroke="#123c2a" strokeWidth="2.6" strokeLinejoin="round">
+        <path d="M170 104c0-16 12-28 28-28 0 16-12 28-28 28z" fill="#a6e5c0" />
+        <path d="M170 104l16-16" strokeWidth="2" />
+        <circle cx="186" cy="88" r="1.8" fill="#123c2a" stroke="none" />
+        <circle cx="193" cy="95" r="1.8" fill="#123c2a" stroke="none" />
+      </g>
+      {/* sparkles */}
+      <g stroke="#e8932a" strokeWidth="2.2" strokeLinecap="round">
+        <path d="M40 40v-10M35 35h10M192 26v-8M188 22h8M118 116v-8M114 112h8" />
+      </g>
+      <circle cx="60" cy="58" r="2.6" fill="#b8536f" />
+      <circle cx="206" cy="70" r="2.2" fill="#5b3fa8" />
+    </svg>
+  )
+}
+
+/* Small anime-leaning scene for the creature quiz header: butterfly,
+   sprout and a shell, over a soft gradient plate. */
+export function CreaturesArt({ className = 'h-24 w-full' }) {
+  const uid = useId().replace(/[^a-zA-Z0-9]/g, '')
+  const plate = 'pl' + uid
+  return (
+    <svg viewBox="0 0 400 96" className={className} preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id={plate} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#fde7e2" />
+          <stop offset="55%" stopColor="#fdf1c6" />
+          <stop offset="100%" stopColor="#ddf3e4" />
+        </linearGradient>
+      </defs>
+      <rect width="400" height="96" fill={`url(#${plate})`} />
+      <g stroke="#123c2a" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        {/* butterfly */}
+        <path d="M128 52c-12-16-30-16-32-2s14 20 32 6z" fill="#c9b8f2" />
+        <path d="M128 52c12-16 30-16 32-2s-14 20-32 6z" fill="#9fd0f5" />
+        <path d="M128 52v14M124 42l-4-6M132 42l4-6" />
+        {/* sprout */}
+        <path d="M196 76V52" />
+        <path d="M196 58c-12 0-18-8-18-16 12 0 18 8 18 16z" fill="#a6e5c0" />
+        <path d="M196 62c12 0 18-8 18-16-12 0-18 8-18 16z" fill="#7ac48a" />
+        {/* shell */}
+        <path d="M262 76c0-14 11-24 24-24s24 10 24 24z" fill="#ffd27a" />
+        <path d="M286 76V54M274 76l4-16M298 76l-4-16" strokeWidth="1.6" />
+        {/* beetle */}
+        <ellipse cx="340" cy="66" rx="11" ry="8" fill="#b8536f" />
+        <path d="M340 58v16M331 62l-4-4M349 62l4-4M337 56l-2-5M343 56l2-5" strokeWidth="1.8" />
+      </g>
+      <g stroke="#5f9c33" strokeWidth="1.8" fill="none" opacity="0.65">
+        <path d="M24 82c3-3 7-3 10 0M44 82c3-3 7-3 10 0M64 82c3-3 7-3 10 0" />
+      </g>
+      <circle cx="60" cy="26" r="2.4" fill="#f2a63c" />
+      <circle cx="366" cy="22" r="2" fill="#5b3fa8" />
     </svg>
   )
 }

@@ -18,8 +18,12 @@ export const learnTopics = [
     category: 'Climate',
     art: 'climate',
     lede: 'Burning fuel traps heat.',
-    points: ['More carbon, warmer planet.', 'Wetter rains and longer droughts.', 'Small cuts still count.'],
-    fact: 'Carbon in the air is the highest in 800,000 years.',
+    points: [
+      'Global emissions hit a record 57.1 GtCO2e in 2023.',
+      'Every region is warming, from Nairobi to Osaka.',
+      'The smallest cuts still add up.',
+    ],
+    fact: 'Nations would need to cut 42 percent of emissions by 2030 to hold 1.5C.',
   },
   {
     id: 'biodiversity',
@@ -27,8 +31,12 @@ export const learnTopics = [
     category: 'Nature',
     art: 'garden',
     lede: 'More threads, stronger web.',
-    points: ['One million species under threat.', 'Habitat loss leads.', 'Native plants help fastest.'],
-    fact: 'Nigeria is one of Africa’s most biodiverse countries.',
+    points: [
+      'Around one million species are threatened worldwide.',
+      'Habitat loss leads, then hunting and pollution.',
+      'Native plants help fastest, anywhere you live.',
+    ],
+    fact: 'Three quarters of the land surface has been visibly altered by people.',
   },
   {
     id: 'pollution',
@@ -36,8 +44,12 @@ export const learnTopics = [
     category: 'Waste',
     art: 'water',
     lede: 'The worst of it is unseen.',
-    points: ['Nine in ten breathe dirty air.', '11 million tonnes of plastic a year.', 'Sorting waste is the cheapest fix.'],
-    fact: 'One bottle becomes thousands of pieces.',
+    points: [
+      '99 percent of people breathe air above WHO limits.',
+      'Roughly 11 million tonnes of plastic reach the sea yearly.',
+      'Sorting waste is the cheapest fix there is.',
+    ],
+    fact: 'One plastic bottle becomes thousands of pieces, never a bottle again.',
   },
   {
     id: 'circular',
@@ -45,8 +57,12 @@ export const learnTopics = [
     category: 'Waste',
     art: 'waste',
     lede: 'Keep it in use, then again.',
-    points: ['Less than a tenth is circular.', 'Repair beats replace.', 'Collectors pay per kilo.'],
-    fact: 'Two more years of phone life saves a lot.',
+    points: [
+      'Only a small share of what we make is truly circular.',
+      'Repair beats replace, in Lagos or Lisbon.',
+      'Waste pickers keep cities running everywhere.',
+    ],
+    fact: 'Two more years of phone life saves the minerals inside it.',
   },
   {
     id: 'forests',
@@ -54,8 +70,12 @@ export const learnTopics = [
     category: 'Forests',
     art: 'forest',
     lede: 'A forest holds four things at once.',
-    points: ['Ten football pitches a minute, lost.', 'Fuelwood drives Nigerian loss.', 'Mangroves shield the coast.'],
-    fact: 'NCF has protected Nigerian forest since 1980.',
+    points: [
+      'Tropical primary forest keeps vanishing at around 11 football fields a minute.',
+      'Fuelwood and farmland drive most of it.',
+      'Mangroves shelter coastlines on every continent.',
+    ],
+    fact: 'A forest holds carbon, water, soil and species in one place.',
   },
   {
     id: 'ocean',
@@ -64,11 +84,11 @@ export const learnTopics = [
     art: 'water',
     lede: 'Every river ends up here.',
     points: [
-      'The sea soaks up much of the heat we trap.',
-      'Warm water bleaches coral reefs.',
-      'Litter dropped inland still reaches the coast.',
+      'The ocean covers 71 percent of the planet.',
+      'It absorbs most of the extra heat we trap.',
+      'Warm water bleaches coral from Fiji to Florida.',
     ],
-    fact: 'Ocean water covers about 71 percent of the planet.',
+    fact: 'Coral reefs host a quarter of marine species on a sliver of the sea floor.',
   },
   {
     id: 'geography',
@@ -81,15 +101,27 @@ export const learnTopics = [
       'Mountains store water for the cities below.',
       'Dry regions feel a small shift first.',
     ],
-    fact: 'Nigeria sits on the Gulf of Guinea, one of Africa\u2019s busiest coastlines.',
+    fact: 'A river running through five nations is only as clean as its furthest source.',
   },
 ]
 
 export const facts = [
-  { text: 'Mangroves store more carbon than most land forests.', art: 'forest' },
-  { text: 'A garbage truck of plastic enters the sea every minute.', art: 'water' },
-  { text: 'Cities cover 3% of land and use most of its energy.', art: 'energy' },
-  { text: 'The Ibadan malimbe survives in a few forest patches.', art: 'garden' },
+  {
+    text: 'Half of the world\u2019s mangrove ecosystems are at risk of collapse, and they shelter coastlines on every continent.',
+    art: 'forest',
+  },
+  {
+    text: 'The coco de mer palm grows wild on two Seychelles islands and makes the biggest seed of any plant. It is Endangered.',
+    art: 'garden',
+  },
+  {
+    text: 'Almost everyone on Earth, 99 percent of us, breathes air that breaks WHO limits.',
+    art: 'climate',
+  },
+  {
+    text: 'Tropical primary forest is still lost at about 11 football fields every minute, mostly for farmland.',
+    art: 'water',
+  },
 ]
 
 export const quizQuestions = [
@@ -130,8 +162,14 @@ export const quizQuestions = [
 export const regions = [
   { id: 'US', label: 'US' },
   { id: 'UK', label: 'UK' },
+  { id: 'CA', label: 'Canada' },
   { id: 'ZA', label: 'South Africa' },
   { id: 'NG', label: 'Nigeria' },
+  { id: 'KE', label: 'Kenya' },
+  { id: 'IN', label: 'India' },
+  { id: 'AU', label: 'Australia' },
+  { id: 'MX', label: 'Mexico' },
+  { id: 'BR', label: 'Brazil' },
   { id: 'Global', label: 'Global' },
 ]
 
@@ -186,6 +224,33 @@ export const organizations = [
   { id: 'lawma', name: 'LAWMA', region: 'NG', kind: 'org', art: 'waste', url: 'https://www.lawma.gov.ng/', note: 'Lagos waste authority.' },
   { id: 'ecopals', name: 'Ecopals Nigeria', region: 'NG', kind: 'org', art: 'community', url: 'https://www.ecopals.org/', note: 'Youth climate education.' },
 
+  /* Canada */
+  { id: 'ncc', name: 'Nature Conservancy of Canada', region: 'CA', kind: 'vol', art: 'forest', url: 'https://www.natureconservancy.ca/', note: 'Habitat stewardship across provinces.' },
+  { id: 'dsf', name: 'David Suzuki Foundation', region: 'CA', kind: 'org', art: 'climate', url: 'https://davidsuzuki.org/', note: 'Climate policy and citizen science.' },
+  { id: 'evergreen', name: 'Evergreen', region: 'CA', kind: 'vol', art: 'community', url: 'https://www.evergreen.ca/', note: 'School grounds and city green space.' },
+
+  /* Kenya */
+  { id: 'lewa', name: 'Lewa Wildlife Conservancy', region: 'KE', kind: 'vol', art: 'nature', url: 'https://www.lewa.org/', note: 'Rhino and rangeland protection.' },
+  { id: 'sheldrick', name: 'Sheldrick Wildlife Trust', region: 'KE', kind: 'vol', art: 'nature', url: 'https://www.sheldrickwildlifetrust.org/', note: 'Orphan elephants and anti poaching.' },
+
+  /* India */
+  { id: 'wti', name: 'Wildlife Trust of India', region: 'IN', kind: 'org', art: 'nature', url: 'https://www.wti.org.in/', note: 'Rescue, rehab and corridors.' },
+  { id: 'cse', name: 'Centre for Science and Environment', region: 'IN', kind: 'org', art: 'climate', url: 'https://www.cseindia.org/', note: 'Air, water and climate research.' },
+  { id: 'chintan', name: 'Chintan Environmental Research', region: 'IN', kind: 'vol', art: 'waste', url: 'https://chintan-india.org/', note: 'Waste pickers and circular cities.' },
+
+  /* Australia */
+  { id: 'acf', name: 'Australian Conservation Foundation', region: 'AU', kind: 'vol', art: 'climate', url: 'https://www.acf.org.au/', note: 'Climate and nature campaigns.' },
+  { id: 'bushheritage', name: 'Bush Heritage Australia', region: 'AU', kind: 'vol', art: 'place', url: 'https://www.bushheritage.org.au/', note: 'Reserves and field days.' },
+  { id: 'landcare', name: 'Landcare Australia', region: 'AU', kind: 'vol', art: 'plant', url: 'https://landcareaustralia.org.au/', note: 'Local planting and river care groups.' },
+
+  /* Mexico */
+  { id: 'pronatura', name: 'Pronatura Mexico', region: 'MX', kind: 'org', art: 'forest', url: 'https://www.pronatura.org.mx/', note: 'Forests, coasts and migratory birds.' },
+  { id: 'conanp', name: 'CONANP', region: 'MX', kind: 'vol', art: 'place', url: 'https://www.gob.mx/conanp', note: 'Runs Mexico\u2019s protected areas.' },
+
+  /* Brazil */
+  { id: 'sosma', name: 'SOS Mata Atlantica', region: 'BR', kind: 'vol', art: 'forest', url: 'https://www.sosma.org.br/', note: 'Atlantic forest restoration.' },
+  { id: 'imazon', name: 'Imazon', region: 'BR', kind: 'org', art: 'climate', url: 'https://imazon.org.br/', note: 'Amazon deforestation monitoring.' },
+
   /* Global */
   { id: 'unep', name: 'UN Environment Programme', region: 'Global', kind: 'org', art: 'climate', url: 'https://www.unep.org/', note: 'Global assessments.' },
   { id: 'foei', name: 'Friends of the Earth', region: 'Global', kind: 'org', art: 'community', url: 'https://www.foei.org/', note: 'Grassroots justice groups.' },
@@ -208,7 +273,7 @@ export const organizations = [
 export const guideGroups = [
   {
     id: 'home',
-    label: 'At home',
+    label: 'Home',
     guides: [
       { title: 'Weigh your waste', art: 'waste', points: 10 },
       { title: 'Kill standby power', art: 'energy', points: 10 },

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Art, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon, BannerArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Segmented, Ext } from '../components/ui.jsx'
 import { guideGroups, organizations, regions } from '../data/content.js'
 
@@ -66,7 +66,13 @@ export default function Discover({ go }) {
 
   return (
     <div className="fade-up">
-      <section className="shell pt-7 md:pt-10">
+      <section className="shell pt-4 md:pt-6">
+        <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
+          <BannerArt variant="park" className="h-16 w-full md:h-20" />
+        </div>
+      </section>
+
+      <section className="shell mt-4">
         <Chapter>Chapter 02</Chapter>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">

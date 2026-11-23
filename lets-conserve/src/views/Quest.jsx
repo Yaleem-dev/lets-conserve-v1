@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Art, Doodle, Icon, BadgeArt } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon, BadgeArt, BannerArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { quests, questCategories, badges } from '../data/content.js'
 
@@ -23,6 +23,12 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
 
   return (
     <div className="fade-up">
+      <section className="shell pt-4 md:pt-6">
+        <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
+          <BannerArt variant="landscape" className="h-16 w-full md:h-20" />
+        </div>
+      </section>
+
       <section className="shell pt-7 md:pt-10">
         <Chapter>Chapter 03</Chapter>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">

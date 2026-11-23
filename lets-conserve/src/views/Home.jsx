@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
-import { Art, Doodle, Icon, HeroArt } from '../components/StickmanArt.jsx'
-import AnimalQuiz from '../components/AnimalQuiz.jsx'
+import { Art, Doodle, Icon, HeroArt, BannerArt } from '../components/StickmanArt.jsx'
+import EcoCreaturesQuiz from '../components/EcoCreaturesQuiz.jsx'
+import { facts } from '../data/content.js'
 import { Btn, Chapter, Chip, Meter } from '../components/ui.jsx'
 import { organizations, resources } from '../data/content.js'
 
@@ -35,7 +36,13 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
   return (
     <div className="fade-up">
       {/* ---------------------------- HERO ---------------------------- */}
-      <section className="shell pt-5 md:pt-8">
+      <section className="shell pt-4 md:pt-6">
+        <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
+          <BannerArt variant="park" className="h-16 w-full md:h-20" />
+        </div>
+      </section>
+
+      <section className="shell mt-3 md:mt-4">
         <div className="card-hero relative overflow-hidden px-5 py-7 sm:px-6 sm:py-8 md:px-10 md:py-11">
           <div className="relative grid items-center gap-6 md:grid-cols-[1.05fr_0.95fr] md:gap-8">
             <div className="min-w-0">
@@ -48,8 +55,10 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
                 <br />
                 for <span className="text-brand-green">eco-action</span>
               </h1>
-              <p className="mt-3 max-w-sm text-[0.9375rem] font-semibold leading-snug text-ink-soft">
-                Learn something. Discover something. Do something.
+              <p className="mt-3 flex flex-col gap-0.5 text-[0.9375rem] font-bold leading-snug">
+                <span className="text-brand-blue">Learn something.</span>
+                <span className="text-blush-ink">Discover something.</span>
+                <span className="text-mint-ink">Do something.</span>
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2.5">
@@ -100,16 +109,15 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
         </div>
       </section>
 
-      {/* ------------------------ ECO ANIMAL QUIZ -------------------- */}
+      {/* ----------------------- ECO-CREATURES QUIZ ------------------ */}
       <section className="shell mt-5">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b-[1.5px] border-line pb-3">
           <div>
-            <Chapter>Quick quiz</Chapter>
-            <h2 className="mt-1 text-xl">Which eco animal are you</h2>
+            <Chapter>Eco-Creatures</Chapter>
+            <h2 className="mt-1 text-xl">Which eco creature are you?</h2>
           </div>
-          <span className="text-[0.75rem] text-slate">Five prompts</span>
         </div>
-        <AnimalQuiz />
+        <EcoCreaturesQuiz />
       </section>
 
       {/* -------------------------- ENTRY CARDS ---------------------- */}
@@ -158,28 +166,26 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
 
       {/* ----------------------------- FACTS ------------------------- */}
       <section className="shell pb-12">
-        <div className="card-chalk relative overflow-hidden p-5 md:p-7">
-          <Doodle name="sprig" tone="dark" className="absolute right-5 top-5 h-7 w-7 opacity-60" />
-          <div className="grid items-center gap-5 md:grid-cols-[0.85fr_1.15fr]">
-            <div>
-              <Chapter tone="dark">Did you know</Chapter>
-              <p className="mt-2 text-[1.2rem] leading-snug text-paper md:text-[1.35rem]">
-                Mangroves store more carbon than most land forests.
-              </p>
-              <button type="button" onClick={() => go('learn')} className="mt-3 inline-flex items-center gap-1.5 text-[0.8125rem] font-bold text-leaf">
-                More facts
-                <Icon name="arrow" className="h-3.5 w-3.5" strokeWidth={2.4} />
-              </button>
-            </div>
-            <div className="grid grid-cols-2 gap-2.5">
-              {resources.slice(0, 2).map((r) => (
-                <div key={r.id} className="rounded-xl border border-paper/15 p-2.5">
-                  <Art name={r.art} variant="doodle" tone="dark" className="h-11" />
-                  <p className="mt-1 text-[0.75rem] font-bold text-paper">{r.name}</p>
-                </div>
-              ))}
-            </div>
+        <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b-[1.5px] border-line pb-3">
+          <div>
+            <Chapter>Did you know</Chapter>
+            <h2 className="mt-1 text-xl">Four things worth knowing</h2>
           </div>
+          <button type="button" onClick={() => go('learn')} className="inline-flex items-center gap-1.5 text-[0.8125rem] font-bold text-green-deep">
+            More in Learn
+            <Icon name="arrow" className="h-3.5 w-3.5" strokeWidth={2.4} />
+          </button>
+        </div>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {facts.map((f, i) => (
+            <div
+              key={f.text}
+              className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac'][i % 4]}`}
+            >
+              <Art name={f.art} variant="doodle" className="h-11" />
+              <p className="mt-1.5 text-[0.8125rem] font-semibold leading-snug text-ink-soft">{f.text}</p>
+            </div>
+          ))}
         </div>
       </section>
     </div>

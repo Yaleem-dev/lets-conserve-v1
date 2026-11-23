@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Art, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon, BannerArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { learnTopics, learnCategories, facts, quizQuestions } from '../data/content.js'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
@@ -136,7 +136,13 @@ export default function Learn({ quiz, recordQuiz }) {
 
   return (
     <div className="fade-up">
-      <section className="shell pt-7 md:pt-10">
+      <section className="shell pt-4 md:pt-6">
+        <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
+          <BannerArt variant="landscape" className="h-16 w-full md:h-20" />
+        </div>
+      </section>
+
+      <section className="shell mt-4">
         <Chapter>Chapter 01</Chapter>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
@@ -168,11 +174,11 @@ export default function Learn({ quiz, recordQuiz }) {
       <section className="shell pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
           <Chapter>Did you know</Chapter>
-          <h2 className="mt-1 text-xl">Four facts</h2>
+          <h2 className="mt-1 text-xl">Four things worth knowing</h2>
         </div>
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {facts.map((f, n) => (
-            <div key={f.text} className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-leaf-3', 'bg-[#e6f6d6]', 'bg-gold-tint', 'bg-card'][n]}`}>
+            <div key={f.text} className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac'][n % 4]}`}>
               <Art name={f.art} variant="doodle" className="h-11" />
               <p className="mt-1.5 text-[0.8125rem] leading-snug text-ink-soft">{f.text}</p>
             </div>
