@@ -109,18 +109,26 @@ export const facts = [
   {
     text: 'Half of the world\u2019s mangrove ecosystems are at risk of collapse, and they shelter coastlines on every continent.',
     art: 'forest',
+    img: '/art/fact-mangrove.webp',
+    alt: 'Mangrove roots standing in calm turquoise water at low tide',
   },
   {
     text: 'The coco de mer palm grows wild on two Seychelles islands and makes the biggest seed of any plant. It is Endangered.',
     art: 'garden',
+    img: '/art/fact-coco.webp',
+    alt: 'Giant fan palms over mossy granite on a Seychelles island',
   },
   {
     text: 'Almost everyone on Earth, 99 percent of us, breathes air that breaks WHO limits.',
     art: 'climate',
+    img: '/art/fact-air.webp',
+    alt: 'City skyline fading into dawn haze and smog',
   },
   {
     text: 'Tropical primary forest is still lost at about 11 football fields every minute, mostly for farmland.',
     art: 'water',
+    img: '/art/fact-forest.webp',
+    alt: 'Dense rainforest meeting cleared farmland at the forest edge',
   },
 ]
 
@@ -275,25 +283,25 @@ export const guideGroups = [
     id: 'home',
     label: 'Home',
     guides: [
-      { title: 'Weigh your waste', art: 'waste', points: 10 },
-      { title: 'Kill standby power', art: 'energy', points: 10 },
-      { title: 'Water twice', art: 'water', points: 10 },
+      { title: 'Weigh your waste', art: 'waste', img: '/art/guide-waste.webp', points: 10 },
+      { title: 'Kill standby power', art: 'energy', img: '/art/guide-energy.webp', points: 10 },
+      { title: 'Water twice', art: 'water', img: '/art/guide-water.webp', points: 10 },
     ],
   },
   {
     id: 'school',
     label: 'School',
     guides: [
-      { title: 'Start a green club', art: 'learn', points: 15 },
-      { title: 'Go bottle free', art: 'waste', points: 15 },
+      { title: 'Start a green club', art: 'learn', img: '/art/guide-club.webp', points: 15 },
+      { title: 'Go bottle free', art: 'waste', img: '/art/guide-bottle.webp', points: 15 },
     ],
   },
   {
     id: 'community',
     label: 'Community',
     guides: [
-      { title: 'Run a street cleanup', art: 'community', points: 25 },
-      { title: 'Adopt a tree', art: 'forest', points: 20 },
+      { title: 'Run a street cleanup', art: 'community', img: '/art/guide-cleanup.webp', points: 25 },
+      { title: 'Adopt a tree', art: 'forest', img: '/art/guide-tree.webp', points: 20 },
     ],
   },
 ]

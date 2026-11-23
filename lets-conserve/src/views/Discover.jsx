@@ -179,9 +179,14 @@ export default function Discover({ go }) {
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {g.guides.map((x) => (
                     <div key={x.title} className="card p-4">
-                      <div
-                        className={`h-24 rounded-[14px] ${GUIDE_TONE[x.art] || 'fill-sage'}`}
-                        aria-hidden="true"
+                      <img
+                        src={x.img}
+                        alt={x.title}
+                        loading="lazy"
+                        decoding="async"
+                        width="760"
+                        height="507"
+                        className="h-28 w-full rounded-[14px] object-cover"
                       />
                       <h4 className="mt-2 text-[0.9375rem] leading-snug">{x.title}</h4>
                       <div className="mt-2 flex items-center justify-between border-t border-line-soft pt-2">

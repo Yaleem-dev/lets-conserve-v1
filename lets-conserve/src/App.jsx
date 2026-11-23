@@ -238,7 +238,15 @@ export default function App() {
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-paper/12 pt-4">
             <p className="text-[0.6875rem] text-paper/70">Version 1. Progress stays in this browser.</p>
-            <p className="text-[0.6875rem] text-paper/70">React, Vite, Tailwind CSS</p>
+            <a
+              href="https://yaleem-dev.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-[0.6875rem] font-bold text-paper/90 underline decoration-leaf/60 decoration-1 underline-offset-4 transition-colors hover:text-leaf hover:decoration-leaf"
+            >
+              Created by Yaleem-dev
+              <Icon name="external" className="h-3 w-3" />
+            </a>
           </div>
         </div>
       </footer>

@@ -177,9 +177,14 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
               key={f.text}
               className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac'][i % 4]}`}
             >
-              <div
-                className={`h-14 rounded-[12px] ${['fill-terra', 'fill-mintflat', 'fill-skyflat', 'fill-lilac'][i % 4]}`}
-                aria-hidden="true"
+              <img
+                src={f.img}
+                alt={f.alt}
+                loading="lazy"
+                decoding="async"
+                width="760"
+                height="507"
+                className="h-24 w-full rounded-[12px] object-cover"
               />
               <p className="mt-1.5 text-[0.8125rem] font-semibold leading-snug text-ink-soft">{f.text}</p>
             </div>
