@@ -53,7 +53,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
               >
                 Your personal guide
                 <br />
-                for <span className="text-brand-green">eco-action</span>
+                for <span className="text-brand-green">eco-action</span>.
               </h1>
               <p className="mt-3 flex flex-col gap-0.5 text-[0.9375rem] font-bold leading-snug">
                 <span className="text-brand-blue">Learn something.</span>

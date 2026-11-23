@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { Component, useEffect, useMemo, useState } from 'react'
 import { LookDefs, Icon, Scene, Strip, Doodle, StickScene, EarthMark } from './components/StickmanArt.jsx'
 import { Points, Meter, Btn } from './components/ui.jsx'
 import { useProgress, currentWeek } from './hooks/useProgress.js'
@@ -8,6 +8,48 @@ import Learn from './views/Learn.jsx'
 import Discover from './views/Discover.jsx'
 import Quest from './views/Quest.jsx'
 import Explore from './views/Explore.jsx'
+
+
+/* A single view failing should never blank the whole app: show a small
+   recoverable panel instead of a white screen. */
+class Boundary extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { error: null }
+  }
+
+  static getDerivedStateFromError(error) {
+    return { error }
+  }
+
+  componentDidCatch(error) {
+    if (typeof console !== 'undefined') console.error('view error:', error)
+  }
+
+  render() {
+    if (this.state.error) {
+      return (
+        <div className="shell py-10">
+          <div className="card p-6">
+            <p className="chapter text-slate">Something broke</p>
+            <h2 className="mt-2 text-xl">This section did not load</h2>
+            <p className="mt-1 text-[0.9375rem] text-ink-soft">
+              The rest of the app still works. Try another tab.
+            </p>
+            <button
+              type="button"
+              onClick={() => this.setState({ error: null })}
+              className="mt-3 rounded-full border-[1.5px] border-leaf-edge bg-leaf px-5 py-2.5 text-sm font-bold text-green-deep"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
 
 const TABS = [
   { id: 'home', label: 'Home', icon: 'home' },
@@ -134,6 +176,7 @@ export default function App() {
       </header>
 
       <main id="main">
+        <Boundary key={view}>
         {view === 'home' && (
           <Home quest={featured} points={points} isDone={isDone} toggleQuest={toggleQuest} go={go} week={week} />
         )}
@@ -143,6 +186,7 @@ export default function App() {
           <Quest points={points} isDone={isDone} toggleQuest={toggleQuest} week={week} reset={reset} go={go} />
         )}
         {view === 'explore' && <Explore go={go} />}
+        </Boundary>
       </main>
 
       {/* --------------------------- FOOTER --------------------------- */}
@@ -185,7 +229,7 @@ export default function App() {
               <p className="text-[0.8125rem] leading-relaxed text-paper/80">
                 Understand, act, repeat.
               </p>
-              <Btn variant="leaf" className="mt-3 !px-4 !py-2 !text-[0.8125rem]" onClick={() => go('quest')}>
+              <Btn variant="warm" className="mt-3 !px-4 !py-2 !text-[0.8125rem]" onClick={() => go('quest')}>
                 This week’s quest
                 <Icon name="arrow" className="h-3.5 w-3.5" />
               </Btn>

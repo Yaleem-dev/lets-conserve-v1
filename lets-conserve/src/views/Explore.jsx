@@ -10,6 +10,8 @@ const TOOL_TONE = {
   News: { bg: '#b8452f', ink: '#fbe2e2' },
 }
 const toneFor = (c) => TOOL_TONE[c] || { bg: '#2f7d4f', ink: '#ddf3e4' }
+const catOf = (r) => r.category || 'Data'
+const initialOf = (r) => String(catOf(r)).slice(0, 1)
 
 export default function Explore({ go }) {
   const [cat, setCat] = useState('All')
@@ -47,21 +49,20 @@ export default function Explore({ go }) {
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((r, n) => (
-            <article key={r.id} className={`rounded-[18px] border-[1.5px] border-line p-4 ${['bg-card', 'bg-leaf-3', 'bg-gold-tint/60'][n % 3]}`}>
+            <article key={r.id} className={`rounded-[18px] border-[1.5px] border-line p-4 ${['bg-mint-tint', 'bg-sky-tint', 'bg-blush', 'bg-lilac'][n % 4]}`}>
               <div className="flex items-center justify-between gap-2">
                 <span
                   aria-hidden="true"
                   className="flex h-10 w-10 items-center justify-center rounded-[12px] text-[0.875rem] font-bold"
-                  style={{ background: toneFor(r.category).bg, color: toneFor(r.category).ink }}
+                  style={{ background: toneFor(catOf(r)).bg, color: toneFor(catOf(r)).ink }}
                 >
-                  {r.category.slice(0, 1)}
+                  {initialOf(r)}
                 </span>
-                <span className="text-[0.625rem] font-bold uppercase tracking-[0.08em] text-slate">{r.category}</span>
+                <span className="text-[0.625rem] font-bold uppercase tracking-[0.08em] text-slate">{catOf(r)}</span>
               </div>
               <div className="mt-2.5 flex items-start justify-between gap-2">
                 <h3 className="text-[0.9375rem] leading-tight">{r.name}</h3>
-                <Chip tone="soft">{r.category}</Chip>
-              </div>
+                </div>
               <p className="mt-0.5 text-[0.8125rem] text-slate">{r.why}</p>
               <div className="mt-2.5 border-t border-line/70 pt-2">
                 <Ext href={r.url}>Learn more</Ext>
@@ -83,7 +84,7 @@ export default function Explore({ go }) {
                 <Icon name="arrow" className="h-4 w-4" />
               </Btn>
             </div>
-            <CartoonTools className="h-28 w-full max-w-[260px]" />
+            <CartoonTools className="h-32 w-full max-w-[280px]" />
           </div>
         </div>
       </section>

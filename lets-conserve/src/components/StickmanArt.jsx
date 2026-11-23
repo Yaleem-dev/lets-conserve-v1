@@ -1162,12 +1162,12 @@ export function HeroArt({ className = 'h-40 w-full' }) {
       aria-hidden="true"
       focusable="false"
     >
-      {/* rainbow */}
-      <g strokeWidth="2.6">
-        <path d="M30 108a62 62 0 0 1 124 0" stroke="#f7fbf0" opacity="0.55" />
-        <path d="M42 108a50 50 0 0 1 100 0" stroke="#f0bb35" />
-        <path d="M54 108a38 38 0 0 1 76 0" stroke="#ea8f8f" />
-        <path d="M66 108a26 26 0 0 1 52 0" stroke="#7fb9ea" />
+      {/* rainbow: four colour bands only, no pale outline band */}
+      <g strokeWidth="2.7">
+        <path d="M30 108a62 62 0 0 1 124 0" stroke="#f0bb35" />
+        <path d="M42 108a50 50 0 0 1 100 0" stroke="#ea8f8f" />
+        <path d="M54 108a38 38 0 0 1 76 0" stroke="#7fb9ea" />
+        <path d="M66 108a26 26 0 0 1 52 0" stroke="#7ac48a" />
       </g>
 
       {/* sun */}
@@ -1177,12 +1177,12 @@ export function HeroArt({ className = 'h-40 w-full' }) {
       </g>
 
       {/* cloud */}
-      <g stroke="#f7fbf0" strokeWidth="1.9" opacity="0.6">
+      <g stroke="#a8c3dd" strokeWidth="1.9" opacity="0.85">
         <path d="M182 44c2-7 12-8 15-1 7-2 12 4 10 8h-27c-3-3-1-6 2-7z" />
       </g>
 
       {/* ground */}
-      <path d="M22 152c32-4 64 3 96-1s70 3 104-2 62 2 92 0" stroke="#f7fbf0" strokeWidth="1.8" opacity="0.5" />
+      <path d="M22 152c32-4 64 3 96-1s70 3 104-2 62 2 92 0" stroke="#a8bf7e" strokeWidth="1.8" opacity="0.85" />
 
       {/* deciduous tree */}
       <g strokeWidth="2.3">

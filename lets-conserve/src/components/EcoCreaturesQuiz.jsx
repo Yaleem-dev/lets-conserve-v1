@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { CreaturesArt } from './StickmanArt.jsx'
+import CreatureArt from './CreatureArt.jsx'
 import { Btn, Chapter } from './ui.jsx'
 
 /* Every conservation status below was checked against the IUCN Red List
@@ -192,7 +193,7 @@ function resolve(picks) {
 
 export default function EcoCreaturesQuiz() {
   const [picks, setPicks] = useState([])
-  const [copied, setCopied] = useState(false)
+  const [note, setNote] = useState('')
 
   const step = picks.length
   const finished = step >= PROMPTS.length
@@ -202,7 +203,7 @@ export default function EcoCreaturesQuiz() {
   const pick = (k) => setPicks((prev) => [...prev, k])
   const reset = () => {
     setPicks([])
-    setCopied(false)
+    setNote('')
   }
 
   const share = async () => {
@@ -211,16 +212,18 @@ export default function EcoCreaturesQuiz() {
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {
         await navigator.share({ title: 'My eco creature', text, url })
+        setNote('Shared')
+        window.setTimeout(() => setNote(''), 2400)
         return
       } catch {
-        /* dismissed, fall through to copy */
+        /* dismissed or unsupported, fall through to copy */
       }
     }
     const payload = `${text} ${url}`
     try {
       await navigator.clipboard.writeText(payload)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 2400)
+      setNote('Copied to clipboard')
+      window.setTimeout(() => setNote(''), 2400)
     } catch {
       const box = document.createElement('textarea')
       box.value = payload
@@ -228,8 +231,8 @@ export default function EcoCreaturesQuiz() {
       box.select()
       try {
         document.execCommand('copy')
-        setCopied(true)
-        window.setTimeout(() => setCopied(false), 2400)
+        setNote('Copied to clipboard')
+        window.setTimeout(() => setNote(''), 2400)
       } finally {
         document.body.removeChild(box)
       }
@@ -248,13 +251,15 @@ export default function EcoCreaturesQuiz() {
         <div className="p-4 sm:p-5" aria-live="polite">
           <div className="flex items-start gap-3.5">
             <span
-              className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-[1.5px] text-[0.7rem] font-bold uppercase"
-              style={{ background: creature.tint, borderColor: creature.ink, color: creature.ink }}
+              className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border-[1.5px]"
+              style={{ background: creature.tint, borderColor: creature.ink }}
             >
-              {creature.kind === 'Plant' ? 'Flora' : creature.kind === 'Insect' ? 'Insect' : 'Fauna'}
+              <CreatureArt name={key} className="h-16 w-16" />
             </span>
             <div className="min-w-0">
-              <p className="text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-slate">{creature.tag}</p>
+              <p className="text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-slate">
+                {creature.kind} · {creature.tag}
+              </p>
               <h3 className="mt-0.5 text-[1.3rem] leading-tight">{creature.name}</h3>
               <span
                 className="mt-1.5 inline-flex items-center rounded-full px-2.5 py-1 text-[0.625rem] font-bold uppercase tracking-[0.05em]"
@@ -273,13 +278,14 @@ export default function EcoCreaturesQuiz() {
             {creature.help}
           </p>
 
-          <div className="mt-3.5 flex flex-wrap gap-2">
+          <div className="mt-3.5 flex flex-wrap items-center gap-2">
             <Btn variant="leaf" className="!px-4 !py-2 !text-[0.8125rem]" onClick={share}>
-              {copied ? 'Link copied' : 'Share my creature'}
+              {note || 'Share my creature'}
             </Btn>
             <Btn variant="ghost" className="!px-4 !py-2 !text-[0.8125rem]" onClick={reset}>
               Play again
             </Btn>
+            <span aria-live="polite" className="text-[0.75rem] font-bold text-mint-ink">{note}</span>
           </div>
         </div>
       </div>
