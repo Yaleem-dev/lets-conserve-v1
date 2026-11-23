@@ -6,8 +6,23 @@
    energy, transport, climate, people.
 ------------------------------------------------------------------ */
 
-const STROKE = 2.1
-const DOODLE_GREEN = '#2F5B3A'
+const STROKE = 1.15
+/* Wide hue ring, not an eco-green monoculture. Every glyph takes a hue
+   from its own name, so a strip of eight icons reads as eight colours.
+   `ink` holds the one fixed colour used for figures on light surfaces. */
+const HUES = {
+  light: ['#1C6B45', '#0F6E8C', '#B4610A', '#A23B2C', '#6F3C96', '#0E7490',
+          '#3F6E13', '#AE2F62', '#2B5FA3', '#8A6A0A', '#4B7F52', '#96502A'],
+  dark:  ['#8ADE9F', '#86D2F0', '#F3C463', '#F2A08F', '#CBA9F2', '#8FE3DD',
+          '#D3EA84', '#F6A2C8', '#A6C1F7', '#EBD57F', '#A7E3A0', '#F0BC8E'],
+}
+
+function hueFor(name, tone) {
+  const ring = HUES[tone === 'dark' ? 'dark' : 'light']
+  let n = 7
+  for (const ch of String(name)) n = (n * 33 + ch.charCodeAt(0)) % 9973
+  return ring[n % ring.length]
+}
 
 /* No SVG filter primitives here on purpose. feTurbulence + feDisplacementMap
    blur the strokes and, on mobile GPUs, can paint large corrupted bands
@@ -273,15 +288,25 @@ const G = {
   ),
 }
 
-export function Doodle({ name = 'leaf', className = 'h-6 w-6', filter = false, title }) {
+/* Thin single stroke plus a faint offset ghost trace. Two overlapping
+   lines that never quite meet is what makes a sketch read as sketched
+   rather than as a geometric icon. `tone` swaps the hue ring for dark
+   panels so nothing disappears into the chalkboard. */
+export function Doodle({ name = 'leaf', className = 'h-6 w-6', tone = 'light', title, color, style }) {
   const glyph = G[name] || G.leaf
+  const stroke = color || hueFor(name, tone)
+  /* Slight weight drift per glyph: a drawn line is never one width. */
+  let n = 5
+  for (const ch of String(name)) n = (n * 29 + ch.charCodeAt(0)) % 977
+  const weight = STROKE + ((n % 5) - 2) * 0.09
   return (
     <svg
       viewBox="0 0 24 24"
       className={className}
+      style={style}
       fill="none"
-      stroke={DOODLE_GREEN}
-      strokeWidth={STROKE}
+      stroke={stroke}
+      strokeWidth={weight.toFixed(2)}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden={title ? undefined : 'true'}
@@ -289,7 +314,10 @@ export function Doodle({ name = 'leaf', className = 'h-6 w-6', filter = false, t
       focusable="false"
     >
       {title && <title>{title}</title>}
-      {glyph}
+      <g>{glyph}</g>
+      <g opacity="0.34" transform="translate(0.5 0.42) rotate(-2.5 12 12)" strokeDasharray="26 3 18 4">
+        {glyph}
+      </g>
     </svg>
   )
 }
@@ -359,15 +387,18 @@ const SCENES = {
   teach: ['duo', 'hand', 'bulb'],
 }
 
-export function Scene({ name = 'nature', className = 'h-full w-full' }) {
+export function Scene({ name = 'nature', tone = 'light', className = 'h-full w-full' }) {
   const set = (SCENES[name] || SCENES.nature).slice(0, 3)
+  const tilt = ['-7deg', '3deg', '-3deg']
   return (
-    <div className={`flex h-full w-full items-center justify-center gap-2 overflow-hidden ${className}`}>
+    <div className={`flex h-full w-full items-end justify-center gap-1.5 overflow-hidden ${className}`}>
       {set.map((g, i) => (
         <Doodle
           key={`${g}-${i}`}
           name={g}
-          className={`h-full w-auto min-w-0 shrink ${i === 1 ? 'opacity-100' : 'opacity-85'}`}
+          tone={tone}
+          className="h-full w-auto min-w-0 shrink"
+          style={{ transform: `rotate(${tilt[i % 3]})`, opacity: i === 1 ? 1 : 0.9 }}
         />
       ))}
     </div>
@@ -375,11 +406,17 @@ export function Scene({ name = 'nature', className = 'h-full w-full' }) {
 }
 
 /* a wide doodle strip for hero and footer bands */
-export function Strip({ className = 'h-20 w-full', names = ['tree', 'bulb', 'bin', 'droplet', 'bike', 'leaf', 'sun', 'globe'], filter = true }) {
+export function Strip({ className = 'h-20 w-full', names = ['tree', 'bulb', 'bin', 'droplet', 'bike', 'leaf', 'sun', 'globe'], tone = 'light' }) {
   return (
-    <div className={`flex items-center justify-between gap-2 overflow-hidden ${className}`}>
+    <div className={`flex items-end justify-between gap-2 overflow-hidden ${className}`}>
       {names.map((n, i) => (
-        <Doodle key={`${n}-${i}`} name={n} className="h-full w-auto min-w-0 shrink opacity-90" />
+        <Doodle
+          key={`${n}-${i}`}
+          name={n}
+          tone={tone}
+          className="h-full w-auto min-w-0 shrink"
+          style={{ transform: `rotate(${i % 2 ? 4 : -4}deg)` }}
+        />
       ))}
     </div>
   )
@@ -412,15 +449,27 @@ export function BadgeArt({ id, className = 'h-9 w-9' }) {
 
 /* gold, mint, sky, rose, cream. On cream cards the pale tones darken
    so nothing disappears. */
-const DARK = { a: '#E5B842', b: '#5CB888', c: '#4FA3D1', d: '#DE708E', e: '#F1F1E8', f: '#8FD3A8' }
-const LIGHT = { a: '#96700C', b: '#276C50', c: '#276A8E', d: '#A54A67', e: '#1B3828', f: '#4E9669' }
+/* Chalk-side hues, bright enough to sit on #0f2418. */
+const RING_DARK = ['#F3C463', '#8ADE9F', '#86D2F0', '#F2A08F', '#CBA9F2', '#D3EA84', '#F6A2C8', '#8FE3DD', '#F0BC8E']
+/* Card-side versions of the same ring, darkened so thin lines stay legible. */
+const RING_LIGHT = ['#9A6B08', '#276C50', '#28688C', '#A23B2C', '#6F3C96', '#3F6E13', '#AE2F62', '#0E7490', '#96502A']
 
-function pal(tone) {
-  return tone === 'dark' ? DARK : LIGHT
+/* Rotating the ring per scene means two scenes on one page never land on
+   the same colour order. `e` stays fixed: it is the figure ink. */
+function pal(tone, seed = '') {
+  const ring = tone === 'dark' ? RING_DARK : RING_LIGHT
+  let n = 3
+  for (const ch of String(seed)) n = (n * 31 + ch.charCodeAt(0)) % 9973
+  const k = n % ring.length
+  const pick = (i) => ring[(k + i) % ring.length]
+  return {
+    a: pick(0), b: pick(2), c: pick(3), d: pick(5), f: pick(6), g: pick(7),
+    e: tone === 'dark' ? '#F2F3E6' : '#1B3828',
+  }
 }
 
-function ChalkScene({ children, tone = 'light', className = '', viewBox = '14 14 192 132' }) {
-  const p = pal(tone)
+function ChalkScene({ children, tone = 'light', seed = '', className = '', viewBox = '14 14 192 132' }) {
+  const p = pal(tone, seed)
   const common = {
     fill: 'none',
     strokeWidth: 2.4,
@@ -455,7 +504,7 @@ const head = (p, x, y, r = 10, color) => <circle cx={x} cy={y} r={r} stroke={col
 
 export function ArtPlanting({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="planting" className={className}>
       {(p) => (
         <>
           {ground(p)}
@@ -489,7 +538,7 @@ export function ArtPlanting({ tone, className }) {
 
 export function ArtWalking({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="walking" className={className}>
       {(p) => (
         <>
           {ground(p)}
@@ -516,7 +565,7 @@ export function ArtWalking({ tone, className }) {
 
 export function ArtRecycling({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="recycling" className={className}>
       {(p) => (
         <>
           {ground(p)}
@@ -545,7 +594,7 @@ export function ArtRecycling({ tone, className }) {
 
 export function ArtLearning({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="learning" className={className}>
       {(p) => (
         <>
           {ground(p)}
@@ -569,7 +618,7 @@ export function ArtLearning({ tone, className }) {
 
 export function ArtOutdoors({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="outdoors" className={className}>
       {(p) => (
         <>
           {ground(p)}
@@ -593,7 +642,7 @@ export function ArtOutdoors({ tone, className }) {
 
 export function ArtCleanup({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="cleanup" className={className}>
       {(p) => (
         <>
           {ground(p)}
@@ -618,7 +667,7 @@ export function ArtCleanup({ tone, className }) {
 
 export function ArtTree({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="tree" className={className}>
       {(p) => (
         <>
           {ground(p)}
@@ -636,7 +685,7 @@ export function ArtTree({ tone, className }) {
 
 export function ArtLeaf({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="leaf" className={className}>
       {(p) => (
         <>
           <path d="M108 128C70 118 50 88 56 44c42 4 68 32 52 84z" stroke={p.b} />
@@ -652,7 +701,7 @@ export function ArtLeaf({ tone, className }) {
 
 export function ArtSun({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="sun" className={className}>
       {(p) => (
         <>
           <circle cx="110" cy="72" r="30" stroke={p.a} />
@@ -669,7 +718,7 @@ export function ArtSun({ tone, className }) {
 
 export function ArtCycle({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="cycle" className={className}>
       {(p) => (
         <>
           <path d="M110 34a38 38 0 0 1 33 19" stroke={p.b} />
@@ -688,7 +737,7 @@ export function ArtCycle({ tone, className }) {
 
 export function ArtShare({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="share" className={className}>
       {(p) => (
         <>
           {ground(p)}
@@ -713,7 +762,7 @@ export function ArtShare({ tone, className }) {
 
 export function ArtCelebrate({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="celebrate" className={className}>
       {(p) => (
         <>
           {ground(p)}
@@ -734,7 +783,7 @@ export function ArtCelebrate({ tone, className }) {
 
 export function ArtQuiz({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className}>
+    <ChalkScene tone={tone} seed="quiz" className={className}>
       {(p) => (
         <>
           <path d="M64 28h72a7 7 0 0 1 7 7v68a7 7 0 0 1-7 7H64a7 7 0 0 1-7-7V35a7 7 0 0 1 7-7z" stroke={p.e} />
@@ -752,7 +801,7 @@ export function ArtQuiz({ tone, className }) {
 /* a wide landscape strip, used as a divider band */
 export function ArtHorizon({ tone, className }) {
   return (
-    <ChalkScene tone={tone} className={className} viewBox="0 0 320 90">
+    <ChalkScene tone={tone} seed="horizon" className={className} viewBox="0 0 320 90">
       {(p) => (
         <>
           <path d="M0 74q40 -10 80 0t80 0t80 0t80 0" stroke={p.b} opacity="0.5" strokeWidth="2" />
@@ -821,7 +870,7 @@ export function Art({ name = 'nature', variant = 'auto', tone = 'light', classNa
   }
   return (
     <div className={`art-frame ${className}`}>
-      <Scene name={name} />
+      <Scene name={name} tone={tone} />
     </div>
   )
 }

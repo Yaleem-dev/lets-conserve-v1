@@ -78,7 +78,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
 
       <section className="shell mt-3">
         <div className="card-chalk relative overflow-hidden p-5">
-          <Doodle name="sun" className="absolute right-5 top-4 h-7 w-7 opacity-80" />
+          <Doodle name="sun" tone="dark" className="absolute right-5 top-4 h-7 w-7 opacity-90" />
           <div className="grid items-center gap-4 sm:grid-cols-[1fr_auto]">
             <div>
               <div className="flex items-center gap-2">
@@ -92,7 +92,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
                 {isDone(featured.id) ? 'Done' : 'Mark complete'}
               </Btn>
             </div>
-            <Art name={featured.art} variant="stick" className="h-24" />
+            <Art name={featured.art} variant="stick" tone="dark" className="h-24" />
           </div>
         </div>
       </section>

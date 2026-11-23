@@ -65,10 +65,11 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
 
             <div className="flex flex-col items-center gap-3">
               <Strip
+                tone="dark"
                 className="h-14 w-full"
                 names={['tree', 'bulb', 'bin', 'droplet', 'bike', 'flower', 'sun']}
               />
-              <Strip className="h-12 w-full opacity-80" names={['globe', 'cloudless', 'apple', 'leaf', 'globeArrows'].filter(n => n !== 'cloudless')} />
+              <Strip tone="dark" className="h-12 w-full" names={['globe', 'apple', 'leaf', 'globeArrows']} />
             </div>
           </div>
         </div>
@@ -93,7 +94,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
                 <span className="text-[0.8125rem] font-bold text-green-deep">+{quest.points} points</span>
               </div>
             </div>
-            <Art name={quest.art} variant="stick" className="h-24" />
+            <Art name={quest.art} variant="stick" tone="dark" className="h-24" />
           </div>
 
           <div className="mt-4 flex items-center gap-3 border-t border-line-soft pt-3">
@@ -151,7 +152,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
       {/* ----------------------------- FACTS ------------------------- */}
       <section className="shell pb-12">
         <div className="card-chalk relative overflow-hidden p-5 md:p-7">
-          <Doodle name="sprig" className="absolute right-5 top-5 h-7 w-7 opacity-40" />
+          <Doodle name="sprig" tone="dark" className="absolute right-5 top-5 h-7 w-7 opacity-60" />
           <div className="grid items-center gap-5 md:grid-cols-[0.85fr_1.15fr]">
             <div>
               <Chapter tone="dark">Did you know</Chapter>
@@ -166,7 +167,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
             <div className="grid grid-cols-2 gap-2.5">
               {resources.slice(0, 2).map((r) => (
                 <div key={r.id} className="rounded-xl border border-paper/15 p-2.5">
-                  <Art name={r.art} variant="doodle" className="h-11" />
+                  <Art name={r.art} variant="doodle" tone="dark" className="h-11" />
                   <p className="mt-1 text-[0.75rem] font-bold text-paper">{r.name}</p>
                 </div>
               ))}

@@ -191,10 +191,10 @@ export default function Learn({ quiz, recordQuiz }) {
         <div className="grid gap-3 lg:grid-cols-[1.3fr_0.7fr]">
           <Quiz recordQuiz={recordQuiz} best={quiz.best} />
           <aside className="card-chalk relative overflow-hidden p-5">
-            <Doodle name="bulb" className="absolute right-4 top-4 h-6 w-6 opacity-70" />
+            <Doodle name="bulb" tone="dark" className="absolute right-4 top-4 h-6 w-6 opacity-80" />
             <Chapter tone="dark">Why bother</Chapter>
             <p className="mt-2 text-[0.9375rem] text-paper/80">Guessing teaches nothing.</p>
-            <Art name="explore" variant="stick" className="mt-3 h-20" />
+            <Art name="explore" variant="stick" tone="dark" className="mt-3 h-20" />
           </aside>
         </div>
       </section>

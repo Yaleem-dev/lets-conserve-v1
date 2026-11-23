@@ -158,7 +158,7 @@ export default function App() {
             <div>
               <div className="flex items-center gap-2.5">
                 <span className="flex h-8 w-8 items-center justify-center rounded-lg border-[1.5px] border-leaf-edge bg-leaf">
-                  <Doodle name="sprig" className="h-4.5 w-4.5" />
+                  <Doodle name="sprig" color="#143f28" className="h-4.5 w-4.5" />
                 </span>
                 <span className="text-[0.9375rem] font-bold">Let’s Conserve</span>
               </div>
@@ -166,7 +166,8 @@ export default function App() {
                 {APP_DESCRIPTION}. Small steps, in real places.
               </p>
               <Strip
-                className="mt-3 h-10 w-full max-w-[280px] opacity-90"
+                tone="dark"
+                className="mt-3 h-10 w-full max-w-[280px]"
                 names={['tree', 'bulb', 'bin', 'droplet', 'bike']}
               />
             </div>

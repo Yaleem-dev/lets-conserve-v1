@@ -118,10 +118,24 @@ export const organizations = [
   { id: 'idealist', name: 'Idealist', region: 'US', kind: 'vol', art: 'community', url: 'https://www.idealist.org/volunteermatch', note: 'Search by postcode.' },
   { id: 'noaa', name: 'NOAA Sanctuaries', region: 'US', kind: 'vol', art: 'water', url: 'https://sanctuaries.noaa.gov/involved/volunteer_future.html', note: 'Reefs, beaches and surveys.' },
 
+    { id: 'tnc', name: 'The Nature Conservancy', region: 'US', kind: 'vol', art: 'forest', url: 'https://www.nature.org/en-us/', note: 'Land and water stewardship.' },
+  { id: 'surfrider', name: 'Surfrider Foundation', region: 'US', kind: 'vol', art: 'water', url: 'https://www.surfrider.org/', note: 'Beach cleanups and water testing.' },
+  { id: 'nrdc', name: 'NRDC', region: 'US', kind: 'org', art: 'climate', url: 'https://www.nrdc.org/', note: 'Policy and legal action.' },
+  { id: 'sca', name: 'Student Conservation Association', region: 'US', kind: 'vol', art: 'plant', url: 'https://thesca.org/', note: 'Crews for young adults.' },
+  { id: 'amforests', name: 'American Forests', region: 'US', kind: 'org', art: 'forest', url: 'https://www.americanforests.org/', note: 'Tree equity in cities.' },
+
   /* United Kingdom */
   { id: 'wt', name: 'The Wildlife Trusts', region: 'UK', kind: 'vol', art: 'garden', url: 'https://www.wildlifetrusts.org/volunteer', note: '47 local trusts.' },
   { id: 'rspb', name: 'RSPB', region: 'UK', kind: 'vol', art: 'garden', url: 'https://volunteer.rspb.org.uk/', note: 'Reserve and residential roles.' },
   { id: 'woodland', name: 'Woodland Trust', region: 'UK', kind: 'vol', art: 'forest', url: 'https://www.woodlandtrust.org.uk/support-us/act/volunteer-with-us/', note: 'Planting and woodland care.' },
+
+    { id: 'nt', name: 'National Trust', region: 'UK', kind: 'vol', art: 'place', url: 'https://www.nationaltrust.org.uk/support-us/volunteer', note: 'Gardens, coast and countryside.' },
+  { id: 'foeuk', name: 'Friends of the Earth UK', region: 'UK', kind: 'vol', art: 'community', url: 'https://friendsoftheearth.uk/', note: '200 local action groups.' },
+  { id: 'tcv', name: 'The Conservation Volunteers', region: 'UK', kind: 'vol', art: 'cleanup', url: 'https://www.tcv.org.uk/', note: 'Green gyms and practical days.' },
+  { id: 'tfc', name: 'Trees for Cities', region: 'UK', kind: 'vol', art: 'plant', url: 'https://www.treesforcities.org/', note: 'Urban planting days.' },
+  { id: 'bto', name: 'British Trust for Ornithology', region: 'UK', kind: 'vol', art: 'garden', url: 'https://www.bto.org/', note: 'Bird surveys you can join.' },
+  { id: 'crt', name: 'Canal & River Trust', region: 'UK', kind: 'vol', art: 'water', url: 'https://canalrivertrust.org.uk/volunteer', note: 'Towpaths, locks and litter.' },
+  { id: 'mcs', name: 'Marine Conservation Society', region: 'UK', kind: 'vol', art: 'water', url: 'https://www.mcsuk.org/', note: 'Beachwatch and seaweed surveys.' },
 
   /* South Africa */
   { id: 'wessa', name: 'WESSA', region: 'ZA', kind: 'org', art: 'learn', url: 'https://www.wessa.org.za/', note: 'Education and advocacy since 1926.' },
@@ -129,12 +143,22 @@ export const organizations = [
   { id: 'wwfsa', name: 'WWF South Africa', region: 'ZA', kind: 'org', art: 'harvest', url: 'https://www.wwf.org.za/', note: 'Landscapes and freshwater.' },
   { id: 'gpafrica', name: 'Greenpeace Africa', region: 'ZA', kind: 'vol', art: 'climate', url: 'https://www.greenpeace.org/africa/en/', note: 'Volunteer teams in three cities.' },
 
+    { id: 'capenature', name: 'CapeNature', region: 'ZA', kind: 'org', art: 'nature', url: 'https://www.capenature.co.za/', note: 'Western Cape reserves.' },
+  { id: 'sanbi', name: 'SANBI', region: 'ZA', kind: 'org', art: 'garden', url: 'https://www.sanbi.org/', note: 'National botanical gardens.' },
+  { id: 'sharkspotters', name: 'Shark Spotters', region: 'ZA', kind: 'vol', art: 'water', url: 'https://sharkspotters.org.za/', note: 'Cape Town shoreline shifts.' },
+  { id: 'wildlifeact', name: 'Wildlife ACT', region: 'ZA', kind: 'vol', art: 'explore', url: 'https://wildlifeact.com/', note: 'Field monitoring in Zululand.' },
+  { id: 'sanparks', name: 'SANParks', region: 'ZA', kind: 'org', art: 'forest', url: 'https://www.sanparks.org/', note: 'Kruger and 19 other parks.' },
+
   /* Nigeria */
   { id: 'ncf', name: 'Nigerian Conservation Foundation', region: 'NG', kind: 'org', art: 'forest', url: 'https://ncfnigeria.org/', note: 'Forests and wetlands since 1980.' },
   { id: 'era', name: 'Environmental Rights Action', region: 'NG', kind: 'org', art: 'water', url: 'https://erafoen.org/', note: 'Friends of the Earth Nigeria.' },
   { id: 'wecyclers', name: 'Wecyclers', region: 'NG', kind: 'org', art: 'waste', url: 'https://www.wecyclers.com/', note: 'Cargo bikes collect in Lagos.' },
   { id: 'recyclepoints', name: 'RecyclePoints', region: 'NG', kind: 'org', art: 'waste', url: 'https://recyclepoints.com/', note: 'Waste traded for rewards.' },
   { id: 'sradev', name: 'SRADev Nigeria', region: 'NG', kind: 'org', art: 'climate', url: 'https://sradev.org/', note: 'Waste, chemicals, air quality.' },
+
+    { id: 'aci', name: 'Africa Cleanup Initiative', region: 'NG', kind: 'vol', art: 'cleanup', url: 'https://africancleanupinitiative.org/', note: 'Cleanup Naija volunteer days.' },
+  { id: 'lawma', name: 'LAWMA', region: 'NG', kind: 'org', art: 'waste', url: 'https://www.lawma.gov.ng/', note: 'Lagos waste authority.' },
+  { id: 'ecopals', name: 'Ecopals Nigeria', region: 'NG', kind: 'org', art: 'community', url: 'https://www.ecopals.org/', note: 'Youth climate education.' },
 
   /* Global */
   { id: 'unep', name: 'UN Environment Programme', region: 'Global', kind: 'org', art: 'climate', url: 'https://www.unep.org/', note: 'Global assessments.' },
@@ -208,4 +232,14 @@ export const resources = [
   { id: 'unccelearn', name: 'UN CC:Learn', category: 'Learning', art: 'learn', url: 'https://unccelearn.org/', why: 'Free courses, with certificates.' },
   { id: 'unep', name: 'UNEP', category: 'News', art: 'climate', url: 'https://www.unep.org/', why: 'Authoritative global reporting.' },
   { id: 'foei', name: 'Friends of the Earth', category: 'News', art: 'community', url: 'https://www.foei.org/', why: 'Grassroots justice reporting.' },
+  { id: 'iucn', name: 'IUCN', region: 'Global', kind: 'org', art: 'nature', url: 'https://iucn.org/', note: 'The species Red List.' },
+  { id: 'ci', name: 'Conservation International', region: 'Global', kind: 'org', art: 'forest', url: 'https://www.conservation.org/', note: 'Science led protection.' },
+  { id: 'birdlife', name: 'BirdLife International', region: 'Global', kind: 'org', art: 'garden', url: 'https://www.birdlife.org/', note: 'Birds and key habitats.' },
+  { id: 'faunaflora', name: 'Fauna & Flora', region: 'Global', kind: 'org', art: 'explore', url: 'https://www.fauna-flora.org/', note: 'Partners in 50 countries.' },
+  { id: 'rainforest', name: 'Rainforest Alliance', region: 'Global', kind: 'org', art: 'harvest', url: 'https://www.rainforest-alliance.org/', note: 'Certification and farming.' },
+  { id: 'earthday', name: 'EARTHDAY.ORG', region: 'Global', kind: 'vol', art: 'celebrate', url: 'https://www.earthday.org/', note: 'The Great Global Cleanup.' },
+  { id: 'gpintl', name: 'Greenpeace International', region: 'Global', kind: 'vol', art: 'climate', url: 'https://www.greenpeace.org/international/', note: 'Campaigns and organising.' },
+  { id: 'inaturalist', name: 'iNaturalist', region: 'Global', kind: 'vol', art: 'garden', url: 'https://www.inaturalist.org/', note: 'Log species from your phone.' },
+  { id: 'ebird', name: 'eBird', region: 'Global', kind: 'vol', art: 'explore', url: 'https://ebird.org/home', note: 'Share your bird lists.' },
+
 ]
