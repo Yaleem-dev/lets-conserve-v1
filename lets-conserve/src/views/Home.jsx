@@ -7,6 +7,18 @@ import { organizations, resources } from '../data/content.js'
 
 export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
   const [flash, setFlash] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const copyEmail = async () => {
+    const email = 'team-tariqlawal@proton.me'
+    try {
+      await navigator.clipboard.writeText(email)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2400)
+    } catch {
+      window.prompt('Copy this address', email)
+    }
+  }
   const done = isDone(quest.id)
 
   const handle = () => {
@@ -98,7 +110,15 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
                 <span className="text-[0.8125rem] font-bold text-green-deep">+{quest.points} points</span>
               </div>
             </div>
-            <Art name={quest.art} variant="stick" tone="dark" className="h-24" />
+            <img
+              src={quest.img}
+              alt={quest.title}
+              loading="lazy"
+              decoding="async"
+              width="760"
+              height="507"
+              className="h-24 w-full rounded-[14px] object-cover sm:w-40"
+            />
           </div>
 
         </div>
@@ -190,6 +210,41 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* ---------------------------- SUPPORT ------------------------- */}
+      <section className="shell pb-10">
+        <div className="card flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <Chapter>Support us</Chapter>
+            <p className="mt-1 max-w-md text-[0.9375rem] leading-snug text-ink-soft">
+              Ideas, funding or a partnership? Send a note.
+            </p>
+            <a
+              href="mailto:team-tariqlawal@proton.me"
+              className="mt-1.5 inline-block break-all text-[0.8125rem] font-bold text-green-deep underline decoration-leaf-2 decoration-2 underline-offset-4 hover:text-green"
+            >
+              team-tariqlawal@proton.me
+            </a>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <a
+              href="mailto:team-tariqlawal@proton.me"
+              className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-leaf-edge bg-leaf px-4 py-2 text-[0.9375rem] font-bold text-ink transition-colors hover:bg-leaf-2"
+            >
+              <Icon name="arrow" className="h-4 w-4" strokeWidth={2.4} />
+              Support us
+            </a>
+            <button
+              type="button"
+              onClick={copyEmail}
+              className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-line bg-card px-4 py-2 text-[0.9375rem] font-bold text-green-deep transition-colors hover:border-leaf-2 hover:bg-leaf-3"
+            >
+              {copied ? 'Copied' : 'Copy email'}
+            </button>
+          </div>
+        </div>
+        <p aria-live="polite" className="sr-only">{copied ? 'Email address copied' : ''}</p>
       </section>
     </div>
   )

@@ -145,14 +145,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* mobile points strip */}
-        <div className="border-t border-line-soft px-5 py-1.5 sm:hidden">
-          <div className="flex items-center gap-2.5">
-            <span className="text-[0.6875rem] font-bold tabular-nums text-ink-soft">{points} pts</span>
-            <Meter value={points} max={max} />
-            <span className="text-[0.6875rem] text-slate">{next ? next.at : 'max'}</span>
-          </div>
-        </div>
 
         {menu && (
           <nav aria-label="Mobile" className="border-t-[1.5px] border-line bg-card md:hidden">
@@ -200,7 +192,7 @@ export default function App() {
                 <span className="text-[0.9375rem] font-bold text-leaf">Let’s Conserve</span>
               </div>
               <p className="mt-2 max-w-xs text-[0.8125rem] leading-relaxed text-paper/80">
-                {APP_DESCRIPTION}. Small steps, in real places.
+                {APP_DESCRIPTION}.
               </p>
               <div className="mt-3 w-full max-w-[260px] overflow-hidden">
                 <Strip
@@ -244,7 +236,7 @@ export default function App() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-[0.6875rem] font-bold text-paper/90 underline decoration-leaf/60 decoration-1 underline-offset-4 transition-colors hover:text-leaf hover:decoration-leaf"
             >
-              Created by Yaleem-dev
+              In collaboration with Yaleem-dev
               <Icon name="external" className="h-3 w-3" />
             </a>
           </div>

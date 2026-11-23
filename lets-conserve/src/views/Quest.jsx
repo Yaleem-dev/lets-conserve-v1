@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Art, Doodle, Icon, BadgeArt, BannerArt } from '../components/StickmanArt.jsx'
+import { Icon, BadgeArt, BannerArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { quests, questCategories, badges } from '../data/content.js'
 
@@ -36,7 +36,6 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
             Do one <span className="doodle-underline">small thing</span>
           </h1>
           <div className="flex items-end gap-3">
-            <Art name="celebrate" variant="stick" className="hidden h-20 sm:flex" />
             <div className="text-right">
               <p className="text-3xl font-bold tabular-nums">{points}</p>
               <p className="text-[0.6875rem] font-bold uppercase tracking-wider text-slate">points</p>
@@ -84,7 +83,6 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
 
       <section className="shell mt-3">
         <div className="card-chalk relative overflow-hidden p-5">
-          <Doodle name="sun" tone="dark" className="absolute right-5 top-4 h-7 w-7 opacity-90" />
           <div className="grid items-center gap-4 sm:grid-cols-[1fr_auto]">
             <div>
               <div className="flex items-center gap-2">
@@ -98,7 +96,15 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
                 {isDone(featured.id) ? 'Done' : 'Mark complete'}
               </Btn>
             </div>
-            <Art name={featured.art} variant="stick" tone="dark" className="h-24" />
+            <img
+              src={featured.img}
+              alt={featured.title}
+              loading="lazy"
+              decoding="async"
+              width="760"
+              height="507"
+              className="h-24 w-full rounded-[14px] object-cover"
+            />
           </div>
         </div>
       </section>
@@ -136,7 +142,15 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
                   done ? 'border-leaf-2 bg-leaf-3' : `border-line ${['bg-card', 'bg-card', 'bg-gold-tint/70', 'bg-card'][n % 4]}`
                 }`}
               >
-                <Art name={q.art} variant={n % 2 ? 'doodle' : 'stick'} className="h-16" />
+                <img
+                  src={q.img}
+                  alt={q.title}
+                  loading="lazy"
+                  decoding="async"
+                  width="760"
+                  height="507"
+                  className="h-24 w-full rounded-[12px] object-cover"
+                />
                 <h3 className="mt-1.5 text-[0.9375rem] leading-snug">{q.title}</h3>
                 <p className="text-[0.75rem] leading-snug text-slate">{q.text}</p>
 

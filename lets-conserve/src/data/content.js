@@ -311,14 +311,14 @@ export const guideGroups = [
 export const questCategories = ['All', 'Nature', 'Community', 'Living', 'Wildlife']
 
 export const quests = [
-  { id: 'plant', title: 'Plant something', category: 'Nature', points: 20, art: 'plant', text: 'A tree or a tin of herbs.' },
-  { id: 'outdoors', title: 'Get outside', category: 'Nature', points: 15, art: 'outdoors', text: 'Twenty minutes in green space.' },
-  { id: 'waste', title: 'Sort your waste', category: 'Living', points: 20, art: 'waste', text: 'Three separate streams.' },
-  { id: 'cleanup', title: 'Clean a spot', category: 'Community', points: 25, art: 'cleanup', text: 'One street, one hour.' },
-  { id: 'walk', title: 'Walk a short trip', category: 'Living', points: 15, art: 'walk', text: 'Leave the car once.' },
-  { id: 'learn', title: 'Learn one thing', category: 'Nature', points: 10, art: 'learn', text: 'Read one explainer.' },
-  { id: 'pollinator', title: 'Plant for bees', category: 'Wildlife', points: 20, art: 'pollinator', text: 'A pot of native flowers.' },
-  { id: 'share', title: 'Teach someone', category: 'Community', points: 15, art: 'teach', text: 'Pass on one skill.' },
+  { id: 'plant', title: 'Plant something', category: 'Nature', points: 20, art: 'plant', img: '/art/guide-tree.webp', text: 'A tree or a tin of herbs.' },
+  { id: 'outdoors', title: 'Get outside', category: 'Nature', points: 15, art: 'outdoors', img: '/art/quest-outdoors.webp', text: 'Twenty minutes in green space.' },
+  { id: 'waste', title: 'Sort your waste', category: 'Living', points: 20, art: 'waste', img: '/art/guide-waste.webp', text: 'Three separate streams.' },
+  { id: 'cleanup', title: 'Clean a spot', category: 'Community', points: 25, art: 'cleanup', img: '/art/guide-cleanup.webp', text: 'One street, one hour.' },
+  { id: 'walk', title: 'Walk a short trip', category: 'Living', points: 15, art: 'walk', img: '/art/quest-walk.webp', text: 'Leave the car once.' },
+  { id: 'learn', title: 'Learn one thing', category: 'Nature', points: 10, art: 'learn', img: '/art/quest-learn.webp', text: 'Read one explainer.' },
+  { id: 'pollinator', title: 'Plant for bees', category: 'Wildlife', points: 20, art: 'pollinator', img: '/art/quest-pollinator.webp', text: 'A pot of native flowers.' },
+  { id: 'share', title: 'Teach someone', category: 'Community', points: 15, art: 'teach', img: '/art/quest-teach.webp', text: 'Pass on one skill.' },
 ]
 
 export const badges = [
