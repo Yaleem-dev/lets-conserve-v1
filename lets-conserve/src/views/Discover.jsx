@@ -48,6 +48,16 @@ const initials = (name) =>
     .map((w) => w[0])
     .join('')
 
+/* solid tone panels for the action guide cards */
+const GUIDE_TONE = {
+  waste: 'bg-[#eab7a6]',
+  energy: 'bg-[#f6d68d]',
+  water: 'bg-[#a9cfe8]',
+  learn: 'bg-[#c5b9e9]',
+  community: 'bg-[#b9d99b]',
+  forest: 'bg-[#93c8a5]',
+}
+
 export default function Discover({ go }) {
   const [tab, setTab] = useState('orgs')
   const [region, setRegion] = useState('All')
@@ -160,7 +170,6 @@ export default function Discover({ go }) {
         <section className="shell mt-5 pb-9">
           <div className="mb-4 border-b-[1.5px] border-line pb-3">
             <Chapter>Action guides</Chapter>
-            <h2 className="mt-1 text-xl">Small and specific</h2>
           </div>
 
           <div className="space-y-5">
@@ -170,7 +179,10 @@ export default function Discover({ go }) {
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {g.guides.map((x) => (
                     <div key={x.title} className="card p-4">
-                      <Art name={x.art} variant="stick" className="h-20" />
+                      <div
+                        className={`h-24 rounded-[14px] ${GUIDE_TONE[x.art] || 'bg-leaf-3'}`}
+                        aria-hidden="true"
+                      />
                       <h4 className="mt-2 text-[0.9375rem] leading-snug">{x.title}</h4>
                       <div className="mt-2 flex items-center justify-between border-t border-line-soft pt-2">
                         <span className="text-[0.6875rem] font-bold uppercase tracking-wide text-slate">Guide</span>

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon, HeroArt, BannerArt } from '../components/StickmanArt.jsx'
 import EcoCreaturesQuiz from '../components/EcoCreaturesQuiz.jsx'
 import { facts } from '../data/content.js'
-import { Btn, Chapter, Chip, Meter } from '../components/ui.jsx'
+import { Btn, Chapter, Chip } from '../components/ui.jsx'
 import { organizations, resources } from '../data/content.js'
 
 export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
@@ -101,11 +101,6 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
             <Art name={quest.art} variant="stick" tone="dark" className="h-24" />
           </div>
 
-          <div className="mt-4 flex items-center gap-3 border-t border-line-soft pt-3">
-            <span className="text-[0.75rem] font-bold tabular-nums text-ink-soft">{points} pts</span>
-            <Meter value={points} max={120} />
-            <span className="text-[0.75rem] font-bold text-slate">120</span>
-          </div>
         </div>
       </section>
 
@@ -182,7 +177,10 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
               key={f.text}
               className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac'][i % 4]}`}
             >
-              <Art name={f.art} variant="doodle" className="h-11" />
+              <div
+                className={`h-14 rounded-[12px] ${['bg-[#f3bdb2]', 'bg-[#a9dfbe]', 'bg-[#b3d5f2]', 'bg-[#cfc4f3]'][i % 4]}`}
+                aria-hidden="true"
+              />
               <p className="mt-1.5 text-[0.8125rem] font-semibold leading-snug text-ink-soft">{f.text}</p>
             </div>
           ))}

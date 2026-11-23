@@ -910,7 +910,7 @@ const STICK = {
 /* Earth mark: a drawn world, not a gridded globe. Continents are
    hand-traced silhouettes inside the ocean circle. Transparent
    background so it sits on any surface. */
-export function EarthMark({ className = 'h-6 w-6', color = '#1d5fa8', weight = 0.95 }) {
+export function EarthMark({ className = 'h-6 w-6', color = '#1d5fa8', weight = 1.05 }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -923,27 +923,27 @@ export function EarthMark({ className = 'h-6 w-6', color = '#1d5fa8', weight = 0
       aria-hidden="true"
       focusable="false"
     >
-      <circle cx="12" cy="12" r="9.35" />
+      <circle cx="12" cy="12" r="9.25" />
       {/* North America */}
-      <path d="M4.3 6.6l1.4-1.5 2.3-.5 1.9.6.9 1.6-1.0 1.2 1.1 1.3-.8 1.6-1.5.5-1.0-1.2-1.3-1.0-.9-1.4z" />
+      <path d="M4.2 6.9c.1-1.2 1.1-2 2.4-1.9l2 .2c1 .1 1.6.9 1.4 1.9l-.4 1.1c-.2.7-.9 1.1-1.6.9l-.8-.2-.8 1c-.5.6-1.4.5-1.7-.3l-.5-1.4c-.1-.5-.1-.9 0-1.3z" />
       {/* Greenland */}
-      <path d="M10.7 4.4l1.6.6-.6 1.5-1.3-.6z" />
-      {/* Central America and South America */}
-      <path d="M8.5 11.6l1.2.5.6 1.5 1.2.9-.3 1.7-1.1 2.1-1.2.9-.6-2.0.2-2.2-1.0-1.6z" />
+      <path d="M10.9 4.3l1.5.5c.5.2.6.8.2 1.2l-.6.6c-.4.4-1 .3-1.2-.2l-.4-1.2c-.1-.4.1-.8.5-.9z" />
+      {/* South America */}
+      <path d="M7.8 10.8c.9-.4 1.7.2 1.7 1.2l-.1 1.7c0 1.1-.6 2.1-1.5 2.7-.6.4-1.3.1-1.3-.6l.1-2.3c0-1 .3-2.1 1.1-2.7z" />
       {/* Africa */}
-      <path d="M12.8 10.4l2.1-.4 1.1 1.4-.5 2.0-.4 2.3-1.1 1.6-.8-2.0-.4-2.4-1.1-1.4z" />
+      <path d="M12.7 10.3c.8-.4 1.8-.3 2.4.3l.5 1.9c.2 1.2-.4 2.3-1.4 2.9l-.6.4c-.7.4-1.5.1-1.7-.7l-.5-2.1c-.2-1.2.4-2.3 1.3-2.7z" />
       {/* Europe */}
-      <path d="M12.7 7.1l1.7-.6 1.1 1.0-1.2 1.4-1.4-.2z" />
+      <path d="M13 7.7c.3-.7 1-1.1 1.7-.9l1 .3c.6.2.8.9.4 1.4l-.8.9c-.4.5-1.1.5-1.5 0l-.8-.9c-.2-.2-.1-.6 0-.8z" />
       {/* Asia */}
-      <path d="M15.7 6.1l2.7-.7 1.9 1.2-.6 2.0-1.6.8-1.4-.7-.8-1.4z" />
+      <path d="M16.9 5.7l2.6-.4c1-.1 1.6.7 1.3 1.6l-.5 1.6c-.2.7-.8 1-1.4.8l-1.2-.5c-.7-.3-1.1-1-1-1.7z" />
       {/* India */}
-      <path d="M16.9 9.7l1.0.2-.5 1.8z" />
+      <path d="M17.1 10c.6-.2 1.1.2 1 1l-.4 1.3c-.2.5-.8.6-1 .1l-.2-1.2c-.1-.5.1-.9.6-1.2z" />
       {/* Southeast Asia */}
-      <path d="M18.6 10.6l1.2.4-.4 1.0-1.0-.3z" />
+      <path d="M19.1 10.7c.5-.2 1 .1.9.6l-.3.8c-.1.4-.6.5-.8.1l-.2-.8c-.1-.3.1-.5.4-.7z" />
       {/* Australia */}
-      <path d="M18.5 14.6l2.2-.4.4 1.7-1.3 1.2-1.5-.8z" />
-      {/* Antarctica hint */}
-      <path d="M6.2 19.4c3.8 1.0 8.0 1.0 11.7 0" strokeWidth="0.9" opacity="0.75" />
+      <path d="M18.4 15c.7-.5 1.7-.4 2.2.2l.5.7c.3.5 0 1.1-.6 1.1h-1.4c-.6 0-1-.6-.8-1.2z" />
+      {/* Antarctica */}
+      <path d="M7.4 19.12c3-.55 6.2-.55 9.2 0" strokeWidth="0.85" opacity="0.7" />
     </svg>
   )
 }
