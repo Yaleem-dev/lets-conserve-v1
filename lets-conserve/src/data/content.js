@@ -166,6 +166,17 @@ export const organizations = [
   { id: 'wwf', name: 'WWF', region: 'Global', kind: 'org', art: 'nature', url: 'https://www.worldwildlife.org/', note: 'Species and habitat programmes.' },
   { id: 'zooniverse', name: 'Zooniverse', region: 'Global', kind: 'vol', art: 'explore', url: 'https://www.zooniverse.org/', note: 'Citizen science from home.' },
   { id: 'unccelearn', name: 'UN CC:Learn', region: 'Global', kind: 'org', art: 'learn', url: 'https://unccelearn.org/', note: 'Free UN climate courses.' },
+  /* Global, added this pass */
+  { id: 'iucn', name: 'IUCN', region: 'Global', kind: 'org', art: 'nature', url: 'https://iucn.org/', note: 'Keeper of the Red List.' },
+  { id: 'ci', name: 'Conservation International', region: 'Global', kind: 'org', art: 'forest', url: 'https://www.conservation.org/', note: 'Science led protection.' },
+  { id: 'birdlife', name: 'BirdLife International', region: 'Global', kind: 'org', art: 'garden', url: 'https://www.birdlife.org/', note: 'Birds and key habitats.' },
+  { id: 'faunaflora', name: 'Fauna and Flora', region: 'Global', kind: 'org', art: 'explore', url: 'https://www.fauna-flora.org/', note: 'Partners in 50 countries.' },
+  { id: 'rainforest', name: 'Rainforest Alliance', region: 'Global', kind: 'org', art: 'harvest', url: 'https://www.rainforest-alliance.org/', note: 'Certification and farming.' },
+  { id: 'earthday', name: 'EARTHDAY.ORG', region: 'Global', kind: 'vol', art: 'celebrate', url: 'https://www.earthday.org/', note: 'The Great Global Cleanup.' },
+  { id: 'gpintl', name: 'Greenpeace International', region: 'Global', kind: 'vol', art: 'climate', url: 'https://www.greenpeace.org/international/', note: 'Campaigns and organising.' },
+  { id: 'inaturalist', name: 'iNaturalist', region: 'Global', kind: 'vol', art: 'garden', url: 'https://www.inaturalist.org/', note: 'Log species from your phone.' },
+  { id: 'ebird', name: 'eBird', region: 'Global', kind: 'vol', art: 'explore', url: 'https://ebird.org/home', note: 'Share your bird lists.' },
+
 ]
 
 export const guideGroups = [
