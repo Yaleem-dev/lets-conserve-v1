@@ -188,7 +188,7 @@ export default function App() {
           <div className="grid gap-7 md:grid-cols-[1.5fr_1fr_1fr]">
             <div>
               <div className="flex items-center gap-2.5">
-                <EarthMark color="#9fd0f5" className="h-6 w-6 shrink-0" />
+                <EarthMark color="#9fd0f5" heartColor="#a8e56f" className="h-6 w-6 shrink-0" />
                 <span className="text-[0.9375rem] font-bold text-leaf">Let’s Conserve</span>
               </div>
               <p className="mt-2 max-w-xs text-[0.8125rem] leading-relaxed text-paper/80">

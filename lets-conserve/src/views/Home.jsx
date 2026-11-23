@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Art, Doodle, Icon, HeroArt, BannerArt } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon, HeroArt } from '../components/StickmanArt.jsx'
 import EcoCreaturesQuiz from '../components/EcoCreaturesQuiz.jsx'
 import { facts } from '../data/content.js'
 import { Btn, Chapter, Chip } from '../components/ui.jsx'
@@ -50,7 +50,15 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
       {/* ---------------------------- HERO ---------------------------- */}
       <section className="shell pt-4 md:pt-6">
         <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
-          <BannerArt variant="park" className="h-16 w-full md:h-20" />
+          <img
+            src="/art/guide-tree.webp"
+            alt="Sunlit park meadow at sunrise"
+            loading="lazy"
+            decoding="async"
+            width="760"
+            height="507"
+            className="h-16 w-full object-cover md:h-20"
+          />
         </div>
       </section>
 

@@ -1,13 +1,15 @@
 import { useMemo, useState } from 'react'
-import { Art, Doodle, Icon, BannerArt } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { learnTopics, learnCategories, facts, quizQuestions } from '../data/content.js'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
 
-function Card({ topic }) {
+const TINTS = ['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac', 'bg-tan', 'bg-butter', 'bg-panel']
+
+function Card({ topic, tint = 'bg-panel' }) {
   const [open, setOpen] = useState(false)
   return (
-    <article className="card overflow-hidden">
+    <article className={`overflow-hidden rounded-[18px] border-[1.5px] border-line ${tint}`}>
       <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="flex w-full items-center gap-3 p-4 text-left">
         <Art name={topic.art} variant="doodle" className="h-12 w-20 shrink-0" />
         <div className="min-w-0 flex-1">
@@ -138,7 +140,15 @@ export default function Learn({ quiz, recordQuiz }) {
     <div className="fade-up">
       <section className="shell pt-4 md:pt-6">
         <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
-          <BannerArt variant="landscape" className="h-16 w-full md:h-20" />
+          <img
+            src="/art/fact-forest.webp"
+            alt="Forest edge above farmland"
+            loading="lazy"
+            decoding="async"
+            width="760"
+            height="507"
+            className="h-16 w-full object-cover md:h-20"
+          />
         </div>
       </section>
 
@@ -165,8 +175,8 @@ export default function Learn({ quiz, recordQuiz }) {
           ))}
         </div>
         <div className="grid gap-3 lg:grid-cols-2">
-          {list.map((t) => (
-            <Card key={t.id} topic={t} />
+          {list.map((t, n) => (
+            <Card key={t.id} topic={t} tint={TINTS[n % TINTS.length]} />
           ))}
         </div>
       </section>
@@ -211,7 +221,12 @@ export default function Learn({ quiz, recordQuiz }) {
             <Chapter>Next</Chapter>
             <h3 className="mt-1 text-lg">Find a way to act</h3>
           </div>
-          <Art name="community" variant="doodle" className="h-12" />
+          <svg viewBox="0 0 56 34" className="h-10 w-16 shrink-0" fill="none" stroke="var(--color-warm-2)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="13" cy="17" r="8.5" />
+              <path d="M13 12.5v9M8.5 17h9" />
+              <path d="M27 17h15M37 12l5.5 5-5.5 5" />
+              <path d="M47 8l3.5-3M50 16h4M47 25l3.5 3" opacity="0.65" />
+            </svg>
         </div>
       </section>
     </div>

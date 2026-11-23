@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Art, Doodle, Icon, BannerArt, CartoonTools } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon, CartoonTools } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Ext } from '../components/ui.jsx'
 import { resources, exploreCategories } from '../data/content.js'
 
@@ -21,7 +21,15 @@ export default function Explore({ go }) {
     <div className="fade-up">
       <section className="shell pt-4 md:pt-6">
         <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
-          <BannerArt variant="ocean" className="h-16 w-full md:h-20" />
+          <img
+            src="/art/fact-mangrove.webp"
+            alt="Mangrove coast at low tide"
+            loading="lazy"
+            decoding="async"
+            width="760"
+            height="507"
+            className="h-16 w-full object-cover md:h-20"
+          />
         </div>
       </section>
 

@@ -910,46 +910,38 @@ const STICK = {
 /* Earth mark: a drawn world, not a gridded globe. Continents are
    hand-traced silhouettes inside the ocean circle. Transparent
    background so it sits on any surface. */
-export function EarthMark({ className = 'h-6 w-6', color = '#1d5fa8', weight = 1.15 }) {
+export function EarthMark({
+  className = 'h-6 w-6',
+  color = '#1d5fa8',
+  heartColor = '#2e9e5b',
+  weight = 1.7,
+}) {
   return (
     <svg
       viewBox="0 0 24 24"
       className={className}
       fill="none"
-      stroke={color}
-      strokeWidth={weight}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      shapeRendering="geometricPrecision"
       aria-hidden="true"
       focusable="false"
     >
-      {/* ocean */}
-      <circle cx="12" cy="12" r="9.15" />
-      {/* equator, kept very faint so it reads as a globe and not a grid */}
-      <path d="M2.85 12h18.3" opacity="0.22" strokeWidth="0.8" />
-
-      {/* North America */}
-      <path d="M5.05 6.75c.55-.95 1.75-1.3 2.75-.8l1.9.95c.75.4.9 1.4.3 2l-.75.75c-.35.35-.35.9 0 1.25l.55.55c.4.4.3 1.1-.2 1.3l-1.15.45c-.6.25-1.25-.1-1.35-.7l-.2-1.15c-.1-.5-.45-.9-.95-1l-1-.2c-.55-.15-.8-.75-.55-1.25z" />
-      {/* Greenland */}
-      <path d="M11.15 4.9c.6-.3 1.3-.15 1.7.35l.35.45c.3.4.2 1-.25 1.25l-.75.4c-.5.25-1.1 0-1.25-.55l-.25-.9c-.1-.4.1-.8.45-1z" />
-      {/* South America */}
-      <path d="M8.6 10.95c.75-.55 1.85-.35 2.3.45.3.55.35 1.2.25 1.8l-.35 2.1c-.15.9-.65 1.75-1.4 2.3-.5.35-1.2.15-1.3-.45l-.25-2c-.1-.85.05-1.7.25-2.5.1-.5.25-1.2.5-1.7z" />
-      {/* Africa */}
-      <path d="M12.85 10.4c.95-.45 2.05-.2 2.7.6.55.7.7 1.65.45 2.5l-.5 1.75c-.25.85-.9 1.5-1.75 1.75-.55.2-1.15-.15-1.2-.75l-.25-2.35c-.05-.9.05-1.8.25-2.65.05-.25.1-.6.3-.85z" />
-      {/* Europe */}
-      <path d="M13.35 6.6c.7-.5 1.65-.5 2.3.05l.5.45c.45.4.45 1.1 0 1.5l-1 .85c-.45.4-1.15.3-1.45-.25l-.65-1.2c-.25-.45-.15-1 .3-1.4z" />
-      {/* Asia */}
-      <path d="M16.05 5.55c1.55-.55 3.3-.3 4.05 1.05.35.6.3 1.35-.15 1.85l-1.35 1.5c-.5.55-1.3.65-1.9.25l-1.85-1.2c-.75-.5-.85-1.55-.2-2.15z" />
-      {/* India */}
-      <path d="M16.9 10.65c.6-.15 1.15.3 1.05.9l-.35 1.6c-.15.65-.85.85-1.25.35l-.75-.95c-.4-.5-.15-1.35.5-1.65z" />
-      {/* Southeast Asia */}
-      <path d="M19.2 11.3c.55-.2 1.1.15 1.1.75v1c0 .55-.6.85-1.05.6l-.9-.5c-.5-.3-.5-1.05.05-1.3z" />
-      {/* Australia */}
-      <path d="M18.35 14.75c.7-.5 1.7-.45 2.3.15l.55.55c.45.5.2 1.3-.45 1.45l-1.9.4c-.75.15-1.3-.65-1-1.35z" />
-
-      {/* Antarctica, a thin cap rather than a floating line */}
-      <path d="M6.6 18.55c1.6-.75 3.4-1.1 5.25-1.05 1.9.05 3.75.45 5.4 1.2" opacity="0.8" />
+      {/* blue circle */}
+      <circle
+        cx="12"
+        cy="12"
+        r="9.4"
+        stroke={color}
+        strokeWidth={weight}
+        strokeLinecap="round"
+        shapeRendering="geometricPrecision"
+      />
+      {/* green heart in the middle */}
+      <path
+        d="M12 17.35c-3.28-2.1-5.42-4.16-5.42-6.42 0-1.72 1.32-3.02 2.94-3.02.98 0 1.9.52 2.48 1.35.58-.83 1.5-1.35 2.48-1.35 1.62 0 2.94 1.3 2.94 3.02 0 2.26-2.14 4.32-5.42 6.42z"
+        fill={heartColor}
+        stroke={heartColor}
+        strokeWidth="0.6"
+        strokeLinejoin="round"
+      />
     </svg>
   )
 }
