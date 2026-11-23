@@ -178,7 +178,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
               className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac'][i % 4]}`}
             >
               <div
-                className={`h-14 rounded-[12px] ${['bg-[#f3bdb2]', 'bg-[#a9dfbe]', 'bg-[#b3d5f2]', 'bg-[#cfc4f3]'][i % 4]}`}
+                className={`h-14 rounded-[12px] ${['fill-terra', 'fill-mintflat', 'fill-skyflat', 'fill-lilac'][i % 4]}`}
                 aria-hidden="true"
               />
               <p className="mt-1.5 text-[0.8125rem] font-semibold leading-snug text-ink-soft">{f.text}</p>

@@ -205,3 +205,18 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------------------------------------------------------------
+   flat fill panels: they replace outline doodle strips above the
+   Home fact cards and the Action guide cards. Plain solid colour
+   only, no strokes, no glyphs.
+--------------------------------------------------------------- */
+@layer components {
+  .fill-terra { background-color: #f0b8a6; }
+  .fill-butter { background-color: #f6d68d; }
+  .fill-skyflat { background-color: #a9cfe8; }
+  .fill-lilac { background-color: #c9bdea; }
+  .fill-sage { background-color: #a9d3b4; }
+  .fill-mintflat { background-color: #9fdcbb; }
+  .fill-clay { background-color: #e8a98f; }
+}

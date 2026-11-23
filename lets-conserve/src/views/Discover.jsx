@@ -50,12 +50,12 @@ const initials = (name) =>
 
 /* solid tone panels for the action guide cards */
 const GUIDE_TONE = {
-  waste: 'bg-[#eab7a6]',
-  energy: 'bg-[#f6d68d]',
-  water: 'bg-[#a9cfe8]',
-  learn: 'bg-[#c5b9e9]',
-  community: 'bg-[#b9d99b]',
-  forest: 'bg-[#93c8a5]',
+  waste: 'fill-terra',
+  energy: 'fill-butter',
+  water: 'fill-skyflat',
+  learn: 'fill-lilac',
+  community: 'fill-sage',
+  forest: 'fill-mintflat',
 }
 
 export default function Discover({ go }) {
@@ -180,7 +180,7 @@ export default function Discover({ go }) {
                   {g.guides.map((x) => (
                     <div key={x.title} className="card p-4">
                       <div
-                        className={`h-24 rounded-[14px] ${GUIDE_TONE[x.art] || 'bg-leaf-3'}`}
+                        className={`h-24 rounded-[14px] ${GUIDE_TONE[x.art] || 'fill-sage'}`}
                         aria-hidden="true"
                       />
                       <h4 className="mt-2 text-[0.9375rem] leading-snug">{x.title}</h4>
