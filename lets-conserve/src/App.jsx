@@ -1,4 +1,5 @@
 import { Component, useEffect, useMemo, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { LookDefs, Icon, Scene, Strip, Doodle, StickScene, EarthMark } from './components/StickmanArt.jsx'
 import { Points, Meter, Btn } from './components/ui.jsx'
 import { useProgress, currentWeek } from './hooks/useProgress.js'
@@ -97,6 +98,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
+      <Analytics />
       <LookDefs />
 
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-chalk focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-paper">
