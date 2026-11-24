@@ -293,7 +293,15 @@ export default function Learn({ quiz, recordQuiz }) {
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {facts.map((f, n) => (
             <div key={f.text} className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac'][n % 4]}`}>
-              <Art name={f.art} variant="doodle" className="h-11" />
+              <img
+                src={f.img}
+                alt={f.alt}
+                loading="lazy"
+                decoding="async"
+                width="760"
+                height="507"
+                className="h-24 w-full rounded-[12px] object-cover"
+              />
               <p className="mt-1.5 text-[0.8125rem] leading-snug text-ink-soft">{f.text}</p>
             </div>
           ))}

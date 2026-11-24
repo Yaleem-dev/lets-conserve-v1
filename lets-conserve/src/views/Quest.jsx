@@ -186,9 +186,9 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
 
       <section className="shell pb-10">
         <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
-          <p className="max-w-sm text-[0.9375rem] text-ink-soft">Points reward showing up.</p>
+          <p className="max-w-sm text-[0.9375rem] text-ink-soft">Points add up with every quest.</p>
           <Btn variant="leaf" onClick={() => go('explore')}>
-            Explore tools
+            Explore resources
             <Icon name="arrow" className="h-4 w-4" />
           </Btn>
         </div>

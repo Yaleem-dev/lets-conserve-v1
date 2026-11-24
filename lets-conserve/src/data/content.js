@@ -387,4 +387,16 @@ export const videos = [
     topic: 'Water',
     length: '4 min',
   },
+  {
+    id: 'ZplA8A-bbWo',
+    title: 'The world ocean',
+    topic: 'Ocean',
+    length: '5 min',
+  },
+  {
+    id: 'P05gJ_KbPBs',
+    title: 'Deforestation',
+    topic: 'Forests',
+    length: '3 min',
+  },
 ]

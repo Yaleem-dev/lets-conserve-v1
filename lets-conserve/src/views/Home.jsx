@@ -37,10 +37,10 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
 
   const featured = useMemo(
     () => [
-      { name: 'Sierra Club', region: 'US', art: 'nature' },
-      { name: 'Wildlife Trusts', region: 'UK', art: 'garden' },
-      { name: 'WESSA', region: 'ZA', art: 'learn' },
-      { name: 'NCF', region: 'NG', art: 'forest' },
+      { name: 'Sierra Club', region: 'US', abbr: 'SC', block: 'bg-leaf-3', ink: 'text-green-deep' },
+      { name: 'Wildlife Trusts', region: 'UK', abbr: 'WT', block: 'bg-gold-tint', ink: 'text-gold-deep' },
+      { name: 'WESSA', region: 'ZA', abbr: 'WE', block: 'bg-sky-tint', ink: 'text-sky' },
+      { name: 'NCF', region: 'NG', abbr: 'NC', block: 'bg-blush', ink: 'text-rose' },
     ],
     [],
   )
@@ -179,7 +179,9 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {featured.map((x, i) => (
             <div key={x.name} className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-leaf-3', 'bg-gold-tint', 'bg-mint-tint', 'bg-blush'][i]}`}>
-              <Art name={x.art} variant="doodle" className="h-12" />
+              <div className={`flex h-12 items-center justify-center rounded-[12px] ${x.block}`}>
+                <span className={`text-[0.9375rem] font-black tracking-[0.1em] ${x.ink}`}>{x.abbr}</span>
+              </div>
               <p className="mt-1.5 truncate text-[0.8125rem] font-bold">{x.name}</p>
               <p className="text-[0.6875rem] font-semibold text-slate">{x.region}</p>
             </div>
