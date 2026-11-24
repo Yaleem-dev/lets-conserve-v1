@@ -8,6 +8,7 @@ const TOOL_TONE = {
   Calculators: { bg: '#f2a63c', ink: '#3f2202' },
   Learning: { bg: '#5b3fa8', ink: '#eae4fb' },
   News: { bg: '#b8452f', ink: '#fbe2e2' },
+  Other: { bg: '#2e8b7a', ink: '#d9f2ea' },
 }
 const toneFor = (c) => TOOL_TONE[c] || { bg: '#2f7d4f', ink: '#ddf3e4' }
 const catOf = (r) => r.category || 'Data'

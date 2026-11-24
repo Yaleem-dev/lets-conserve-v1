@@ -278,7 +278,6 @@ export const organizations = [
   { id: 'rainforest', name: 'Rainforest Alliance', category: 'Learning', region: 'Global', kind: 'org', art: 'harvest', url: 'https://www.rainforest-alliance.org/', note: 'Certification and farming.' },
   { id: 'earthday', name: 'EARTHDAY.ORG', category: 'News', region: 'Global', kind: 'vol', art: 'celebrate', url: 'https://www.earthday.org/', note: 'The Great Global Cleanup.' },
   { id: 'gpintl', name: 'Greenpeace International', category: 'News', region: 'Global', kind: 'vol', art: 'climate', url: 'https://www.greenpeace.org/international/', note: 'Campaigns and organising.' },
-  { id: 'inaturalist', name: 'iNaturalist', category: 'Other', region: 'Global', kind: 'vol', art: 'garden', url: 'https://www.inaturalist.org/', note: 'Log species from your phone.' },
   { id: 'ebird', name: 'eBird', category: 'Learning', region: 'Global', kind: 'vol', art: 'explore', url: 'https://ebird.org/home', note: 'Share your bird lists.' },
 
 ]
@@ -349,6 +348,7 @@ export const resources = [
   { id: 'foei', name: 'Friends of the Earth', category: 'News', art: 'community', url: 'https://www.foei.org/', why: 'Grassroots justice reporting.' },
   { id: 'grist', name: 'Grist', category: 'News', art: 'climate', url: 'https://grist.org/', why: 'Independent climate reporting.' },
   { id: 'ycc', name: 'Yale Climate Connections', category: 'News', art: 'learn', url: 'https://yaleclimateconnections.org/', why: 'Daily climate news and solutions.' },
+  { id: 'inaturalist', name: 'iNaturalist', category: 'Other', art: 'garden', url: 'https://www.inaturalist.org/', why: 'Log species from your phone.' },
   { id: 'iucn', name: 'IUCN', region: 'Global', kind: 'org', art: 'nature', url: 'https://iucn.org/', note: 'The species Red List.' },
   { id: 'ci', name: 'Conservation International', region: 'Global', kind: 'org', art: 'forest', url: 'https://www.conservation.org/', note: 'Science led protection.' },
   { id: 'birdlife', name: 'BirdLife International', region: 'Global', kind: 'org', art: 'garden', url: 'https://www.birdlife.org/', note: 'Birds and key habitats.' },
