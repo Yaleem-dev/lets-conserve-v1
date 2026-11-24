@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Icon, BadgeArt } from '../components/StickmanArt.jsx'
+import { Icon, BadgeArt, TopArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { quests, questCategories, badges } from '../data/content.js'
 
@@ -25,15 +25,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
     <div className="fade-up">
       <section className="shell pt-4 md:pt-6">
         <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
-          <img
-            src="/art/quest-outdoors.webp"
-            alt="Open meadow under a warm sky"
-            loading="lazy"
-            decoding="async"
-            width="760"
-            height="507"
-            className="h-16 w-full object-cover md:h-20"
-          />
+          <TopArt variant="quest" />
         </div>
       </section>
 

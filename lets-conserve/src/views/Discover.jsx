@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Art, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon, TopArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Segmented, Ext } from '../components/ui.jsx'
 import { guideGroups, organizations, regions } from '../data/content.js'
 
@@ -78,15 +78,7 @@ export default function Discover({ go }) {
     <div className="fade-up">
       <section className="shell pt-4 md:pt-6">
         <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
-          <img
-            src="/art/guide-club.webp"
-            alt="School courtyard with a greenhouse"
-            loading="lazy"
-            decoding="async"
-            width="760"
-            height="507"
-            className="h-16 w-full object-cover md:h-20"
-          />
+          <TopArt variant="discover" />
         </div>
       </section>
 

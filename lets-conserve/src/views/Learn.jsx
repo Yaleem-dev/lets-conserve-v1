@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Art, Doodle, Icon } from '../components/StickmanArt.jsx'
+import { Art, Doodle, Icon, TopArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { learnTopics, learnCategories, facts, quizQuestions, videos } from '../data/content.js'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
@@ -142,15 +142,7 @@ export default function Learn({ quiz, recordQuiz }) {
     <div className="fade-up">
       <section className="shell pt-4 md:pt-6">
         <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
-          <img
-            src="/art/fact-forest.webp"
-            alt="Forest edge above farmland"
-            loading="lazy"
-            decoding="async"
-            width="760"
-            height="507"
-            className="h-16 w-full object-cover md:h-20"
-          />
+          <TopArt variant="learn" />
         </div>
       </section>
 

@@ -278,7 +278,7 @@ export const organizations = [
   { id: 'rainforest', name: 'Rainforest Alliance', category: 'Learning', region: 'Global', kind: 'org', art: 'harvest', url: 'https://www.rainforest-alliance.org/', note: 'Certification and farming.' },
   { id: 'earthday', name: 'EARTHDAY.ORG', category: 'News', region: 'Global', kind: 'vol', art: 'celebrate', url: 'https://www.earthday.org/', note: 'The Great Global Cleanup.' },
   { id: 'gpintl', name: 'Greenpeace International', category: 'News', region: 'Global', kind: 'vol', art: 'climate', url: 'https://www.greenpeace.org/international/', note: 'Campaigns and organising.' },
-  { id: 'inaturalist', name: 'iNaturalist', category: 'Learning', region: 'Global', kind: 'vol', art: 'garden', url: 'https://www.inaturalist.org/', note: 'Log species from your phone.' },
+  { id: 'inaturalist', name: 'iNaturalist', category: 'Other', region: 'Global', kind: 'vol', art: 'garden', url: 'https://www.inaturalist.org/', note: 'Log species from your phone.' },
   { id: 'ebird', name: 'eBird', category: 'Learning', region: 'Global', kind: 'vol', art: 'explore', url: 'https://ebird.org/home', note: 'Share your bird lists.' },
 
 ]
@@ -335,7 +335,7 @@ export const badges = [
 
 /* ------------------------------- EXPLORE --------------------------- */
 
-export const exploreCategories = ['All', 'Data', 'Calculators', 'Learning', 'News']
+export const exploreCategories = ['All', 'Data', 'Calculators', 'Learning', 'News', 'Other']
 
 export const resources = [
   { id: 'nasa', name: 'NASA Climate', category: 'Data', art: 'climate', url: 'https://science.nasa.gov/climate-change/', why: 'Satellite data, clean visuals.' },
@@ -356,7 +356,6 @@ export const resources = [
   { id: 'rainforest', name: 'Rainforest Alliance', region: 'Global', kind: 'org', art: 'harvest', url: 'https://www.rainforest-alliance.org/', note: 'Certification and farming.' },
   { id: 'earthday', name: 'EARTHDAY.ORG', region: 'Global', kind: 'vol', art: 'celebrate', url: 'https://www.earthday.org/', note: 'The Great Global Cleanup.' },
   { id: 'gpintl', name: 'Greenpeace International', region: 'Global', kind: 'vol', art: 'climate', url: 'https://www.greenpeace.org/international/', note: 'Campaigns and organising.' },
-  { id: 'inaturalist', name: 'iNaturalist', region: 'Global', kind: 'vol', art: 'garden', url: 'https://www.inaturalist.org/', note: 'Log species from your phone.' },
   { id: 'ebird', name: 'eBird', region: 'Global', kind: 'vol', art: 'explore', url: 'https://ebird.org/home', note: 'Share your bird lists.' },
 
 ]
