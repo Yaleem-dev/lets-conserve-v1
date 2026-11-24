@@ -411,14 +411,11 @@ export function Scene({ name = 'nature', tone = 'light', className = 'h-full w-f
 }
 
 /* a wide doodle strip for hero and footer bands */
-export function Strip({ className = 'h-20 w-full', names = ['tree', 'bulb', 'bin', 'droplet', 'bike', 'leaf', 'sun', 'globe'], tone = 'light' }) {
+export function Strip({ className = 'h-9 w-full', names = ['tree', 'bulb', 'bin', 'droplet', 'bike', 'leaf', 'sun', 'globe'], tone = 'light' }) {
   return (
-    <div
-      className={`grid w-full items-center gap-1 overflow-hidden ${className}`}
-      style={{ gridTemplateColumns: `repeat(${names.length}, minmax(0, 1fr))`, gridAutoRows: '100%' }}
-    >
+    <div className={`flex w-full items-center gap-2 overflow-hidden ${className}`}>
       {names.map((n, i) => (
-        <div key={`${n}-${i}`} className="flex min-w-0 items-center justify-center">
+        <div key={`${n}-${i}`} className="flex h-full shrink-0 items-center justify-center" style={{ aspectRatio: '1 / 1' }}>
           <Doodle
             name={n}
             tone={tone}

@@ -194,11 +194,11 @@ export default function App() {
               <p className="mt-2 max-w-xs text-[0.8125rem] leading-relaxed text-paper/80">
                 {APP_DESCRIPTION}.
               </p>
-              <div className="mt-3 w-full max-w-[260px] overflow-hidden">
+              <div className="mt-3 w-full max-w-[240px]">
                 <Strip
                   tone="dark"
-                  className="h-9 w-full"
-                  names={['tree', 'bulb', 'bin', 'droplet', 'bike']}
+                  className="h-8 w-full"
+                  names={['tree', 'bulb', 'bin', 'droplet']}
                 />
               </div>
             </div>
@@ -228,7 +228,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-paper/12 pt-4">
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-paper/12 pt-4">
             <a
               href="https://yaleem-dev.vercel.app/"
               target="_blank"
@@ -237,6 +237,13 @@ export default function App() {
             >
               In collaboration with Yaleem-dev
               <Icon name="external" className="h-3 w-3" />
+            </a>
+            <a
+              href="mailto:team-tariqlawal@proton.me"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border-[1.5px] border-paper/25 px-3.5 py-1.5 text-[0.75rem] font-bold text-paper/90 transition-colors hover:border-leaf hover:bg-leaf hover:text-ink"
+            >
+              Support us
+              <Icon name="arrow" className="h-3 w-3" strokeWidth={2.4} />
             </a>
           </div>
         </div>
