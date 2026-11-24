@@ -195,6 +195,7 @@ export const organizations = [
   { id: 'nrdc', name: 'NRDC', region: 'US', kind: 'org', art: 'climate', url: 'https://www.nrdc.org/', note: 'Policy and legal action.' },
   { id: 'sca', name: 'Student Conservation Association', region: 'US', kind: 'vol', art: 'plant', url: 'https://thesca.org/', note: 'Crews for young adults.' },
   { id: 'amforests', name: 'American Forests', region: 'US', kind: 'org', art: 'forest', url: 'https://www.americanforests.org/', note: 'Tree equity in cities.' },
+  { id: 'climatereality', name: 'The Climate Reality Project', region: 'US', kind: 'vol', art: 'climate', url: 'https://www.climaterealityproject.org/', note: 'Leadership Corps training.' },
 
   /* United Kingdom */
   { id: 'wt', name: 'The Wildlife Trusts', region: 'UK', kind: 'vol', art: 'garden', url: 'https://www.wildlifetrusts.org/volunteer', note: '47 local trusts.' },
@@ -231,6 +232,9 @@ export const organizations = [
     { id: 'aci', name: 'Africa Cleanup Initiative', region: 'NG', kind: 'vol', art: 'cleanup', url: 'https://africancleanupinitiative.org/', note: 'Cleanup Naija volunteer days.' },
   { id: 'lawma', name: 'LAWMA', region: 'NG', kind: 'org', art: 'waste', url: 'https://www.lawma.gov.ng/', note: 'Lagos waste authority.' },
   { id: 'ecopals', name: 'Ecopals Nigeria', region: 'NG', kind: 'org', art: 'community', url: 'https://www.ecopals.org/', note: 'Youth climate education.' },
+  { id: 'sustyvibes', name: 'SustyVibes', region: 'NG', kind: 'vol', art: 'community', url: 'https://sustyvibes.org/', note: 'Youth-led projects since 2016.' },
+  { id: 'preserveroots', name: 'Preserve Our Roots', region: 'NG', kind: 'vol', art: 'plant', url: 'https://preserveourroots.org.ng/', note: 'By youth, for youth climate action.' },
+  { id: 'illuminate', name: 'Team Illuminate', region: 'NG', kind: 'vol', art: 'learn', url: 'https://teamilluminate.org.ng/', note: 'Climate education in schools.' },
 
   /* Canada */
   { id: 'ncc', name: 'Nature Conservancy of Canada', region: 'CA', kind: 'vol', art: 'forest', url: 'https://www.natureconservancy.ca/', note: 'Habitat stewardship across provinces.' },
@@ -265,6 +269,7 @@ export const organizations = [
   { id: 'wwf', name: 'WWF', region: 'Global', kind: 'org', art: 'nature', url: 'https://www.worldwildlife.org/', note: 'Species and habitat programmes.' },
   { id: 'zooniverse', name: 'Zooniverse', region: 'Global', kind: 'vol', art: 'explore', url: 'https://www.zooniverse.org/', note: 'Citizen science from home.' },
   { id: 'unccelearn', name: 'UN CC:Learn', region: 'Global', kind: 'org', art: 'learn', url: 'https://unccelearn.org/', note: 'Free UN climate courses.' },
+  { id: 'cardinals', name: 'Climate Cardinals', region: 'Global', kind: 'vol', art: 'learn', url: 'https://www.climatecardinals.org/', note: 'Translating climate info.' },
   /* Global, added this pass */
   { id: 'iucn', name: 'IUCN', category: 'Data', region: 'Global', kind: 'org', art: 'nature', url: 'https://iucn.org/', note: 'Keeper of the Red List.' },
   { id: 'ci', name: 'Conservation International', category: 'News', region: 'Global', kind: 'org', art: 'forest', url: 'https://www.conservation.org/', note: 'Science led protection.' },
@@ -342,6 +347,8 @@ export const resources = [
   { id: 'unccelearn', name: 'UN CC:Learn', category: 'Learning', art: 'learn', url: 'https://unccelearn.org/', why: 'Free courses, with certificates.' },
   { id: 'unep', name: 'UNEP', category: 'News', art: 'climate', url: 'https://www.unep.org/', why: 'Authoritative global reporting.' },
   { id: 'foei', name: 'Friends of the Earth', category: 'News', art: 'community', url: 'https://www.foei.org/', why: 'Grassroots justice reporting.' },
+  { id: 'grist', name: 'Grist', category: 'News', art: 'climate', url: 'https://grist.org/', why: 'Independent climate reporting.' },
+  { id: 'ycc', name: 'Yale Climate Connections', category: 'News', art: 'learn', url: 'https://yaleclimateconnections.org/', why: 'Daily climate news and solutions.' },
   { id: 'iucn', name: 'IUCN', region: 'Global', kind: 'org', art: 'nature', url: 'https://iucn.org/', note: 'The species Red List.' },
   { id: 'ci', name: 'Conservation International', region: 'Global', kind: 'org', art: 'forest', url: 'https://www.conservation.org/', note: 'Science led protection.' },
   { id: 'birdlife', name: 'BirdLife International', region: 'Global', kind: 'org', art: 'garden', url: 'https://www.birdlife.org/', note: 'Birds and key habitats.' },
