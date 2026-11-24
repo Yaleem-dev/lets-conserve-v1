@@ -212,8 +212,14 @@ export default function Learn({ quiz, recordQuiz }) {
           </div>
           <span className="text-[0.75rem] font-semibold text-slate">Khan Academy</span>
         </div>
-        <div className="overflow-hidden rounded-[18px] border-[1.5px] border-line">
+        <div className="overflow-hidden rounded-[18px] border-[1.5px] border-line bg-chalk">
           <div className="relative aspect-video w-full overflow-hidden bg-chalk">
+            <img
+              src={`https://i.ytimg.com/vi/${featured.id}/hqdefault.jpg`}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover opacity-70"
+            />
             <iframe
               src={`https://www.youtube-nocookie.com/embed/${featured.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`}
               title={featured.title}
@@ -229,30 +235,54 @@ export default function Learn({ quiz, recordQuiz }) {
           <span className="font-normal text-slate"> · {featured.topic} · {featured.length}</span>
         </p>
 
-        <div className="mt-2 flex flex-wrap gap-2">
-          {others.map((v) => (
-            <a
+        <div className="mt-3 grid gap-3 sm:grid-cols-3">
+          {others.map((v, n) => (
+            <article
               key={v.id}
-              href={`https://www.youtube.com/watch?v=${v.id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-line bg-panel px-3 py-1.5 text-[0.75rem] font-bold text-green-deep transition-colors hover:border-leaf-2 hover:bg-leaf-3"
+              className={`overflow-hidden rounded-[18px] border-[1.5px] border-line ${['bg-mint-tint', 'bg-tan', 'bg-blush'][n % 3]}`}
             >
-              {v.title}
-              <Icon name="external" className="h-3 w-3" strokeWidth={2.4} />
-            </a>
+              <div className="relative aspect-video w-full overflow-hidden bg-chalk">
+                <img
+                  src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover opacity-70"
+                />
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${v.id}?rel=0&modestbranding=1`}
+                  title={v.title}
+                  loading="lazy"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full border-0"
+                />
+              </div>
+              <div className="p-3">
+                <p className="text-[0.625rem] font-bold uppercase tracking-[0.08em] text-slate">
+                  {v.topic} · {v.length}
+                </p>
+                <h3 className="mt-0.5 text-[0.9375rem] leading-snug">{v.title}</h3>
+              </div>
+            </article>
           ))}
         </div>
 
-        <a
-          href="https://www.khanacademy.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-1.5 text-[0.8125rem] font-bold text-green-deep underline decoration-leaf-2 decoration-2 underline-offset-4"
-        >
-          khanacademy.org
-          <Icon name="external" className="h-3 w-3" strokeWidth={2.4} />
-        </a>
+        <div className="mt-3 flex flex-col gap-2.5 rounded-[18px] border-[1.5px] border-line bg-butter p-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-md text-[0.875rem] leading-snug text-ink-soft">
+            Every lesson here is free, ad free, and made by Khan Academy.
+          </p>
+          <a
+            href="https://www.khanacademy.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border-[1.5px] border-leaf-edge bg-leaf px-4 py-2 text-[0.875rem] font-bold text-ink transition-colors hover:bg-leaf-2"
+          >
+            khanacademy.org
+            <Icon name="external" className="h-3.5 w-3.5" strokeWidth={2.4} />
+          </a>
+        </div>
       </section>
 
       <section className="shell pb-7">
