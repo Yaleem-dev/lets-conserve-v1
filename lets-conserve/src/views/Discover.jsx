@@ -128,7 +128,7 @@ export default function Discover({ go }) {
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search by name"
-              className="w-full rounded-full border-[1.5px] border-line bg-card py-2.5 pl-10 pr-4 text-[0.9375rem] placeholder:text-slate/70 focus:border-leaf-2 focus:bg-leaf-3 focus:outline-none"
+              className="w-full rounded-full border-[1.5px] border-line bg-panel py-2.5 pl-10 pr-4 text-[0.9375rem] placeholder:text-slate/70 focus:border-leaf-2 focus:bg-leaf-3 focus:outline-none"
             />
           </div>
 
@@ -142,7 +142,7 @@ export default function Discover({ go }) {
           </div>
 
           {list.length === 0 ? (
-            <p className="rounded-[18px] border-[1.5px] border-dashed border-line bg-card/60 px-5 py-9 text-center text-sm text-slate">
+            <p className="rounded-[18px] border-[1.5px] border-dashed border-line bg-panel px-5 py-9 text-center text-sm text-slate">
               Nothing matches. Try another region.
             </p>
           ) : (

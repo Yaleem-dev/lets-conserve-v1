@@ -353,3 +353,31 @@ export const resources = [
   { id: 'ebird', name: 'eBird', region: 'Global', kind: 'vol', art: 'explore', url: 'https://ebird.org/home', note: 'Share your bird lists.' },
 
 ]
+/* Khan Academy lessons. Every id below was checked against the @khanacademy
+   channel before it was added, so none of them point at a re-upload. */
+export const videos = [
+  {
+    id: 'z9xKxciHgo8',
+    title: "Earth's changing climate",
+    topic: 'Climate',
+    length: '4 min',
+  },
+  {
+    id: 'K10qnzCYH54',
+    title: 'Human impacts on ecosystems',
+    topic: 'Nature',
+    length: '5 min',
+  },
+  {
+    id: 'XynPVsE1fd4',
+    title: 'The carbon cycle',
+    topic: 'Climate',
+    length: '4 min',
+  },
+  {
+    id: '6N-W1guncoo',
+    title: 'Freshwater use and conservation',
+    topic: 'Water',
+    length: '4 min',
+  },
+]

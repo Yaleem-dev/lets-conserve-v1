@@ -32,7 +32,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
   const cards = [
     { view: 'learn', scene: 'learn', title: 'Learn', line: 'Short explanations.', tone: 'bg-leaf-3' },
     { view: 'discover', scene: 'community', title: 'Discover', line: 'Ways to act.', tone: 'bg-sky-tint' },
-    { view: 'explore', scene: 'explore', title: 'Explore', line: 'Tools worth opening.', tone: 'bg-blush' },
+    { view: 'explore', scene: 'explore', title: 'Explore', line: 'Resources.', tone: 'bg-blush' },
   ]
 
   const featured = useMemo(
@@ -178,7 +178,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
 
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {featured.map((x, i) => (
-            <div key={x.name} className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-leaf-3', 'bg-gold-tint', 'bg-[#e6f6d6]', 'bg-card'][i]}`}>
+            <div key={x.name} className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-leaf-3', 'bg-gold-tint', 'bg-mint-tint', 'bg-blush'][i]}`}>
               <Art name={x.art} variant="doodle" className="h-12" />
               <p className="mt-1.5 truncate text-[0.8125rem] font-bold">{x.name}</p>
               <p className="text-[0.6875rem] font-semibold text-slate">{x.region}</p>
@@ -246,7 +246,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
             <button
               type="button"
               onClick={copyEmail}
-              className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-line bg-card px-4 py-2 text-[0.9375rem] font-bold text-green-deep transition-colors hover:border-leaf-2 hover:bg-leaf-3"
+              className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-line bg-panel px-4 py-2 text-[0.9375rem] font-bold text-green-deep transition-colors hover:border-leaf-2 hover:bg-leaf-3"
             >
               {copied ? 'Copied' : 'Copy email'}
             </button>

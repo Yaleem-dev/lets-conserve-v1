@@ -37,7 +37,7 @@ export default function Explore({ go }) {
         <Chapter>Chapter 04</Chapter>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
-            Tools worth <span className="doodle-underline">opening</span>
+            Resources
           </h1>
           <Art name="explore" variant="stick" className="h-20" />
         </div>

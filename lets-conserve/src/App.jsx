@@ -229,7 +229,6 @@ export default function App() {
           </div>
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-paper/12 pt-4">
-            <p className="text-[0.6875rem] text-paper/70">Version 1. Progress stays in this browser.</p>
             <a
               href="https://yaleem-dev.vercel.app/"
               target="_blank"

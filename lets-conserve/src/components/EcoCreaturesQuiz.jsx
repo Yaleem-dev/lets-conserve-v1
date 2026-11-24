@@ -311,7 +311,7 @@ export default function EcoCreaturesQuiz() {
               key={o.label}
               type="button"
               onClick={() => pick(o.for)}
-              className="flex w-full items-center gap-2.5 rounded-xl border-[1.5px] border-line bg-card px-3 py-2.5 text-left text-[0.875rem] font-semibold leading-snug text-ink-soft transition-colors hover:border-leaf-edge hover:bg-leaf-3"
+              className="flex w-full items-center gap-2.5 rounded-xl border-[1.5px] border-line bg-panel px-3 py-2.5 text-left text-[0.875rem] font-semibold leading-snug text-ink-soft transition-colors hover:border-leaf-edge hover:bg-leaf-3"
             >
               <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-line text-[0.625rem] font-bold">
                 {String.fromCharCode(65 + i)}

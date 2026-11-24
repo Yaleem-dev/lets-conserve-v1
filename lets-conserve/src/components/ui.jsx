@@ -10,7 +10,7 @@ export function Btn({ children, onClick, variant = 'leaf', className = '', ...re
     gold: 'bg-gold-tint text-gold-deep border-[#c99a20] hover:bg-gold hover:text-ink',
     warm: 'bg-warm text-warm-ink border-warm-edge hover:bg-warm-2',
     blush: 'bg-blush text-blush-ink border-blush-2 hover:bg-blush-2',
-    ghost: 'bg-card text-ink-soft border-line hover:border-green hover:text-green-deep',
+    ghost: 'bg-panel text-ink-soft border-line hover:border-green hover:text-green-deep',
     ghostLight: 'bg-paper/10 text-paper border-paper/40 hover:bg-leaf hover:text-green-deep hover:border-leaf',
   }
   return (
@@ -55,7 +55,7 @@ export function Pill({ active, children, onClick }) {
         'inline-flex items-center gap-2 rounded-full border-[1.5px] px-3.5 py-1.5 text-[0.8125rem] font-bold transition-colors',
         active
           ? 'border-leaf-edge bg-leaf text-green-deep shadow-[inset_0_0_0_1px_rgba(16,64,42,0.10)]'
-          : 'border-line bg-card text-ink-soft hover:border-leaf-edge hover:bg-leaf-3',
+          : 'border-line bg-panel text-ink-soft hover:border-leaf-edge hover:bg-leaf-3',
       ].join(' ')}
     >
       {children}
@@ -66,7 +66,7 @@ export function Pill({ active, children, onClick }) {
 /* Segmented toggle: active segment is light green. */
 export function Segmented({ options, value, onChange }) {
   return (
-    <div className="flex gap-1.5 rounded-full border-[1.5px] border-line bg-card/80 p-1">
+    <div className="flex gap-1.5 rounded-full border-[1.5px] border-line bg-panel/80 p-1">
       {options.map((o) => (
         <button
           key={o.id}

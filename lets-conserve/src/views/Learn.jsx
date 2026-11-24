@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
-import { learnTopics, learnCategories, facts, quizQuestions } from '../data/content.js'
+import { learnTopics, learnCategories, facts, quizQuestions, videos } from '../data/content.js'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
 
 const TINTS = ['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac', 'bg-tan', 'bg-butter', 'bg-panel']
@@ -100,7 +100,7 @@ function Quiz({ recordQuiz, best }) {
           const isAns = n === q.answer
           const isPick = n === picked
           const shown = picked !== null
-          let cls = 'border-line bg-card hover:border-leaf-edge hover:bg-leaf-3'
+          let cls = 'border-line bg-panel hover:border-leaf-edge hover:bg-leaf-3'
           if (shown && isAns) cls = 'border-leaf-edge bg-leaf text-green-deep'
           else if (shown && isPick) cls = 'border-rose/50 bg-[#fbe7ec]'
           return (
@@ -178,6 +178,57 @@ export default function Learn({ quiz, recordQuiz }) {
           {list.map((t, n) => (
             <Card key={t.id} topic={t} tint={TINTS[n % TINTS.length]} />
           ))}
+        </div>
+      </section>
+
+      <section className="shell pb-7">
+        <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b-[1.5px] border-line pb-3">
+          <div>
+            <Chapter>Watch</Chapter>
+            <h2 className="mt-1 text-xl">Short lessons</h2>
+          </div>
+          <span className="text-[0.75rem] font-semibold text-slate">Khan Academy</span>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {videos.map((v, n) => (
+            <article
+              key={v.id}
+              className={`overflow-hidden rounded-[18px] border-[1.5px] border-line ${['bg-sky-tint', 'bg-mint-tint', 'bg-tan', 'bg-blush'][n % 4]}`}
+            >
+              <div className="relative aspect-video w-full overflow-hidden bg-chalk">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${v.id}?rel=0&modestbranding=1`}
+                  title={v.title}
+                  loading="lazy"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full border-0"
+                />
+              </div>
+              <div className="p-3.5">
+                <p className="text-[0.625rem] font-bold uppercase tracking-[0.08em] text-slate">
+                  {v.topic} · {v.length}
+                </p>
+                <h3 className="mt-0.5 text-[0.9375rem] leading-snug">{v.title}</h3>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-3 flex flex-col gap-2.5 rounded-[18px] border-[1.5px] border-line bg-butter p-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-md text-[0.875rem] leading-snug text-ink-soft">
+            Every lesson here is free, ad free, and made by Khan Academy.
+          </p>
+          <a
+            href="https://www.khanacademy.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border-[1.5px] border-leaf-edge bg-leaf px-4 py-2 text-[0.875rem] font-bold text-ink transition-colors hover:bg-leaf-2"
+          >
+            Open Khan Academy
+            <Icon name="external" className="h-3.5 w-3.5" strokeWidth={2.4} />
+          </a>
         </div>
       </section>
 

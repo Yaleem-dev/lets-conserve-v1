@@ -147,7 +147,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
               <article
                 key={q.id}
                 className={`rounded-[18px] border-[1.5px] p-3.5 ${
-                  done ? 'border-leaf-2 bg-leaf-3' : 'border-line bg-butter'
+                  done ? 'border-leaf-2 bg-leaf-3' : `border-line ${['bg-butter','bg-mint-tint','bg-sky-tint','bg-blush','bg-lilac','bg-tan','bg-gold-tint','bg-panel'][n % 8]}`
                 }`}
               >
                 <img
@@ -169,7 +169,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
                     aria-pressed={done}
                     aria-label={`${done ? 'Undo' : 'Complete'} ${q.title}`}
                     className={`flex h-6 w-6 items-center justify-center rounded-md border-[1.5px] transition-colors ${
-                      done ? 'border-green-deep bg-green-deep text-paper' : 'border-ink/25 bg-card text-transparent hover:border-leaf-2 hover:bg-leaf'
+                      done ? 'border-green-deep bg-green-deep text-paper' : 'border-ink/25 bg-panel text-transparent hover:border-leaf-2 hover:bg-leaf'
                     }`}
                   >
                     <Icon name="check" className="h-3 w-3" strokeWidth={3.4} />
