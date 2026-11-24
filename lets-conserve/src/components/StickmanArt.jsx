@@ -1284,105 +1284,29 @@ export function AnimalArt({ name = 'lion', className = 'h-10 w-10', color = '#1d
   )
 }
 
+/* Abstract climate artwork for the strip above each section.
+   Five painted pieces, one per section, each on that section's own tint. */
+const STRIPS = {
+  home: { src: '/art/strip-home.webp', tint: '#eef9dd', alt: 'Abstract arcs, a gold sun and offset circles over a pale green ground' },
+  learn: { src: '/art/strip-learn.webp', tint: '#fdf3d0', alt: 'Layered contour waves in ochre and teal over a pale gold ground' },
+  discover: { src: '/art/strip-discover.webp', tint: '#e3eefb', alt: 'Overlapping orbit ellipses and nodes over a pale blue ground' },
+  quest: { src: '/art/strip-quest.webp', tint: '#fde8e1', alt: 'Ascending terraced steps and chevrons over a pale coral ground' },
+  explore: { src: '/art/strip-explore.webp', tint: '#efe9fd', alt: 'Concentric rings and a zigzag line over a pale lilac ground' },
+}
 
-/* Abstract, thin-stroke art for the strip above each section. No photos. */
 export function TopArt({ variant = 'home', className = 'h-16 w-full md:h-20' }) {
-  const tints = {
-    home: '#eef9dd',
-    learn: '#fdf3d0',
-    discover: '#e3eefb',
-    quest: '#fde8e1',
-    explore: '#efe9fd',
-  }
-  const labels = {
-    home: 'Abstract green arcs, a gold sun and offset circles',
-    learn: 'Abstract gold waves, ticks and a thin circle',
-    discover: 'Abstract blue orbit ellipses and scattered dots',
-    quest: 'Abstract coral steps, chevrons and a sun',
-    explore: 'Abstract violet rings, a zigzag line and dots',
-  }
-
-  const art = {
-    home: (
-      <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M-20 158a130 130 0 0 1 260 0" stroke="#23654a" strokeWidth="1.6" />
-        <path d="M20 158a90 90 0 0 1 180 0" stroke="#2f7da6" strokeWidth="1.4" />
-        <path d="M58 158a52 52 0 0 1 104 0" stroke="#8ed84f" strokeWidth="1.8" />
-        <circle cx="146" cy="92" r="16" fill="#f7d98a" stroke="#bd7415" strokeWidth="1.3" />
-        <path d="M268 128h190" stroke="#23654a" strokeWidth="1.3" strokeDasharray="2 9" />
-        <path d="M268 112h150" stroke="#b8536f" strokeWidth="1.2" strokeDasharray="2 9" />
-        <circle cx="592" cy="60" r="36" stroke="#2f7da6" strokeWidth="1.5" />
-        <circle cx="624" cy="86" r="36" stroke="#e5b842" strokeWidth="1.5" />
-        <circle cx="487" cy="48" r="5" fill="#8ed84f" stroke="none" />
-        <circle cx="512" cy="98" r="3.5" fill="#b8536f" stroke="none" />
-        <circle cx="704" cy="130" r="4.5" fill="#23654a" stroke="none" />
-      </g>
-    ),
-    learn: (
-      <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M-6 84q38-26 76 0t76 0t76 0t76 0t76 0t76 0t76 0t76 0" stroke="#8ed84f" strokeWidth="1.3" />
-        <path d="M-6 106q38-30 76 0t76 0t76 0t76 0t76 0t76 0t76 0t76 0t76 0t76 0" stroke="#bd7415" strokeWidth="1.5" />
-        <path d="M-6 128q38 24 76 0t76 0t76 0t76 0t76 0t76 0t76 0t76 0t76 0" stroke="#2f7da6" strokeWidth="1.2" />
-        <circle cx="632" cy="56" r="30" stroke="#b8536f" strokeWidth="1.5" />
-        <path d="M602 56h60" stroke="#b8536f" strokeWidth="1.2" />
-        <circle cx="152" cy="44" r="12" stroke="#23654a" strokeWidth="1.3" />
-        <path d="M300 38v22" stroke="#23654a" strokeWidth="1.3" />
-        <path d="M330 30v30" stroke="#e5b842" strokeWidth="1.3" />
-        <path d="M360 42v18" stroke="#8ed84f" strokeWidth="1.3" />
-        <circle cx="712" cy="126" r="5" fill="#2f7da6" stroke="none" />
-      </g>
-    ),
-    discover: (
-      <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <ellipse cx="176" cy="82" rx="100" ry="40" stroke="#2f7da6" strokeWidth="1.4" transform="rotate(-18 176 82)" />
-        <ellipse cx="176" cy="82" rx="100" ry="40" stroke="#8ed84f" strokeWidth="1.3" transform="rotate(32 176 82)" />
-        <circle cx="176" cy="82" r="7" fill="#e5b842" stroke="#bd7415" strokeWidth="1.2" />
-        <ellipse cx="536" cy="84" rx="112" ry="46" stroke="#b8536f" strokeWidth="1.3" transform="rotate(14 536 84)" />
-        <ellipse cx="536" cy="84" rx="68" ry="26" stroke="#23654a" strokeWidth="1.4" transform="rotate(-26 536 84)" />
-        <circle cx="536" cy="84" r="4" fill="#2f7da6" stroke="none" />
-        <circle cx="698" cy="42" r="4.5" fill="#2f7da6" stroke="none" />
-        <circle cx="660" cy="128" r="3.5" fill="#b8536f" stroke="none" />
-        <circle cx="330" cy="36" r="4" fill="#23654a" stroke="none" />
-        <path d="M300 140h80" stroke="#e5b842" strokeWidth="1.2" strokeDasharray="2 8" />
-      </g>
-    ),
-    quest: (
-      <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M34 140h58v-26h58v-26h58v-26h58v-26h56" stroke="#23654a" strokeWidth="1.5" />
-        <path d="M404 138l32-32 32 32" stroke="#b8536f" strokeWidth="1.5" />
-        <path d="M486 138l32-32 32 32" stroke="#e5b842" strokeWidth="1.5" />
-        <path d="M568 138l32-32 32 32" stroke="#2f7da6" strokeWidth="1.5" />
-        <circle cx="680" cy="54" r="20" fill="#f7d98a" stroke="#bd7415" strokeWidth="1.3" />
-        <path d="M700 132h44" stroke="#23654a" strokeWidth="1.2" strokeDasharray="2 8" />
-        <circle cx="368" cy="48" r="4.5" fill="#8ed84f" stroke="none" />
-        <circle cx="396" cy="96" r="3.5" fill="#b8536f" stroke="none" />
-      </g>
-    ),
-    explore: (
-      <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M-10 128l52-36 52 36 52-36 52 36 52-36 52 36 52-36" stroke="#23654a" strokeWidth="1.5" />
-        <circle cx="620" cy="72" r="44" stroke="#7b6bd6" strokeWidth="1.5" />
-        <circle cx="620" cy="72" r="28" stroke="#b8536f" strokeWidth="1.3" />
-        <circle cx="620" cy="72" r="13" stroke="#e5b842" strokeWidth="1.4" />
-        <path d="M470 40h70" stroke="#2f7da6" strokeWidth="1.3" strokeDasharray="2 8" />
-        <path d="M470 58h48" stroke="#8ed84f" strokeWidth="1.3" strokeDasharray="2 8" />
-        <circle cx="530" cy="126" r="5" fill="#2f7da6" stroke="none" />
-        <circle cx="716" cy="136" r="4" fill="#b8536f" stroke="none" />
-        <circle cx="706" cy="28" r="3.5" fill="#23654a" stroke="none" />
-      </g>
-    ),
-  }
-
+  const s = STRIPS[variant] || STRIPS.home
   return (
-    <svg
-      viewBox="0 0 760 160"
-      preserveAspectRatio="xMidYMid slice"
-      role="img"
-      aria-label={labels[variant] || labels.home}
-      className={className}
-    >
-      <rect width="760" height="160" fill={tints[variant] || tints.home} />
-      {art[variant] || art.home}
-    </svg>
+    <div className={`relative overflow-hidden ${className}`} style={{ backgroundColor: s.tint }}>
+      <img
+        src={s.src}
+        alt={s.alt}
+        width="1200"
+        height="220"
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+    </div>
   )
 }
