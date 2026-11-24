@@ -137,7 +137,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b-[1.5px] border-line pb-3">
           <div>
             <Chapter>Eco-Creatures</Chapter>
-            <h2 className="mt-1 text-xl">Which eco creature are you?</h2>
+            <h2 className="mt-1 text-xl">Which eco-creature are you?</h2>
           </div>
         </div>
         <EcoCreaturesQuiz />
