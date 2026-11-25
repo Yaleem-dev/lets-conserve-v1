@@ -132,7 +132,7 @@ function Quiz({ recordQuiz, best }) {
   )
 }
 
-export default function Learn({ quiz, recordQuiz }) {
+export default function Learn({ quiz, recordQuiz, go }) {
   const [cat, setCat] = useState('All')
   const list = useMemo(() => (cat === 'All' ? learnTopics : learnTopics.filter((t) => t.category === cat)), [cat])
   const featured = videos[0]
@@ -320,7 +320,11 @@ export default function Learn({ quiz, recordQuiz }) {
       </section>
 
       <section className="shell pb-10">
-        <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
+        <button
+          type="button"
+          onClick={() => go('discover')}
+          className="card flex w-full flex-wrap items-center justify-between gap-3 p-4 text-left transition hover:border-leaf-edge hover:bg-leaf-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-deep"
+        >
           <div>
             <Chapter>Next</Chapter>
             <h3 className="mt-1 text-lg">Find a way to act</h3>
@@ -331,7 +335,7 @@ export default function Learn({ quiz, recordQuiz }) {
               <path d="M27 17h15M37 12l5.5 5-5.5 5" />
               <path d="M47 8l3.5-3M50 16h4M47 25l3.5 3" opacity="0.65" />
             </svg>
-        </div>
+        </button>
       </section>
     </div>
   )

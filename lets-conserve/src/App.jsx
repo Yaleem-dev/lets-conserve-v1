@@ -174,7 +174,7 @@ export default function App() {
         {view === 'home' && (
           <Home quest={featured} points={points} isDone={isDone} toggleQuest={toggleQuest} go={go} week={week} />
         )}
-        {view === 'learn' && <Learn quiz={quiz} recordQuiz={recordQuiz} />}
+        {view === 'learn' && <Learn quiz={quiz} recordQuiz={recordQuiz} go={go} />}
         {view === 'discover' && <Discover go={go} />}
         {view === 'quest' && (
           <Quest points={points} isDone={isDone} toggleQuest={toggleQuest} week={week} reset={reset} go={go} />
