@@ -1284,25 +1284,40 @@ export function AnimalArt({ name = 'lion', className = 'h-10 w-10', color = '#1d
   )
 }
 
-/* Abstract climate artwork for the strip above each section.
-   Five painted pieces, one per section, each on that section's own tint. */
+/* A real nature photograph for each section, chosen to match what that
+   section is about. Photos are local WebP files, not hotlinked. */
 const STRIPS = {
-  home: { src: '/art/strip-home.webp', tint: '#eef9dd', alt: 'Abstract arcs, a gold sun and offset circles over a pale green ground' },
-  learn: { src: '/art/strip-learn.webp', tint: '#fdf3d0', alt: 'Layered contour waves in ochre and teal over a pale gold ground' },
-  discover: { src: '/art/strip-discover.webp', tint: '#e3eefb', alt: 'Overlapping orbit ellipses and nodes over a pale blue ground' },
-  quest: { src: '/art/strip-quest.webp', tint: '#fde8e1', alt: 'Ascending terraced steps and chevrons over a pale coral ground' },
-  explore: { src: '/art/strip-explore.webp', tint: '#efe9fd', alt: 'Concentric rings and a zigzag line over a pale lilac ground' },
+  home: {
+    src: '/art/strip-home.webp',
+    alt: 'Sunlight streaming through a green forest canopy',
+  },
+  learn: {
+    src: '/art/strip-learn.webp',
+    alt: 'Blue glacial ice and snow across a wide valley',
+  },
+  discover: {
+    src: '/art/strip-discover.webp',
+    alt: 'Aerial view of green wetlands and river channels meeting the sea',
+  },
+  quest: {
+    src: '/art/strip-quest.webp',
+    alt: 'A wildflower meadow in low golden light, full of blooms for pollinators',
+  },
+  explore: {
+    src: '/art/strip-explore.webp',
+    alt: 'A sunlit footpath winding through tall green woodland',
+  },
 }
 
-export function TopArt({ variant = 'home', className = 'h-16 w-full md:h-20' }) {
+export function TopArt({ variant = 'home', className = 'h-20 w-full md:h-28' }) {
   const s = STRIPS[variant] || STRIPS.home
   return (
-    <div className={`relative overflow-hidden ${className}`} style={{ backgroundColor: s.tint }}>
+    <div className={`relative overflow-hidden bg-leaf-3 ${className}`}>
       <img
         src={s.src}
         alt={s.alt}
         width="1200"
-        height="220"
+        height="260"
         loading="lazy"
         decoding="async"
         className="absolute inset-0 h-full w-full object-cover"
