@@ -1,14 +1,15 @@
-import { Component, useEffect, useMemo, useState } from 'react'
+import { Component, useContext, useEffect, useMemo, useState } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import { LookDefs, Icon, Scene, Strip, Doodle, StickScene, EarthMark } from './components/StickmanArt.jsx'
 import { Points, Meter, Btn } from './components/ui.jsx'
 import { useProgress, currentWeek } from './hooks/useProgress.js'
-import { quests, badges, APP_DESCRIPTION } from './data/content.js'
+import { quests, badges } from './data/content.js'
 import Home from './views/Home.jsx'
 import Learn from './views/Learn.jsx'
 import Discover from './views/Discover.jsx'
 import Quest from './views/Quest.jsx'
 import Explore from './views/Explore.jsx'
+import { LangCtx, LangSelect, LANGS, makeT } from './i18n.jsx'
 
 
 /* A single view failing should never blank the whole app: show a small
@@ -67,7 +68,8 @@ function readHash() {
   return VALID.has(h) ? h : 'home'
 }
 
-export default function App() {
+function AppInner() {
+  const { t: tr, lang } = useContext(LangCtx)
   const [view, setView] = useState(readHash)
   const [menu, setMenu] = useState(false)
   const week = useMemo(() => currentWeek(), [])
@@ -88,9 +90,9 @@ export default function App() {
   }
 
   useEffect(() => {
-    const label = TABS.find((t) => t.id === view).label
-    document.title = view === 'home' ? `Let’s Conserve | ${APP_DESCRIPTION}` : `${label} | Let’s Conserve`
-  }, [view])
+    const label = tr(`nav.${view}`)
+    document.title = view === 'home' ? `Let’s Conserve | ${tr('app.description')}` : `${label} | Let’s Conserve`
+  }, [view, tr, lang])
 
   const featured = quests[week.index % quests.length]
   const max = quests.reduce((s, q) => s + q.points, 0) + 25
@@ -127,12 +129,15 @@ export default function App() {
                     view === t.id ? 'bg-leaf text-green-deep shadow-[inset_0_0_0_1.5px_var(--color-leaf-edge)]' : 'text-ink-soft hover:bg-leaf-3 hover:text-green-deep'
                   }`}
                 >
-                  {t.label}
+                  {tr(`nav.${t.id}`)}
                 </button>
               ))}
             </nav>
 
             <div className="flex items-center gap-2">
+              <span className="hidden sm:inline-flex">
+                <LangSelect />
+              </span>
               <Points points={points} className="hidden sm:inline-flex" />
               <button
                 type="button"
@@ -151,6 +156,10 @@ export default function App() {
         {menu && (
           <nav aria-label="Mobile" className="border-t-[1.5px] border-line bg-card md:hidden">
             <div className="shell py-2">
+              <div className="mb-2 flex items-center justify-between gap-2 border-b border-line pb-2">
+                <span className="text-[0.75rem] font-bold uppercase tracking-wider text-slate">{tr('lang.label')}</span>
+                <LangSelect />
+              </div>
               {TABS.map((t) => (
                 <button
                   key={t.id}
@@ -161,7 +170,7 @@ export default function App() {
                   }`}
                 >
                   <Icon name={t.icon} className="h-4 w-4" />
-                  {t.label}
+                  {tr(`nav.${t.id}`)}
                 </button>
               ))}
             </div>
@@ -194,7 +203,7 @@ export default function App() {
                 <span className="text-[0.9375rem] font-bold text-leaf">Let’s Conserve</span>
               </div>
               <p className="mt-2 max-w-xs text-[0.8125rem] leading-relaxed text-paper/80">
-                {APP_DESCRIPTION}.
+                {tr('app.description')}.
               </p>
               <div className="mt-3 w-full max-w-[240px]">
                 <Strip
@@ -206,12 +215,12 @@ export default function App() {
             </div>
 
             <div>
-              <p className="chapter mb-2.5 text-leaf">Sections</p>
+              <p className="chapter mb-2.5 text-leaf">{tr('footer.sections')}</p>
               <ul className="space-y-1.5">
                 {TABS.filter((t) => t.id !== 'home').map((t) => (
                   <li key={t.id}>
                     <button type="button" onClick={() => go(t.id)} className="text-[0.8125rem] text-paper/85 hover:text-leaf">
-                      {t.label}
+                      {tr(`nav.${t.id}`)}
                     </button>
                   </li>
                 ))}
@@ -219,12 +228,12 @@ export default function App() {
             </div>
 
             <div>
-              <p className="chapter mb-2.5 text-leaf">Start here</p>
+              <p className="chapter mb-2.5 text-leaf">{tr('footer.startHere')}</p>
               <p className="text-[0.8125rem] leading-relaxed text-paper/80">
-                Understand, act, repeat.
+                {tr('footer.understand')}
               </p>
               <Btn variant="warm" className="mt-3 !px-4 !py-2 !text-[0.8125rem]" onClick={() => go('quest')}>
-                This week’s quest
+                {tr('home.weekQuest')}
                 <Icon name="arrow" className="h-3.5 w-3.5" />
               </Btn>
             </div>
@@ -237,19 +246,54 @@ export default function App() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-[0.6875rem] font-bold text-paper/90 underline decoration-leaf/60 decoration-1 underline-offset-4 transition-colors hover:text-leaf hover:decoration-leaf"
             >
-              In collaboration with Yaleem-dev
+              {tr('footer.collab')}
               <Icon name="external" className="h-3 w-3" />
             </a>
             <a
               href="mailto:team-tariqlawal@proton.me"
               className="inline-flex shrink-0 items-center gap-1.5 rounded-full border-[1.5px] border-paper/25 px-3.5 py-1.5 text-[0.75rem] font-bold text-paper/90 transition-colors hover:border-leaf hover:bg-leaf hover:text-ink"
             >
-              Support us
+              {tr('footer.support')}
               <Icon name="arrow" className="h-3 w-3" strokeWidth={2.4} />
             </a>
           </div>
         </div>
       </footer>
     </div>
+  )
+}
+
+/* The chosen language sits above the app so every view reads one table.
+   It is remembered on this device only, never sent anywhere. */
+function LangProvider({ children }) {
+  const [lang, setLangState] = useState(() => {
+    try {
+      const saved = localStorage.getItem('lc-lang')
+      return LANGS.some((l) => l.id === saved) ? saved : 'en'
+    } catch {
+      return 'en'
+    }
+  })
+  const setLang = (id) => {
+    if (!LANGS.some((l) => l.id === id)) return
+    setLangState(id)
+    try {
+      localStorage.setItem('lc-lang', id)
+    } catch {
+      /* private mode: keep the session value */
+    }
+  }
+  const value = useMemo(() => ({ lang, setLang, t: makeT(lang) }), [lang])
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
+  return <LangCtx.Provider value={value}>{children}</LangCtx.Provider>
+}
+
+export default function App() {
+  return (
+    <LangProvider>
+      <AppInner />
+    </LangProvider>
   )
 }

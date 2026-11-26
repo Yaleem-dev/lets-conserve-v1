@@ -1,4 +1,5 @@
 import { Icon, Doodle } from './StickmanArt.jsx'
+import { useT } from '../i18n.jsx'
 
 /* Light green primary button, per the brief. Dark text for AA contrast:
    #1C5238 on #C9EE9C is about 7.4:1. */
@@ -110,12 +111,14 @@ export function Meter({ value, max, tone = 'bg-green', track = 'bg-line' }) {
   )
 }
 
-export function Ext({ href, children = 'Learn more', tone = 'light' }) {
+export function Ext({ href, children, tone = 'light' }) {
+  const t = useT()
+  const label = children ?? t('common.learnMore')
   const color = tone === 'light' ? 'text-green-deep hover:text-green' : 'text-leaf hover:text-white'
   return (
     <a href={href} target="_blank" rel="noopener noreferrer"
       className={`inline-flex items-center gap-1.5 text-[0.8125rem] font-bold ${color}`}>
-      {children}
+      {label}
       <Icon name="external" className="h-3.5 w-3.5" strokeWidth={2.4} />
     </a>
   )

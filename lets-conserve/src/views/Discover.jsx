@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon, TopArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Segmented, Ext } from '../components/ui.jsx'
-import { guideGroups, organizations, regions } from '../data/content.js'
+import { guideGroups, organizations, regions, regionLabel } from '../data/content.js'
+import { useT } from '../i18n.jsx'
 
 const BRAND = {
   ocean: { bar: '#1d5fa8', tint: '#dbeafa', ink: '#17456f' },
@@ -59,6 +60,7 @@ const GUIDE_TONE = {
 }
 
 export default function Discover({ go }) {
+  const t = useT()
   const [tab, setTab] = useState('orgs')
   const [region, setRegion] = useState('All')
   const [q, setQ] = useState('')
@@ -83,10 +85,10 @@ export default function Discover({ go }) {
       </section>
 
       <section className="shell mt-4">
-        <Chapter>Chapter 02</Chapter>
+        <Chapter>{t('discover.chapter')}</Chapter>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
-            Find your <span className="doodle-underline">path</span>
+            <span className="doodle-underline">{t('discover.title')}</span>
           </h1>
           <Art name="community" variant="stick" className="h-20" />
         </div>
@@ -97,8 +99,8 @@ export default function Discover({ go }) {
           value={tab}
           onChange={setTab}
           options={[
-            { id: 'orgs', label: 'Directory' },
-            { id: 'acts', label: 'Action guides' },
+            { id: 'orgs', label: t('discover.directory') },
+            { id: 'acts', label: t('discover.guides') },
           ]}
         />
       </div>
@@ -107,10 +109,10 @@ export default function Discover({ go }) {
         <section className="shell mt-5 pb-9">
           <div className="mb-3 flex items-end justify-between border-b-[1.5px] border-line pb-3">
             <div>
-              <Chapter>Directory</Chapter>
-              <h2 className="mt-1 text-xl">Where the work happens</h2>
+              <Chapter>{t('discover.directory')}</Chapter>
+              <h2 className="mt-1 text-xl">{t('discover.whereWork')}</h2>
             </div>
-            <span className="text-[0.75rem] text-slate">{list.length} listed</span>
+            <span className="text-[0.75rem] text-slate">{t('discover.listed', { n: list.length })}</span>
           </div>
 
           <div className="relative mb-3">
@@ -119,13 +121,13 @@ export default function Discover({ go }) {
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search by name"
+              placeholder={t('discover.search')}
               className="w-full rounded-full border-[1.5px] border-line bg-panel py-2.5 pl-10 pr-4 text-[0.9375rem] placeholder:text-slate/70 focus:border-leaf-2 focus:bg-leaf-3 focus:outline-none"
             />
           </div>
 
           <div className="mb-4 flex flex-wrap gap-2">
-            <Pill active={region === 'All'} onClick={() => setRegion('All')}>All</Pill>
+            <Pill active={region === 'All'} onClick={() => setRegion('All')}>{t('discover.all')}</Pill>
             {regions.map((r) => (
               <Pill key={r.id} active={region === r.id} onClick={() => setRegion(r.id)}>
                 {r.label} <span className="tabular-nums opacity-55">{count(r.id)}</span>
@@ -135,7 +137,7 @@ export default function Discover({ go }) {
 
           {list.length === 0 ? (
             <p className="rounded-[18px] border-[1.5px] border-dashed border-line bg-panel px-5 py-9 text-center text-sm text-slate">
-              Nothing matches. Try another region.
+              {t('discover.nothing')}
             </p>
           ) : (
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -155,8 +157,8 @@ export default function Discover({ go }) {
                     </div>
                     <p className="mt-2 flex-1 text-[0.8125rem] leading-snug text-slate">{o.note}</p>
                     <div className="mt-2.5 flex items-center justify-between gap-2 border-t border-line-soft pt-2">
-                      <Ext href={o.url}>Learn more</Ext>
-                      <span className="text-[0.625rem] font-bold uppercase tracking-[0.08em] text-slate">{o.region}</span>
+                      <Ext href={o.url} />
+                      <span className="text-[0.625rem] font-bold uppercase tracking-[0.08em] text-slate">{regionLabel(o.region)}</span>
                     </div>
                   </div>
                 </article>
@@ -169,7 +171,7 @@ export default function Discover({ go }) {
       {tab === 'acts' && (
         <section className="shell mt-5 pb-9">
           <div className="mb-4 border-b-[1.5px] border-line pb-3">
-            <Chapter>Action guides</Chapter>
+            <Chapter>{t('discover.guides')}</Chapter>
           </div>
 
           <div className="space-y-5">
@@ -204,11 +206,11 @@ export default function Discover({ go }) {
             <Doodle name="sprig" className="absolute right-5 top-5 h-7 w-7 opacity-40" />
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <Chapter tone="dark">Turn it into a habit</Chapter>
-                <p className="mt-1 max-w-sm text-paper/80">Pick one and repeat it.</p>
+                <Chapter tone="dark">{t('discover.habit')}</Chapter>
+                <p className="mt-1 max-w-sm text-paper/80">{t('discover.repeat')}</p>
               </div>
               <Btn variant="leaf" onClick={() => go('quest')}>
-                Go to Quest
+                {t('discover.goQuest')}
                 <Icon name="arrow" className="h-4 w-4" />
               </Btn>
             </div>

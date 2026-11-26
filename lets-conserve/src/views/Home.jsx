@@ -4,8 +4,10 @@ import EcoCreaturesQuiz from '../components/EcoCreaturesQuiz.jsx'
 import { facts } from '../data/content.js'
 import { Btn, Chapter, Chip } from '../components/ui.jsx'
 import { organizations, resources } from '../data/content.js'
+import { useT } from '../i18n.jsx'
 
 export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
+  const t = useT()
   const [flash, setFlash] = useState(false)
   const [copied, setCopied] = useState(false)
 
@@ -30,17 +32,17 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
   }
 
   const cards = [
-    { view: 'learn', scene: 'learn', title: 'Learn', line: 'Short explanations.', tone: 'bg-leaf-3' },
-    { view: 'discover', scene: 'community', title: 'Discover', line: 'Ways to act.', tone: 'bg-sky-tint' },
-    { view: 'explore', scene: 'explore', title: 'Explore', line: 'Resources.', tone: 'bg-blush' },
+    { view: 'learn', scene: 'learn', title: t('nav.learn'), line: t('home.cardLearn'), tone: 'bg-leaf-3' },
+    { view: 'discover', scene: 'community', title: t('nav.discover'), line: t('home.cardAct'), tone: 'bg-sky-tint' },
+    { view: 'explore', scene: 'explore', title: t('nav.explore'), line: t('home.cardRes'), tone: 'bg-blush' },
   ]
 
   const featured = useMemo(
     () => [
-      { name: 'Sierra Club', region: 'US', abbr: 'SC', block: 'bg-leaf-3', ink: 'text-green-deep' },
-      { name: 'Wildlife Trusts', region: 'UK', abbr: 'WT', block: 'bg-gold-tint', ink: 'text-gold-deep' },
-      { name: 'WESSA', region: 'ZA', abbr: 'WE', block: 'bg-sky-tint', ink: 'text-sky' },
-      { name: 'NCF', region: 'NG', abbr: 'NC', block: 'bg-blush', ink: 'text-rose' },
+      { name: 'Sierra Club', region: 'United States', abbr: 'SC', block: 'bg-leaf-3', ink: 'text-green-deep' },
+      { name: 'The Wildlife Trusts', region: 'United Kingdom', abbr: 'WT', block: 'bg-gold-tint', ink: 'text-gold-deep' },
+      { name: 'Wildlife and Environment Society of South Africa (WESSA)', region: 'South Africa', abbr: 'WE', block: 'bg-sky-tint', ink: 'text-sky' },
+      { name: 'Nigerian Conservation Foundation (NCF)', region: 'Nigeria', abbr: 'NC', block: 'bg-blush', ink: 'text-rose' },
     ],
     [],
   )
@@ -58,28 +60,28 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
         <div className="card-hero relative overflow-hidden px-5 py-7 sm:px-6 sm:py-8 md:px-10 md:py-11">
           <div className="relative grid items-center gap-6 md:grid-cols-[1.05fr_0.95fr] md:gap-8">
             <div className="min-w-0">
-              <Chapter>Welcome</Chapter>
+              <Chapter>{t('home.welcome')}</Chapter>
               <h1
                 className="display mt-3 text-ink"
                 style={{ fontSize: 'clamp(1.65rem, 6.6vw, 3.1rem)' }}
               >
-                Your personal guide
+                {t('home.heroA')}
                 <br />
-                for <span className="text-brand-green">eco-action</span>.
+                {t('home.heroB')} <span className="text-brand-green">{t('home.heroC')}</span>
               </h1>
               <p className="mt-3 flex flex-col gap-0.5 text-[0.9375rem] font-bold leading-snug">
-                <span className="text-brand-blue">Learn something.</span>
-                <span className="text-blush-ink">Discover something.</span>
-                <span className="text-mint-ink">Do something.</span>
+                <span className="text-brand-blue">{t('home.line1')}</span>
+                <span className="text-blush-ink">{t('home.line2')}</span>
+                <span className="text-mint-ink">{t('home.line3')}</span>
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2.5">
                 <Btn variant="warm" onClick={() => go('quest')}>
-                  This week&rsquo;s quest
+                  {t('home.weekQuest')}
                   <Icon name="arrow" className="h-4 w-4" />
                 </Btn>
                 <Btn variant="leaf" onClick={() => go('learn')}>
-                  Start learning
+                  {t('home.startLearning')}
                 </Btn>
               </div>
             </div>
@@ -97,7 +99,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
           <div className="grid items-center gap-4 sm:grid-cols-[1fr_auto]">
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <Chip tone="gold">This week</Chip>
+                <Chip tone="gold">{t('home.thisWeek')}</Chip>
                 <span className="text-[0.75rem] font-semibold text-slate">{week.label}</span>
               </div>
               <h2 className="mt-2 text-[1.4rem] md:text-[1.6rem]">{quest.title}</h2>
@@ -105,9 +107,9 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
               <div className="mt-3.5 flex flex-wrap items-center gap-3">
                 <Btn variant="leaf" onClick={handle} aria-pressed={done}>
                   <Icon name={done ? 'check' : 'arrow'} className="h-4 w-4" strokeWidth={2.6} />
-                  {done ? 'Done' : 'Mark complete'}
+                  {done ? t('home.done') : t('home.markComplete')}
                 </Btn>
-                <span className="text-[0.8125rem] font-bold text-green-deep">+{quest.points} points</span>
+                <span className="text-[0.8125rem] font-bold text-green-deep">+{quest.points} {t('home.points')}</span>
               </div>
             </div>
             <img
@@ -128,8 +130,8 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
       <section className="shell mt-5">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b-[1.5px] border-line pb-3">
           <div>
-            <Chapter>Eco-Creatures</Chapter>
-            <h2 className="mt-1 text-xl">Which eco-creature are you?</h2>
+            <Chapter>{t('home.creatures')}</Chapter>
+            <h2 className="mt-1 text-xl">{t('home.creatureQ')}</h2>
           </div>
         </div>
         <EcoCreaturesQuiz />
@@ -160,11 +162,11 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
       <section className="shell pb-8">
         <div className="mb-3.5 flex items-end justify-between border-b-[1.5px] border-line pb-3">
           <div>
-            <Chapter>Discover</Chapter>
-            <h2 className="mt-1 text-xl">Organizations near you</h2>
+            <Chapter>{t('nav.discover')}</Chapter>
+            <h2 className="mt-1 text-xl">{t('home.orgs')}</h2>
           </div>
           <button type="button" onClick={() => go('discover')} className="text-[0.8125rem] font-bold text-green-deep underline decoration-leaf-2 decoration-2 underline-offset-4">
-            Full directory
+            {t('home.fullDirectory')}
           </button>
         </div>
 
@@ -174,7 +176,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
               <div className={`flex h-12 items-center justify-center rounded-[12px] ${x.block}`}>
                 <span className={`text-[0.9375rem] font-black tracking-[0.1em] ${x.ink}`}>{x.abbr}</span>
               </div>
-              <p className="mt-1.5 truncate text-[0.8125rem] font-bold">{x.name}</p>
+              <p className="mt-1.5 line-clamp-2 text-[0.8125rem] font-bold leading-snug">{x.name}</p>
               <p className="text-[0.6875rem] font-semibold text-slate">{x.region}</p>
             </div>
           ))}
@@ -185,11 +187,11 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
       <section className="shell pb-12">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b-[1.5px] border-line pb-3">
           <div>
-            <Chapter>Did you know</Chapter>
-            <h2 className="mt-1 text-xl">Four things worth knowing</h2>
+            <Chapter>{t('home.didYouKnow')}</Chapter>
+            <h2 className="mt-1 text-xl">{t('home.fourThings')}</h2>
           </div>
           <button type="button" onClick={() => go('learn')} className="inline-flex items-center gap-1.5 text-[0.8125rem] font-bold text-green-deep">
-            More in Learn
+            {t('home.moreInLearn')}
             <Icon name="arrow" className="h-3.5 w-3.5" strokeWidth={2.4} />
           </button>
         </div>
@@ -218,9 +220,9 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
       <section className="shell pb-10">
         <div className="card flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0">
-            <Chapter>Support us</Chapter>
+            <Chapter>{t('home.supportUs')}</Chapter>
             <p className="mt-1 max-w-md text-[0.9375rem] leading-snug text-ink-soft">
-              Ideas, funding or a partnership? Send a note.
+              {t('home.supportLine')}
             </p>
             <a
               href="mailto:team-tariqlawal@proton.me"
@@ -235,14 +237,14 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
               className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-leaf-edge bg-leaf px-4 py-2 text-[0.9375rem] font-bold text-ink transition-colors hover:bg-leaf-2"
             >
               <Icon name="arrow" className="h-4 w-4" strokeWidth={2.4} />
-              Support us
+              {t('home.supportUs')}
             </a>
             <button
               type="button"
               onClick={copyEmail}
               className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-line bg-panel px-4 py-2 text-[0.9375rem] font-bold text-green-deep transition-colors hover:border-leaf-2 hover:bg-leaf-3"
             >
-              {copied ? 'Copied' : 'Copy email'}
+              {copied ? t('home.copied') : t('home.copyEmail')}
             </button>
           </div>
         </div>

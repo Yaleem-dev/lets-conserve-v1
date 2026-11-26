@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useT } from '../i18n.jsx'
 import { Art, Doodle, Icon, CartoonTools, TopArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Ext } from '../components/ui.jsx'
 import { resources, exploreCategories } from '../data/content.js'
@@ -15,6 +16,7 @@ const catOf = (r) => r.category || 'Data'
 const initialOf = (r) => String(catOf(r)).slice(0, 1)
 
 export default function Explore({ go }) {
+  const t = useT()
   const [cat, setCat] = useState('All')
   const list = useMemo(() => (cat === 'All' ? resources : resources.filter((r) => r.category === cat)), [cat])
 
@@ -27,10 +29,10 @@ export default function Explore({ go }) {
       </section>
 
       <section className="shell mt-4">
-        <Chapter>Chapter 04</Chapter>
+        <Chapter>{t('explore.chapter')}</Chapter>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
-            Resources
+            {t('explore.title')}
           </h1>
           <Art name="explore" variant="stick" className="h-20" />
         </div>
@@ -38,7 +40,7 @@ export default function Explore({ go }) {
 
       <section className="shell mt-5 pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
-          <Chapter>Curated</Chapter>
+          <Chapter>{t('explore.curated')}</Chapter>
         </div>
         <div className="mb-3.5 flex flex-wrap gap-2">
           {exploreCategories.map((c) => (
@@ -66,7 +68,7 @@ export default function Explore({ go }) {
                 </div>
               <p className="mt-0.5 text-[0.8125rem] text-slate">{r.why}</p>
               <div className="mt-2.5 border-t border-line/70 pt-2">
-                <Ext href={r.url}>Learn more</Ext>
+                <Ext href={r.url} />
               </div>
             </article>
           ))}
@@ -78,10 +80,10 @@ export default function Explore({ go }) {
           <Doodle name="wind" className="absolute right-5 top-4 h-6 w-9 opacity-40" />
           <div className="grid items-center gap-5 md:grid-cols-[1fr_auto]">
             <div>
-              <Chapter tone="dark">Why so few</Chapter>
-              <h3 className="mt-1.5 text-xl text-paper">A short list you can trust</h3>
+              <Chapter tone="dark">{t('explore.whyFew')}</Chapter>
+              <h3 className="mt-1.5 text-xl text-paper">{t('explore.shortList')}</h3>
               <Btn variant="leaf" className="mt-3" onClick={() => go('quest')}>
-                Turn one into a quest
+                {t('explore.turnOne')}
                 <Icon name="arrow" className="h-4 w-4" />
               </Btn>
             </div>

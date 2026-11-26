@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon, TopArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { learnTopics, learnCategories, facts, quizQuestions, videos } from '../data/content.js'
+import { useT } from '../i18n.jsx'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
 
 const TINTS = ['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac', 'bg-tan', 'bg-butter', 'bg-panel']
@@ -133,6 +134,7 @@ function Quiz({ recordQuiz, best }) {
 }
 
 export default function Learn({ quiz, recordQuiz, go }) {
+  const t = useT()
   const [cat, setCat] = useState('All')
   const list = useMemo(() => (cat === 'All' ? learnTopics : learnTopics.filter((t) => t.category === cat)), [cat])
   const featured = videos[0]
@@ -147,10 +149,10 @@ export default function Learn({ quiz, recordQuiz, go }) {
       </section>
 
       <section className="shell mt-4">
-        <Chapter>Chapter 01</Chapter>
+        <Chapter>{t('learn.chapter')}</Chapter>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
-            Understand an <span className="doodle-underline">issue</span>
+            <span className="doodle-underline">{t('learn.title')}</span>
           </h1>
           <Art name="learn" variant="stick" className="h-20" />
         </div>
@@ -158,8 +160,8 @@ export default function Learn({ quiz, recordQuiz, go }) {
 
       <section className="shell mt-5 pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
-          <Chapter>Explainers</Chapter>
-          <h2 className="mt-1 text-xl">Pick one</h2>
+          <Chapter>{t('learn.explainers')}</Chapter>
+          <h2 className="mt-1 text-xl">{t('learn.pickOne')}</h2>
         </div>
         <div className="mb-3.5 flex flex-wrap gap-2">
           {learnCategories.map((c) => (
@@ -177,7 +179,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
 
       <section className="shell pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
-          <Chapter>Go deeper</Chapter>
+          <Chapter>{t('learn.goDeeper')}</Chapter>
         </div>
         <a
           href="https://climatescience.org/"
@@ -199,8 +201,8 @@ export default function Learn({ quiz, recordQuiz, go }) {
       <section className="shell pb-7">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b-[1.5px] border-line pb-3">
           <div>
-            <Chapter>Watch</Chapter>
-            <h2 className="mt-1 text-xl">Short lessons</h2>
+            <Chapter>{t('learn.watch')}</Chapter>
+            <h2 className="mt-1 text-xl">{t('learn.shortLessons')}</h2>
           </div>
           <span className="text-[0.75rem] font-semibold text-slate">Khan Academy</span>
         </div>
@@ -279,8 +281,8 @@ export default function Learn({ quiz, recordQuiz, go }) {
 
       <section className="shell pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
-          <Chapter>Did you know</Chapter>
-          <h2 className="mt-1 text-xl">Four things worth knowing</h2>
+          <Chapter>{t('home.didYouKnow')}</Chapter>
+          <h2 className="mt-1 text-xl">{t('home.fourThings')}</h2>
         </div>
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {facts.map((f, n) => (
@@ -303,8 +305,8 @@ export default function Learn({ quiz, recordQuiz, go }) {
       <section className="shell pb-7">
         <div className="mb-3 flex items-end justify-between border-b-[1.5px] border-line pb-3">
           <div>
-            <Chapter>Knowledge check</Chapter>
-            <h2 className="mt-1 text-xl">Five questions, {QUIZ_BONUS} points</h2>
+            <Chapter>{t('learn.knowledgeCheck')}</Chapter>
+            <h2 className="mt-1 text-xl">{t('learn.fiveQ', { n: QUIZ_BONUS })}</h2>
           </div>
           <span className="text-[0.75rem] text-slate">Best {quiz.best}/{quizQuestions.length}</span>
         </div>
@@ -312,8 +314,8 @@ export default function Learn({ quiz, recordQuiz, go }) {
           <Quiz recordQuiz={recordQuiz} best={quiz.best} />
           <aside className="card-chalk relative overflow-hidden p-5">
             <Doodle name="bulb" tone="dark" className="absolute right-4 top-4 h-6 w-6 opacity-80" />
-            <Chapter tone="dark">Why bother</Chapter>
-            <p className="mt-2 text-[0.9375rem] text-paper/80">Guessing teaches nothing.</p>
+            <Chapter tone="dark">{t('learn.whyBother')}</Chapter>
+            <p className="mt-2 text-[0.9375rem] text-paper/80">{t('learn.guessing')}</p>
             <Art name="explore" variant="stick" tone="dark" className="mt-3 h-20" />
           </aside>
         </div>
@@ -326,8 +328,8 @@ export default function Learn({ quiz, recordQuiz, go }) {
           className="card flex w-full flex-wrap items-center justify-between gap-3 p-4 text-left transition hover:border-leaf-edge hover:bg-leaf-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-deep"
         >
           <div>
-            <Chapter>Next</Chapter>
-            <h3 className="mt-1 text-lg">Find a way to act</h3>
+            <Chapter>{t('learn.next')}</Chapter>
+            <h3 className="mt-1 text-lg">{t('learn.findWay')}</h3>
           </div>
           <svg viewBox="0 0 56 34" className="h-10 w-16 shrink-0" fill="none" stroke="var(--color-warm-2)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <circle cx="13" cy="17" r="8.5" />
