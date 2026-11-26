@@ -41,7 +41,7 @@ export const ha = {
   'learn.chapter': 'Babi 01',
   'learn.title': 'Fahimci wani batu',
   'learn.explainers': 'Bayani',
-  'learn.pickOne': 'Zaɓi ɗaya',
+
   'learn.goDeeper': 'Ƙara zurfi',
   'learn.watch': 'Kalla',
   'learn.shortLessons': 'Gajerun darussa',
@@ -132,7 +132,7 @@ export const yo = {
   'learn.chapter': 'Orí 01',
   'learn.title': 'Lóye ọ̀ràn kan',
   'learn.explainers': 'Àlàyé',
-  'learn.pickOne': 'Yan ọ̀kan',
+
   'learn.goDeeper': 'Lọ jìn sí i',
   'learn.watch': 'Wo',
   'learn.shortLessons': 'Ẹ̀kọ́ kúkúrú',
@@ -223,7 +223,7 @@ export const ig = {
   'learn.chapter': 'Isi 01',
   'learn.title': 'Ghọta otu okwu',
   'learn.explainers': 'Nkọwa',
-  'learn.pickOne': 'Họrọ otu',
+
   'learn.goDeeper': 'Gaa nke ọma',
   'learn.watch': 'Lelee',
   'learn.shortLessons': 'Ihe ọmụmụ dị mkpụmkpụ',
@@ -314,7 +314,7 @@ export const pcm = {
   'learn.chapter': 'Chapta 01',
   'learn.title': 'Ɔndastand wan ishu',
   'learn.explainers': 'Ɛkspleneshɔn',
-  'learn.pickOne': 'Pik wan',
+
   'learn.goDeeper': 'Go dipa',
   'learn.watch': 'Wach',
   'learn.shortLessons': 'Shɔt lɛsɔn',
@@ -405,7 +405,7 @@ export const ff = {
   'learn.chapter': 'Taƴre 01',
   'learn.title': 'Faamnu fiyaaku',
   'learn.explainers': 'Caaɓɓe',
-  'learn.pickOne': 'Suɓo gootal',
+
   'learn.goDeeper': 'Yah ɓuri ɓadi',
   'learn.watch': 'Yiy',
   'learn.shortLessons': 'Janngirɗe juutɗe',
@@ -496,7 +496,7 @@ export const wo = {
   'learn.chapter': 'Bérapp 01',
   'learn.title': 'Dégg aw mi',
   'learn.explainers': 'Tënk',
-  'learn.pickOne': 'Tànn benn',
+
   'learn.goDeeper': 'Dem ci ginnaaw',
   'learn.watch': 'Xool',
   'learn.shortLessons': 'Jàng yu gàtt',

@@ -5,6 +5,7 @@ import { zu, xh, af, sn, rw, bm, tw, am, so, mg } from './i18n/ui/africa-south.j
 import { ar, ti, om } from './i18n/ui/africa-east.js'
 import { EXTRAS } from './i18n/ui/extras.js'
 import { GAPS } from './i18n/ui/gaps.js'
+import { SHARING } from './i18n/ui/sharing.js'
 import { de, it, nl, pl } from './i18n/ui/europe1.js'
 import * as EA from './i18n/ui/europe-asia.js'
 
@@ -128,7 +129,7 @@ const en = {
   'learn.chapter': 'Chapter 01',
   'learn.title': 'Understand an issue',
   'learn.explainers': 'Explainers',
-  'learn.pickOne': 'Pick one',
+
   'learn.goDeeper': 'Go deeper',
   'learn.watch': 'Watch',
   'learn.shortLessons': 'Short lessons',
@@ -248,7 +249,7 @@ const es = {
   'learn.chapter': 'Capítulo 01',
   'learn.title': 'Entiende un tema',
   'learn.explainers': 'Explicaciones',
-  'learn.pickOne': 'Elige una',
+
   'learn.goDeeper': 'Ve más lejos',
   'learn.watch': 'Mira',
   'learn.shortLessons': 'Lecciones cortas',
@@ -346,7 +347,7 @@ const fr = {
   'learn.chapter': 'Chapitre 01',
   'learn.title': 'Comprendre un enjeu',
   'learn.explainers': 'Explications',
-  'learn.pickOne': 'Choisissez-en une',
+
   'learn.goDeeper': 'Aller plus loin',
   'learn.watch': 'Regarder',
   'learn.shortLessons': 'Leçons courtes',
@@ -444,7 +445,7 @@ const zh = {
   'learn.chapter': '第 01 章',
   'learn.title': '了解一个议题',
   'learn.explainers': '解说',
-  'learn.pickOne': '选一个',
+
   'learn.goDeeper': '深入了解',
   'learn.watch': '观看',
   'learn.shortLessons': '短课',
@@ -542,7 +543,7 @@ const hi = {
   'learn.chapter': 'अध्याय 01',
   'learn.title': 'किसी मुद्दे को समझें',
   'learn.explainers': 'व्याख्या',
-  'learn.pickOne': 'एक चुनें',
+
   'learn.goDeeper': 'और गहराई में',
   'learn.watch': 'देखें',
   'learn.shortLessons': 'छोटे पाठ',
@@ -640,7 +641,7 @@ const pt = {
   'learn.chapter': 'Capítulo 01',
   'learn.title': 'Entenda um tema',
   'learn.explainers': 'Explicações',
-  'learn.pickOne': 'Escolha uma',
+
   'learn.goDeeper': 'Aprofunde',
   'learn.watch': 'Assista',
   'learn.shortLessons': 'Lições curtas',
@@ -738,7 +739,7 @@ const sw = {
   'learn.chapter': 'Sura 01',
   'learn.title': 'Elewa suala',
   'learn.explainers': 'Maelezo',
-  'learn.pickOne': 'Chagua moja',
+
   'learn.goDeeper': 'Nenda ndani zaidi',
   'learn.watch': 'Tazama',
   'learn.shortLessons': 'Masomo mafupi',
@@ -813,7 +814,7 @@ const NEW = {
 Object.assign(BASE, NEW)
 
 export const STRINGS = Object.keys(BASE).reduce((acc, id) => {
-  const merged = { ...BASE[id], ...(EXTRAS[id] || {}), ...(GAPS[id] || {}) }
+  const merged = { ...BASE[id], ...(EXTRAS[id] || {}), ...(GAPS[id] || {}), ...(SHARING[id] || {}) }
   if (id !== 'en') {
     for (const k of Object.keys(en)) if (!merged[k]) merged[k] = en[k]
   }

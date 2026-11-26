@@ -41,7 +41,7 @@ export const ar = {
   'learn.chapter': 'الفصل 01',
   'learn.title': 'افهم قضية',
   'learn.explainers': 'شروح',
-  'learn.pickOne': 'اختر واحداً',
+
   'learn.goDeeper': 'اذهب أعمق',
   'learn.watch': 'شاهد',
   'learn.shortLessons': 'دروس قصيرة',
@@ -150,7 +150,7 @@ export const ti = {
   'learn.chapter': 'ምዕራፍ 01',
   'learn.title': 'ሓደ ጉዳይ ተረዳእ',
   'learn.explainers': 'መግለጺታት',
-  'learn.pickOne': 'ሓደ ምረጽ',
+
   'learn.goDeeper': 'ናብ ውሽጢ ኺድ',
   'learn.watch': 'ተመልከት',
   'learn.shortLessons': 'ሓጸርቲ ትምህርትታት',
@@ -259,7 +259,7 @@ export const om = {
   'learn.chapter': 'Boqonnaa 01',
   'learn.title': 'Dhimma tokko hubadhu',
   'learn.explainers': 'Ibsa',
-  'learn.pickOne': 'Tokko filadhu',
+
   'learn.goDeeper': 'Gad fagaadhu',
   'learn.watch': 'Ilaali',
   'learn.shortLessons': 'Barnoota gabaabaa',

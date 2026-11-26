@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { CreaturesArt } from './StickmanArt.jsx'
 import CreatureArt from './CreatureArt.jsx'
+import CreatureShareCard from './CreatureShareCard.jsx'
 import { Btn, Chapter } from './ui.jsx'
 import { useC, useT } from '../i18n.jsx'
 
@@ -195,52 +196,26 @@ function resolve(picks) {
 export default function EcoCreaturesQuiz() {
   const t = useT()
   const [picks, setPicks] = useState([])
-  const [note, setNote] = useState('')
+  const [sharedKey, setSharedKey] = useState(() => {
+    const value = new URLSearchParams(window.location.search).get('creature')
+    return Object.hasOwn(CREATURES, value) ? value : null
+  })
 
   const step = picks.length
   const c = useC()
-  const finished = step >= PROMPTS.length
-  const key = useMemo(() => (finished ? resolve(picks) : picks[0]), [finished, picks])
+  const finished = Boolean(sharedKey) || step >= PROMPTS.length
+  const key = useMemo(() => sharedKey || (finished ? resolve(picks) : picks[0]), [sharedKey, finished, picks])
   const creature = CREATURES[key]
 
   const pick = (k) => setPicks((prev) => [...prev, k])
   const reset = () => {
     setPicks([])
-    setNote('')
+    setSharedKey(null)
+    const url = new URL(window.location.href)
+    url.searchParams.delete('creature')
+    window.history.replaceState(null, '', url)
   }
 
-  const share = async () => {
-    const text = `I got the ${creature.name} (${creature.status}) on the Let's Conserve Eco-Creatures quiz.`
-    const url = typeof window !== 'undefined' ? window.location.href : ''
-    if (typeof navigator !== 'undefined' && navigator.share) {
-      try {
-        await navigator.share({ title: 'My eco creature', text, url })
-        setNote('Shared')
-        window.setTimeout(() => setNote(''), 2400)
-        return
-      } catch {
-        /* dismissed or unsupported, fall through to copy */
-      }
-    }
-    const payload = `${text} ${url}`
-    try {
-      await navigator.clipboard.writeText(payload)
-      setNote('Copied to clipboard')
-      window.setTimeout(() => setNote(''), 2400)
-    } catch {
-      const box = document.createElement('textarea')
-      box.value = payload
-      document.body.appendChild(box)
-      box.select()
-      try {
-        document.execCommand('copy')
-        setNote('Copied to clipboard')
-        window.setTimeout(() => setNote(''), 2400)
-      } finally {
-        document.body.removeChild(box)
-      }
-    }
-  }
 
   if (finished) {
     return (
@@ -281,14 +256,11 @@ export default function EcoCreaturesQuiz() {
             {c(`c.${key}.help`, creature.help)}
           </p>
 
+          <CreatureShareCard creature={creature} creatureKey={key} />
           <div className="mt-3.5 flex flex-wrap items-center gap-2">
-            <Btn variant="leaf" className="!px-4 !py-2 !text-[0.8125rem]" onClick={share}>
-              {note || t('creatures.share')}
-            </Btn>
             <Btn variant="ghost" className="!px-4 !py-2 !text-[0.8125rem]" onClick={reset}>
               {t('creatures.playAgain')}
             </Btn>
-            <span aria-live="polite" className="text-[0.75rem] font-bold text-mint-ink">{note}</span>
           </div>
         </div>
       </div>

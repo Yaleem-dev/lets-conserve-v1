@@ -3,7 +3,21 @@ import { Art, Doodle, Icon, TopArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter, LangNotice } from '../components/ui.jsx'
 import { learnTopics, learnCategories, facts, quizQuestions, videos } from '../data/content.js'
 import { useT, useC } from '../i18n.jsx'
+import { factsPool } from '../data/factpool.js'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
+
+
+function shuffled(items) {
+  const result = [...items]
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[result[i], result[j]] = [result[j], result[i]]
+  }
+  return result
+}
+const originalFacts = facts.map((fact, i) => ({ ...fact, translationKey: `f.${i}` }))
+const extraFacts = factsPool.map((fact, i) => ({ ...fact, translationKey: `factpool.${i}` }))
+const learnFactBank = [...originalFacts, ...extraFacts]
 
 const TINTS = ['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac', 'bg-tan', 'bg-butter', 'bg-panel']
 
@@ -154,6 +168,22 @@ export default function Learn({ quiz, recordQuiz, go }) {
   const [cat, setCat] = useState('All')
   const [run, setRun] = useState(0)
   const list = useMemo(() => (cat === 'All' ? learnTopics : learnTopics.filter((t) => t.category === cat)), [cat])
+  const [factDeck, setFactDeck] = useState(() => [...originalFacts, ...shuffled(extraFacts)])
+  const [factRound, setFactRound] = useState(0)
+  const shownFacts = factDeck.slice(factRound * 4, factRound * 4 + 4)
+  const refreshFacts = () => {
+    if ((factRound + 1) * 4 >= factDeck.length) {
+      setFactDeck(shuffled(learnFactBank)); setFactRound(0)
+    } else setFactRound(n => n + 1)
+  }
+  const openFreshContent = () => {
+    refreshFacts()
+    requestAnimationFrame(() => {
+      const section = document.getElementById('learn-fresh-content')
+      section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      section?.focus({ preventScroll: true })
+    })
+  }
   const featured = videos[0]
   const others = videos.slice(1)
 
@@ -172,13 +202,13 @@ export default function Learn({ quiz, recordQuiz, go }) {
             <span className="doodle-underline">{t('learn.title')}</span>
           </h1>
           <Art name="learn" variant="stick" className="h-20" />
+          <Btn onClick={openFreshContent}>{t('learn.newContent')}</Btn>
         </div>
       </section>
 
       <section className="shell mt-5 pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
           <Chapter>{t('learn.explainers')}</Chapter>
-          <h2 className="mt-1 text-xl">{t('learn.pickOne')}</h2>
         </div>
         <div className="mb-3.5 flex flex-wrap gap-2">
           {learnCategories.map((k) => (
@@ -296,13 +326,16 @@ export default function Learn({ quiz, recordQuiz, go }) {
         </div>
       </section>
 
-      <section className="shell pb-7">
-        <div className="mb-3 border-b-[1.5px] border-line pb-3">
-          <Chapter>{t('home.didYouKnow')}</Chapter>
-          <h2 className="mt-1 text-xl">{t('home.fourThings')}</h2>
+      <section id="learn-fresh-content" tabIndex={-1} className="shell scroll-mt-28 pb-7">
+        <div className="mb-3 flex flex-wrap items-end justify-between gap-3 border-b-[1.5px] border-line pb-3">
+          <div>
+            <Chapter>{t('home.didYouKnow')}</Chapter>
+            <h2 className="mt-1 text-xl">{t('home.fourThings')}</h2>
+          </div>
+          <Btn onClick={refreshFacts}>{t('learn.refresh')}</Btn>
         </div>
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          {facts.map((f, n) => (
+          {shownFacts.map((f, n) => (
             <div key={f.text} className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac'][n % 4]}`}>
               <img
                 src={f.img}
@@ -313,7 +346,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
                 height="507"
                 className="h-24 w-full rounded-[12px] object-cover"
               />
-              <p className="mt-1.5 text-[0.8125rem] leading-snug text-ink-soft">{c(`f.${n}`, f.text)}</p>
+              <p className="mt-1.5 text-[0.8125rem] leading-snug text-ink-soft">{c(f.translationKey, f.text)}</p>
             </div>
           ))}
         </div>

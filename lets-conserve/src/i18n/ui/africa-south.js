@@ -41,7 +41,7 @@ export const zu = {
   'learn.chapter': 'Isahluko 01',
   'learn.title': 'Qonda udaba',
   'learn.explainers': 'Izincazelo',
-  'learn.pickOne': 'Khetha okukodwa',
+
   'learn.goDeeper': 'Finyelela phambili',
   'learn.watch': 'Buka',
   'learn.shortLessons': 'Izifundo ezimfushane',
@@ -132,7 +132,7 @@ export const xh = {
   'learn.chapter': 'Isahluko 01',
   'learn.title': 'Qonda umba',
   'learn.explainers': 'Iingcaciso',
-  'learn.pickOne': 'Khetha enye',
+
   'learn.goDeeper': 'Ngena nzulu',
   'learn.watch': 'Bukela',
   'learn.shortLessons': 'Izifundo ezimfutshane',
@@ -223,7 +223,7 @@ export const af = {
   'learn.chapter': 'Hoofstuk 01',
   'learn.title': 'Verstaan ’n kwessie',
   'learn.explainers': 'Verklarings',
-  'learn.pickOne': 'Kies een',
+
   'learn.goDeeper': 'Gaan dieper',
   'learn.watch': 'Kyk',
   'learn.shortLessons': 'Kort lesse',
@@ -314,7 +314,7 @@ export const sn = {
   'learn.chapter': 'Chitsauko 01',
   'learn.title': 'Nzwisisa nyaya',
   'learn.explainers': 'Tsananguro',
-  'learn.pickOne': 'Sarudza imwe',
+
   'learn.goDeeper': 'Pinda mukati',
   'learn.watch': 'Tarisa',
   'learn.shortLessons': 'Zvidzidzo zvipfupi',
@@ -405,7 +405,7 @@ export const rw = {
   'learn.chapter': 'Igice 01',
   'learn.title': 'Menya ikibazo',
   'learn.explainers': 'Ibisobanuro',
-  'learn.pickOne': 'Hitamo kimwe',
+
   'learn.goDeeper': 'Jya imbere',
   'learn.watch': 'Reba',
   'learn.shortLessons': 'Amasomo magufi',
@@ -496,7 +496,7 @@ export const bm = {
   'learn.chapter': 'Tagi 01',
   'learn.title': 'Ko dɔ faamu',
   'learn.explainers': 'Fɔcogo',
-  'learn.pickOne': 'Dɔ sugandi',
+
   'learn.goDeeper': 'Taa lajɛ',
   'learn.watch': 'A ye',
   'learn.shortLessons': 'Kalan kulu',
@@ -587,7 +587,7 @@ export const tw = {
   'learn.chapter': 'Ti 01',
   'learn.title': 'Te asɛm bi ase',
   'learn.explainers': 'Nkyerɛmu',
-  'learn.pickOne': 'Paw biako',
+
   'learn.goDeeper': 'Kɔ mu kɛse',
   'learn.watch': 'Hwɛ',
   'learn.shortLessons': 'Adesua tiawa',
@@ -678,7 +678,7 @@ export const am = {
   'learn.chapter': 'ምዕራፍ 01',
   'learn.title': 'አንድ ጉዳይ ተረዳ',
   'learn.explainers': 'ማብራሪያዎች',
-  'learn.pickOne': 'አንዱን ምረጥ',
+
   'learn.goDeeper': 'ወደ ውስጥ ግባ',
   'learn.watch': 'ተመልከት',
   'learn.shortLessons': 'አጭር ትምህርቶች',
@@ -769,7 +769,7 @@ export const so = {
   'learn.chapter': 'Cutub 01',
   'learn.title': 'Fahan arrin',
   'learn.explainers': 'Sharaxaad',
-  'learn.pickOne': 'Dooro mid',
+
   'learn.goDeeper': 'Sii gal',
   'learn.watch': 'Daawo',
   'learn.shortLessons': 'Casharro gaaban',
@@ -860,7 +860,7 @@ export const mg = {
   'learn.chapter': 'Tokony 01',
   'learn.title': 'Fantaro ny olana',
   'learn.explainers': 'Fanazavana',
-  'learn.pickOne': 'Safidio iray',
+
   'learn.goDeeper': 'Midira lalindalina',
   'learn.watch': 'Hijery',
   'learn.shortLessons': 'Lesona fohy',
