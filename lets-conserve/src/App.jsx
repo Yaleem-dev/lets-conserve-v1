@@ -9,7 +9,7 @@ import Learn from './views/Learn.jsx'
 import Discover from './views/Discover.jsx'
 import Quest from './views/Quest.jsx'
 import Explore from './views/Explore.jsx'
-import { LangCtx, LangSelect, LANGS, makeT, makeC } from './i18n.jsx'
+import { LangCtx, LangSelect, LangDirSync, LANGS, makeT, makeC, useContentReady } from './i18n.jsx'
 
 
 /* A single view failing should never blank the whole app: show a small
@@ -33,10 +33,10 @@ class Boundary extends Component {
       return (
         <div className="shell py-10">
           <div className="card p-6">
-            <p className="chapter text-slate">Something broke</p>
-            <h2 className="mt-2 text-xl">This section did not load</h2>
+            <p className="chapter text-slate">{this.props.tr('error.kicker')}</p>
+            <h2 className="mt-2 text-xl">{this.props.tr('error.title')}</h2>
             <p className="mt-1 text-[0.9375rem] text-ink-soft">
-              The rest of the app still works. Try another tab.
+              {this.props.tr('error.body')}
             </p>
             <button
               type="button"
@@ -101,24 +101,25 @@ function AppInner() {
   return (
     <div className="min-h-screen">
       <Analytics />
+      <LangDirSync />
       <LookDefs />
 
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-chalk focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-paper">
-        Skip to content
+        {tr('skip.content')}
       </a>
 
       {/* --------------------------- HEADER --------------------------- */}
       <header className="sticky top-0 z-40 border-b-[1.5px] border-line bg-page/95 backdrop-blur-md">
         <div className="shell">
-          <div className="flex h-16 items-center justify-between gap-3">
-            <button type="button" onClick={() => go('home')} className="flex shrink-0 items-center gap-2.5" aria-label="Let’s Conserve home">
+          <div className="flex h-16 items-center justify-between gap-2">
+            <button type="button" onClick={() => go('home')} className="flex min-w-0 items-center gap-2 md:gap-2.5" aria-label={tr('home.letsHome')}>
               <EarthMark className="h-9 w-9 shrink-0" />
               <span className="text-left leading-none">
-                <span className="block text-[1.0625rem] font-bold tracking-tight text-brand-green">Let’s Conserve</span>
+                <span className="block truncate text-[0.9375rem] font-bold tracking-tight text-brand-green sm:text-[1.0625rem]">Let’s Conserve</span>
               </span>
             </button>
 
-            <nav aria-label="Primary" className="hidden items-center gap-0.5 md:flex">
+            <nav aria-label={tr('nav.primary')} className="hidden items-center gap-0.5 md:flex">
               {TABS.map((t) => (
                 <button
                   key={t.id}
@@ -134,16 +135,14 @@ function AppInner() {
               ))}
             </nav>
 
-            <div className="flex items-center gap-2">
-              <span className="hidden sm:inline-flex">
-                <LangSelect />
-              </span>
+            <div className="flex shrink-0 items-center gap-1.5">
+              <LangSelect />
               <Points points={points} className="hidden sm:inline-flex" />
               <button
                 type="button"
                 onClick={() => setMenu(!menu)}
                 aria-expanded={menu}
-                aria-label="Menu"
+                aria-label={tr('menu.label')}
                 className="flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-line bg-card/70 text-ink md:hidden"
               >
                 <Icon name={menu ? 'close' : 'menu'} className="h-4 w-4" strokeWidth={2.4} />
@@ -154,12 +153,8 @@ function AppInner() {
 
 
         {menu && (
-          <nav aria-label="Mobile" className="border-t-[1.5px] border-line bg-card md:hidden">
+          <nav aria-label={tr('nav.mobile')} className="border-t-[1.5px] border-line bg-card md:hidden">
             <div className="shell py-2">
-              <div className="mb-2 flex items-center justify-between gap-2 border-b border-line pb-2">
-                <span className="text-[0.75rem] font-bold uppercase tracking-wider text-slate">{tr('lang.label')}</span>
-                <LangSelect />
-              </div>
               {TABS.map((t) => (
                 <button
                   key={t.id}
@@ -179,7 +174,7 @@ function AppInner() {
       </header>
 
       <main id="main">
-        <Boundary key={view}>
+        <Boundary key={view} tr={tr}>
         {view === 'home' && (
           <Home quest={featured} points={points} isDone={isDone} toggleQuest={toggleQuest} go={go} week={week} />
         )}

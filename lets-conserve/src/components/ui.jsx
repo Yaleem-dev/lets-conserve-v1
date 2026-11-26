@@ -1,5 +1,5 @@
 import { Icon, Doodle } from './StickmanArt.jsx'
-import { useT } from '../i18n.jsx'
+import { useT, useContentReady } from '../i18n.jsx'
 
 /* Light green primary button, per the brief. Dark text for AA contrast:
    #1C5238 on #C9EE9C is about 7.4:1. */
@@ -134,4 +134,23 @@ export function Head({ chapter, title, action, tone = 'light' }) {
       {action}
     </div>
   )
+}
+
+/* Shown on a locale whose long-form reading library is still being
+   translated. The interface, navigation, quests and categories are already
+   fully translated, so the notice explains what is held back. */
+export function ThinNotice() {
+  const t = useT()
+  return (
+    <div className="rounded-[16px] border-[1.5px] border-line bg-panel px-4 py-3">
+      <p className="text-[0.8125rem] font-semibold leading-snug text-ink-soft">{t('content.pending')}</p>
+    </div>
+  )
+}
+
+/* Renders children only when the long-form reading library exists for the
+   current language, so no English paragraph leaks onto a translated page. */
+export function Thin({ children }) {
+  const ready = useContentReady()
+  return ready ? children : null
 }

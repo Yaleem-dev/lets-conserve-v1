@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { CreaturesArt } from './StickmanArt.jsx'
 import CreatureArt from './CreatureArt.jsx'
 import { Btn, Chapter } from './ui.jsx'
-import { useC } from '../i18n.jsx'
+import { useC, useT } from '../i18n.jsx'
 
 /* Every conservation status below was checked against the IUCN Red List
    or the assessing body, not written from memory. */
@@ -193,6 +193,7 @@ function resolve(picks) {
 }
 
 export default function EcoCreaturesQuiz() {
+  const t = useT()
   const [picks, setPicks] = useState([])
   const [note, setNote] = useState('')
 
@@ -246,7 +247,7 @@ export default function EcoCreaturesQuiz() {
       <div className="card overflow-hidden">
         <CreaturesArt className="h-16 w-full" />
         <div className="flex items-center justify-between border-b border-line-soft bg-blush px-4 py-2.5">
-          <Chapter>Your creature</Chapter>
+          <Chapter>{t('creatures.your')}</Chapter>
           <span className="text-[0.6875rem] font-bold uppercase tracking-wide text-blush-ink">{creature.kind}</span>
         </div>
 
@@ -282,10 +283,10 @@ export default function EcoCreaturesQuiz() {
 
           <div className="mt-3.5 flex flex-wrap items-center gap-2">
             <Btn variant="leaf" className="!px-4 !py-2 !text-[0.8125rem]" onClick={share}>
-              {note || 'Share my creature'}
+              {note || t('creatures.share')}
             </Btn>
             <Btn variant="ghost" className="!px-4 !py-2 !text-[0.8125rem]" onClick={reset}>
-              Play again
+              {t('creatures.playAgain')}
             </Btn>
             <span aria-live="polite" className="text-[0.75rem] font-bold text-mint-ink">{note}</span>
           </div>

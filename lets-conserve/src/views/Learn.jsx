@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon, TopArt } from '../components/StickmanArt.jsx'
-import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
+import { Btn, Chapter, Chip, Pill, Meter, Thin, ThinNotice } from '../components/ui.jsx'
 import { learnTopics, learnCategories, facts, quizQuestions, videos } from '../data/content.js'
 import { useT, useC } from '../i18n.jsx'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
@@ -41,6 +41,7 @@ function Card({ topic, tint = 'bg-panel' }) {
 }
 
 function Quiz({ recordQuiz, best }) {
+  const t = useT()
   const [i, setI] = useState(0)
   const [picked, setPicked] = useState(null)
   const [score, setScore] = useState(0)
@@ -70,15 +71,15 @@ function Quiz({ recordQuiz, best }) {
         <div className="flex items-center gap-4">
           <Art name={win ? 'celebrate' : 'learn'} variant="stick" className="h-20 w-28 shrink-0" />
           <div>
-            <Chapter>Result</Chapter>
+            <Chapter>{t('learn.result')}</Chapter>
             <p className="mt-1 text-2xl font-bold tabular-nums">
               {score} / {quizQuestions.length}
             </p>
             <p className="mt-0.5 text-[0.875rem] text-slate">
-              {win ? `Bonus earned. ${QUIZ_BONUS} points.` : 'Read the cards, then retry.'}
+              {win ? t('learn.bonusEarned', { n: QUIZ_BONUS }) : t('learn.readThen')}
             </p>
             <Btn variant="leaf" className="mt-2.5 !py-2" onClick={() => { setI(0); setPicked(null); setScore(0); setDone(false) }}>
-              Try again
+              {t('learn.tryAgain')}
             </Btn>
           </div>
         </div>
@@ -89,8 +90,8 @@ function Quiz({ recordQuiz, best }) {
   return (
     <div className="card p-5">
       <div className="flex items-center justify-between">
-        <Chapter>{`Question ${i + 1} of ${quizQuestions.length}`}</Chapter>
-        <span className="text-[0.75rem] tabular-nums text-slate">{score} right</span>
+        <Chapter>{t('learn.questionOf', { a: i + 1, b: quizQuestions.length })}</Chapter>
+        <span className="text-[0.75rem] tabular-nums text-slate">{t('learn.rightSoFar', { n: score })}</span>
       </div>
       <div className="mt-2">
         <Meter value={i} max={quizQuestions.length} tone="bg-gold" />
@@ -126,7 +127,7 @@ function Quiz({ recordQuiz, best }) {
 
       <div className="mt-3 flex justify-end">
         <Btn variant="leaf" onClick={next} disabled={picked === null} className="!py-2 disabled:opacity-40">
-          {i + 1 >= quizQuestions.length ? 'See result' : 'Next'}
+          {i + 1 >= quizQuestions.length ? t('learn.seeResult') : t('learn.next')}
           <Icon name="arrow" className="h-4 w-4" />
         </Btn>
       </div>
@@ -136,7 +137,7 @@ function Quiz({ recordQuiz, best }) {
 
 export default function Learn({ quiz, recordQuiz, go }) {
   const t = useT()
-  const c = useC()
+    const c = useC()
   const [cat, setCat] = useState('All')
   const list = useMemo(() => (cat === 'All' ? learnTopics : learnTopics.filter((t) => t.category === cat)), [cat])
   const featured = videos[0]
@@ -160,7 +161,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
         </div>
       </section>
 
-      <section className="shell mt-5 pb-7">
+      <Thin><section className="shell mt-5 pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
           <Chapter>{t('learn.explainers')}</Chapter>
           <h2 className="mt-1 text-xl">{t('learn.pickOne')}</h2>
@@ -177,9 +178,9 @@ export default function Learn({ quiz, recordQuiz, go }) {
             <Card key={t.id} topic={t} tint={TINTS[n % TINTS.length]} />
           ))}
         </div>
-      </section>
+      </section></Thin>
 
-      <section className="shell pb-7">
+      <Thin><section className="shell pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
           <Chapter>{t('learn.goDeeper')}</Chapter>
         </div>
@@ -198,9 +199,9 @@ export default function Learn({ quiz, recordQuiz, go }) {
             <Icon name="external" className="h-3.5 w-3.5" strokeWidth={2.4} />
           </span>
         </a>
-      </section>
+      </section></Thin>
 
-      <section className="shell pb-7">
+      <Thin><section className="shell pb-7">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b-[1.5px] border-line pb-3">
           <div>
             <Chapter>{t('learn.watch')}</Chapter>
@@ -279,7 +280,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
             <Icon name="external" className="h-3.5 w-3.5" strokeWidth={2.4} />
           </a>
         </div>
-      </section>
+      </section></Thin>
 
       <section className="shell pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
@@ -304,7 +305,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
         </div>
       </section>
 
-      <section className="shell pb-7">
+      <Thin><section className="shell pb-7">
         <div className="mb-3 flex items-end justify-between border-b-[1.5px] border-line pb-3">
           <div>
             <Chapter>{t('learn.knowledgeCheck')}</Chapter>
@@ -321,7 +322,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
             <Art name="explore" variant="stick" tone="dark" className="mt-3 h-20" />
           </aside>
         </div>
-      </section>
+      </section></Thin>
 
       <section className="shell pb-10">
         <button

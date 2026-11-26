@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useT } from '../i18n.jsx'
 import { Art, Doodle, Icon, CartoonTools, TopArt } from '../components/StickmanArt.jsx'
-import { Btn, Chapter, Chip, Pill, Ext } from '../components/ui.jsx'
+import { Btn, Chapter, Chip, Pill, Ext, Thin, ThinNotice } from '../components/ui.jsx'
 import { resources, exploreCategories } from '../data/content.js'
 
 const TOOL_TONE = {
@@ -17,7 +17,7 @@ const initialOf = (r) => String(catOf(r)).slice(0, 1)
 
 export default function Explore({ go }) {
   const t = useT()
-  const [cat, setCat] = useState('All')
+    const [cat, setCat] = useState('All')
   const list = useMemo(() => (cat === 'All' ? resources : resources.filter((r) => r.category === cat)), [cat])
 
   return (
@@ -38,7 +38,7 @@ export default function Explore({ go }) {
         </div>
       </section>
 
-      <section className="shell mt-5 pb-7">
+      <Thin><section className="shell mt-5 pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
           <Chapter>{t('explore.curated')}</Chapter>
         </div>
@@ -73,7 +73,7 @@ export default function Explore({ go }) {
             </article>
           ))}
         </div>
-      </section>
+      </section></Thin>
 
       <section className="shell pb-10">
         <div className="card-chalk relative overflow-hidden p-5">

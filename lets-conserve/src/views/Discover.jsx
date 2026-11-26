@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon, TopArt } from '../components/StickmanArt.jsx'
-import { Btn, Chapter, Chip, Pill, Segmented, Ext } from '../components/ui.jsx'
+import { Btn, Chapter, Chip, Pill, Segmented, Ext, Thin, ThinNotice } from '../components/ui.jsx'
 import { guideGroups, organizations, regions, regionLabel } from '../data/content.js'
 import { useT } from '../i18n.jsx'
 
@@ -61,7 +61,7 @@ const GUIDE_TONE = {
 
 export default function Discover({ go }) {
   const t = useT()
-  const [tab, setTab] = useState('orgs')
+    const [tab, setTab] = useState('orgs')
   const [region, setRegion] = useState('All')
   const [q, setQ] = useState('')
 
@@ -169,7 +169,7 @@ export default function Discover({ go }) {
       )}
 
       {tab === 'acts' && (
-        <section className="shell mt-5 pb-9">
+        <Thin><section className="shell mt-5 pb-9">
           <div className="mb-4 border-b-[1.5px] border-line pb-3">
             <Chapter>{t('discover.guides')}</Chapter>
           </div>
@@ -192,7 +192,7 @@ export default function Discover({ go }) {
                       />
                       <h4 className="mt-2 text-[0.9375rem] leading-snug">{x.title}</h4>
                       <div className="mt-2 flex items-center justify-between border-t border-line-soft pt-2">
-                        <span className="text-[0.6875rem] font-bold uppercase tracking-wide text-slate">Guide</span>
+                        <span className="text-[0.6875rem] font-bold uppercase tracking-wide text-slate">{t('discover.guideLabel')}</span>
                         <span className="text-[0.75rem] font-bold text-gold-deep">+{x.points}</span>
                       </div>
                     </div>
@@ -215,7 +215,7 @@ export default function Discover({ go }) {
               </Btn>
             </div>
           </div>
-        </section>
+        </section></Thin>
       )}
     </div>
   )

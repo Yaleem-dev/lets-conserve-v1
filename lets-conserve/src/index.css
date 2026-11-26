@@ -7,7 +7,7 @@
 ------------------------------------------------------------------ */
 
 @theme {
-  --font-sans: Helvetica, "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
+  --font-sans: Helvetica, "Helvetica Neue", Arial, "Liberation Sans", "Noto Sans Ethiopic", "Noto Sans Arabic", "Segoe UI", sans-serif;
 
   /* page surfaces: bright lime tint, cards sit on pure white so they read
      as separate objects instead of melting into the backdrop */

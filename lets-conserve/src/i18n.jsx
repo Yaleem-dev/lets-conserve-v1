@@ -1,5 +1,10 @@
-import { createContext, useContext, useMemo } from 'react'
-import { CONTENT_I18N } from './content-i18n/index.js'
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { CONTENT_I18N, isThin } from './content-i18n/index.js'
+import { ha, yo, ig, pcm, ff, wo } from './i18n/ui/africa-west.js'
+import { zu, xh, af, sn, rw, bm, tw, am, so, mg } from './i18n/ui/africa-south.js'
+import { ar, ti, om } from './i18n/ui/africa-east.js'
+import { EXTRAS } from './i18n/ui/extras.js'
+import { GAPS } from './i18n/ui/gaps.js'
 
 /* One place for every language the app ships with. English is the source
    of truth: any missing key falls back to it, so a half-finished locale
@@ -8,11 +13,37 @@ export const LANGS = [
   { id: 'en', label: 'English', native: 'English' },
   { id: 'es', label: 'Spanish', native: 'Español' },
   { id: 'fr', label: 'French', native: 'Français' },
+  { id: 'pt', label: 'Portuguese', native: 'Português' },
+  { id: 'ar', label: 'Arabic', native: 'العربية', dir: 'rtl' },
   { id: 'zh', label: 'Chinese', native: '中文' },
   { id: 'hi', label: 'Hindi', native: 'हिन्दी' },
-  { id: 'pt', label: 'Portuguese', native: 'Português' },
   { id: 'sw', label: 'Swahili', native: 'Kiswahili' },
+  { id: 'ha', label: 'Hausa', native: 'Hausa' },
+  { id: 'yo', label: 'Yoruba', native: 'Yorùbá' },
+  { id: 'ig', label: 'Igbo', native: 'Igbo' },
+  { id: 'pcm', label: 'Nigerian Pidgin', native: 'Naijá' },
+  { id: 'ff', label: 'Fulfulde', native: 'Fulfulde' },
+  { id: 'wo', label: 'Wolof', native: 'Wolof' },
+  { id: 'zu', label: 'Zulu', native: 'isiZulu' },
+  { id: 'xh', label: 'Xhosa', native: 'isiXhosa' },
+  { id: 'af', label: 'Afrikaans', native: 'Afrikaans' },
+  { id: 'sn', label: 'Shona', native: 'chiShona' },
+  { id: 'rw', label: 'Kinyarwanda', native: 'Ikinyarwanda' },
+  { id: 'bm', label: 'Bambara', native: 'Bamanankan' },
+  { id: 'tw', label: 'Twi', native: 'Twi' },
+  { id: 'am', label: 'Amharic', native: 'አማርኛ' },
+  { id: 'ti', label: 'Tigrinya', native: 'ትግርኛ' },
+  { id: 'om', label: 'Oromo', native: 'Afaan Oromoo' },
+  { id: 'so', label: 'Somali', native: 'Soomaali' },
+  { id: 'mg', label: 'Malagasy', native: 'Malagasy' },
 ]
+
+export const RTL = ['ar', 'ff']
+
+export function dirOf(lang) {
+  const hit = LANGS.find((l) => l.id === lang)
+  return hit && hit.dir ? hit.dir : 'ltr'
+}
 
 const en = {
   'lang.label': 'Language',
@@ -104,6 +135,26 @@ const en = {
   'footer.understand': 'Understand, act, repeat.',
   'footer.collab': 'In collaboration with Yaleem-dev',
   'footer.support': 'Support us',
+
+
+  'learn.result': 'Result',
+  'learn.tryAgain': 'Try again',
+  'learn.bonusEarned': 'Bonus earned. {n} points.',
+  'learn.readThen': 'Read the cards, then retry.',
+  'learn.questionOf': 'Question {a} of {b}',
+  'learn.rightSoFar': '{n} right',
+  'learn.seeResult': 'See result',
+  'discover.guideLabel': 'Guide',
+  'menu.label': 'Menu',
+  'nav.primary': 'Primary',
+  'nav.mobile': 'Mobile',
+  'skip.content': 'Skip to content',
+  'home.letsHome': 'Let’s Conserve home',
+  'error.kicker': 'Something broke',
+  'error.title': 'This section did not load',
+  'creatures.your': 'Your creature',
+  'creatures.share': 'Share my creature',
+  'creatures.playAgain': 'Play again',
 
   'badge.seed': 'Seed',
   'badge.sprout': 'Sprout',
@@ -693,14 +744,37 @@ const sw = {
   'badge.canopy': 'Kilele',
 }
 
-export const STRINGS = { en, es, fr, zh, hi, pt, sw }
+const BASE = {
+  en, es, fr, zh, hi, pt, sw,
+  ar, ti, om,
+  ha, yo, ig, pcm, ff, wo,
+  zu, xh, af, sn, rw, bm, tw, am, so, mg,
+}
+
+/* Extra keys added after the first packs shipped are merged per locale so a
+   locale file never has to be rewritten wholesale. */
+export const STRINGS = Object.keys(BASE).reduce((acc, id) => {
+  const merged = { ...BASE[id], ...(EXTRAS[id] || {}), ...(GAPS[id] || {}) }
+  if (id !== 'en') {
+    for (const k of Object.keys(en)) if (!merged[k]) merged[k] = en[k]
+  }
+  acc[id] = merged
+  return acc
+}, {})
 
 /* Content translations live in ./content-i18n and are keyed by stable ids
    (t.climate.title, q.plant.title, c.lion.about ...). Anything missing
    falls through to the English string the component already holds. */
 export function makeC(lang) {
   const table = CONTENT_I18N[lang] || {}
-  return (id, fallback) => table[id] || fallback
+  /* On a locale whose long-form library is still being translated, an
+     untranslated string is left blank instead of dropping to English. */
+  return (id, fallback) => table[id] || (isThin(lang) ? '' : fallback)
+}
+
+export function useContentReady() {
+  const { lang } = useContext(LangCtx)
+  return Boolean(CONTENT_I18N[lang]) && !isThin(lang)
 }
 
 export function useC() {
@@ -731,46 +805,101 @@ export function useLang() {
 
 /* Native select keeps the picker usable on every phone, keyboard and
    screen reader without shipping a custom listbox. */
-export function LangSelect({ className = '', compact = false }) {
+export function LangSelect({ className = '' }) {
   const { lang, setLang, t } = useLang()
+  const [open, setOpen] = useState(false)
+  const [q, setQ] = useState('')
+  const box = useRef(null)
+  const current = LANGS.find((l) => l.id === lang) || LANGS[0]
+
+  useEffect(() => {
+    if (!open) return
+    const away = (e) => { if (box.current && !box.current.contains(e.target)) setOpen(false) }
+    const esc = (e) => { if (e.key === 'Escape') setOpen(false) }
+    document.addEventListener('mousedown', away)
+    document.addEventListener('touchstart', away, { passive: true })
+    document.addEventListener('keydown', esc)
+    return () => {
+      document.removeEventListener('mousedown', away)
+      document.removeEventListener('touchstart', away)
+      document.removeEventListener('keydown', esc)
+    }
+  }, [open])
+
+  const term = q.trim().toLowerCase()
+  const list = term
+    ? LANGS.filter((l) => `${l.native} ${l.label} ${l.id}`.toLowerCase().includes(term))
+    : LANGS
+
   return (
-    <label className={`relative inline-flex w-[9.5rem] items-center ${className}`}>
-      <span className="sr-only">{t('lang.label')}</span>
-      <svg
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-        className="pointer-events-none absolute left-2.5 h-4 w-4 text-green-deep"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
+    <div ref={box} className={`relative shrink-0 ${className}`}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label={t('lang.title')}
+        className="flex max-w-[5.1rem] items-center gap-1 rounded-full border-[1.5px] border-leaf-edge bg-leaf-3 py-1.5 pl-2 pr-2 text-[0.75rem] font-bold text-green-deep transition-colors hover:bg-leaf focus:outline-none focus-visible:ring-2 focus-visible:ring-green-deep sm:max-w-[11rem] sm:pl-2.5 sm:pr-3 sm:text-[0.8125rem]"
       >
-        <circle cx="12" cy="12" r="8.5" />
-        <path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.4 3.6 8.5S14.4 18.1 12 20.5c-2.4-2.4-3.6-5.4-3.6-8.5S9.6 5.9 12 3.5z" />
-      </svg>
-      <select
-        value={lang}
-        onChange={(e) => setLang(e.target.value)}
-        aria-label={t('lang.label')}
-        className="w-full cursor-pointer appearance-none truncate rounded-full border-[1.5px] border-leaf-edge bg-leaf-3 py-1.5 pl-8 pr-7 text-[0.8125rem] font-bold text-green-deep transition-colors hover:bg-leaf focus:outline-none focus-visible:ring-2 focus-visible:ring-green-deep"
-      >
-        {LANGS.map((l) => (
-          <option key={l.id} value={l.id}>
-            {l.native}
-          </option>
-        ))}
-      </select>
-      <svg
-        viewBox="0 0 12 8"
-        aria-hidden="true"
-        className="pointer-events-none absolute right-2.5 h-2 w-3 text-green-deep"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      >
-        <path d="M1 1.5 6 6.5l5-5" />
-      </svg>
-    </label>
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+          <circle cx="12" cy="12" r="8.5" />
+          <path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.4 3.6 8.5S14.4 18.1 12 20.5c-2.4-2.4-3.6-5.4-3.6-8.5S9.6 5.9 12 3.5z" />
+        </svg>
+        <span className="truncate">{current.native}</span>
+        <svg viewBox="0 0 12 8" aria-hidden="true" className="h-2 w-2.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round">
+          <path d="M1 1.5 6 6.5l5-5" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute right-0 z-50 mt-1.5 w-[16rem] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-2xl border-[1.5px] border-line bg-card shadow-[0_18px_40px_-12px_rgba(15,45,30,0.45)]">
+          <div className="border-b border-line p-2">
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder={t('lang.search')}
+              aria-label={t('lang.search')}
+              autoFocus
+              className="w-full rounded-lg border-[1.5px] border-line bg-page px-2.5 py-1.5 text-[0.8125rem] font-medium text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-green-deep"
+            />
+          </div>
+          <ul role="listbox" aria-label={t('lang.title')} className="max-h-[min(56vh,17rem)] overflow-y-auto overscroll-contain p-1">
+            {list.map((l) => (
+              <li key={l.id}>
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected={l.id === lang}
+                  onClick={() => { setLang(l.id); setOpen(false); setQ('') }}
+                  className={`flex w-full items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 text-left text-[0.8125rem] font-semibold transition-colors ${
+                    l.id === lang ? 'bg-leaf text-green-deep' : 'text-ink hover:bg-leaf-3'
+                  }`}
+                >
+                  <span className="truncate" dir={l.dir || 'ltr'}>{l.native}</span>
+                  {l.id === lang && (
+                    <svg viewBox="0 0 16 16" aria-hidden="true" className="h-3 w-3 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                      <path d="M3 8.4 6.3 12 13 4.4" />
+                    </svg>
+                  )}
+                </button>
+              </li>
+            ))}
+            {list.length === 0 && (
+              <li className="px-2.5 py-2 text-[0.8125rem] font-medium text-slate">{t('discover.nothing')}</li>
+            )}
+          </ul>
+        </div>
+      )}
+    </div>
   )
+}
+
+export function LangDirSync() {
+  const { lang } = useLang()
+  useEffect(() => {
+    const el = document.documentElement
+    el.setAttribute('lang', lang)
+    el.setAttribute('dir', dirOf(lang))
+  }, [lang])
+  return null
 }

@@ -2,13 +2,13 @@ import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon, HeroArt, TopArt } from '../components/StickmanArt.jsx'
 import EcoCreaturesQuiz from '../components/EcoCreaturesQuiz.jsx'
 import { facts } from '../data/content.js'
-import { Btn, Chapter, Chip } from '../components/ui.jsx'
+import { Btn, Chapter, Chip, Thin, ThinNotice } from '../components/ui.jsx'
 import { organizations, resources } from '../data/content.js'
 import { useT, useC } from '../i18n.jsx'
 
 export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
   const t = useT()
-  const c = useC()
+    const c = useC()
   const [flash, setFlash] = useState(false)
   const [copied, setCopied] = useState(false)
 
@@ -128,7 +128,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
       </section>
 
       {/* ----------------------- ECO-CREATURES QUIZ ------------------ */}
-      <section className="shell mt-5">
+      <Thin><section className="shell mt-5">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b-[1.5px] border-line pb-3">
           <div>
             <Chapter>{t('home.creatures')}</Chapter>
@@ -136,7 +136,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
           </div>
         </div>
         <EcoCreaturesQuiz />
-      </section>
+      </section></Thin>
 
       {/* -------------------------- ENTRY CARDS ---------------------- */}
       <section className="shell mt-4 pb-7">
