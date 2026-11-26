@@ -11,14 +11,24 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
     const c = useC()
   const [flash, setFlash] = useState(false)
   const [copied, setCopied] = useState(false)
-  /* Four facts at a time, walking the pool. Nothing comes back until every
-     entry has been seen once, then the order reshuffles. */
+  // Shuffle once per cycle; show every fact before starting a new cycle.
+  const shuffleFacts = () => {
+    const pool = [...factsPool]
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[pool[i], pool[j]] = [pool[j], pool[i]]
+    }
+    return pool
+  }
+  const [factDeck, setFactDeck] = useState(shuffleFacts)
   const [factRound, setFactRound] = useState(0)
-  const shownFacts = useMemo(() => {
-    const total = factsPool.length
-    const start = (factRound * 4) % total
-    return Array.from({ length: 4 }, (_, k) => factsPool[(start + k) % total])
-  }, [factRound])
+  const shownFacts = factDeck.slice(factRound * 4, factRound * 4 + 4)
+  const newFacts = () => {
+    if ((factRound + 1) * 4 >= factDeck.length) {
+      setFactDeck(shuffleFacts())
+      setFactRound(0)
+    } else setFactRound(n => n + 1)
+  }
 
   const copyEmail = async () => {
     const email = 'team-tariqlawal@proton.me'
@@ -202,7 +212,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
           <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
-              onClick={() => setFactRound((n) => n + 1)}
+              onClick={newFacts}
               className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-leaf-edge bg-leaf-3 px-3 py-1.5 text-[0.8125rem] font-bold text-green-deep transition-colors hover:bg-leaf focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-deep"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -231,7 +241,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
                 height="507"
                 className="h-24 w-full rounded-[12px] object-cover"
               />
-              <p className="mt-1.5 text-[0.8125rem] font-semibold leading-snug text-ink-soft">{c(`f.${i}`, f.text)}</p>
+              <p className="mt-1.5 text-[0.8125rem] font-semibold leading-snug text-ink-soft">{c(`factpool.${factsPool.indexOf(f)}`, f.text)}</p>
             </div>
           ))}
         </div>

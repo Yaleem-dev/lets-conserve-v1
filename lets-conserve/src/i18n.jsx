@@ -207,6 +207,7 @@ const en = {
 }
 
 const es = {
+  'lang.search': 'Buscar un idioma',
   'lang.label': 'Idioma',
   'nav.home': 'Inicio',
   'nav.learn': 'Aprender',
@@ -304,6 +305,7 @@ const es = {
 }
 
 const fr = {
+  'lang.search': 'Rechercher une langue',
   'lang.label': 'Langue',
   'nav.home': 'Accueil',
   'nav.learn': 'Apprendre',
@@ -401,6 +403,7 @@ const fr = {
 }
 
 const zh = {
+  'lang.search': '搜索语言',
   'lang.label': '语言',
   'nav.home': '首页',
   'nav.learn': '学习',
@@ -498,6 +501,7 @@ const zh = {
 }
 
 const hi = {
+  'lang.search': 'भाषा खोजें',
   'lang.label': 'भाषा',
   'nav.home': 'होम',
   'nav.learn': 'सीखें',
@@ -595,6 +599,7 @@ const hi = {
 }
 
 const pt = {
+  'lang.search': 'Pesquisar um idioma',
   'lang.label': 'Idioma',
   'nav.home': 'Início',
   'nav.learn': 'Aprender',
@@ -692,6 +697,7 @@ const pt = {
 }
 
 const sw = {
+  'lang.search': 'Tafuta lugha',
   'lang.label': 'Lugha',
   'nav.home': 'Mwanzo',
   'nav.learn': 'Jifunze',
@@ -887,9 +893,10 @@ export function LangSelect({ className = '' }) {
   }, [open])
 
   const term = q.trim().toLowerCase()
+  const groupedLangs = LANGS.map(l => ({ ...l, region: l.region || (['en','es','fr','pt'].includes(l.id) ? undefined : 'africa') }))
   const list = term
-    ? LANGS.filter((l) => `${l.native} ${l.label} ${l.id}`.toLowerCase().includes(term))
-    : LANGS.filter((l) => !l.region)
+    ? groupedLangs.filter((l) => `${l.native} ${l.label} ${l.id}`.toLowerCase().includes(term))
+    : groupedLangs.filter((l) => !l.region)
 
   return (
     <div ref={box} className={`relative shrink-0 ${className}`}>
@@ -945,7 +952,7 @@ export function LangSelect({ className = '' }) {
               </li>
             ))}
             {!term && ['africa', 'europe', 'asia'].map((g) => {
-              const rows = LANGS.filter((l) => l.region === g)
+              const rows = groupedLangs.filter((l) => l.region === g)
               const open2 = !!groups[g]
               return (
                 <li key={g} className="mt-1 border-t border-line-soft pt-1">
