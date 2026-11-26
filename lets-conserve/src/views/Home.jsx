@@ -4,10 +4,11 @@ import EcoCreaturesQuiz from '../components/EcoCreaturesQuiz.jsx'
 import { facts } from '../data/content.js'
 import { Btn, Chapter, Chip } from '../components/ui.jsx'
 import { organizations, resources } from '../data/content.js'
-import { useT } from '../i18n.jsx'
+import { useT, useC } from '../i18n.jsx'
 
 export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
   const t = useT()
+  const c = useC()
   const [flash, setFlash] = useState(false)
   const [copied, setCopied] = useState(false)
 
@@ -102,8 +103,8 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
                 <Chip tone="gold">{t('home.thisWeek')}</Chip>
                 <span className="text-[0.75rem] font-semibold text-slate">{week.label}</span>
               </div>
-              <h2 className="mt-2 text-[1.4rem] md:text-[1.6rem]">{quest.title}</h2>
-              <p className="mt-0.5 text-[0.9375rem] text-ink-soft">{quest.text}</p>
+              <h2 className="mt-2 text-[1.4rem] md:text-[1.6rem]">{c(`q.${quest.id}.title`, quest.title)}</h2>
+              <p className="mt-0.5 text-[0.9375rem] text-ink-soft">{c(`q.${quest.id}.text`, quest.text)}</p>
               <div className="mt-3.5 flex flex-wrap items-center gap-3">
                 <Btn variant="leaf" onClick={handle} aria-pressed={done}>
                   <Icon name={done ? 'check' : 'arrow'} className="h-4 w-4" strokeWidth={2.6} />
@@ -210,7 +211,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
                 height="507"
                 className="h-24 w-full rounded-[12px] object-cover"
               />
-              <p className="mt-1.5 text-[0.8125rem] font-semibold leading-snug text-ink-soft">{f.text}</p>
+              <p className="mt-1.5 text-[0.8125rem] font-semibold leading-snug text-ink-soft">{c(`f.${i}`, f.text)}</p>
             </div>
           ))}
         </div>

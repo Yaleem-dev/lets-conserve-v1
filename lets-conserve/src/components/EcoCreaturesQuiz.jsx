@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { CreaturesArt } from './StickmanArt.jsx'
 import CreatureArt from './CreatureArt.jsx'
 import { Btn, Chapter } from './ui.jsx'
+import { useC } from '../i18n.jsx'
 
 /* Every conservation status below was checked against the IUCN Red List
    or the assessing body, not written from memory. */
@@ -196,6 +197,7 @@ export default function EcoCreaturesQuiz() {
   const [note, setNote] = useState('')
 
   const step = picks.length
+  const c = useC()
   const finished = step >= PROMPTS.length
   const key = useMemo(() => (finished ? resolve(picks) : picks[0]), [finished, picks])
   const creature = CREATURES[key]
@@ -258,24 +260,24 @@ export default function EcoCreaturesQuiz() {
             </span>
             <div className="min-w-0">
               <p className="text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-slate">
-                {creature.kind} · {creature.tag}
+                {c(`kind.${creature.kind}`, creature.kind)} · {c(`c.${key}.tag`, creature.tag)}
               </p>
-              <h3 className="mt-0.5 text-[1.3rem] leading-tight">{creature.name}</h3>
+              <h3 className="mt-0.5 text-[1.3rem] leading-tight">{c(`c.${key}.name`, creature.name)}</h3>
               <span
                 className="mt-1.5 inline-flex items-center rounded-full px-2.5 py-1 text-[0.625rem] font-bold uppercase tracking-[0.05em]"
                 style={{ background: creature.chip, color: creature.chipInk }}
               >
-                {creature.status}
+                {c(`status.${creature.status}`, creature.status)}
               </span>
             </div>
           </div>
 
-          <p className="mt-3 text-[0.875rem] leading-snug text-ink-soft">{creature.about}</p>
+          <p className="mt-3 text-[0.875rem] leading-snug text-ink-soft">{c(`c.${key}.about`, creature.about)}</p>
           <p
             className="mt-2 rounded-xl px-3 py-2 text-[0.8125rem] font-semibold leading-snug"
             style={{ background: creature.tint, color: creature.ink }}
           >
-            {creature.help}
+            {c(`c.${key}.help`, creature.help)}
           </p>
 
           <div className="mt-3.5 flex flex-wrap items-center gap-2">
@@ -303,7 +305,7 @@ export default function EcoCreaturesQuiz() {
       </div>
 
       <div className="p-4 sm:p-5">
-        <p className="text-[0.9375rem] font-bold leading-snug">{p.q}</p>
+        <p className="text-[0.9375rem] font-bold leading-snug">{c(`p.${step}.q`, p.q)}</p>
 
         <div className="mt-3 flex flex-col gap-2">
           {p.options.map((o, i) => (
@@ -316,7 +318,7 @@ export default function EcoCreaturesQuiz() {
               <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-line text-[0.625rem] font-bold">
                 {String.fromCharCode(65 + i)}
               </span>
-              <span className="min-w-0">{o.label}</span>
+              <span className="min-w-0">{c(`p.${step}.o${i}`, o.label)}</span>
             </button>
           ))}
         </div>

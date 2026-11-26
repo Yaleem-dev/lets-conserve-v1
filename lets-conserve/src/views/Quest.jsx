@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react'
-import { useT } from '../i18n.jsx'
+import { useT, useC } from '../i18n.jsx'
 import { Icon, BadgeArt, TopArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { quests, questCategories, badges } from '../data/content.js'
 
 export default function Quest({ points, isDone, toggleQuest, week, reset, go }) {
   const t = useT()
+  const c = useC()
   const [cat, setCat] = useState('All')
   const [flash, setFlash] = useState(null)
 
@@ -35,7 +36,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
         <Chapter>{t('quest.chapter')}</Chapter>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
-            <span className="doodle-underline">{t('quest.title')}</span>
+            {t('quest.title')}
           </h1>
           <div className="flex items-end gap-3">
             <div className="text-right">
@@ -83,23 +84,6 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
         </div>
       </section>
 
-      {points === 0 && (
-        <section className="shell mt-3">
-          <div className="card flex flex-wrap items-center justify-between gap-3 bg-leaf-3 p-4">
-            <div>
-              <Chapter>{t('quest.firstStep')}</Chapter>
-              <p className="mt-1 text-[0.9375rem] text-ink-soft">{t('quest.firstStepLine')}</p>
-            </div>
-            <Btn
-              variant="leaf"
-              onClick={() => document.getElementById('all-quests')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-            >
-              {t('quest.pickQuest')}
-              <Icon name="arrow" className="h-4 w-4" />
-            </Btn>
-          </div>
-        </section>
-      )}
 
       <section className="shell mt-3">
         <div className="card-chalk relative overflow-hidden p-5">
@@ -109,8 +93,8 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
                 <span className="chapter rounded-full border-[1.5px] border-leaf-edge bg-leaf px-2.5 py-1 text-green-deep">{t('home.thisWeek')}</span>
                 <span className="text-[0.75rem] text-paper/50">{week.label}</span>
               </div>
-              <h2 className="mt-2 text-[1.4rem] text-paper">{featured.title}</h2>
-              <p className="mt-0.5 max-w-sm text-[0.9375rem] text-paper/70">{featured.text}</p>
+              <h2 className="mt-2 text-[1.4rem] text-paper">{c(`q.${featured.id}.title`, featured.title)}</h2>
+              <p className="mt-0.5 max-w-sm text-[0.9375rem] text-paper/70">{c(`q.${featured.id}.text`, featured.text)}</p>
               <Btn variant="leaf" className="mt-3.5" onClick={() => onToggle(featured)} aria-pressed={isDone(featured.id)}>
                 <Icon name={isDone(featured.id) ? 'check' : 'arrow'} className="h-4 w-4" strokeWidth={2.6} />
                 {isDone(featured.id) ? t('home.done') : t('home.markComplete')}
@@ -145,9 +129,9 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
         </div>
 
         <div className="mb-3.5 flex flex-wrap gap-2">
-          {questCategories.map((c) => (
-            <Pill key={c} active={cat === c} onClick={() => setCat(c)}>
-              {c}
+          {questCategories.map((k) => (
+            <Pill key={k} active={cat === k} onClick={() => setCat(k)}>
+              {c(`cat.${k}`, k)}
             </Pill>
           ))}
         </div>
@@ -171,8 +155,8 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
                   height="507"
                   className="h-24 w-full rounded-[12px] object-cover"
                 />
-                <h3 className="mt-1.5 text-[0.9375rem] leading-snug">{q.title}</h3>
-                <p className="text-[0.75rem] leading-snug text-slate">{q.text}</p>
+                <h3 className="mt-1.5 text-[0.9375rem] leading-snug">{c(`q.${q.id}.title`, q.title)}</h3>
+                <p className="text-[0.75rem] leading-snug text-slate">{c(`q.${q.id}.text`, q.text)}</p>
 
                 <div className="mt-2 flex items-center justify-between border-t border-line/70 pt-2">
                   <button

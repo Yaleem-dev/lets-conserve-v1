@@ -1,4 +1,5 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useMemo } from 'react'
+import { CONTENT_I18N } from './content-i18n/index.js'
 
 /* One place for every language the app ships with. English is the source
    of truth: any missing key falls back to it, so a half-finished locale
@@ -26,9 +27,6 @@ const en = {
     'home.cardLearn': 'Short explanations.',
   'home.cardAct': 'Ways to act.',
   'home.cardRes': 'Resources.',
-  'quest.firstStep': 'Take your first step.',
-  'quest.firstStepLine': 'Tick one quest below. It takes a minute.',
-  'quest.pickQuest': 'Pick a quest',
   'home.welcome': 'Welcome',
   'home.heroA': 'Your personal guide',
   'home.heroB': 'for',
@@ -82,7 +80,7 @@ const en = {
   'discover.nothing': 'Nothing matches. Try another region.',
 
   'quest.chapter': 'Chapter 03',
-  'quest.title': 'Do one small thing',
+  'quest.title': 'Take your first step.',
   'quest.points': 'points',
   'quest.record': 'Your record',
   'quest.doneOf': '{a} of {b} done',
@@ -126,9 +124,6 @@ const es = {
     'home.cardLearn': 'Explicaciones cortas.',
   'home.cardAct': 'Formas de actuar.',
   'home.cardRes': 'Recursos.',
-  'quest.firstStep': 'Da tu primer paso.',
-  'quest.firstStepLine': 'Marca un reto abajo. Toma un minuto.',
-  'quest.pickQuest': 'Elige un reto',
   'home.welcome': 'Bienvenido',
   'home.heroA': 'Tu guía personal',
   'home.heroB': 'para la',
@@ -182,7 +177,7 @@ const es = {
   'discover.nothing': 'Nada coincide. Prueba otra región.',
 
   'quest.chapter': 'Capítulo 03',
-  'quest.title': 'Haz una cosa pequeña',
+  'quest.title': 'Da tu primer paso.',
   'quest.points': 'puntos',
   'quest.record': 'Tu registro',
   'quest.doneOf': '{a} de {b} hechos',
@@ -226,9 +221,6 @@ const fr = {
     'home.cardLearn': 'Courtes explications.',
   'home.cardAct': 'Façons d’agir.',
   'home.cardRes': 'Ressources.',
-  'quest.firstStep': 'Faites le premier pas.',
-  'quest.firstStepLine': 'Cochez un défi ci-dessous. Cela prend une minute.',
-  'quest.pickQuest': 'Choisir un défi',
   'home.welcome': 'Bienvenue',
   'home.heroA': 'Votre guide personnel',
   'home.heroB': 'pour',
@@ -282,7 +274,7 @@ const fr = {
   'discover.nothing': 'Aucun résultat. Essayez une autre région.',
 
   'quest.chapter': 'Chapitre 03',
-  'quest.title': 'Faites une petite chose',
+  'quest.title': 'Faites le premier pas.',
   'quest.points': 'points',
   'quest.record': 'Votre bilan',
   'quest.doneOf': '{a} sur {b} faits',
@@ -326,9 +318,6 @@ const zh = {
     'home.cardLearn': '简短解说。',
   'home.cardAct': '行动方式。',
   'home.cardRes': '资源。',
-  'quest.firstStep': '迈出第一步。',
-  'quest.firstStepLine': '在下面勾选一个挑战，只需一分钟。',
-  'quest.pickQuest': '选一个挑战',
   'home.welcome': '欢迎',
   'home.heroA': '你的个人指南',
   'home.heroB': '为了',
@@ -382,7 +371,7 @@ const zh = {
   'discover.nothing': '没有匹配结果。试试其他地区。',
 
   'quest.chapter': '第 03 章',
-  'quest.title': '做一件小事',
+  'quest.title': '迈出第一步。',
   'quest.points': '积分',
   'quest.record': '你的记录',
   'quest.doneOf': '已完成 {a} / {b}',
@@ -426,9 +415,6 @@ const hi = {
     'home.cardLearn': 'छोटी व्याख्याएँ।',
   'home.cardAct': 'काम करने के तरीके।',
   'home.cardRes': 'संसाधन।',
-  'quest.firstStep': 'पहला कदम बढ़ाएँ।',
-  'quest.firstStepLine': 'नीचे एक चुनौती चुनें। एक मिनट लगेगा।',
-  'quest.pickQuest': 'चुनौती चुनें',
   'home.welcome': 'स्वागत है',
   'home.heroA': 'आपका निजी मार्गदर्शक',
   'home.heroB': 'पर्यावरण',
@@ -482,7 +468,7 @@ const hi = {
   'discover.nothing': 'कुछ नहीं मिला। दूसरा क्षेत्र आज़माएँ।',
 
   'quest.chapter': 'अध्याय 03',
-  'quest.title': 'एक छोटा काम करें',
+  'quest.title': 'पहला कदम बढ़ाएँ।',
   'quest.points': 'अंक',
   'quest.record': 'आपका रिकॉर्ड',
   'quest.doneOf': '{b} में से {a} पूरे',
@@ -526,9 +512,6 @@ const pt = {
     'home.cardLearn': 'Explicações curtas.',
   'home.cardAct': 'Formas de agir.',
   'home.cardRes': 'Recursos.',
-  'quest.firstStep': 'Dê o primeiro passo.',
-  'quest.firstStepLine': 'Marque um desafio abaixo. Leva um minuto.',
-  'quest.pickQuest': 'Escolher um desafio',
   'home.welcome': 'Bem-vindo',
   'home.heroA': 'O seu guia pessoal',
   'home.heroB': 'para a',
@@ -582,7 +565,7 @@ const pt = {
   'discover.nothing': 'Nada corresponde. Tente outra região.',
 
   'quest.chapter': 'Capítulo 03',
-  'quest.title': 'Faça uma coisa pequena',
+  'quest.title': 'Dê o primeiro passo.',
   'quest.points': 'pontos',
   'quest.record': 'Seu registro',
   'quest.doneOf': '{a} de {b} feitos',
@@ -626,9 +609,6 @@ const sw = {
     'home.cardLearn': 'Maelezo mafupi.',
   'home.cardAct': 'Njia za kutenda.',
   'home.cardRes': 'Rasilimali.',
-  'quest.firstStep': 'Chukua hatua yako ya kwanza.',
-  'quest.firstStepLine': 'Weka alama kwenye changamoto moja hapa chini. Inachukua dakika.',
-  'quest.pickQuest': 'Chagua changamoto',
   'home.welcome': 'Karibu',
   'home.heroA': 'Mwongozo wako binafsi',
   'home.heroB': 'wa',
@@ -682,7 +662,7 @@ const sw = {
   'discover.nothing': 'Hakuna kinacholingana. Jaribu eneo lingine.',
 
   'quest.chapter': 'Sura 03',
-  'quest.title': 'Fanya kitu kimoja kidogo',
+  'quest.title': 'Chukua hatua yako ya kwanza.',
   'quest.points': 'pointi',
   'quest.record': 'Rekodi yako',
   'quest.doneOf': '{a} kati ya {b} imekamilika',
@@ -714,6 +694,19 @@ const sw = {
 }
 
 export const STRINGS = { en, es, fr, zh, hi, pt, sw }
+
+/* Content translations live in ./content-i18n and are keyed by stable ids
+   (t.climate.title, q.plant.title, c.lion.about ...). Anything missing
+   falls through to the English string the component already holds. */
+export function makeC(lang) {
+  const table = CONTENT_I18N[lang] || {}
+  return (id, fallback) => table[id] || fallback
+}
+
+export function useC() {
+  const { lang } = useContext(LangCtx)
+  return useMemo(() => makeC(lang), [lang])
+}
 
 export function makeT(lang) {
   const table = STRINGS[lang] || en

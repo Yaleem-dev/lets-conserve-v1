@@ -9,7 +9,7 @@ import Learn from './views/Learn.jsx'
 import Discover from './views/Discover.jsx'
 import Quest from './views/Quest.jsx'
 import Explore from './views/Explore.jsx'
-import { LangCtx, LangSelect, LANGS, makeT } from './i18n.jsx'
+import { LangCtx, LangSelect, LANGS, makeT, makeC } from './i18n.jsx'
 
 
 /* A single view failing should never blank the whole app: show a small
@@ -283,7 +283,7 @@ function LangProvider({ children }) {
       /* private mode: keep the session value */
     }
   }
-  const value = useMemo(() => ({ lang, setLang, t: makeT(lang) }), [lang])
+  const value = useMemo(() => ({ lang, setLang, t: makeT(lang), c: makeC(lang) }), [lang])
   useEffect(() => {
     document.documentElement.lang = lang
   }, [lang])

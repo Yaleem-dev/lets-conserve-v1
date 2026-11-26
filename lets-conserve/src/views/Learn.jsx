@@ -2,37 +2,38 @@ import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon, TopArt } from '../components/StickmanArt.jsx'
 import { Btn, Chapter, Chip, Pill, Meter } from '../components/ui.jsx'
 import { learnTopics, learnCategories, facts, quizQuestions, videos } from '../data/content.js'
-import { useT } from '../i18n.jsx'
+import { useT, useC } from '../i18n.jsx'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
 
 const TINTS = ['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac', 'bg-tan', 'bg-butter', 'bg-panel']
 
 function Card({ topic, tint = 'bg-panel' }) {
+  const c = useC()
   const [open, setOpen] = useState(false)
   return (
     <article className={`overflow-hidden rounded-[18px] border-[1.5px] border-line ${tint}`}>
       <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="flex w-full items-center gap-3 p-4 text-left">
         <Art name={topic.art} variant="doodle" className="h-12 w-20 shrink-0" />
         <div className="min-w-0 flex-1">
-          <Chip tone="soft">{topic.category}</Chip>
-          <h3 className="mt-1 text-[1rem] leading-tight">{topic.title}</h3>
-          {!open && <p className="truncate text-[0.8125rem] text-slate">{topic.lede}</p>}
+          <Chip tone="soft">{c(`cat.${topic.category}`, topic.category)}</Chip>
+          <h3 className="mt-1 text-[1rem] leading-tight">{c(`t.${topic.id}.title`, topic.title)}</h3>
+          {!open && <p className="truncate text-[0.8125rem] text-slate">{c(`t.${topic.id}.lede`, topic.lede)}</p>}
         </div>
         <Icon name="chevron" className={`h-4 w-4 shrink-0 text-slate transition-transform ${open ? 'rotate-90' : ''}`} strokeWidth={2.4} />
       </button>
 
       {open && (
         <div className="border-t border-line-soft px-4 pb-4 pt-3">
-          <p className="text-[0.9375rem] font-semibold text-ink-soft">{topic.lede}</p>
+          <p className="text-[0.9375rem] font-semibold text-ink-soft">{c(`t.${topic.id}.lede`, topic.lede)}</p>
           <ul className="mt-2 space-y-1.5">
-            {topic.points.map((p) => (
+            {topic.points.map((p, i) => (
               <li key={p} className="flex gap-2 text-[0.875rem] text-ink-soft">
                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-green" />
-                {p}
+                {c(`t.${topic.id}.p${i}`, p)}
               </li>
             ))}
           </ul>
-          <p className="mt-2.5 rounded-lg bg-leaf-3 px-3 py-2 text-[0.8125rem] text-green-deep">{topic.fact}</p>
+          <p className="mt-2.5 rounded-lg bg-leaf-3 px-3 py-2 text-[0.8125rem] text-green-deep">{c(`t.${topic.id}.fact`, topic.fact)}</p>
         </div>
       )}
     </article>
@@ -135,6 +136,7 @@ function Quiz({ recordQuiz, best }) {
 
 export default function Learn({ quiz, recordQuiz, go }) {
   const t = useT()
+  const c = useC()
   const [cat, setCat] = useState('All')
   const list = useMemo(() => (cat === 'All' ? learnTopics : learnTopics.filter((t) => t.category === cat)), [cat])
   const featured = videos[0]
@@ -164,9 +166,9 @@ export default function Learn({ quiz, recordQuiz, go }) {
           <h2 className="mt-1 text-xl">{t('learn.pickOne')}</h2>
         </div>
         <div className="mb-3.5 flex flex-wrap gap-2">
-          {learnCategories.map((c) => (
-            <Pill key={c} active={cat === c} onClick={() => setCat(c)}>
-              {c}
+          {learnCategories.map((k) => (
+            <Pill key={k} active={cat === k} onClick={() => setCat(k)}>
+              {c(`cat.${k}`, k)}
             </Pill>
           ))}
         </div>
@@ -296,7 +298,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
                 height="507"
                 className="h-24 w-full rounded-[12px] object-cover"
               />
-              <p className="mt-1.5 text-[0.8125rem] leading-snug text-ink-soft">{f.text}</p>
+              <p className="mt-1.5 text-[0.8125rem] leading-snug text-ink-soft">{c(`f.${n}`, f.text)}</p>
             </div>
           ))}
         </div>
