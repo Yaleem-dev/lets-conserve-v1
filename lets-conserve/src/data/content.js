@@ -163,6 +163,66 @@ export const quizQuestions = [
     answer: 1,
     why: 'That is why net zero targets focus on it.',
   },
+  {
+    q: 'Which gas warms the most per molecule?',
+    options: ['Carbon dioxide', 'Methane', 'Nitrogen'],
+    answer: 1,
+    why: 'Methane traps far more heat, though it leaves the air faster.',
+  },
+  {
+    q: 'Best use for food scraps?',
+    options: ['Bin them', 'Compost or feed animals', 'Flush them'],
+    answer: 1,
+    why: 'Compost returns nutrients instead of making landfill gas.',
+  },
+  {
+    q: 'What keeps a coastline calm in a storm?',
+    options: ['Seawalls', 'Mangroves and reefs', 'Dredging'],
+    answer: 1,
+    why: 'Living barriers absorb wave energy and rebuild themselves.',
+  },
+  {
+    q: 'Which choice cuts a flight footprint most?',
+    options: ['A train for the same trip', 'A bigger plane', 'An extra bag'],
+    answer: 0,
+    why: 'Rail is far lighter per passenger kilometre than flying.',
+  },
+  {
+    q: 'A rewilded patch of city grass usually brings?',
+    options: ['Fewer insects', 'More pollinators', 'More heat'],
+    answer: 1,
+    why: 'Longer grass and native flowers feed insects and cool the ground.',
+  },
+  {
+    q: 'The biggest share of a phone carbon footprint sits in?',
+    options: ['Charging it', 'Making it', 'Sending texts'],
+    answer: 1,
+    why: 'Manufacture and mining dominate, so repair beats replacing.',
+  },
+  {
+    q: 'Fast fashion is hard on the planet mainly because of?',
+    options: ['Water and dye', 'Price', 'Packaging'],
+    answer: 0,
+    why: 'Growing cotton and dyeing cloth take enormous water and chemicals.',
+  },
+  {
+    q: 'Which light fitting is most efficient?',
+    options: ['Halogen', 'LED', 'Incandescent'],
+    answer: 1,
+    why: 'LEDs turn most of the electricity into light, not heat.',
+  },
+  {
+    q: 'Refill shops mostly help by cutting?',
+    options: ['Transport', 'Single use packaging', 'Tax'],
+    answer: 1,
+    why: 'The same container goes round and round.',
+  },
+  {
+    q: 'A green roof on a city block mainly helps with?',
+    options: ['Heating and runoff', 'Parking', 'Noise from planes'],
+    answer: 0,
+    why: 'Soil and plants cool the roof and slow rainwater down.',
+  },
 ]
 
 /* ------------------------------ DISCOVER --------------------------- */

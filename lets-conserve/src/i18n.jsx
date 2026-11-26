@@ -5,6 +5,8 @@ import { zu, xh, af, sn, rw, bm, tw, am, so, mg } from './i18n/ui/africa-south.j
 import { ar, ti, om } from './i18n/ui/africa-east.js'
 import { EXTRAS } from './i18n/ui/extras.js'
 import { GAPS } from './i18n/ui/gaps.js'
+import { de, it, nl, pl } from './i18n/ui/europe1.js'
+import * as EA from './i18n/ui/europe-asia.js'
 
 /* One place for every language the app ships with. English is the source
    of truth: any missing key falls back to it, so a half-finished locale
@@ -15,8 +17,6 @@ export const LANGS = [
   { id: 'fr', label: 'French', native: 'Français' },
   { id: 'pt', label: 'Portuguese', native: 'Português' },
   { id: 'ar', label: 'Arabic', native: 'العربية', dir: 'rtl' },
-  { id: 'zh', label: 'Chinese', native: '中文' },
-  { id: 'hi', label: 'Hindi', native: 'हिन्दी' },
   { id: 'sw', label: 'Swahili', native: 'Kiswahili' },
   { id: 'ha', label: 'Hausa', native: 'Hausa' },
   { id: 'yo', label: 'Yoruba', native: 'Yorùbá' },
@@ -36,9 +36,44 @@ export const LANGS = [
   { id: 'om', label: 'Oromo', native: 'Afaan Oromoo' },
   { id: 'so', label: 'Somali', native: 'Soomaali' },
   { id: 'mg', label: 'Malagasy', native: 'Malagasy' },
+
+  /* Europe */
+  { id: 'de', label: 'German', native: 'Deutsch', region: 'europe' },
+  { id: 'it', label: 'Italian', native: 'Italiano', region: 'europe' },
+  { id: 'nl', label: 'Dutch', native: 'Nederlands', region: 'europe' },
+  { id: 'pl', label: 'Polish', native: 'Polski', region: 'europe' },
+  { id: 'sv', label: 'Swedish', native: 'Svenska', region: 'europe' },
+  { id: 'da', label: 'Danish', native: 'Dansk', region: 'europe' },
+  { id: 'nb', label: 'Norwegian', native: 'Norsk', region: 'europe' },
+  { id: 'fi', label: 'Finnish', native: 'Suomi', region: 'europe' },
+  { id: 'el', label: 'Greek', native: 'Ελληνικά', region: 'europe' },
+  { id: 'cs', label: 'Czech', native: 'Čeština', region: 'europe' },
+  { id: 'hu', label: 'Hungarian', native: 'Magyar', region: 'europe' },
+  { id: 'ro', label: 'Romanian', native: 'Română', region: 'europe' },
+  { id: 'ru', label: 'Russian', native: 'Русский', region: 'europe' },
+  { id: 'uk', label: 'Ukrainian', native: 'Українська', region: 'europe' },
+  { id: 'hr', label: 'Croatian', native: 'Hrvatski', region: 'europe' },
+  { id: 'ca', label: 'Catalan', native: 'Català', region: 'europe' },
+  { id: 'tr', label: 'Turkish', native: 'Türkçe', region: 'europe' },
+
+  /* Asia */
+  { id: 'zh', label: 'Chinese', native: '中文', region: 'asia' },
+  { id: 'hi', label: 'Hindi', native: 'हिन्दी', region: 'asia' },
+  { id: 'ja', label: 'Japanese', native: '日本語', region: 'asia' },
+  { id: 'ko', label: 'Korean', native: '한국어', region: 'asia' },
+  { id: 'vi', label: 'Vietnamese', native: 'Tiếng Việt', region: 'asia' },
+  { id: 'th', label: 'Thai', native: 'ไทย', region: 'asia' },
+  { id: 'id', label: 'Indonesian', native: 'Bahasa Indonesia', region: 'asia' },
+  { id: 'ms', label: 'Malay', native: 'Bahasa Melayu', region: 'asia' },
+  { id: 'tl', label: 'Filipino', native: 'Filipino', region: 'asia' },
+  { id: 'bn', label: 'Bengali', native: 'বাংলা', region: 'asia' },
+  { id: 'ur', label: 'Urdu', native: 'اردو', dir: 'rtl', region: 'asia' },
+  { id: 'fa', label: 'Persian', native: 'فارسی', dir: 'rtl', region: 'asia' },
+  { id: 'ta', label: 'Tamil', native: 'தமிழ்', region: 'asia' },
+  { id: 'ne', label: 'Nepali', native: 'नेपाली', region: 'asia' },
 ]
 
-export const RTL = ['ar', 'ff']
+export const RTL = ['ar', 'ff', 'ur', 'fa']
 
 export function dirOf(lang) {
   const hit = LANGS.find((l) => l.id === lang)
@@ -47,6 +82,13 @@ export function dirOf(lang) {
 
 const en = {
   'lang.label': 'Language',
+  'lang.search': 'Search a language',
+  'lang.title': 'Choose a language',
+  'lang.more': 'More languages',
+  'lang.group.core': 'Most used',
+  'lang.group.africa': 'More languages: Africa',
+  'lang.group.europe': 'More languages: Europe',
+  'lang.group.asia': 'More languages: Asia',
   'nav.home': 'Home',
   'nav.learn': 'Learn',
   'nav.discover': 'Discover',
@@ -94,6 +136,8 @@ const en = {
   'learn.fiveQ': 'Five questions, {n} points',
   'learn.whyBother': 'Why bother',
   'learn.guessing': 'Guessing teaches nothing.',
+  'quiz.newSet': 'New set of questions',
+  'home.newFacts': 'Show new facts',
   'learn.next': 'Next',
   'learn.findWay': 'Find a way to act',
 
@@ -111,7 +155,7 @@ const en = {
   'discover.nothing': 'Nothing matches. Try another region.',
 
   'quest.chapter': 'Chapter 03',
-  'quest.title': 'Take your first step.',
+  'quest.title': 'Take your first step',
   'quest.points': 'points',
   'quest.record': 'Your record',
   'quest.doneOf': '{a} of {b} done',
@@ -122,7 +166,7 @@ const en = {
   'quest.exploreRes': 'Explore resources',
 
   'explore.chapter': 'Chapter 04',
-  'explore.title': 'Resources',
+  'explore.title': 'A couple of resources',
   'explore.curated': 'Curated',
   'explore.whyFew': 'Why so few',
   'explore.shortList': 'A short list you can trust',
@@ -228,7 +272,7 @@ const es = {
   'discover.nothing': 'Nada coincide. Prueba otra región.',
 
   'quest.chapter': 'Capítulo 03',
-  'quest.title': 'Da tu primer paso.',
+  'quest.title': 'Da tu primer paso',
   'quest.points': 'puntos',
   'quest.record': 'Tu registro',
   'quest.doneOf': '{a} de {b} hechos',
@@ -325,7 +369,7 @@ const fr = {
   'discover.nothing': 'Aucun résultat. Essayez une autre région.',
 
   'quest.chapter': 'Chapitre 03',
-  'quest.title': 'Faites le premier pas.',
+  'quest.title': 'Faites le premier pas',
   'quest.points': 'points',
   'quest.record': 'Votre bilan',
   'quest.doneOf': '{a} sur {b} faits',
@@ -422,7 +466,7 @@ const zh = {
   'discover.nothing': '没有匹配结果。试试其他地区。',
 
   'quest.chapter': '第 03 章',
-  'quest.title': '迈出第一步。',
+  'quest.title': '迈出第一步',
   'quest.points': '积分',
   'quest.record': '你的记录',
   'quest.doneOf': '已完成 {a} / {b}',
@@ -616,7 +660,7 @@ const pt = {
   'discover.nothing': 'Nada corresponde. Tente outra região.',
 
   'quest.chapter': 'Capítulo 03',
-  'quest.title': 'Dê o primeiro passo.',
+  'quest.title': 'Dê o primeiro passo',
   'quest.points': 'pontos',
   'quest.record': 'Seu registro',
   'quest.doneOf': '{a} de {b} feitos',
@@ -713,7 +757,7 @@ const sw = {
   'discover.nothing': 'Hakuna kinacholingana. Jaribu eneo lingine.',
 
   'quest.chapter': 'Sura 03',
-  'quest.title': 'Chukua hatua yako ya kwanza.',
+  'quest.title': 'Chukua hatua yako ya kwanza',
   'quest.points': 'pointi',
   'quest.record': 'Rekodi yako',
   'quest.doneOf': '{a} kati ya {b} imekamilika',
@@ -753,6 +797,15 @@ const BASE = {
 
 /* Extra keys added after the first packs shipped are merged per locale so a
    locale file never has to be rewritten wholesale. */
+const NEW = {
+  de, it, nl, pl, ja: EA.ja, ko: EA.ko, vi: EA.vi, th: EA.th, id: EA.id, ms: EA.ms,
+  tl: EA.tl, bn: EA.bn, ur: EA.ur, fa: EA.fa, tr: EA.tr, ta: EA.ta, ne: EA.ne,
+  sv: EA.sv, da: EA.da, nb: EA.nb, fi: EA.fi, el: EA.el, cs: EA.cs, hu: EA.hu,
+  ro: EA.ro, ru: EA.ru, uk: EA.uk, hr: EA.hr, ca: EA.ca,
+}
+
+Object.assign(BASE, NEW)
+
 export const STRINGS = Object.keys(BASE).reduce((acc, id) => {
   const merged = { ...BASE[id], ...(EXTRAS[id] || {}), ...(GAPS[id] || {}) }
   if (id !== 'en') {
@@ -815,6 +868,7 @@ export function LangSelect({ className = '' }) {
   const { lang, setLang, t } = useLang()
   const [open, setOpen] = useState(false)
   const [q, setQ] = useState('')
+  const [groups, setGroups] = useState({})
   const box = useRef(null)
   const current = LANGS.find((l) => l.id === lang) || LANGS[0]
 
@@ -835,7 +889,7 @@ export function LangSelect({ className = '' }) {
   const term = q.trim().toLowerCase()
   const list = term
     ? LANGS.filter((l) => `${l.native} ${l.label} ${l.id}`.toLowerCase().includes(term))
-    : LANGS
+    : LANGS.filter((l) => !l.region)
 
   return (
     <div ref={box} className={`relative shrink-0 ${className}`}>
@@ -890,6 +944,44 @@ export function LangSelect({ className = '' }) {
                 </button>
               </li>
             ))}
+            {!term && ['africa', 'europe', 'asia'].map((g) => {
+              const rows = LANGS.filter((l) => l.region === g)
+              const open2 = !!groups[g]
+              return (
+                <li key={g} className="mt-1 border-t border-line-soft pt-1">
+                  <button
+                    type="button"
+                    aria-expanded={open2}
+                    onClick={() => setGroups((v) => ({ ...v, [g]: !v[g] }))}
+                    className="flex w-full items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 text-left text-[0.75rem] font-bold uppercase tracking-wider text-slate transition-colors hover:bg-leaf-3"
+                  >
+                    <span className="truncate">{t('lang.group.' + g)}</span>
+                    <svg viewBox="0 0 12 8" aria-hidden="true" className={`h-2 w-2.5 shrink-0 transition-transform ${open2 ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round">
+                      <path d="M1 1.5 6 6.5l5-5" />
+                    </svg>
+                  </button>
+                  {open2 && (
+                    <ul>
+                      {rows.map((l) => (
+                        <li key={l.id}>
+                          <button
+                            type="button"
+                            role="option"
+                            aria-selected={l.id === lang}
+                            onClick={() => { setLang(l.id); setOpen(false); setQ('') }}
+                            className={`flex w-full items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 text-left text-[0.8125rem] font-semibold transition-colors ${
+                              l.id === lang ? 'bg-leaf text-green-deep' : 'text-ink hover:bg-leaf-3'
+                            }`}
+                          >
+                            <span className="truncate" dir={l.dir || 'ltr'}>{l.native}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              )
+            })}
             {list.length === 0 && (
               <li className="px-2.5 py-2 text-[0.8125rem] font-medium text-slate">{t('discover.nothing')}</li>
             )}

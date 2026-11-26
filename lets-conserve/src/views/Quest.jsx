@@ -36,7 +36,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
         <Chapter>{t('quest.chapter')}</Chapter>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
-            {t('quest.title')}
+            <span className="doodle-underline">{t('quest.title')}</span>
           </h1>
           <div className="flex items-end gap-3">
             <div className="text-right">

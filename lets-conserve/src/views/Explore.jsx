@@ -32,7 +32,7 @@ export default function Explore({ go }) {
         <Chapter>{t('explore.chapter')}</Chapter>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <h1 className="display max-w-xl text-[2.1rem] md:text-[2.7rem]">
-            {t('explore.title')}
+            <span className="doodle-underline">{t('explore.title')}</span>
           </h1>
           <Art name="explore" variant="stick" className="h-20" />
         </div>

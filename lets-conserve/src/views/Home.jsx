@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon, HeroArt, TopArt } from '../components/StickmanArt.jsx'
 import EcoCreaturesQuiz from '../components/EcoCreaturesQuiz.jsx'
-import { facts } from '../data/content.js'
+import { factsPool } from '../data/factpool.js'
 import { Btn, Chapter, Chip, LangNotice } from '../components/ui.jsx'
 import { organizations, resources } from '../data/content.js'
 import { useT, useC } from '../i18n.jsx'
@@ -11,6 +11,14 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
     const c = useC()
   const [flash, setFlash] = useState(false)
   const [copied, setCopied] = useState(false)
+  /* Four facts at a time, walking the pool. Nothing comes back until every
+     entry has been seen once, then the order reshuffles. */
+  const [factRound, setFactRound] = useState(0)
+  const shownFacts = useMemo(() => {
+    const total = factsPool.length
+    const start = (factRound * 4) % total
+    return Array.from({ length: 4 }, (_, k) => factsPool[(start + k) % total])
+  }, [factRound])
 
   const copyEmail = async () => {
     const email = 'team-tariqlawal@proton.me'
@@ -191,13 +199,25 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
             <Chapter>{t('home.didYouKnow')}</Chapter>
             <h2 className="mt-1 text-xl">{t('home.fourThings')}</h2>
           </div>
-          <button type="button" onClick={() => go('learn')} className="inline-flex items-center gap-1.5 text-[0.8125rem] font-bold text-green-deep">
-            {t('home.moreInLearn')}
-            <Icon name="arrow" className="h-3.5 w-3.5" strokeWidth={2.4} />
-          </button>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setFactRound((n) => n + 1)}
+              className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-leaf-edge bg-leaf-3 px-3 py-1.5 text-[0.8125rem] font-bold text-green-deep transition-colors hover:bg-leaf focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-deep"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 12a8 8 0 1 1-2.6-5.9M20 4v4h-4" />
+              </svg>
+              {t('home.newFacts')}
+            </button>
+            <button type="button" onClick={() => go('learn')} className="inline-flex items-center gap-1.5 text-[0.8125rem] font-bold text-green-deep">
+              {t('home.moreInLearn')}
+              <Icon name="arrow" className="h-3.5 w-3.5" strokeWidth={2.4} />
+            </button>
+          </div>
         </div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {facts.map((f, i) => (
+          {shownFacts.map((f, i) => (
             <div
               key={f.text}
               className={`rounded-[18px] border-[1.5px] border-line p-3.5 ${['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac'][i % 4]}`}

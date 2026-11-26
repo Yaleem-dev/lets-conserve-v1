@@ -40,13 +40,26 @@ function Card({ topic, tint = 'bg-panel' }) {
   )
 }
 
-function Quiz({ recordQuiz, best }) {
+/* Five questions per run, drawn from the whole bank. Each new run reshuffles
+   so a repeat visitor does not see the same five every time. */
+const SET_SIZE = 5
+function drawSet() {
+  const pool = [...quizQuestions]
+  for (let i = pool.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[pool[i], pool[j]] = [pool[j], pool[i]]
+  }
+  return pool.slice(0, SET_SIZE)
+}
+
+function Quiz({ recordQuiz, best, run = 0, onNew }) {
   const t = useT()
+  const [set] = useState(drawSet)
   const [i, setI] = useState(0)
   const [picked, setPicked] = useState(null)
   const [score, setScore] = useState(0)
   const [done, setDone] = useState(false)
-  const q = quizQuestions[i]
+  const q = set[i]
 
   const pick = (n) => {
     if (picked !== null) return
@@ -55,8 +68,8 @@ function Quiz({ recordQuiz, best }) {
   }
 
   const next = () => {
-    if (i + 1 >= quizQuestions.length) {
-      recordQuiz(score, quizQuestions.length)
+    if (i + 1 >= set.length) {
+      recordQuiz(score, set.length)
       setDone(true)
     } else {
       setI(i + 1)
@@ -65,7 +78,7 @@ function Quiz({ recordQuiz, best }) {
   }
 
   if (done) {
-    const win = score / quizQuestions.length >= 0.6
+    const win = score / set.length >= 0.6
     return (
       <div className="card p-5">
         <div className="flex items-center gap-4">
@@ -73,12 +86,12 @@ function Quiz({ recordQuiz, best }) {
           <div>
             <Chapter>{t('learn.result')}</Chapter>
             <p className="mt-1 text-2xl font-bold tabular-nums">
-              {score} / {quizQuestions.length}
+              {score} / {set.length}
             </p>
             <p className="mt-0.5 text-[0.875rem] text-slate">
               {win ? t('learn.bonusEarned', { n: QUIZ_BONUS }) : t('learn.readThen')}
             </p>
-            <Btn variant="leaf" className="mt-2.5 !py-2" onClick={() => { setI(0); setPicked(null); setScore(0); setDone(false) }}>
+            <Btn variant="leaf" className="mt-2.5 !py-2" onClick={() => { onNew && onNew(); setI(0); setPicked(null); setScore(0); setDone(false) }}>
               {t('learn.tryAgain')}
             </Btn>
           </div>
@@ -90,11 +103,11 @@ function Quiz({ recordQuiz, best }) {
   return (
     <div className="card p-5">
       <div className="flex items-center justify-between">
-        <Chapter>{t('learn.questionOf', { a: i + 1, b: quizQuestions.length })}</Chapter>
+        <Chapter>{t('learn.questionOf', { a: i + 1, b: set.length })}</Chapter>
         <span className="text-[0.75rem] tabular-nums text-slate">{t('learn.rightSoFar', { n: score })}</span>
       </div>
       <div className="mt-2">
-        <Meter value={i} max={quizQuestions.length} tone="bg-gold" />
+        <Meter value={i} max={set.length} tone="bg-gold" />
       </div>
       <h3 className="mt-3 text-[1rem] leading-snug">{q.q}</h3>
 
@@ -127,7 +140,7 @@ function Quiz({ recordQuiz, best }) {
 
       <div className="mt-3 flex justify-end">
         <Btn variant="leaf" onClick={next} disabled={picked === null} className="!py-2 disabled:opacity-40">
-          {i + 1 >= quizQuestions.length ? t('learn.seeResult') : t('learn.next')}
+          {i + 1 >= set.length ? t('learn.seeResult') : t('learn.next')}
           <Icon name="arrow" className="h-4 w-4" />
         </Btn>
       </div>
@@ -139,6 +152,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
   const t = useT()
     const c = useC()
   const [cat, setCat] = useState('All')
+  const [run, setRun] = useState(0)
   const list = useMemo(() => (cat === 'All' ? learnTopics : learnTopics.filter((t) => t.category === cat)), [cat])
   const featured = videos[0]
   const others = videos.slice(1)
@@ -311,16 +325,19 @@ export default function Learn({ quiz, recordQuiz, go }) {
             <Chapter>{t('learn.knowledgeCheck')}</Chapter>
             <h2 className="mt-1 text-xl">{t('learn.fiveQ', { n: QUIZ_BONUS })}</h2>
           </div>
-          <span className="text-[0.75rem] text-slate">Best {quiz.best}/{quizQuestions.length}</span>
+          <div className="flex items-center gap-2">
+            <span className="text-[0.75rem] text-slate">Best {quiz.best}/{SET_SIZE}</span>
+            <button
+              type="button"
+              onClick={() => setRun((r) => r + 1)}
+              className="rounded-full border-[1.5px] border-line bg-panel px-2.5 py-1 text-[0.75rem] font-bold text-green-deep transition-colors hover:border-leaf-edge hover:bg-leaf-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-deep"
+            >
+              {t('quiz.newSet')}
+            </button>
+          </div>
         </div>
-        <div className="grid gap-3 lg:grid-cols-[1.3fr_0.7fr]">
-          <Quiz recordQuiz={recordQuiz} best={quiz.best} />
-          <aside className="card-chalk relative overflow-hidden p-5">
-            <Doodle name="bulb" tone="dark" className="absolute right-4 top-4 h-6 w-6 opacity-80" />
-            <Chapter tone="dark">{t('learn.whyBother')}</Chapter>
-            <p className="mt-2 text-[0.9375rem] text-paper/80">{t('learn.guessing')}</p>
-            <Art name="explore" variant="stick" tone="dark" className="mt-3 h-20" />
-          </aside>
+        <div className="grid gap-3">
+          <Quiz key={run} recordQuiz={recordQuiz} best={quiz.best} run={run} onNew={() => setRun((r) => r + 1)} />
         </div>
       </section>
 
