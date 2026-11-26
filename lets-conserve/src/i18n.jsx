@@ -767,14 +767,20 @@ export const STRINGS = Object.keys(BASE).reduce((acc, id) => {
    falls through to the English string the component already holds. */
 export function makeC(lang) {
   const table = CONTENT_I18N[lang] || {}
-  /* On a locale whose long-form library is still being translated, an
-     untranslated string is left blank instead of dropping to English. */
-  return (id, fallback) => table[id] || (isThin(lang) ? '' : fallback)
+  /* English is the source. A missing translation falls back to it, so no
+     page can ever render blank. */
+  return (id, fallback) => table[id] || fallback
 }
 
 export function useContentReady() {
+  return true
+}
+
+/* True only for the locales whose long-form reading library is still being
+   translated. Used to show a short banner, never to hide content. */
+export function useThin() {
   const { lang } = useContext(LangCtx)
-  return Boolean(CONTENT_I18N[lang]) && !isThin(lang)
+  return isThin(lang)
 }
 
 export function useC() {

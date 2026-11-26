@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useT } from '../i18n.jsx'
 import { Art, Doodle, Icon, CartoonTools, TopArt } from '../components/StickmanArt.jsx'
-import { Btn, Chapter, Chip, Pill, Ext, Thin, ThinNotice } from '../components/ui.jsx'
+import { Btn, Chapter, Chip, Pill, Ext, LangNotice } from '../components/ui.jsx'
 import { resources, exploreCategories } from '../data/content.js'
 
 const TOOL_TONE = {
@@ -38,7 +38,7 @@ export default function Explore({ go }) {
         </div>
       </section>
 
-      <Thin><section className="shell mt-5 pb-7">
+      <section className="shell mt-5 pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
           <Chapter>{t('explore.curated')}</Chapter>
         </div>
@@ -73,7 +73,7 @@ export default function Explore({ go }) {
             </article>
           ))}
         </div>
-      </section></Thin>
+      </section>
 
       <section className="shell pb-10">
         <div className="card-chalk relative overflow-hidden p-5">

@@ -1,5 +1,5 @@
 import { Icon, Doodle } from './StickmanArt.jsx'
-import { useT, useContentReady } from '../i18n.jsx'
+import { useT, useThin } from '../i18n.jsx'
 
 /* Light green primary button, per the brief. Dark text for AA contrast:
    #1C5238 on #C9EE9C is about 7.4:1. */
@@ -148,9 +148,15 @@ export function ThinNotice() {
   )
 }
 
-/* Renders children only when the long-form reading library exists for the
-   current language, so no English paragraph leaks onto a translated page. */
-export function Thin({ children }) {
-  const ready = useContentReady()
-  return ready ? children : null
+/* A short banner for the locales whose long-form reading library is still
+   being translated. Content is always shown, falling back to English. */
+export function LangNotice({ className = '' }) {
+  const thin = useThin()
+  const t = useT()
+  if (!thin) return null
+  return (
+    <div className={`rounded-[16px] border-[1.5px] border-line bg-panel px-4 py-3 ${className}`}>
+      <p className="text-[0.8125rem] font-semibold leading-snug text-ink-soft">{t('content.pending')}</p>
+    </div>
+  )
 }

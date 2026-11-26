@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon, TopArt } from '../components/StickmanArt.jsx'
-import { Btn, Chapter, Chip, Pill, Meter, Thin, ThinNotice } from '../components/ui.jsx'
+import { Btn, Chapter, Chip, Pill, Meter, LangNotice } from '../components/ui.jsx'
 import { learnTopics, learnCategories, facts, quizQuestions, videos } from '../data/content.js'
 import { useT, useC } from '../i18n.jsx'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
@@ -161,7 +161,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
         </div>
       </section>
 
-      <Thin><section className="shell mt-5 pb-7">
+      <section className="shell mt-5 pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
           <Chapter>{t('learn.explainers')}</Chapter>
           <h2 className="mt-1 text-xl">{t('learn.pickOne')}</h2>
@@ -178,9 +178,9 @@ export default function Learn({ quiz, recordQuiz, go }) {
             <Card key={t.id} topic={t} tint={TINTS[n % TINTS.length]} />
           ))}
         </div>
-      </section></Thin>
+      </section>
 
-      <Thin><section className="shell pb-7">
+      <section className="shell pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
           <Chapter>{t('learn.goDeeper')}</Chapter>
         </div>
@@ -199,9 +199,9 @@ export default function Learn({ quiz, recordQuiz, go }) {
             <Icon name="external" className="h-3.5 w-3.5" strokeWidth={2.4} />
           </span>
         </a>
-      </section></Thin>
+      </section>
 
-      <Thin><section className="shell pb-7">
+      <section className="shell pb-7">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b-[1.5px] border-line pb-3">
           <div>
             <Chapter>{t('learn.watch')}</Chapter>
@@ -280,7 +280,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
             <Icon name="external" className="h-3.5 w-3.5" strokeWidth={2.4} />
           </a>
         </div>
-      </section></Thin>
+      </section>
 
       <section className="shell pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
@@ -305,7 +305,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
         </div>
       </section>
 
-      <Thin><section className="shell pb-7">
+      <section className="shell pb-7">
         <div className="mb-3 flex items-end justify-between border-b-[1.5px] border-line pb-3">
           <div>
             <Chapter>{t('learn.knowledgeCheck')}</Chapter>
@@ -322,7 +322,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
             <Art name="explore" variant="stick" tone="dark" className="mt-3 h-20" />
           </aside>
         </div>
-      </section></Thin>
+      </section>
 
       <section className="shell pb-10">
         <button

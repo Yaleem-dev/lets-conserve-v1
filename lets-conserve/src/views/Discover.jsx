@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon, TopArt } from '../components/StickmanArt.jsx'
-import { Btn, Chapter, Chip, Pill, Segmented, Ext, Thin, ThinNotice } from '../components/ui.jsx'
+import { Btn, Chapter, Chip, Pill, Segmented, Ext, LangNotice } from '../components/ui.jsx'
 import { guideGroups, organizations, regions, regionLabel } from '../data/content.js'
 import { useT } from '../i18n.jsx'
 
@@ -169,7 +169,7 @@ export default function Discover({ go }) {
       )}
 
       {tab === 'acts' && (
-        <Thin><section className="shell mt-5 pb-9">
+        <section className="shell mt-5 pb-9">
           <div className="mb-4 border-b-[1.5px] border-line pb-3">
             <Chapter>{t('discover.guides')}</Chapter>
           </div>
@@ -215,7 +215,7 @@ export default function Discover({ go }) {
               </Btn>
             </div>
           </div>
-        </section></Thin>
+        </section>
       )}
     </div>
   )
