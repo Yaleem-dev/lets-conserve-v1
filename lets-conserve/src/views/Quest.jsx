@@ -25,7 +25,7 @@ export default function Quest({ points, isDone, toggleQuest, week, reset, go }) 
   }
 
   return (
-    <div className="fade-up">
+    <div className="route-view">
       <section className="shell pt-4 md:pt-6">
         <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
           <TopArt variant="quest" />

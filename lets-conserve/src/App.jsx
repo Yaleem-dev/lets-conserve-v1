@@ -109,7 +109,7 @@ function AppInner() {
       </a>
 
       {/* --------------------------- HEADER --------------------------- */}
-      <header className="sticky top-0 z-40 border-b-[1.5px] border-line bg-page/95 backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b-[1.5px] border-line bg-page">
         <div className="shell">
           <div className="flex h-16 items-center justify-between gap-2">
             <button type="button" onClick={() => go('home')} className="flex min-w-0 items-center gap-2 md:gap-2.5" aria-label={tr('home.letsHome')}>

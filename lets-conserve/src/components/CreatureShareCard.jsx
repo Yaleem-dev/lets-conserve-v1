@@ -79,7 +79,6 @@ export default function CreatureShareCard({ creature, creatureKey }) {
       <svg ref={ref} xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-label={`${name}: ${trait}`} className="mx-auto h-auto w-full max-w-[390px] rounded-xl" data-creature-card={creatureKey}>
         <title>{name}: {trait}</title>
         <defs>
-          <filter id={`rough-${id}`} x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5"/></filter>
           <pattern id={`paper-${id}`} width="18" height="18" patternUnits="userSpaceOnUse"><path d="M2 4h2m9 8h1" stroke="#51765d" strokeWidth="1" opacity="0.13"/></pattern>
         </defs>
         <rect width="1080" height="1350" rx="36" fill="#f6efdb"/>
@@ -90,7 +89,7 @@ export default function CreatureShareCard({ creature, creatureKey }) {
           <text x="540" y="202" fontSize="28">{t('home.creatures')}</text>
           <path d="M460 235q80-10 160 0" stroke={creature.ink} strokeWidth="4" fill="none" strokeLinecap="round"/>
           <circle cx="540" cy="578" r="250" fill={creature.tint}/>
-          <g transform="translate(225 265) scale(3.6)" fill="none" stroke={creature.ink} strokeWidth="1.15" strokeLinecap="round" strokeLinejoin="round" filter={`url(#rough-${id})`}><path d={SKETCHES[creatureKey] || SKETCHES.mangrove}/></g>
+          <g transform="translate(225 265) scale(3.6)" fill="none" stroke={creature.ink} strokeWidth="1.15" strokeLinecap="round" strokeLinejoin="round"><path d={SKETCHES[creatureKey] || SKETCHES.mangrove}/></g>
           {wrap(name, 23).map((line, i) => <text key={i} x="540" y={950 + i * 65} fontSize="58" fontWeight="700">{line}</text>)}
           {wrap(trait).map((line, i) => <text key={i} x="540" y={1082 + i * 40} fontSize="30">{line}</text>)}
           <path d="M440 1180q100 10 200 0" stroke="#28563e" strokeWidth="2" fill="none"/>

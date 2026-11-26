@@ -2,7 +2,7 @@ import { useId } from 'react'
 /* ------------------------------------------------------------------
    Eco line-art doodle library
    Single stroke #2E5A36, no fill, rounded terminals, uniform weight,
-   slightly wobbly hand-drawn feel (feTurbulence displacement).
+   slightly wobbly hand-drawn paths, without raster-effect filters.
    Each doodle is mapped to a real subject: water, waste, nature,
    energy, transport, climate, people.
 ------------------------------------------------------------------ */
@@ -293,7 +293,7 @@ const G = {
    lines that never quite meet is what makes a sketch read as sketched
    rather than as a geometric icon. `tone` swaps the hue ring for dark
    panels so nothing disappears into the chalkboard. */
-export function Doodle({ name = 'leaf', className = 'h-6 w-6', tone = 'light', title, color, style }) {
+export function Doodle({ name = 'leaf', className = 'h-6 w-6', tone = 'light', title, color, style, rotation = 0 }) {
   const glyph = G[name] || G.leaf
   const stroke = color || hueFor(name, tone)
   /* Slight weight drift per glyph: a drawn line is never one width. */
@@ -303,6 +303,8 @@ export function Doodle({ name = 'leaf', className = 'h-6 w-6', tone = 'light', t
   return (
     <svg
       viewBox="0 0 24 24"
+      width="24"
+      height="24"
       className={className}
       style={style}
       fill="none"
@@ -315,9 +317,11 @@ export function Doodle({ name = 'leaf', className = 'h-6 w-6', tone = 'light', t
       focusable="false"
     >
       {title && <title>{title}</title>}
-      <g>{glyph}</g>
-      <g opacity="0.26" transform="translate(0.45 0.38) rotate(-2.2 12 12)">
-        {glyph}
+      <g transform={`rotate(${rotation} 12 12)`}>
+        <g>{glyph}</g>
+        <g opacity="0.26" transform="translate(0.45 0.38) rotate(-2.2 12 12)">
+          {glyph}
+        </g>
       </g>
     </svg>
   )
@@ -390,7 +394,7 @@ const SCENES = {
 
 export function Scene({ name = 'nature', tone = 'light', className = 'h-full w-full' }) {
   const set = (SCENES[name] || SCENES.nature).slice(0, 3)
-  const tilt = ['-7deg', '3deg', '-3deg']
+  const tilt = [-7, 3, -3]
   return (
     <div
       className={`grid w-full items-center gap-1.5 overflow-hidden ${className}`}
@@ -402,7 +406,8 @@ export function Scene({ name = 'nature', tone = 'light', className = 'h-full w-f
             name={g}
             tone={tone}
             className="block h-full w-full"
-            style={{ transform: `rotate(${tilt[i % 3]})`, opacity: i === 1 ? 1 : 0.9 }}
+            rotation={tilt[i % 3]}
+            style={{ opacity: i === 1 ? 1 : 0.9 }}
           />
         </div>
       ))}
@@ -420,7 +425,7 @@ export function Strip({ className = 'h-9 w-full', names = ['tree', 'bulb', 'bin'
             name={n}
             tone={tone}
             className="block h-full w-full"
-            style={{ transform: `rotate(${i % 2 ? 4 : -4}deg)` }}
+            rotation={i % 2 ? 4 : -4}
           />
         </div>
       ))}

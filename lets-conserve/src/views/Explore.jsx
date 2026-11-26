@@ -21,7 +21,7 @@ export default function Explore({ go }) {
   const list = useMemo(() => (cat === 'All' ? resources : resources.filter((r) => r.category === cat)), [cat])
 
   return (
-    <div className="fade-up">
+    <div className="route-view">
       <section className="shell pt-4 md:pt-6">
         <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
           <TopArt variant="explore" />

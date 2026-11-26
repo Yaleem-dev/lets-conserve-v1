@@ -188,7 +188,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
   const others = videos.slice(1)
 
   return (
-    <div className="fade-up">
+    <div className="route-view">
       <section className="shell pt-4 md:pt-6">
         <div className="overflow-hidden rounded-[22px] border-[1.5px] border-line">
           <TopArt variant="learn" />
