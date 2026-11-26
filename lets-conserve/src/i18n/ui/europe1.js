@@ -1,6 +1,7 @@
 /* European interface packs, part one: German, Italian, Dutch, Polish. */
 
 export const de = {
+  'lang.search': 'Sprache suchen',
   'lang.label': 'Sprache', 'nav.home': 'Start', 'nav.learn': 'Lernen',
   'nav.discover': 'Entdecken', 'nav.quest': 'Aufgaben', 'nav.explore': 'Ressourcen',
   'app.description': 'Dein persönlicher Leitfaden für Umweltengagement',
@@ -45,6 +46,7 @@ export const de = {
 }
 
 export const it = {
+  'lang.search': 'Cerca una lingua',
   'lang.label': 'Lingua', 'nav.home': 'Home', 'nav.learn': 'Impara', 'nav.discover': 'Scopri',
   'nav.quest': 'Missioni', 'nav.explore': 'Risorse', 'app.description': 'La tua guida personale per l’azione ecologica',
   'home.cardLearn': 'Spiegazioni brevi.', 'home.cardAct': 'Modi per agire.', 'home.cardRes': 'Risorse.',
@@ -87,6 +89,7 @@ export const it = {
 }
 
 export const nl = {
+  'lang.search': 'Zoek een taal',
   'lang.label': 'Taal', 'nav.home': 'Start', 'nav.learn': 'Leren', 'nav.discover': 'Ontdekken',
   'nav.quest': 'Opdrachten', 'nav.explore': 'Bronnen', 'app.description': 'Jouw persoonlijke gids voor ecologische actie',
   'home.cardLearn': 'Korte uitleg.', 'home.cardAct': 'Manieren om te handelen.', 'home.cardRes': 'Bronnen.',
@@ -128,6 +131,7 @@ export const nl = {
 }
 
 export const pl = {
+  'lang.search': 'Szukaj języka',
   'lang.label': 'Język', 'nav.home': 'Start', 'nav.learn': 'Nauka', 'nav.discover': 'Odkrywaj',
   'nav.quest': 'Zadania', 'nav.explore': 'Zasoby', 'app.description': 'Twój osobisty przewodnik po działaniach dla środowiska',
   'home.cardLearn': 'Krótkie wyjaśnienia.', 'home.cardAct': 'Sposoby działania.', 'home.cardRes': 'Zasoby.',
