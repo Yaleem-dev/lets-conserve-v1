@@ -73,6 +73,13 @@
   --color-warm-edge: #bd7415;
   --color-warm-ink: #3f2202;
 
+  /* Reuse quest orange; red is a selective climate-action accent. */
+  --color-alert: #c92335;
+  --color-alert-on: #ffffff;
+  --color-alert-tint: #ffe5e4;
+  --color-alert-ink: #741725;
+  --color-creature-paper: #fbf6ea;
+
   /* the single line-art stroke, per the reference sheet */
   --color-doodle: #2e5a36;
 
@@ -166,6 +173,17 @@
   /* Small paint boundaries stop a scrolled tile from drawing through its
      siblings. These do not transform or animate the route or force GPU
      layers. On phones the affected lists use ordinary vertical flex flow. */
+  .creature-banner {
+    overflow: hidden;
+    contain: layout paint;
+    background-color: var(--color-creature-paper);
+  }
+  .weather-panel,
+  .elnino-teaser {
+    min-width: 0;
+    contain: layout paint;
+    isolation: isolate;
+  }
   .learn-explainer-list {
     display: flex;
     flex-direction: column;

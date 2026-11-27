@@ -6,6 +6,7 @@ import { ar, ti, om } from './i18n/ui/africa-east.js'
 import { EXTRAS } from './i18n/ui/extras.js'
 import { GAPS } from './i18n/ui/gaps.js'
 import { SHARING } from './i18n/ui/sharing.js'
+import { WEATHER } from './i18n/ui/weather.js'
 import { de, it, nl, pl } from './i18n/ui/europe1.js'
 import * as EA from './i18n/ui/europe-asia.js'
 
@@ -83,7 +84,7 @@ export function dirOf(lang) {
 
 const en = {
   'lang.label': 'Language',
-  'lang.search': 'Search a language',
+  'lang.search': 'Search for a Language',
   'lang.title': 'Choose a language',
   'lang.more': 'More languages',
   'lang.group.core': 'Most used',
@@ -795,6 +796,8 @@ const sw = {
   'badge.canopy': 'Kilele',
 }
 
+Object.assign(en, WEATHER.en)
+
 const BASE = {
   en, es, fr, zh, hi, pt, sw,
   ar, ti, om,
@@ -814,7 +817,7 @@ const NEW = {
 Object.assign(BASE, NEW)
 
 export const STRINGS = Object.keys(BASE).reduce((acc, id) => {
-  const merged = { ...BASE[id], ...(EXTRAS[id] || {}), ...(GAPS[id] || {}), ...(SHARING[id] || {}) }
+  const merged = { ...BASE[id], ...(EXTRAS[id] || {}), ...(GAPS[id] || {}), ...(SHARING[id] || {}), ...(WEATHER[id] || {}) }
   if (id !== 'en') {
     for (const k of Object.keys(en)) if (!merged[k]) merged[k] = en[k]
   }

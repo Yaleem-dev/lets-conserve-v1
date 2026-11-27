@@ -19,7 +19,7 @@ for (const file of files) {
   assert.doesNotMatch(source, /background-attachment\s*:\s*fixed/, `${label}: avoid fixed tiled backgrounds`)
   assert.doesNotMatch(source, /@keyframes\s+fade-up/, `${label}: route-wide transformed animation must stay removed`)
 }
-for (const name of ['Home', 'Learn', 'Discover', 'Quest', 'Explore']) {
+for (const name of ['Home', 'Learn', 'Discover', 'Quest', 'Explore', 'ElNino']) {
   const source = fs.readFileSync(path.join(root, 'src/views', `${name}.jsx`), 'utf8')
   assert.match(source, /className="route-view"/, `${name}: use a normal, non-transformed route root`)
 }
@@ -41,4 +41,4 @@ for (const name of ['learn-climate', 'learn-biodiversity', 'learn-pollution', 'l
   assert.equal(bytes.subarray(1, 4).toString(), 'PNG', `${name}: PNG signature`)
   assert.ok(bytes.readUInt32BE(16) > 0 && bytes.readUInt32BE(20) > 0, `${name}: explicit non-zero dimensions`)
 }
-console.log(`PASS: ${files.length} source files; 5 route roots; 10 bounded decorative image assets; isolated Learn/footer paint; no SVG raster filters, backdrop sampling, fixed backgrounds or route-wide transform animation. Sharing, PNG export and Learn content retained.`)
+console.log(`PASS: ${files.length} source files; 6 route roots; 10 bounded decorative image assets; isolated Learn/footer paint; no SVG raster filters, backdrop sampling, fixed backgrounds or route-wide transform animation. Sharing, PNG export and Learn content retained.`)

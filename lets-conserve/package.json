@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "check:rendering": "node scripts/check-rendering.mjs"
+    "check:rendering": "node scripts/check-rendering.mjs",
+    "check:content": "node scripts/check-weather-content.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.5",

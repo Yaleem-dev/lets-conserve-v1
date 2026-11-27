@@ -4,6 +4,7 @@ import { Btn, Chapter, Chip, Pill, Meter, LangNotice } from '../components/ui.js
 import { learnTopics, learnCategories, facts, quizQuestions, videos } from '../data/content.js'
 import { useT, useC } from '../i18n.jsx'
 import { factsPool } from '../data/factpool.js'
+import { explainerRounds } from '../data/explainerLibrary.js'
 import { QUIZ_BONUS } from '../hooks/useProgress.js'
 
 
@@ -23,12 +24,13 @@ const TINTS = ['bg-blush', 'bg-mint-tint', 'bg-sky-tint', 'bg-lilac', 'bg-tan', 
 
 function Card({ topic, tint = 'bg-panel' }) {
   const c = useC()
+  const t = useT()
   const [open, setOpen] = useState(false)
   return (
     <article data-explainer={topic.id} className={`learn-explainer overflow-hidden rounded-[18px] border-[1.5px] border-line ${tint}`}>
       <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="flex w-full items-center gap-3 p-4 text-left">
         <img
-          src={`/art/ui/learn-${topic.id}.png`}
+          src={`/art/ui/learn-${topic.imageKey || topic.id}.png`}
           width="80" height="48" alt="" aria-hidden="true"
           className="h-12 w-20 shrink-0 object-contain"
         />
@@ -52,6 +54,7 @@ function Card({ topic, tint = 'bg-panel' }) {
             ))}
           </ul>
           <p className="mt-2.5 rounded-lg bg-leaf-3 px-3 py-2 text-[0.8125rem] text-green-deep">{c(`t.${topic.id}.fact`, topic.fact)}</p>
+          {topic.source && <a href={topic.source} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-xs font-bold text-green-deep underline underline-offset-4">{t('learn.source')}</a>}
         </div>
       )}
     </article>
@@ -171,7 +174,9 @@ export default function Learn({ quiz, recordQuiz, go }) {
     const c = useC()
   const [cat, setCat] = useState('All')
   const [run, setRun] = useState(0)
-  const list = useMemo(() => (cat === 'All' ? learnTopics : learnTopics.filter((t) => t.category === cat)), [cat])
+  const [explainerRound, setExplainerRound] = useState(0)
+  const topicBank = [learnTopics, ...explainerRounds][explainerRound]
+  const list = useMemo(() => (cat === 'All' ? topicBank : topicBank.filter((topic) => topic.category === cat)), [cat, topicBank])
   const [factDeck, setFactDeck] = useState(() => [...originalFacts, ...shuffled(extraFacts)])
   const [factRound, setFactRound] = useState(0)
   const shownFacts = factDeck.slice(factRound * 4, factRound * 4 + 4)
@@ -181,9 +186,10 @@ export default function Learn({ quiz, recordQuiz, go }) {
     } else setFactRound(n => n + 1)
   }
   const openFreshContent = () => {
-    refreshFacts()
+    setExplainerRound(round => (round + 1) % (explainerRounds.length + 1))
+    setCat('All')
     requestAnimationFrame(() => {
-      const section = document.getElementById('learn-fresh-content')
+      const section = document.getElementById('learn-explainers')
       section?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       section?.focus({ preventScroll: true })
     })
@@ -210,9 +216,10 @@ export default function Learn({ quiz, recordQuiz, go }) {
         </div>
       </section>
 
-      <section className="shell mt-5 pb-7">
+      <section id="learn-explainers" tabIndex={-1} className="shell mt-5 scroll-mt-28 pb-7">
         <div className="mb-3 border-b-[1.5px] border-line pb-3">
           <Chapter>{t('learn.explainers')}</Chapter>
+          <p role="status" className="sr-only">{explainerRound > 0 ? t('learn.freshReady') : ''}</p>
         </div>
         <div className="mb-3.5 flex flex-wrap gap-2">
           {learnCategories.map((k) => (

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Art, Doodle, Icon, HeroArt, TopArt } from '../components/StickmanArt.jsx'
 import EcoCreaturesQuiz from '../components/EcoCreaturesQuiz.jsx'
+import { ElNinoTeaser } from './ElNino.jsx'
 import { factsPool } from '../data/factpool.js'
 import { Btn, Chapter, Chip, LangNotice } from '../components/ui.jsx'
 import { organizations, resources } from '../data/content.js'
@@ -155,6 +156,7 @@ export default function Home({ quest, points, isDone, toggleQuest, go, week }) {
         </div>
         <EcoCreaturesQuiz />
       </section>
+      <ElNinoTeaser go={go} />
 
       {/* -------------------------- ENTRY CARDS ---------------------- */}
       <section className="shell mt-4 pb-7">

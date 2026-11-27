@@ -9,6 +9,7 @@ import Learn from './views/Learn.jsx'
 import Discover from './views/Discover.jsx'
 import Quest from './views/Quest.jsx'
 import Explore from './views/Explore.jsx'
+import ElNino from './views/ElNino.jsx'
 import { LangCtx, LangSelect, LangDirSync, LANGS, makeT, makeC, useContentReady } from './i18n.jsx'
 
 
@@ -61,7 +62,7 @@ const TABS = [
   { id: 'explore', label: 'Explore', icon: 'explore' },
 ]
 
-const VALID = new Set(TABS.map((t) => t.id))
+const VALID = new Set([...TABS.map((t) => t.id), 'el-nino'])
 
 function readHash() {
   const h = window.location.hash.replace('#', '').trim()
@@ -184,6 +185,7 @@ function AppInner() {
           <Quest points={points} isDone={isDone} toggleQuest={toggleQuest} week={week} reset={reset} go={go} />
         )}
         {view === 'explore' && <Explore go={go} />}
+        {view === 'el-nino' && <ElNino go={go} />}
         </Boundary>
       </main>
 

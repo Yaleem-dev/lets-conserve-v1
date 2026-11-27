@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { CreaturesArt } from './StickmanArt.jsx'
 import CreatureArt from './CreatureArt.jsx'
 import CreatureShareCard from './CreatureShareCard.jsx'
 import { Btn, Chapter } from './ui.jsx'
@@ -271,10 +270,11 @@ export default function EcoCreaturesQuiz() {
 
   return (
     <div className="card overflow-hidden">
-      <CreaturesArt className="h-16 w-full" />
-      <div className="flex items-center justify-between border-b border-line-soft bg-mint-tint px-4 py-2.5">
-        <Chapter>Prompt {step + 1} of {PROMPTS.length}</Chapter>
-        <span className="text-[0.6875rem] font-bold tabular-nums text-mint-ink">{step}/{PROMPTS.length}</span>
+      <div className="creature-banner">
+        <img src="/art/eco-creatures-outline.webp" width="1248" height="832" alt={t('creatures.artAlt')} className="block h-auto max-h-[360px] w-full object-contain" />
+      </div>
+      <div className="border-b border-warm-edge bg-warm px-4 py-2.5 text-warm-ink">
+        <p className="text-xs font-bold uppercase tracking-wide">{t('creatures.invite')}</p>
       </div>
 
       <div className="p-4 sm:p-5">
@@ -296,9 +296,9 @@ export default function EcoCreaturesQuiz() {
           ))}
         </div>
 
-        <div className="mt-3 flex gap-1.5" aria-hidden="true">
+        <div className="mt-3 flex gap-1.5" role="progressbar" aria-label={t('creatures.journey')} aria-valuemin={0} aria-valuemax={PROMPTS.length} aria-valuenow={step}>
           {PROMPTS.map((_, n) => (
-            <span key={n} className={`h-1.5 flex-1 rounded-full ${n < step ? 'bg-green' : 'bg-line-soft'}`} />
+            <span key={n} className={`h-1.5 flex-1 rounded-full ${n < step ? 'bg-alert' : 'bg-line-soft'}`} />
           ))}
         </div>
       </div>

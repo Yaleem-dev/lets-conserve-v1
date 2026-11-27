@@ -400,6 +400,8 @@ export const badges = [
 export const exploreCategories = ['All', 'Data', 'Calculators', 'Learning', 'News', 'Other']
 
 export const resources = [
+  { id: 'global-temperature', name: 'Zoom Earth Temperature Map', category: 'Data', art: 'climate', region: 'Global', url: 'https://zoom.earth/maps/temperature/', why: 'Global forecast air temperatures by location and time. Not an official heat-warning map.' },
+  { id: 'nws-heatrisk', name: 'National Weather Service (NWS) HeatRisk', category: 'Data', art: 'climate', region: 'US', url: 'https://www.wpc.ncep.noaa.gov/heatrisk/', why: 'United States heat-impact forecasts for seven days. Supplements official local alerts.' },
   { id: 'nasa', name: 'National Aeronautics and Space Administration (NASA) Climate', category: 'Data', art: 'climate', url: 'https://science.nasa.gov/climate-change/', why: 'Satellite data, clean visuals.' },
   { id: 'gnw', name: 'Global Nature Watch', category: 'Data', art: 'forest', url: 'https://globalnaturewatch.org/', why: 'Near real time forest alerts.' },
   { id: 'iqair', name: 'IQAir', category: 'Data', art: 'climate', url: 'https://www.iqair.com/world-air-quality', why: 'Live air quality by city.' },
