@@ -219,10 +219,12 @@ export default function EcoCreaturesQuiz() {
   if (finished) {
     return (
       <div className="card overflow-hidden">
-        <CreaturesArt className="h-16 w-full" />
+        <div className="creature-banner">
+          <img src="/art/eco-creatures-outline.webp" width="1248" height="832" alt={t('creatures.artAlt')} className="block h-auto max-h-[360px] w-full object-contain" />
+        </div>
         <div className="flex items-center justify-between border-b border-line-soft bg-blush px-4 py-2.5">
           <Chapter>{t('creatures.your')}</Chapter>
-          <span className="text-[0.6875rem] font-bold uppercase tracking-wide text-blush-ink">{creature.kind}</span>
+          <span className="text-[0.6875rem] font-bold uppercase tracking-wide text-blush-ink">{c(`kind.${creature.kind}`, creature.kind)}</span>
         </div>
 
         <div className="p-4 sm:p-5" aria-live="polite">

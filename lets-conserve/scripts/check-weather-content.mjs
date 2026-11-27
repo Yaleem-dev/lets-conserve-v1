@@ -26,6 +26,21 @@ const png = fs.readFileSync(new URL('../public/art/eco-creatures-outline.webp', 
 assert.equal(png.toString('ascii', 8, 12), 'WEBP')
 const i18n = fs.readFileSync(new URL('../src/i18n.jsx', import.meta.url), 'utf8')
 assert.match(i18n, /'lang.search': 'Search for a Language'/)
+assert.doesNotMatch(quiz, /<CreaturesArt\b/, 'The retired banner component must not remain in the result branch')
+const locales = [...i18n.split('export const LANGS = [')[1].split(']')[0].matchAll(/id: '([^']+)'/g)].map(match => match[1])
+const required = Object.keys(WEATHER.en).filter(key => /^(elnino\.|heat\.|error\.|nav\.el-nino$|learn\.source$)/.test(key))
+const properNames = new Set(['nav.el-nino','elnino.noaa','elnino.who','elnino.ready','heat.globalTitle','heat.riskTitle'])
+let checked = 0
+for (const locale of locales) {
+  const pack = WEATHER[locale]
+  assert.ok(pack, `Missing weather locale: ${locale}`)
+  for (const key of required) {
+    assert.ok(Object.hasOwn(pack, key) && typeof pack[key] === 'string' && pack[key].trim(), `${locale}: missing or empty ${key}`)
+    if (locale !== 'en' && !properNames.has(key)) assert.notEqual(pack[key], WEATHER.en[key], `${locale}: English fallback in ${key}`)
+    checked++
+  }
+}
+console.log(`PASS: ${locales.length} guide/recovery locales; ${required.length} required keys; ${checked} translated cells checked; missing=0; empty=0; unapproved English fallback=0.`)
 
 function luminance(hex) {
   const values = hex.match(/[\da-f]{2}/gi).map(x => parseInt(x, 16) / 255).map(v => v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)

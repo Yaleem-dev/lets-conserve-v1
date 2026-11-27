@@ -32,7 +32,7 @@ class Boundary extends Component {
   render() {
     if (this.state.error) {
       return (
-        <div className="shell py-10">
+        <div className="shell py-10" data-error-boundary="true">
           <div className="card p-6">
             <p className="chapter text-slate">{this.props.tr('error.kicker')}</p>
             <h2 className="mt-2 text-xl">{this.props.tr('error.title')}</h2>
@@ -44,7 +44,7 @@ class Boundary extends Component {
               onClick={() => this.setState({ error: null })}
               className="mt-3 rounded-full border-[1.5px] border-leaf-edge bg-leaf px-5 py-2.5 text-sm font-bold text-green-deep"
             >
-              Retry
+              {this.props.tr('error.retry')}
             </button>
           </div>
         </div>

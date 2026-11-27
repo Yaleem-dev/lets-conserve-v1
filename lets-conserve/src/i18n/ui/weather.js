@@ -1,4 +1,10 @@
+import FULL_WEATHER from '../weather-locales/index.js'
+
 const en = {
+  'error.kicker': 'Something went wrong',
+  'error.title': 'This section could not load',
+  'error.body': 'Please try again. Your saved progress is still in this browser.',
+  'error.retry': 'Try again',
   'nav.el-nino': 'El Niño',
   'creatures.invite': 'Follow your instincts',
   'creatures.journey': 'Your eco-creature journey',
@@ -56,8 +62,8 @@ const en = {
   'elnino.who': 'World Health Organization (WHO)',
   'elnino.ready': 'Ready.gov preparedness guidance',
 }
-// Existing locales continue to use their existing translations. New labels
-// are keyed here; long-form additions use English until a reviewed pack exists.
+// The full guide and recovery messages are provided for every selectable
+// language. Keep these existing short labels where they were already present.
 const controls = {
  es: ['Sigue tu instinto','Tu recorrido eco-criatura','Nuevas explicaciones disponibles.','Leer la fuente','Sobre El Niño','Compréndelo. Prepárate.','Leer la guía'],
  fr: ['Suivez votre instinct','Votre parcours éco-créature','De nouvelles explications sont prêtes.','Lire la source','À propos d’El Niño','Comprendre et se préparer.','Lire le guide'],
@@ -73,4 +79,5 @@ const controls = {
  it: ['Segui il tuo istinto','Il tuo percorso eco-creatura','Nuove spiegazioni disponibili.','Leggi la fonte','Su El Niño','Capire. Prepararsi.','Leggi la guida'],
 }
 const keys = ['creatures.invite','creatures.journey','learn.freshReady','learn.source','elnino.tag','elnino.teaserTitle','elnino.read']
-export const WEATHER = { en, ...Object.fromEntries(Object.entries(controls).map(([id, values]) => [id, Object.fromEntries(keys.map((k, i) => [k, values[i]]))])) }
+const labels = Object.fromEntries(Object.entries(controls).map(([id, values]) => [id, Object.fromEntries(keys.map((k, i) => [k, values[i]]))]))
+export const WEATHER = { en, ...Object.fromEntries(Object.entries(FULL_WEATHER).map(([id, pack]) => [id, { ...pack, ...(labels[id] || {}) }])) }
