@@ -25,9 +25,13 @@ function Card({ topic, tint = 'bg-panel' }) {
   const c = useC()
   const [open, setOpen] = useState(false)
   return (
-    <article className={`overflow-hidden rounded-[18px] border-[1.5px] border-line ${tint}`}>
+    <article data-explainer={topic.id} className={`learn-explainer overflow-hidden rounded-[18px] border-[1.5px] border-line ${tint}`}>
       <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="flex w-full items-center gap-3 p-4 text-left">
-        <Art name={topic.art} variant="doodle" className="h-12 w-20 shrink-0" />
+        <img
+          src={`/art/ui/learn-${topic.id}.png`}
+          width="80" height="48" alt="" aria-hidden="true"
+          className="h-12 w-20 shrink-0 object-contain"
+        />
         <div className="min-w-0 flex-1">
           <Chip tone="soft">{c(`cat.${topic.category}`, topic.category)}</Chip>
           <h3 className="mt-1 text-[1rem] leading-tight">{c(`t.${topic.id}.title`, topic.title)}</h3>
@@ -217,7 +221,7 @@ export default function Learn({ quiz, recordQuiz, go }) {
             </Pill>
           ))}
         </div>
-        <div className="grid gap-3 lg:grid-cols-2">
+        <div className="learn-explainer-list">
           {list.map((t, n) => (
             <Card key={t.id} topic={t} tint={TINTS[n % TINTS.length]} />
           ))}

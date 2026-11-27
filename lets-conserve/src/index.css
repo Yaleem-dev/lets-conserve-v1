@@ -163,6 +163,51 @@
     overflow: hidden;
   }
 
+  /* Small paint boundaries stop a scrolled tile from drawing through its
+     siblings. These do not transform or animate the route or force GPU
+     layers. On phones the affected lists use ordinary vertical flex flow. */
+  .learn-explainer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .learn-explainer {
+    position: relative;
+    min-width: 0;
+    contain: layout paint;
+    isolation: isolate;
+  }
+  .site-footer {
+    position: relative;
+    contain: layout paint;
+    isolation: isolate;
+  }
+  .footer-columns {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+  .footer-columns > div,
+  .footer-art-panel,
+  .footer-bottom {
+    min-width: 0;
+    contain: layout paint;
+    isolation: isolate;
+    background-color: var(--color-chalk);
+  }
+  @media (min-width: 768px) {
+    .footer-columns {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .learn-explainer-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   .chapter {
     font-size: 0.6875rem;
     font-weight: 700;

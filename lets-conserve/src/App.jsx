@@ -1,6 +1,6 @@
 import { Component, useContext, useEffect, useMemo, useState } from 'react'
 import { Analytics } from '@vercel/analytics/react'
-import { LookDefs, Icon, Scene, Strip, Doodle, StickScene, EarthMark } from './components/StickmanArt.jsx'
+import { LookDefs, Icon, Scene, Doodle, EarthMark } from './components/StickmanArt.jsx'
 import { Points, Meter, Btn } from './components/ui.jsx'
 import { useProgress, currentWeek } from './hooks/useProgress.js'
 import { quests, badges } from './data/content.js'
@@ -188,24 +188,22 @@ function AppInner() {
       </main>
 
       {/* --------------------------- FOOTER --------------------------- */}
-      <footer className="mt-3 overflow-hidden border-t-[1.5px] border-line bg-chalk text-paper">
+      <footer className="site-footer mt-3 overflow-hidden border-t-[1.5px] border-line bg-chalk text-paper">
         <div className="shell py-8">
-          <StickScene name="horizon" tone="dark" className="mb-7 h-20 w-full max-w-[520px]" />
-          <div className="grid gap-7 md:grid-cols-[1.5fr_1fr_1fr]">
+          <div className="footer-art-panel mb-7">
+            <img src="/art/ui/footer-horizon.png" width="320" height="90" alt="" aria-hidden="true" className="block h-20 w-full max-w-[520px] object-contain" />
+          </div>
+          <div className="footer-columns">
             <div>
               <div className="flex items-center gap-2.5">
-                <EarthMark color="#9fd0f5" heartColor="#a8e56f" className="h-6 w-6 shrink-0" />
+                <img src="/art/ui/footer-mark.png" width="24" height="24" alt="" aria-hidden="true" className="h-6 w-6 shrink-0" />
                 <span className="text-[0.9375rem] font-bold text-leaf">Let’s Conserve</span>
               </div>
               <p className="mt-2 max-w-xs text-[0.8125rem] leading-relaxed text-paper/80">
                 {tr('app.description')}.
               </p>
               <div className="mt-3 w-full max-w-[240px]">
-                <Strip
-                  tone="dark"
-                  className="h-8 w-full"
-                  names={['tree', 'bulb', 'bin', 'droplet']}
-                />
+                <img src="/art/ui/footer-symbols.png" width="240" height="32" alt="" aria-hidden="true" className="block h-8 w-full object-contain object-left" />
               </div>
             </div>
 
@@ -234,7 +232,7 @@ function AppInner() {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-paper/12 pt-4">
+          <div className="footer-bottom mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-paper/12 pt-4">
             <a
               href="https://yaleem-dev.vercel.app/"
               target="_blank"
